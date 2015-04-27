@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
+		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
+		76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */; };
+		76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3333A1AEDF8C40077BACF /* ViewController.m */; };
+		76E3333E1AEDF8C40077BACF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E3333C1AEDF8C40077BACF /* Main.storyboard */; };
+		76E333401AEDF8C40077BACF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E3333F1AEDF8C40077BACF /* Images.xcassets */; };
+		76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E333411AEDF8C40077BACF /* LaunchScreen.xib */; };
+		76E3334F1AEDF8C40077BACF /* YunGeZiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76E333491AEDF8C40077BACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76E333241AEDF8C30077BACF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76E3332B1AEDF8C40077BACF;
+			remoteInfo = YunGeZi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76E333301AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76E333311AEDF8C40077BACF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		76E333331AEDF8C40077BACF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		76E333341AEDF8C40077BACF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		76E333371AEDF8C40077BACF /* YunGeZi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YunGeZi.xcdatamodel; sourceTree = "<group>"; };
+		76E333391AEDF8C40077BACF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		76E3333A1AEDF8C40077BACF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		76E3333D1AEDF8C40077BACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76E3333F1AEDF8C40077BACF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		76E333421AEDF8C40077BACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		76E333481AEDF8C40077BACF /* YunGeZiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YunGeZiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76E3334D1AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YunGeZiTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76E333291AEDF8C40077BACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76E333451AEDF8C40077BACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76E333231AEDF8C30077BACF = {
+			isa = PBXGroup;
+			children = (
+				76E3332E1AEDF8C40077BACF /* YunGeZi */,
+				76E3334B1AEDF8C40077BACF /* YunGeZiTests */,
+				76E3332D1AEDF8C40077BACF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76E3332D1AEDF8C40077BACF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76E3332C1AEDF8C40077BACF /* YunGeZi.app */,
+				76E333481AEDF8C40077BACF /* YunGeZiTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76E3332E1AEDF8C40077BACF /* YunGeZi */ = {
+			isa = PBXGroup;
+			children = (
+				76E333331AEDF8C40077BACF /* AppDelegate.h */,
+				76E333341AEDF8C40077BACF /* AppDelegate.m */,
+				76E333391AEDF8C40077BACF /* ViewController.h */,
+				76E3333A1AEDF8C40077BACF /* ViewController.m */,
+				76E3333C1AEDF8C40077BACF /* Main.storyboard */,
+				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
+				76E333411AEDF8C40077BACF /* LaunchScreen.xib */,
+				76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */,
+				76E3332F1AEDF8C40077BACF /* Supporting Files */,
+			);
+			path = YunGeZi;
+			sourceTree = "<group>";
+		};
+		76E3332F1AEDF8C40077BACF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76E333301AEDF8C40077BACF /* Info.plist */,
+				76E333311AEDF8C40077BACF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76E3334B1AEDF8C40077BACF /* YunGeZiTests */ = {
+			isa = PBXGroup;
+			children = (
+				76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */,
+				76E3334C1AEDF8C40077BACF /* Supporting Files */,
+			);
+			path = YunGeZiTests;
+			sourceTree = "<group>";
+		};
+		76E3334C1AEDF8C40077BACF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76E3334D1AEDF8C40077BACF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76E3332B1AEDF8C40077BACF /* YunGeZi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76E333521AEDF8C40077BACF /* Build configuration list for PBXNativeTarget "YunGeZi" */;
+			buildPhases = (
+				76E333281AEDF8C40077BACF /* Sources */,
+				76E333291AEDF8C40077BACF /* Frameworks */,
+				76E3332A1AEDF8C40077BACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YunGeZi;
+			productName = YunGeZi;
+			productReference = 76E3332C1AEDF8C40077BACF /* YunGeZi.app */;
+			productType = "com.apple.product-type.application";
+		};
+		76E333471AEDF8C40077BACF /* YunGeZiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76E333551AEDF8C40077BACF /* Build configuration list for PBXNativeTarget "YunGeZiTests" */;
+			buildPhases = (
+				76E333441AEDF8C40077BACF /* Sources */,
+				76E333451AEDF8C40077BACF /* Frameworks */,
+				76E333461AEDF8C40077BACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76E3334A1AEDF8C40077BACF /* PBXTargetDependency */,
+			);
+			name = YunGeZiTests;
+			productName = YunGeZiTests;
+			productReference = 76E333481AEDF8C40077BACF /* YunGeZiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76E333241AEDF8C30077BACF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = ZJU;
+				TargetAttributes = {
+					76E3332B1AEDF8C40077BACF = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					76E333471AEDF8C40077BACF = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 76E3332B1AEDF8C40077BACF;
+					};
+				};
+			};
+			buildConfigurationList = 76E333271AEDF8C30077BACF /* Build configuration list for PBXProject "YunGeZi" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76E333231AEDF8C30077BACF;
+			productRefGroup = 76E3332D1AEDF8C40077BACF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76E3332B1AEDF8C40077BACF /* YunGeZi */,
+				76E333471AEDF8C40077BACF /* YunGeZiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76E3332A1AEDF8C40077BACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76E3333E1AEDF8C40077BACF /* Main.storyboard in Resources */,
+				76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */,
+				76E333401AEDF8C40077BACF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76E333461AEDF8C40077BACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76E333281AEDF8C40077BACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
+				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
+				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
+				76E333321AEDF8C40077BACF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76E333441AEDF8C40077BACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76E3334F1AEDF8C40077BACF /* YunGeZiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76E3334A1AEDF8C40077BACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76E3332B1AEDF8C40077BACF /* YunGeZi */;
+			targetProxy = 76E333491AEDF8C40077BACF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		76E3333C1AEDF8C40077BACF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76E3333D1AEDF8C40077BACF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		76E333411AEDF8C40077BACF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76E333421AEDF8C40077BACF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		76E333501AEDF8C40077BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		76E333511AEDF8C40077BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76E333531AEDF8C40077BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = YunGeZi/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		76E333541AEDF8C40077BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = YunGeZi/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		76E333561AEDF8C40077BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = YunGeZiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YunGeZi.app/YunGeZi";
+			};
+			name = Debug;
+		};
+		76E333571AEDF8C40077BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = YunGeZiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YunGeZi.app/YunGeZi";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76E333271AEDF8C30077BACF /* Build configuration list for PBXProject "YunGeZi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76E333501AEDF8C40077BACF /* Debug */,
+				76E333511AEDF8C40077BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76E333521AEDF8C40077BACF /* Build configuration list for PBXNativeTarget "YunGeZi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76E333531AEDF8C40077BACF /* Debug */,
+				76E333541AEDF8C40077BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		76E333551AEDF8C40077BACF /* Build configuration list for PBXNativeTarget "YunGeZiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76E333561AEDF8C40077BACF /* Debug */,
+				76E333571AEDF8C40077BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				76E333371AEDF8C40077BACF /* YunGeZi.xcdatamodel */,
+			);
+			currentVersion = 76E333371AEDF8C40077BACF /* YunGeZi.xcdatamodel */;
+			path = YunGeZi.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 76E333241AEDF8C30077BACF /* Project object */;
+}
