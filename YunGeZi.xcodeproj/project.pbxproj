@@ -83,14 +83,10 @@
 		76E3332E1AEDF8C40077BACF /* YunGeZi */ = {
 			isa = PBXGroup;
 			children = (
-				76E333331AEDF8C40077BACF /* AppDelegate.h */,
-				76E333341AEDF8C40077BACF /* AppDelegate.m */,
 				76E333391AEDF8C40077BACF /* ViewController.h */,
 				76E3333A1AEDF8C40077BACF /* ViewController.m */,
 				76E3333C1AEDF8C40077BACF /* Main.storyboard */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
-				76E333411AEDF8C40077BACF /* LaunchScreen.xib */,
-				76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
 			);
 			path = YunGeZi;
@@ -99,6 +95,10 @@
 		76E3332F1AEDF8C40077BACF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				76E333331AEDF8C40077BACF /* AppDelegate.h */,
+				76E333341AEDF8C40077BACF /* AppDelegate.m */,
+				76E333411AEDF8C40077BACF /* LaunchScreen.xib */,
+				76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */,
 				76E333301AEDF8C40077BACF /* Info.plist */,
 				76E333311AEDF8C40077BACF /* main.m */,
 			);
@@ -352,8 +352,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YunGeZi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -362,8 +364,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YunGeZi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -420,6 +424,7 @@
 				76E333541AEDF8C40077BACF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76E333551AEDF8C40077BACF /* Build configuration list for PBXNativeTarget "YunGeZiTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +433,7 @@
 				76E333571AEDF8C40077BACF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
