@@ -43,7 +43,46 @@ enum {
 }
 
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
-    
+    NSInteger status = -1;
+    @try {
+        NSURL *postURL = [NSURL URLWithString:@"https://secure.boxbuy.cc/login"];
+        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@", self.textUsername.text, self.textPassword.text];
+        NSData *postData = [postStr dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        NSString *postContentType = @"application/x-www-form-urlencoded";
+
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:postURL];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:postContentType forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+
+        NSError *requestError = [[NSError alloc] init];
+        NSHTTPURLResponse *requestResponse;
+        NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
+        NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
+
+        NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
+        NSLog(@"Response ==> %@", responseData);
+
+        NSError *jsonError = nil;
+        NSDictionary *jsonData = [NSJSONSerialization
+                                  JSONObjectWithData:requestHandler
+                                  options:NSJSONReadingMutableContainers
+                                  error:&jsonError];
+        NSLog(@"Response with json ==> %@", jsonData);
+
+        status = [jsonData[@"err"] integerValue];
+        NSLog(@"Success: %ld",(long)status);
+
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+    if (status == 0) {
+        [self performSegueWithIdentifier:@"showTabBarController" sender:self];
+    }
 }
 
 - (void)viewDidLoad {
@@ -58,7 +97,7 @@ enum {
         NSLog(@"%@", cookie);
     }
     */
-    
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 

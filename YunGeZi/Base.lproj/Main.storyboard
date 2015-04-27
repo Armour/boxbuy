@@ -38,7 +38,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTouchUpInside:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1HS-5D-ieP"/>
-                                    <segue destination="JgY-7Q-4pM" kind="show" identifier="goToMainWindow" id="gTN-X5-sAA"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Wc-Uk-ITw">
@@ -69,6 +68,7 @@
                         <outlet property="loginButton" destination="iMe-zj-9RM" id="wib-9u-GRH"/>
                         <outlet property="textPassword" destination="xgx-wh-eYN" id="qmf-qb-hOM"/>
                         <outlet property="textUsername" destination="Bd4-3V-uQw" id="GRK-ak-eIs"/>
+                        <segue destination="JgY-7Q-4pM" kind="show" identifier="showTabBarController" id="SmC-T6-a6W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
