@@ -15,6 +15,7 @@
 		76E333401AEDF8C40077BACF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E3333F1AEDF8C40077BACF /* Images.xcassets */; };
 		76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E333411AEDF8C40077BACF /* LaunchScreen.xib */; };
 		76E3334F1AEDF8C40077BACF /* YunGeZiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */; };
+		76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F426AA1AEF271B00A5849A /* MainPageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		76E333481AEDF8C40077BACF /* YunGeZiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YunGeZiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E3334D1AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YunGeZiTests.m; sourceTree = "<group>"; };
+		76F426A91AEF271B00A5849A /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPageViewController.h; path = ../MainPageViewController.h; sourceTree = "<group>"; };
+		76F426AA1AEF271B00A5849A /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPageViewController.m; path = ../MainPageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 			children = (
 				76E333391AEDF8C40077BACF /* ViewController.h */,
 				76E3333A1AEDF8C40077BACF /* ViewController.m */,
+				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
+				76F426AA1AEF271B00A5849A /* MainPageViewController.m */,
 				76E3333C1AEDF8C40077BACF /* Main.storyboard */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
@@ -222,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
