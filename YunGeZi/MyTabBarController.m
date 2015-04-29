@@ -16,6 +16,8 @@
 @implementation MyTabBarController
 
 @synthesize access_token = _access_token;
+@synthesize refresh_token = _refresh_token;
+@synthesize expire_time = _expire_time;
 
 - (NSString *)access_token {
     if (!_access_token) {
@@ -28,8 +30,54 @@
     _access_token = access_token;
 }
 
+- (NSString *)refresh_token {
+    if (!_refresh_token) {
+        _refresh_token = [[NSString alloc] init];
+    }
+    return _refresh_token;
+}
+
+- (void)setRefresh_token:(NSString *)refresh_token {
+    _refresh_token = refresh_token;
+}
+
+- (NSString *)expire_time {
+    if (!_expire_time) {
+        _expire_time = [[NSString alloc] init];
+    }
+    return _expire_time;
+}
+
+- (void)setExpire_time:(NSString *)expire_time {
+    _expire_time = expire_time;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIImage *selectedImage = [UIImage imageNamed:@"Main_32"];
+    UIImage *unselectedImage = [UIImage imageNamed:@"Main_32"];
+    UITabBarItem * item = [self.tabBar.items objectAtIndex:0];
+    [item setImage:unselectedImage];
+    [item setSelectedImage:selectedImage];
+
+    selectedImage = [UIImage imageNamed:@"Menu_32"];
+    unselectedImage = [UIImage imageNamed:@"Menu_32"];
+    item = [self.tabBar.items objectAtIndex:1];
+    [item setImage:unselectedImage];
+    [item setSelectedImage:selectedImage];
+
+    selectedImage = [UIImage imageNamed:@"Camera_32"];
+    unselectedImage = [UIImage imageNamed:@"Camera_32"];
+    item = [self.tabBar.items objectAtIndex:2];
+    [item setImage:unselectedImage];
+    [item setSelectedImage:selectedImage];
+
+    selectedImage = [UIImage imageNamed:@"User_32"];
+    unselectedImage = [UIImage imageNamed:@"User_32"];
+    item = [self.tabBar.items objectAtIndex:3];
+    [item setImage:unselectedImage];
+    [item setSelectedImage:selectedImage];
+    // self.tabBar.barTintColor = [UIColor blackColor];
     // Do any additional setup after loading the view.
 }
 
@@ -37,17 +85,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MainPageViewController *destination = (MainPageViewController *)[segue destinationViewController];
-    destination.access_token = self.access_token;
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
 
 @end

@@ -13,7 +13,8 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) NSString *access_token;
-//@property (strong, nonatomic) NSString *refresh_token;
+@property (strong, nonatomic) NSString *refresh_token;
+@property (strong, nonatomic) NSString *expire_time;
 
 @end
 
@@ -64,7 +65,7 @@ enum {
     NSInteger status = -1;
     @try {
         NSURL *postURL = [NSURL URLWithString:@"https://secure.boxbuy.cc/oauth/authorize"];
-        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=&mobile=1&return_url=null", self.textUsername.text, self.textPassword.text];
+        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=appkeyhere&mobile=1&return_url=null", self.textUsername.text, self.textPassword.text];
         NSData *postData = [postStr dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         NSString *postContentType = @"application/x-www-form-urlencoded";
@@ -105,7 +106,8 @@ enum {
         NSLog(@"Response with json ==> %@", jsonData);
 
         self.access_token = [[NSString alloc] initWithFormat:@"%@", jsonData[@"access_token"]];
-        NSLog(@"Token ==> %@",self.access_token);
+        self.refresh_token = [[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]];
+        self.expire_time = [[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]];
 
         status = [jsonData[@"err"] integerValue];
     }
@@ -190,8 +192,10 @@ enum {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showTabBarController"]){
-         MyTabBarController *controller = (MyTabBarController *)segue.destinationViewController;
+        MyTabBarController *controller = (MyTabBarController *)segue.destinationViewController;
         [controller setAccess_token:self.access_token];
+        [controller setRefresh_token:self.refresh_token];
+        [controller setExpire_time:self.expire_time];
     }
 }
 

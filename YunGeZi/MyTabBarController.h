@@ -11,5 +11,7 @@
 @interface MyTabBarController : UITabBarController
 
 @property (strong, nonatomic) NSString *access_token;
+@property (strong, nonatomic) NSString *refresh_token;
+@property (strong, nonatomic) NSString *expire_time;
 
 @end
