@@ -7,13 +7,31 @@
 //
 
 #import "ViewController.h"
+#import "MyTabBarController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 
+@property (strong, nonatomic) NSString *access_token;
+//@property (strong, nonatomic) NSString *refresh_token;
+
 @end
 
+
 @implementation ViewController
+
+@synthesize access_token = _access_token;
+
+- (NSString *)access_token {
+    if (!_access_token) {
+        _access_token = [[NSString alloc] init];
+    }
+    return _access_token;
+}
+
+- (void)setAccess_token:(NSString *)access_token {
+    _access_token = access_token;
+}
 
 enum {
     textUsernameTag = 0,
@@ -45,8 +63,8 @@ enum {
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
     NSInteger status = -1;
     @try {
-        NSURL *postURL = [NSURL URLWithString:@"https://secure.boxbuy.cc/login"];
-        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&save=true", self.textUsername.text, self.textPassword.text];
+        NSURL *postURL = [NSURL URLWithString:@"https://secure.boxbuy.cc/oauth/authorize"];
+        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=&mobile=1&return_url=null", self.textUsername.text, self.textPassword.text];
         NSData *postData = [postStr dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         NSString *postContentType = @"application/x-www-form-urlencoded";
@@ -64,9 +82,9 @@ enum {
         NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
         NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
 
-        NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
+        //NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
 
-        NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[requestResponse allHeaderFields] forURL:[NSURL URLWithString:@"http://www.boxbuy.cc/"]];
+        /*NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[requestResponse allHeaderFields] forURL:[NSURL URLWithString:@"http://www.boxbuy.cc/"]];
         NSLog(@"count: %lu", (unsigned long)all.count);
 
         for (NSHTTPCookie *cookie in all) {
@@ -77,8 +95,7 @@ enum {
             NSLog(@"isSessionOnly: %c : path: %@", cookie.isSessionOnly, cookie.path);
             NSLog(@"portList: %@ : properties: %@", cookie.portList, cookie.properties);
             NSLog(@"version: %lu", (unsigned long)cookie.version);
-        }
-
+        }*/
 
         NSError *jsonError = nil;
         NSDictionary *jsonData = [NSJSONSerialization
@@ -87,18 +104,21 @@ enum {
                                   error:&jsonError];
         NSLog(@"Response with json ==> %@", jsonData);
 
+        self.access_token = [[NSString alloc] initWithFormat:@"%@", jsonData[@"access_token"]];
+        NSLog(@"Token ==> %@",self.access_token);
+
         status = [jsonData[@"err"] integerValue];
     }
     @catch (NSException *exception) {
         NSLog(@"Exception: %@", exception);
     }
 
-    NSLog(@"Cookie!: ");
+    /*NSLog(@"Cookie!: ");
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (cookie in [cookieJar cookies]) {
         NSLog(@"%@", cookie);
-    }
+    }*/
 
     if (status == 0) {
         [self performSegueWithIdentifier:@"showTabBarController" sender:self];
@@ -110,7 +130,7 @@ enum {
     [self prepareMyTextField];
     [self prepareMyButton];
 
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    /*NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray *cookieArray = [NSArray arrayWithArray:[cookieJar cookies]];
     for (id obj in cookieArray) {
         [cookieJar deleteCookie:obj];
@@ -120,7 +140,7 @@ enum {
     NSHTTPCookie *cookie;
     for (cookie in [cookieJar cookies]) {
         NSLog(@"%@", cookie);
-    }
+    }*/
 
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -166,6 +186,13 @@ enum {
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"showTabBarController"]){
+         MyTabBarController *controller = (MyTabBarController *)segue.destinationViewController;
+        [controller setAccess_token:self.access_token];
+    }
 }
 
 @end

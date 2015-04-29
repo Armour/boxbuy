@@ -126,7 +126,7 @@
                         <viewControllerLayoutGuide type="bottom" id="m4U-2q-9Wk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rfL-d6-bMX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -145,7 +145,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ZQ0-7Y-ayr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FRS-Xv-mjq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -164,7 +164,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6ZS-0o-Y7Y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uwZ-Zm-708">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -183,7 +183,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mUl-7m-3Vs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UgW-46-GRF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgb-Qf-jbN">
@@ -213,12 +213,12 @@
             </objects>
             <point key="canvasLocation" x="338.5" y="-256.5"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="cLs-kk-gdw">
             <objects>
-                <tabBarController id="JgY-7Q-4pM" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="rC2-P8-Sk5">
+                <tabBarController id="JgY-7Q-4pM" customClass="MyTabBarController" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="rC2-P8-Sk5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -232,7 +232,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3a-O7-OrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-185.5" y="177.5"/>
+            <point key="canvasLocation" x="-210.5" y="177.5"/>
         </scene>
     </scenes>
     <resources>
