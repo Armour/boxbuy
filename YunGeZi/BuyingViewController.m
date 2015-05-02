@@ -8,14 +8,36 @@
 
 #import "BuyingViewController.h"
 #import "MyTabBarController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface BuyingViewController ()
+@interface BuyingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *BuyingWebView;
 
 @end
 
 @implementation BuyingViewController
+
+- (IBAction)takephoto:(UIButton *)sender {
+    UIImagePickerController *uiipc = [[UIImagePickerController alloc] init];
+    uiipc.delegate = self;
+    uiipc.mediaTypes = @[(NSString *)kUTTypeImage];
+    uiipc.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
+    uiipc.allowsEditing = YES;
+    [self presentViewController:uiipc animated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    if (!image) {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
