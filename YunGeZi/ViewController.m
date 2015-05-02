@@ -65,7 +65,7 @@ enum {
     NSInteger status = -1;
     @try {
         NSURL *postURL = [NSURL URLWithString:@"https://secure.boxbuy.cc/oauth/authorize"];
-        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=appkeyhere&mobile=1&return_url=null", self.textUsername.text, self.textPassword.text];
+        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=yourappkey=1&return_url=null", self.textUsername.text, self.textPassword.text];
         NSData *postData = [postStr dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         NSString *postContentType = @"application/x-www-form-urlencoded";
