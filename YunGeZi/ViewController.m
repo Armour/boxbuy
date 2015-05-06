@@ -39,6 +39,10 @@ enum {
     textPasswordTag
 };
 
+- (BOOL)shouldAutorotate {
+    return false;
+}
+
 - (void)prepareMyTextField {
     self.textUsername.delegate = self;
     self.textPassword.delegate = self;
