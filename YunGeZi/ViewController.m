@@ -50,8 +50,6 @@ enum {
     self.textPassword.tag = textPasswordTag;
     self.textUsername.layer.cornerRadius = 10.0f;
     self.textPassword.layer.cornerRadius = 10.0f;
-    //self.textUsername.layer.masksToBounds = YES;
-    //self.textPassword.layer.masksToBounds = YES;
     self.textUsername.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.textPassword.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.textUsername.layer.borderWidth = 1.0f;

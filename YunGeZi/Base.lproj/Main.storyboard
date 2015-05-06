@@ -6,10 +6,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Forget Password View Controller-->
         <scene sceneID="EMj-zG-Tr0">
             <objects>
-                <viewController id="62V-tC-gNT" sceneMemberID="viewController">
+                <viewController id="62V-tC-gNT" customClass="forgetPasswordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="75B-bR-YAW"/>
                         <viewControllerLayoutGuide type="bottom" id="ZFP-aW-cH9"/>
@@ -17,17 +17,26 @@
                     <view key="view" contentMode="scaleToFill" id="rqC-wF-iOE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8rK-39-7Mo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="forgetPasswordWebView" destination="8rK-39-7Mo" id="Bwb-BE-KPd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6QZ-fG-Pdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2241.5" y="1069.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Register View Controller-->
         <scene sceneID="J8D-y2-6Sg">
             <objects>
-                <viewController id="obV-JF-Xzg" sceneMemberID="viewController">
+                <viewController id="obV-JF-Xzg" customClass="registerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PFx-55-OUY"/>
                         <viewControllerLayoutGuide type="bottom" id="HOp-O2-0hZ"/>
@@ -35,8 +44,17 @@
                     <view key="view" contentMode="scaleToFill" id="SIy-xd-HwQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-6I-iqo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="registerWebView" destination="fxd-6I-iqo" id="p4V-FN-ftM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,12 +233,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mrZ-5z-NYR">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrZ-5z-NYR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mrZ-5z-NYR" secondAttribute="trailing" id="QkB-hO-gxj"/>
+                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="leading" secondItem="FRS-Xv-mjq" secondAttribute="leading" id="e17-mn-Zvv"/>
+                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="bottom" secondItem="ZQ0-7Y-ayr" secondAttribute="top" id="oKB-to-Xpn"/>
+                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="top" secondItem="FRS-Xv-mjq" secondAttribute="top" id="zof-kl-T8o"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="我的" id="gwq-Mc-nq9"/>
                     <connections>
@@ -243,52 +267,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2jU-mD-Vv0">
-                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jU-mD-Vv0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fo3-hD-8XO" appends="YES" id="2FJ-Zs-b94"/>
+                                </connections>
                             </webView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4PA-0J-ovE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" fixedFrame="YES" placeholder="输入您要找的宝贝" translatesAutoresizingMaskIntoConstraints="NO" id="Bqa-53-UZd">
-                                        <rect key="frame" x="8" y="8" width="359" height="44"/>
-                                        <color key="barTintColor" red="0.75980951539999997" green="0.19796667879999999" blue="0.81503266819999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
-                                </subviews>
-                                <color key="backgroundColor" red="0.75980951539999997" green="0.19796667879999999" blue="0.81503266819999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="leading" secondItem="uwZ-Zm-708" secondAttribute="leading" id="E0J-Bp-eOL"/>
+                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="top" secondItem="uwZ-Zm-708" secondAttribute="top" id="SCu-dJ-ZI1"/>
+                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="bottom" secondItem="6ZS-0o-Y7Y" secondAttribute="top" id="WUs-sW-FOl"/>
+                            <constraint firstAttribute="trailing" secondItem="2jU-mD-Vv0" secondAttribute="trailing" id="an8-dD-RT1"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="分类" id="P7c-dl-NSG"/>
+                    <navigationItem key="navigationItem" id="x0C-LD-jbD"/>
                     <connections>
                         <outlet property="CategoryWebView" destination="2jU-mD-Vv0" id="ul9-dY-5zD"/>
-                        <outlet property="categorySearchBar" destination="Bqa-53-UZd" id="MO6-eo-0b5"/>
+                        <segue destination="K87-1c-mC9" kind="show" identifier="showSearchResultInCategory" id="Idv-Fp-Y3O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Jy-Oc-HXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fo3-hD-8XO">
+                    <connections>
+                        <action selector="tapCategoryPageView:" destination="SyP-Fb-Twr" id="WmB-ds-U8I"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-966.5" y="-237.5"/>
+            <point key="canvasLocation" x="-514.5" y="-192.5"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="thR-Bg-6LN">
+        <!--Search In Category View Controller-->
+        <scene sceneID="hqA-rs-ii0">
             <objects>
-                <viewController id="4uO-e1-dUz" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IXR-82-Zea"/>
-                        <viewControllerLayoutGuide type="bottom" id="HEw-F7-Tqy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hjc-YR-Jgc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <viewController id="K87-1c-mC9" customClass="SearchInCategoryViewController" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" id="IOe-ia-o5Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Qtc-bB-XJi"/>
+                    </webView>
+                    <connections>
+                        <outlet property="searchResultWebView" destination="IOe-ia-o5Q" id="Cp1-Gq-ctc"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3yB-oc-x3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pOA-cM-Z02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46" y="-960"/>
+            <point key="canvasLocation" x="-54.5" y="-192.5"/>
+        </scene>
+        <!--首页-->
+        <scene sceneID="Lee-FU-l6Z">
+            <objects>
+                <navigationController id="4qF-fO-Vlr" customClass="MyNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="首页" id="caG-XG-5Wa"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pmE-4p-0RK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lq1-d8-pUB" kind="relationship" relationship="rootViewController" id="R3q-oE-CTe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDb-Y4-Itl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-966.5" y="-967.5"/>
         </scene>
         <!--首页-->
         <scene sceneID="mZG-rm-UVg">
@@ -302,44 +346,92 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dgb-Qf-jbN">
-                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgb-Qf-jbN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="CXK-L7-u6e" appends="YES" id="ydZ-PI-rie"/>
+                                </connections>
                             </webView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4m-Tl-9de">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" fixedFrame="YES" placeholder="输入您要找的宝贝" translatesAutoresizingMaskIntoConstraints="NO" id="t01-pu-vMd">
-                                        <rect key="frame" x="8" y="8" width="359" height="44"/>
-                                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
-                                </subviews>
-                                <color key="backgroundColor" red="0.75980951539999997" green="0.19796667879999999" blue="0.81503266819999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="leading" secondItem="UgW-46-GRF" secondAttribute="leading" id="1bu-SS-L0U"/>
-                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="bottom" secondItem="mUl-7m-3Vs" secondAttribute="top" id="UQd-qc-rT9"/>
-                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="top" secondItem="UgW-46-GRF" secondAttribute="top" id="WFQ-7q-RRT"/>
-                            <constraint firstAttribute="trailing" secondItem="Dgb-Qf-jbN" secondAttribute="trailing" id="s9U-bp-76k"/>
+                            <constraint firstAttribute="trailing" secondItem="Dgb-Qf-jbN" secondAttribute="trailing" id="6mV-i1-can"/>
+                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="bottom" secondItem="mUl-7m-3Vs" secondAttribute="top" id="OE8-8S-BEx"/>
+                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="leading" secondItem="UgW-46-GRF" secondAttribute="leading" id="bhv-N4-nkb"/>
+                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="top" secondItem="UgW-46-GRF" secondAttribute="top" id="w2w-cw-jha"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="bwh-Nj-tQI"/>
+                    <navigationItem key="navigationItem" id="xap-XS-NiK">
+                        <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" id="TR8-Dq-Zv9"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="MainPageWebView" destination="Dgb-Qf-jbN" id="Rlp-0y-qlQ"/>
-                        <outlet property="mainPageSearchBar" destination="t01-pu-vMd" id="7qb-UJ-9NP"/>
+                        <segue destination="CFI-zY-bc0" kind="show" identifier="showSearchResultInMain" id="wTo-zk-26Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMf-hl-PaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <webView contentMode="scaleToFill" id="4fQ-fD-dUN">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </webView>
+                <tapGestureRecognizer id="CXK-L7-u6e">
+                    <connections>
+                        <action selector="tapMainPageView:" destination="lq1-d8-pUB" id="ME8-54-Qix"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-966.5" y="-988.5"/>
+            <point key="canvasLocation" x="-514.5" y="-967.5"/>
+        </scene>
+        <!--Search In Main View Controller-->
+        <scene sceneID="iCh-YQ-ETw">
+            <objects>
+                <viewController id="CFI-zY-bc0" customClass="SearchInMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="khO-qW-2IC"/>
+                        <viewControllerLayoutGuide type="bottom" id="rEb-ST-ivx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oDK-y8-645">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nl-tl-Kpt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="leading" secondItem="oDK-y8-645" secondAttribute="leading" id="558-5v-KvD"/>
+                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="top" secondItem="oDK-y8-645" secondAttribute="top" id="Vr6-49-u45"/>
+                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="bottom" secondItem="rEb-ST-ivx" secondAttribute="top" id="dTR-x4-FZX"/>
+                            <constraint firstAttribute="trailing" secondItem="1nl-tl-Kpt" secondAttribute="trailing" id="mcu-Na-Ihe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchResultWebView" destination="1nl-tl-Kpt" id="2fV-Mw-hMk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDo-TI-H1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54.5" y="-967.5"/>
+        </scene>
+        <!--分类-->
+        <scene sceneID="iLa-vI-gYS">
+            <objects>
+                <navigationController id="56K-0e-EBg" customClass="MyNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="分类" id="er6-va-feA"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T1o-SN-XIP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SyP-Fb-Twr" kind="relationship" relationship="rootViewController" id="Xhk-ws-4Ye"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HbW-Cy-ZOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-966.5" y="-192.5"/>
         </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="cLs-kk-gdw">
@@ -352,15 +444,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lq1-d8-pUB" kind="relationship" relationship="viewControllers" id="bgD-G4-za5"/>
-                        <segue destination="SyP-Fb-Twr" kind="relationship" relationship="viewControllers" id="zbb-NF-7xt"/>
+                        <segue destination="4qF-fO-Vlr" kind="relationship" relationship="viewControllers" id="akl-lU-jiv"/>
+                        <segue destination="56K-0e-EBg" kind="relationship" relationship="viewControllers" id="GQp-EE-63R"/>
                         <segue destination="GqD-f6-mOr" kind="relationship" relationship="viewControllers" id="mQQ-sS-tiY"/>
                         <segue destination="XJX-x6-mLu" kind="relationship" relationship="viewControllers" id="QHU-DH-ggQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3a-O7-OrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1522.5" y="201.5"/>
+            <point key="canvasLocation" x="-1512.5" y="201.5"/>
         </scene>
     </scenes>
     <resources>

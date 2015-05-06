@@ -10,12 +10,17 @@
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
 		7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* BuyingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
+		76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */; };
+		76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF71AFA27D200A987C2 /* registerViewController.m */; };
+		76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */; };
+		76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */; };
+		76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */; };
+		76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */; };
 		76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C522F81AF0622E00476769 /* MyTabBarController.m */; };
 		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
 		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
 		76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */; };
 		76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3333A1AEDF8C40077BACF /* ViewController.m */; };
-		76E3333E1AEDF8C40077BACF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E3333C1AEDF8C40077BACF /* Main.storyboard */; };
 		76E333401AEDF8C40077BACF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E3333F1AEDF8C40077BACF /* Images.xcassets */; };
 		76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E333411AEDF8C40077BACF /* LaunchScreen.xib */; };
 		76E3334F1AEDF8C40077BACF /* YunGeZiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */; };
@@ -39,6 +44,17 @@
 		7651D2C31AF0771B003184A8 /* BuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyingViewController.m; sourceTree = "<group>"; };
 		7651D2C51AF079BD003184A8 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		7651D2C61AF079BD003184A8 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgetPasswordViewController.h; sourceTree = "<group>"; };
+		76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgetPasswordViewController.m; sourceTree = "<group>"; };
+		76B6ACF61AFA27D200A987C2 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
+		76B6ACF71AFA27D200A987C2 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
+		76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInMainViewController.m; sourceTree = "<group>"; };
+		76B6ACFC1AFA49AC00A987C2 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
+		76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
+		76B6AD001AFA6B4800A987C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInMainViewController.h; sourceTree = "<group>"; };
+		76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInCategoryViewController.h; sourceTree = "<group>"; };
+		76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInCategoryViewController.m; sourceTree = "<group>"; };
 		76C522F71AF0622E00476769 /* MyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBarController.h; sourceTree = "<group>"; };
 		76C522F81AF0622E00476769 /* MyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBarController.m; sourceTree = "<group>"; };
 		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,7 +65,6 @@
 		76E333371AEDF8C40077BACF /* YunGeZi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YunGeZi.xcdatamodel; sourceTree = "<group>"; };
 		76E333391AEDF8C40077BACF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		76E3333A1AEDF8C40077BACF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		76E3333D1AEDF8C40077BACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76E3333F1AEDF8C40077BACF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		76E333421AEDF8C40077BACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		76E333481AEDF8C40077BACF /* YunGeZiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YunGeZiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +113,7 @@
 		76E3332E1AEDF8C40077BACF /* YunGeZi */ = {
 			isa = PBXGroup;
 			children = (
+				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
 				76E333391AEDF8C40077BACF /* ViewController.h */,
 				76E3333A1AEDF8C40077BACF /* ViewController.m */,
 				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
@@ -108,7 +124,16 @@
 				7651D2C31AF0771B003184A8 /* BuyingViewController.m */,
 				7651D2C51AF079BD003184A8 /* AccountViewController.h */,
 				7651D2C61AF079BD003184A8 /* AccountViewController.m */,
-				76E3333C1AEDF8C40077BACF /* Main.storyboard */,
+				76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */,
+				76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */,
+				76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */,
+				76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */,
+				76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */,
+				76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */,
+				76B6ACF61AFA27D200A987C2 /* registerViewController.h */,
+				76B6ACF71AFA27D200A987C2 /* registerViewController.m */,
+				76B6ACFC1AFA49AC00A987C2 /* MyNavigationController.h */,
+				76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */,
 				76C522F71AF0622E00476769 /* MyTabBarController.h */,
 				76C522F81AF0622E00476769 /* MyTabBarController.m */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
@@ -227,7 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76E3333E1AEDF8C40077BACF /* Main.storyboard in Resources */,
+				76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */,
 				76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */,
 				76E333401AEDF8C40077BACF /* Images.xcassets in Resources */,
 			);
@@ -248,11 +273,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
+				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
+				76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */,
+				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
+				76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */,
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */,
+				76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
 				7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
@@ -278,10 +308,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		76E3333C1AEDF8C40077BACF /* Main.storyboard */ = {
+		76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				76E3333D1AEDF8C40077BACF /* Base */,
+				76B6AD001AFA6B4800A987C2 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

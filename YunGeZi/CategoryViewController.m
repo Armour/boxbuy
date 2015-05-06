@@ -8,20 +8,43 @@
 
 #import "CategoryViewController.h"
 #import "MyTabBarController.h"
+#import "SearchInCategoryViewController.h"
 
 @interface CategoryViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *CategoryWebView;
-@property (weak, nonatomic) IBOutlet UISearchBar *categorySearchBar;
+@property (strong, nonatomic) UISearchBar *categorySearchBar;
+@property (strong, nonatomic) NSString *searchQuery;
 
 @end
 
 @implementation CategoryViewController
 
+@synthesize searchQuery = _searchQuery;
+
+- (NSString *)searchQuery {
+    if (!_searchQuery) {
+        _searchQuery = [[NSString alloc] init];
+    }
+    return _searchQuery;
+}
+
+- (void)setSearchQuery:(NSString *)searchQuery {
+    _searchQuery = searchQuery;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.categorySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(self.view.bounds.size.width*0.027f,0.0f,self.view.bounds.size.width * 0.9f,44.0f)];
     self.categorySearchBar.delegate = self;
     self.categorySearchBar.backgroundImage = [self imageWithColor:[UIColor clearColor]];
+    [self.categorySearchBar setPlaceholder:@"输入您想要的宝贝"];
+
+    // put the searchBar to searchView into navigationBar
+    UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    searchView.backgroundColor = [UIColor clearColor];
+    [searchView addSubview:self.categorySearchBar];
+    self.navigationItem.titleView = searchView;
 
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/statics/class.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
@@ -43,9 +66,14 @@
     return image;
 }
 
+- (IBAction)tapCategoryPageView:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
+}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.categorySearchBar resignFirstResponder];
+    self.searchQuery = searchBar.text;
+    [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -55,6 +83,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"showSearchResultInCategory"]){
+        SearchInCategoryViewController *controller = (SearchInCategoryViewController *)segue.destinationViewController;
+        NSLog(@"%@!!",self.searchQuery);
+        [controller setSearchQuery:self.searchQuery];
+    }
 }
 
 @end
