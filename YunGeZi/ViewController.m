@@ -67,7 +67,7 @@ enum {
     NSInteger status = -1;
     @try {
         NSURL *postURL = [NSURL URLWithString:@"https://secure.boxbuy.cc/oauth/authorize"];
-        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=yourappkey&mobile=1&return_url=null", self.textUsername.text, self.textPassword.text];
+        NSString *postStr = [NSString stringWithFormat:@"username=%@&password=%@&app_key=X6K1Hfzr12EERq3ea0SZJC0XAWk4ojOy&mobile=1&return_url=null", self.textUsername.text, self.textPassword.text];
         NSData *postData = [postStr dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         NSString *postContentType = @"application/x-www-form-urlencoded";
@@ -113,6 +113,10 @@ enum {
 
     if (status == 0) {
         [self performSegueWithIdentifier:@"showTabBarController" sender:self];
+    } else if (status == 10004) {
+        [self popAlert:@"登录失败" withMessage:@"您输入的密码有误╮(╯_╰)╭"];
+    } else if (status == 10002) {
+        [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在╮(╯_╰)╭"];
     }
 }
 
@@ -184,6 +188,16 @@ enum {
         [controller setRefresh_token:self.refresh_token];
         [controller setExpire_time:self.expire_time];
     }
+}
+
+- (void) popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles: nil];
+    //[alert addButtonWithTitle:@"GOO"];
+    [alert show];
 }
 
 @end

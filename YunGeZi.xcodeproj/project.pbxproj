@@ -10,12 +10,17 @@
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
 		7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* BuyingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
+		76A2515E1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */; };
+		76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */; };
+		76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A251611AFB866A0017F285 /* CategoryDetailViewController.m */; };
 		76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */; };
 		76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF71AFA27D200A987C2 /* registerViewController.m */; };
 		76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */; };
 		76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */; };
 		76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */; };
 		76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */; };
+		76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */; };
+		76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */; };
 		76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C522F81AF0622E00476769 /* MyTabBarController.m */; };
 		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
 		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
@@ -44,6 +49,11 @@
 		7651D2C31AF0771B003184A8 /* BuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyingViewController.m; sourceTree = "<group>"; };
 		7651D2C51AF079BD003184A8 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		7651D2C61AF079BD003184A8 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		76A2515B1AFB7CF80017F285 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
+		76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		76A251601AFB866A0017F285 /* CategoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryDetailViewController.h; sourceTree = "<group>"; };
+		76A251611AFB866A0017F285 /* CategoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryDetailViewController.m; sourceTree = "<group>"; };
 		76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgetPasswordViewController.h; sourceTree = "<group>"; };
 		76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgetPasswordViewController.m; sourceTree = "<group>"; };
 		76B6ACF61AFA27D200A987C2 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
@@ -55,6 +65,10 @@
 		76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInMainViewController.h; sourceTree = "<group>"; };
 		76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInCategoryViewController.h; sourceTree = "<group>"; };
 		76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInCategoryViewController.m; sourceTree = "<group>"; };
+		76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailViewController.h; sourceTree = "<group>"; };
+		76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailViewController.m; sourceTree = "<group>"; };
+		76C3F9B51AFBB83600821B9B /* ObjectDetailInMainSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInMainSearchViewController.h; sourceTree = "<group>"; };
+		76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInMainSearchViewController.m; sourceTree = "<group>"; };
 		76C522F71AF0622E00476769 /* MyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBarController.h; sourceTree = "<group>"; };
 		76C522F81AF0622E00476769 /* MyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBarController.m; sourceTree = "<group>"; };
 		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				76A2515B1AFB7CF80017F285 /* WebViewJavascriptBridge.h */,
+				76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */,
+				76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
 		76E333231AEDF8C30077BACF = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +152,12 @@
 				76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */,
 				76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */,
 				76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */,
+				76A251601AFB866A0017F285 /* CategoryDetailViewController.h */,
+				76A251611AFB866A0017F285 /* CategoryDetailViewController.m */,
+				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
+				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */,
+				76C3F9B51AFBB83600821B9B /* ObjectDetailInMainSearchViewController.h */,
+				76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */,
 				76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */,
 				76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */,
 				76B6ACF61AFA27D200A987C2 /* registerViewController.h */,
@@ -137,6 +167,7 @@
 				76C522F71AF0622E00476769 /* MyTabBarController.h */,
 				76C522F81AF0622E00476769 /* MyTabBarController.m */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
+				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
 			);
 			path = YunGeZi;
@@ -252,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A2515E1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt in Resources */,
 				76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */,
 				76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */,
 				76E333401AEDF8C40077BACF /* Images.xcassets in Resources */,
@@ -272,19 +304,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */,
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
 				76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */,
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
+				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
 				76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */,
+				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */,
 				76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
 				7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */,
+				76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

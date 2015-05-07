@@ -9,12 +9,16 @@
 #import "CategoryViewController.h"
 #import "MyTabBarController.h"
 #import "SearchInCategoryViewController.h"
+#import "WebViewJavascriptBridge.h"
+#import "CategoryDetailViewController.h"
 
 @interface CategoryViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *CategoryWebView;
 @property (strong, nonatomic) UISearchBar *categorySearchBar;
 @property (strong, nonatomic) NSString *searchQuery;
+@property (strong, nonatomic) NSString *categoryNumber;
+@property WebViewJavascriptBridge* bridge;
 
 @end
 
@@ -46,10 +50,19 @@
     self.navigationItem.titleView = searchView;
 }
 
+- (void)webViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_CategoryWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+        self.categoryNumber = data;
+        [self performSegueWithIdentifier:@"showCategoryResult" sender:self];
+        responseCallback(self.categoryNumber);
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addSearchBar];
-     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/statics/class.html"];
+    [self webViewBridge];
+     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/index.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_CategoryWebView loadRequest:request];
 }
@@ -67,10 +80,6 @@
     UIGraphicsEndImageContext();
 
     return image;
-}
-
-- (IBAction)tapCategoryPageView:(UITapGestureRecognizer *)sender {
-    [self.view endEditing:YES];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -92,8 +101,12 @@
     if([segue.identifier isEqualToString:@"showSearchResultInCategory"]){
         SearchInCategoryViewController *controller = (SearchInCategoryViewController *)segue.destinationViewController;
         NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        NSLog(@"%@",urlencodedQuery);
+        // Holy shit! Why there need to encode twice? = =
+        urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         [controller setSearchQuery:urlencodedQuery];
+    } else if ([segue.identifier isEqualToString:@"showCategoryResult"]){
+        CategoryDetailViewController *controller = (CategoryDetailViewController *)segue.destinationViewController;
+        [controller setCategoryNumber:self.categoryNumber];
     }
 }
 

@@ -9,12 +9,16 @@
 #import "MainPageViewController.h"
 #import "MyTabBarController.h"
 #import "SearchInMainViewController.h"
+#import "WebViewJavascriptBridge.h"
+#import "ObjectDetailViewController.h"
 
 @interface MainPageViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *MainPageWebView;
 @property (strong, nonatomic) UISearchBar *mainPageSearchBar;
 @property (strong, nonatomic) NSString *searchQuery;
+@property (strong, nonatomic) NSString *objectNumber;
+@property WebViewJavascriptBridge* bridge;
 
 @end
 
@@ -46,9 +50,18 @@
     self.navigationItem.titleView = searchView;
 }
 
+- (void)webViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_MainPageWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+        self.objectNumber = data;
+        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        responseCallback(self.objectNumber);
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addSearchBar];
+    [self webViewBridge];
 
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?access_token=%@&refresh_token=%@&expire_time=%@&login=1", tab.access_token, tab.refresh_token, tab.expire_time];
@@ -91,11 +104,17 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showSearchResultInMain"]){
+    if ([segue.identifier isEqualToString:@"showSearchResultInMain"]) {
         SearchInMainViewController *controller = (SearchInMainViewController *)segue.destinationViewController;
         NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         NSLog(@"%@",urlencodedQuery);
+        // Holy shit! Why there need to encode twice? = =
+        urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        NSLog(@"%@",urlencodedQuery);
         [controller setSearchQuery:urlencodedQuery];
+    } else if([segue.identifier isEqualToString:@"detailFromMain"]) {
+        ObjectDetailViewController *controller = (ObjectDetailViewController *)segue.destinationViewController;
+        [controller setObjectNumber:self.objectNumber];
     }
 }
 

@@ -197,18 +197,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPY-zW-gR0">
-                                <rect key="frame" x="0.0" y="79" width="375" height="539"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOT-6a-Smi">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
-                                <state key="normal" title="Camera">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takephoto:" destination="GqD-f6-mOr" eventType="touchUpInside" id="clQ-YR-PdF"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -271,9 +262,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="fo3-hD-8XO" appends="YES" id="2FJ-Zs-b94"/>
-                                </connections>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -289,16 +277,54 @@
                     <connections>
                         <outlet property="CategoryWebView" destination="2jU-mD-Vv0" id="ul9-dY-5zD"/>
                         <segue destination="K87-1c-mC9" kind="show" identifier="showSearchResultInCategory" id="Idv-Fp-Y3O"/>
+                        <segue destination="WbG-eI-Bj8" kind="show" identifier="showCategoryResult" id="BVl-PR-0f1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Jy-Oc-HXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="fo3-hD-8XO">
-                    <connections>
-                        <action selector="tapCategoryPageView:" destination="SyP-Fb-Twr" id="WmB-ds-U8I"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-514.5" y="-192.5"/>
+        </scene>
+        <!--Category Detail View Controller-->
+        <scene sceneID="JbC-QQ-qqX">
+            <objects>
+                <viewController id="WbG-eI-Bj8" customClass="CategoryDetailViewController" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" id="r3W-yj-cCo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </webView>
+                    <connections>
+                        <outlet property="categoryDetailWebView" destination="r3W-yj-cCo" id="Dqx-iy-t6o"/>
+                        <segue destination="GkO-yn-bOb" kind="show" identifier="detailFromCategory" id="Zf1-Q5-YCv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g8E-Eb-edd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54.5" y="585.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5N6-Y9-NOq">
+            <objects>
+                <viewController id="GkO-yn-bOb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eRK-yd-r3w"/>
+                        <viewControllerLayoutGuide type="bottom" id="qKw-FR-3qp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="izV-v0-nXr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eN5-gR-jIu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qZA-Pq-FoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="402.5" y="585.5"/>
         </scene>
         <!--搜索结果-->
         <scene sceneID="hqA-rs-ii0">
@@ -336,7 +362,7 @@
         <!--商品详情-->
         <scene sceneID="Mxn-YC-1ge">
             <objects>
-                <viewController id="mum-fe-LV2" sceneMemberID="viewController">
+                <viewController id="mum-fe-LV2" customClass="ObjectDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TyQ-db-lVr"/>
                         <viewControllerLayoutGuide type="bottom" id="zjp-td-KjU"/>
@@ -353,6 +379,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="商品详情" id="j74-gz-O1Q"/>
+                    <connections>
+                        <outlet property="ObjectDetailWebView" destination="Ztw-Di-gS4" id="t2O-vw-pHH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhs-xQ-qdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -452,12 +481,40 @@
                     <navigationItem key="navigationItem" title=" 搜索结果" id="pgu-yx-6ZP"/>
                     <connections>
                         <outlet property="searchResultWebView" destination="1nl-tl-Kpt" id="2fV-Mw-hMk"/>
-                        <segue destination="mum-fe-LV2" kind="show" identifier="detailFromMainSearch" id="smO-wn-4c0"/>
+                        <segue destination="KUM-xb-dJc" kind="show" identifier="detailFromMainSearch" id="fTl-SR-xJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDo-TI-H1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-54.5" y="-967.5"/>
+        </scene>
+        <!--Object Detail In Main Search View Controller-->
+        <scene sceneID="HfK-no-8HN">
+            <objects>
+                <viewController id="KUM-xb-dJc" customClass="ObjectDetailInMainSearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="udI-wm-RhA"/>
+                        <viewControllerLayoutGuide type="bottom" id="2h5-fY-6Rp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4jF-IL-vG9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9RI-Zh-mdM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="ObjectDetailWebView" destination="9RI-Zh-mdM" id="zoJ-rz-Ofr"/>
+                        <outlet property="objectDetailWebView" destination="9RI-Zh-mdM" id="Ssa-DV-8w3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AyR-r0-ka9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="407.5" y="-967.5"/>
         </scene>
         <!--分类-->
         <scene sceneID="iLa-vI-gYS">
@@ -501,7 +558,4 @@
     <resources>
         <image name="logo" width="1278" height="1036"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="0p7-WM-ggn"/>
-    </inferredMetricsTieBreakers>
 </document>
