@@ -1,5 +1,5 @@
 //
-//  CategoryDetailViewController.h
+//  ObjectDetailViewController.h
 //  YunGeZi
 //
 //  Created by Armour on 5/7/15.
@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CategoryDetailViewController : UIViewController
+@interface ObjectDetailInMainViewController : UIViewController
 
-@property (strong, nonatomic) NSString* categoryNumber;
 @property (strong, nonatomic) NSString *objectNumber;
 
 @end

@@ -11,5 +11,6 @@
 @interface SearchInCategoryViewController : UIViewController
 
 @property (strong, nonatomic) NSString *searchQuery;
+@property (strong, nonatomic) NSString *objectNumber;
 
 @end

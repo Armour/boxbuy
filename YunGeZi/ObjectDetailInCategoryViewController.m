@@ -1,20 +1,20 @@
 //
-//  ObjectDetailInMainSearchViewController.m
+//  ObjectDetailInCategoryViewController.m
 //  YunGeZi
 //
-//  Created by Armour on 5/7/15.
+//  Created by Armour on 5/8/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "ObjectDetailInMainSearchViewController.h"
+#import "ObjectDetailInCategoryViewController.h"
 
-@interface ObjectDetailInMainSearchViewController ()
+@interface ObjectDetailInCategoryViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *objectDetailWebView;
 
 @end
 
-@implementation ObjectDetailInMainSearchViewController
+@implementation ObjectDetailInCategoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

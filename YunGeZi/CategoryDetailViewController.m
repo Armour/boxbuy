@@ -7,10 +7,13 @@
 //
 
 #import "CategoryDetailViewController.h"
+#import "WebViewJavascriptBridge.h"
+#import "ObjectDetailInCategoryViewController.h"
 
 @interface CategoryDetailViewController ()
 
 @property (strong, nonatomic) IBOutlet UIWebView *categoryDetailWebView;
+@property WebViewJavascriptBridge* bridge;
 
 @end
 
@@ -29,6 +32,14 @@
     _categoryNumber = categoryNumber;
 }
 
+- (void)webViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_categoryDetailWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+        self.objectNumber = data;
+        [self performSegueWithIdentifier:@"detailFromCategory" sender:self];
+        responseCallback(self.objectNumber);
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?c=%@", self.categoryNumber];
@@ -39,6 +50,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"detailFromCategory"]) {
+        ObjectDetailInCategoryViewController *controller = (ObjectDetailInCategoryViewController *)segue.destinationViewController;
+        [controller setObjectNumber:self.objectNumber];
+    }
 }
 
 @end

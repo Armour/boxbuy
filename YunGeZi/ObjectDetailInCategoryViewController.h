@@ -1,14 +1,14 @@
 //
-//  ObjectDetailViewController.h
+//  ObjectDetailInCategoryViewController.h
 //  YunGeZi
 //
-//  Created by Armour on 5/7/15.
+//  Created by Armour on 5/8/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectDetailViewController : UIViewController
+@interface ObjectDetailInCategoryViewController : UIViewController
 
 @property (strong, nonatomic) NSString *objectNumber;
 

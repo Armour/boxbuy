@@ -10,7 +10,7 @@
 #import "MyTabBarController.h"
 #import "SearchInMainViewController.h"
 #import "WebViewJavascriptBridge.h"
-#import "ObjectDetailViewController.h"
+#import "ObjectDetailViewInMainController.h"
 
 @interface MainPageViewController ()
 
@@ -113,7 +113,7 @@
         NSLog(@"%@",urlencodedQuery);
         [controller setSearchQuery:urlencodedQuery];
     } else if([segue.identifier isEqualToString:@"detailFromMain"]) {
-        ObjectDetailViewController *controller = (ObjectDetailViewController *)segue.destinationViewController;
+        ObjectDetailInMainViewController *controller = (ObjectDetailInMainViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
 }

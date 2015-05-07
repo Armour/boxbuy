@@ -1,26 +1,26 @@
 //
-//  ObjectDetailViewController.m
+//  ObjectDetailInCategorySearchViewController.m
 //  YunGeZi
 //
-//  Created by Armour on 5/7/15.
+//  Created by Armour on 5/8/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "ObjectDetailViewController.h"
+#import "ObjectDetailInCategorySearchViewController.h"
 
-@interface ObjectDetailViewController ()
+@interface ObjectDetailInCategorySearchViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *ObjectDetailWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *objectDetailWebView;
 
 @end
 
-@implementation ObjectDetailViewController
+@implementation ObjectDetailInCategorySearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/show.html?item_id=%@", self.objectNumber];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_ObjectDetailWebView loadRequest:request];
+    [_objectDetailWebView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {
