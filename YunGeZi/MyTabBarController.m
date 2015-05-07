@@ -77,8 +77,6 @@
     item = [self.tabBar.items objectAtIndex:3];
     [item setImage:unselectedImage];
     [item setSelectedImage:selectedImage];
-    // self.tabBar.barTintColor = [UIColor blackColor];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

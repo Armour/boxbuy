@@ -33,8 +33,7 @@
     _searchQuery = searchQuery;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)addSearchBar {
     self.mainPageSearchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(self.view.bounds.size.width*0.027f,0.0f,self.view.bounds.size.width * 0.9f,44.0f)];
     self.mainPageSearchBar.delegate = self;
     self.mainPageSearchBar.backgroundImage = [self imageWithColor:[UIColor clearColor]];
@@ -45,6 +44,11 @@
     searchView.backgroundColor = [UIColor clearColor];
     [searchView addSubview:self.mainPageSearchBar];
     self.navigationItem.titleView = searchView;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addSearchBar];
 
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?access_token=%@&refresh_token=%@&expire_time=%@&login=1", tab.access_token, tab.refresh_token, tab.expire_time];
@@ -72,8 +76,8 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self.mainPageSearchBar resignFirstResponder];
     self.searchQuery = searchBar.text;
+    [self.mainPageSearchBar resignFirstResponder];
     [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
 }
 
@@ -89,8 +93,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showSearchResultInMain"]){
         SearchInMainViewController *controller = (SearchInMainViewController *)segue.destinationViewController;
-        NSLog(@"%@",self.searchQuery);
-        [controller setSearchQuery:self.searchQuery];
+        NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        NSLog(@"%@",urlencodedQuery);
+        [controller setSearchQuery:urlencodedQuery];
     }
 }
 

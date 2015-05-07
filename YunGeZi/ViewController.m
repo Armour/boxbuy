@@ -87,19 +87,6 @@ enum {
 
         //NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
 
-        /*NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[requestResponse allHeaderFields] forURL:[NSURL URLWithString:@"http://www.boxbuy.cc/"]];
-        NSLog(@"count: %lu", (unsigned long)all.count);
-
-        for (NSHTTPCookie *cookie in all) {
-            NSLog(@"Name: %@ : Value: %@", cookie.name, cookie.value);
-            NSLog(@"Comment: %@ : CommentURL: %@", cookie.comment, cookie.commentURL);
-            NSLog(@"Domain: %@ : ExpiresDate: %@", cookie.domain, cookie.expiresDate);
-            NSLog(@"isHTTPOnly: %c : isSecure: %c", cookie.isHTTPOnly, cookie.isSecure);
-            NSLog(@"isSessionOnly: %c : path: %@", cookie.isSessionOnly, cookie.path);
-            NSLog(@"portList: %@ : properties: %@", cookie.portList, cookie.properties);
-            NSLog(@"version: %lu", (unsigned long)cookie.version);
-        }*/
-
         NSError *jsonError = nil;
         NSDictionary *jsonData = [NSJSONSerialization
                                   JSONObjectWithData:requestHandler
@@ -145,8 +132,6 @@ enum {
     for (cookie in [cookieJar cookies]) {
         NSLog(@"%@", cookie);
     }*/
-
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {

@@ -300,7 +300,7 @@
             </objects>
             <point key="canvasLocation" x="-514.5" y="-192.5"/>
         </scene>
-        <!--Search In Category View Controller-->
+        <!--搜索结果-->
         <scene sceneID="hqA-rs-ii0">
             <objects>
                 <viewController id="K87-1c-mC9" customClass="SearchInCategoryViewController" sceneMemberID="viewController">
@@ -309,13 +309,54 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
+                    <navigationItem key="navigationItem" title="搜索结果" id="dkb-N0-4sf"/>
                     <connections>
                         <outlet property="searchResultWebView" destination="IOe-ia-o5Q" id="Cp1-Gq-ctc"/>
+                        <segue destination="4cR-ZP-cC0" kind="show" identifier="detailFromCategorySearch" id="oWd-a4-taD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pOA-cM-Z02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-54.5" y="-192.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gtF-QN-Itk">
+            <objects>
+                <viewController id="4cR-ZP-cC0" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" id="rc0-TO-UTx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </webView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nAt-ph-Xpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="402.5" y="-192.5"/>
+        </scene>
+        <!--商品详情-->
+        <scene sceneID="Mxn-YC-1ge">
+            <objects>
+                <viewController id="mum-fe-LV2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TyQ-db-lVr"/>
+                        <viewControllerLayoutGuide type="bottom" id="zjp-td-KjU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EJ8-Gr-Uf8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ztw-Di-gS4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="商品详情" id="j74-gz-O1Q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hhs-xQ-qdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54.5" y="-1738.5"/>
         </scene>
         <!--首页-->
         <scene sceneID="Lee-FU-l6Z">
@@ -366,12 +407,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="bwh-Nj-tQI"/>
                     <navigationItem key="navigationItem" id="xap-XS-NiK">
-                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" id="TR8-Dq-Zv9"/>
                     </navigationItem>
                     <connections>
                         <outlet property="MainPageWebView" destination="Dgb-Qf-jbN" id="Rlp-0y-qlQ"/>
                         <segue destination="CFI-zY-bc0" kind="show" identifier="showSearchResultInMain" id="wTo-zk-26Y"/>
+                        <segue destination="mum-fe-LV2" kind="show" identifier="detailFromMain" id="0p7-WM-ggn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMf-hl-PaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -383,7 +424,7 @@
             </objects>
             <point key="canvasLocation" x="-514.5" y="-967.5"/>
         </scene>
-        <!--Search In Main View Controller-->
+        <!-- 搜索结果-->
         <scene sceneID="iCh-YQ-ETw">
             <objects>
                 <viewController id="CFI-zY-bc0" customClass="SearchInMainViewController" sceneMemberID="viewController">
@@ -408,8 +449,10 @@
                             <constraint firstAttribute="trailing" secondItem="1nl-tl-Kpt" secondAttribute="trailing" id="mcu-Na-Ihe"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title=" 搜索结果" id="pgu-yx-6ZP"/>
                     <connections>
                         <outlet property="searchResultWebView" destination="1nl-tl-Kpt" id="2fV-Mw-hMk"/>
+                        <segue destination="mum-fe-LV2" kind="show" identifier="detailFromMainSearch" id="smO-wn-4c0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDo-TI-H1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -458,4 +501,7 @@
     <resources>
         <image name="logo" width="1278" height="1036"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0p7-WM-ggn"/>
+    </inferredMetricsTieBreakers>
 </document>

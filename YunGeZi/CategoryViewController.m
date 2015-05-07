@@ -33,8 +33,7 @@
     _searchQuery = searchQuery;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)addSearchBar {
     self.categorySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(self.view.bounds.size.width*0.027f,0.0f,self.view.bounds.size.width * 0.9f,44.0f)];
     self.categorySearchBar.delegate = self;
     self.categorySearchBar.backgroundImage = [self imageWithColor:[UIColor clearColor]];
@@ -45,8 +44,12 @@
     searchView.backgroundColor = [UIColor clearColor];
     [searchView addSubview:self.categorySearchBar];
     self.navigationItem.titleView = searchView;
+}
 
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/statics/class.html"];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addSearchBar];
+     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/statics/class.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_CategoryWebView loadRequest:request];
 }
@@ -71,8 +74,8 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self.categorySearchBar resignFirstResponder];
     self.searchQuery = searchBar.text;
+    [self.categorySearchBar resignFirstResponder];
     [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
 }
 
@@ -88,8 +91,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showSearchResultInCategory"]){
         SearchInCategoryViewController *controller = (SearchInCategoryViewController *)segue.destinationViewController;
-        NSLog(@"%@!!",self.searchQuery);
-        [controller setSearchQuery:self.searchQuery];
+        NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        NSLog(@"%@",urlencodedQuery);
+        [controller setSearchQuery:urlencodedQuery];
     }
 }
 
