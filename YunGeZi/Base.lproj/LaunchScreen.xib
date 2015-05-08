@@ -16,15 +16,19 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="7R2-Cc-uxN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="7R2-Cc-uxN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="bottom" secondItem="7R2-Cc-uxN" secondAttribute="bottom" id="3T6-ke-Gkq"/>
+                <constraint firstItem="7R2-Cc-uxN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="WSR-yE-HhY"/>
+                <constraint firstItem="7R2-Cc-uxN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="i4A-XX-eJf"/>
+                <constraint firstAttribute="trailing" secondItem="7R2-Cc-uxN" secondAttribute="trailing" id="ji6-iF-bHT"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="w52-vV-1IP"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="wgX-te-v0O"/>
+                <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="19" id="yx2-uZ-nht"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -32,6 +36,6 @@
         </view>
     </objects>
     <resources>
-        <image name="welcome" width="2753" height="2160"/>
+        <image name="welcome" width="640" height="1136"/>
     </resources>
 </document>

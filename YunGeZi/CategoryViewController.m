@@ -85,7 +85,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     self.searchQuery = searchBar.text;
     [self.categorySearchBar resignFirstResponder];
-    [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
+    if (![self.searchQuery isEqual: @""]) {
+        [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
+    } else {
+        
+    }
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

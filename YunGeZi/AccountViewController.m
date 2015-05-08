@@ -8,17 +8,30 @@
 
 #import "AccountViewController.h"
 #import "MyTabBarController.h"
+#import "WebViewJavascriptBridge.h"
 
 @interface AccountViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *AccountWebView;
+@property WebViewJavascriptBridge* bridge;
 
 @end
 
 @implementation AccountViewController
 
+- (void)webViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_AccountWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+        if ([data isEqualToString:@"order"]) {
+            [self performSegueWithIdentifier:@"showMyOrder" sender:self];
+        } else if ([data isEqualToString:@"shop"]) {
+            [self performSegueWithIdentifier:@"showMyShop" sender:self];
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self webViewBridge];
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/index.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_AccountWebView loadRequest:request];

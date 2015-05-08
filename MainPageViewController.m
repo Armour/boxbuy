@@ -91,7 +91,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     self.searchQuery = searchBar.text;
     [self.mainPageSearchBar resignFirstResponder];
-    [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
+    if (![self.searchQuery isEqual: @""]) {
+        [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
+    } else {
+
+    }
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

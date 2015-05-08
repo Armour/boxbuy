@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */; };
 		7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */; };
+		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
+		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
 		7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* BuyingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
@@ -49,6 +51,10 @@
 		7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7603A8241AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategoryViewController.h; sourceTree = "<group>"; };
 		7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategoryViewController.m; sourceTree = "<group>"; };
+		7603A8271AFC58F6007E4B78 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
+		7603A8281AFC58F6007E4B78 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
+		7603A82A1AFC682A007E4B78 /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
+		7603A82B1AFC682A007E4B78 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		7651D2C01AF07434003184A8 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		7651D2C21AF0771B003184A8 /* BuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyingViewController.h; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 				76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */,
 				76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */,
 				76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */,
+				7603A8271AFC58F6007E4B78 /* OrderViewController.h */,
+				7603A8281AFC58F6007E4B78 /* OrderViewController.m */,
+				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
+				7603A82B1AFC682A007E4B78 /* ShopViewController.m */,
 				76A251601AFB866A0017F285 /* CategoryDetailViewController.h */,
 				76A251611AFB866A0017F285 /* CategoryDetailViewController.m */,
 				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewInMainController.h */,
@@ -318,6 +328,7 @@
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
 				7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */,
+				7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */,
 				76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */,
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
@@ -327,6 +338,7 @@
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
 				76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */,
 				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
+				7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */,
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */,
 				76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */,

@@ -56,6 +56,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"detailFromMainSearch"]) {
         ObjectDetailInMainSearchViewController *controller = (ObjectDetailInMainSearchViewController *)segue.destinationViewController;
+        //NSLog(@"!!!!");
         [controller setObjectNumber:self.objectNumber];
     }
 }
