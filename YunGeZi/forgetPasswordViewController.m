@@ -22,10 +22,10 @@
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_forgetPasswordWebView handler:^(id data, WVJBResponseCallback responseCallback) {
         NSLog(@"%@",data);
         if ([data isEqualToString:@"true"]) {
-            //[self popAlert:@"修改密码成功" withMessage:@"修改密码成功!"];
+            [self popAlert:@"修改密码成功" withMessage:@"修改密码成功!"];
             [self performSegueWithIdentifier:@"backToLoginFromChangePassword" sender:self];
         } else if ([data isEqualToString:@"false"]) {
-            //[self popAlert:@"修改密码失败" withMessage:@"找回密码失败"];
+            [self popAlert:@"修改密码失败" withMessage:@"修改密码失败"];
             [self performSegueWithIdentifier:@"backToLoginFromChangePassword" sender:self];
         } else if ([data isEqualToString:@"back"]) {
             [self performSegueWithIdentifier:@"backToLoginFromChangePassword" sender:self];

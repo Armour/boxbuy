@@ -7,18 +7,37 @@
 //
 
 #import "registerViewController.h"
+#import "WebViewJavascriptBridge.h"
 
 @interface registerViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *registerWebView;
+@property WebViewJavascriptBridge* bridge;
 
 @end
 
 @implementation registerViewController
 
+- (void)webViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_registerWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"%@",data);
+        if ([data isEqualToString:@"true"]) {
+            //[self popAlert:@"注册成功" withMessage:@"注册成功!"];
+            [self performSegueWithIdentifier:@"backToLoginFromRegister" sender:self];
+        } else if ([data isEqualToString:@"false"]) {
+            //[self popAlert:@"注册失败" withMessage:@"注册失败"];
+            [self performSegueWithIdentifier:@"backToLoginFromRegister" sender:self];
+        } else if ([data isEqualToString:@"back"]) {
+            [self performSegueWithIdentifier:@"backToLoginFromRegister" sender:self];
+        }
+        responseCallback(@"0.0");
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/oauth/register?mobile=1&return=http%%3A%%2F%%2Fwebapp-ios.boxbuy.cc%%2Flogin.html"];
+    [self webViewBridge];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/register.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_registerWebView loadRequest:request];
 }

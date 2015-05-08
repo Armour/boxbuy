@@ -9,11 +9,13 @@
 #import "AccountViewController.h"
 #import "MyTabBarController.h"
 #import "WebViewJavascriptBridge.h"
+#import "ShopViewController.h"
 
 @interface AccountViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *AccountWebView;
 @property WebViewJavascriptBridge* bridge;
+@property (strong, nonatomic) NSString *userid;
 
 @end
 
@@ -21,9 +23,11 @@
 
 - (void)webViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_AccountWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"%@",data);
+        self.userid = data;
         if ([data isEqualToString:@"order"]) {
             [self performSegueWithIdentifier:@"showMyOrder" sender:self];
-        } else if ([data isEqualToString:@"shop"]) {
+        } else if (![data isEqualToString:@"order"]){
             [self performSegueWithIdentifier:@"showMyShop" sender:self];
         }
     }];
@@ -40,6 +44,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"showMyShop"]) {
+        ShopViewController *controller = (ShopViewController *)segue.destinationViewController;
+        [controller setUserid:self.userid];
+    }
 }
 
 @end

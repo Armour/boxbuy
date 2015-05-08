@@ -14,12 +14,24 @@
 @interface BuyingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *BuyingWebView;
-@property (strong, nonatomic) NSString *imageData;
+@property (strong, nonatomic) NSString *imageEncodedData;
 @property WebViewJavascriptBridge* bridge;
+
+- (NSString *)randomStringWithLength:(int)len;
 
 @end
 
 @implementation BuyingViewController
+
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+- (NSString *)randomStringWithLength:(int)len {
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%c", [letters characterAtIndex: arc4random_uniform((unsigned int)[letters length])]];
+    }
+    return randomString;
+}
 
 - (void)takePhoto {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -52,24 +64,95 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (NSMutableURLRequest *)createURLRequestWithURL:(NSString *)URL andPostData:(NSMutableDictionary *)postDictionary {
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
+    NSMutableData *postData = [NSMutableData data];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSMutableString * wa = [[NSMutableString alloc] init];
+    //convert post distionary into a string
+    if (postDictionary) {
+        for (NSString *key in postDictionary) {
+            [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [wa appendFormat:@"\r\n--%@\r\n", boundary];
+            id postValue = [postDictionary valueForKey:key];
+            if ([postValue isKindOfClass:[NSString class]]) {
+                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
+                [wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                [wa appendFormat:@"%@", postValue];
+                //NSLog(@"!!!%@ %@", key, postValue);
+            } else if ([postValue isKindOfClass:[UIImage class]]) {
+                NSString *tmpStr = [self randomStringWithLength:8];
+                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr]  dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:UIImageJPEGRepresentation(postValue, 0.8)];
+
+                [wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                [wa appendFormat:@"Content-Type: image/jpeg\r\n"];
+                [wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                [wa appendString:@"!!!Image Data Here!!!"];
+                //NSLog(@">.<%@ %@", key, postValue);
+            } else {
+                [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
+            }
+        }
+        [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [wa appendFormat:@"\r\n--%@--\r\n", boundary];
+    }
+
+    //setup the request
+    [urlRequest setURL:[NSURL URLWithString:URL]];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary] forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setHTTPBody:postData];
+
+    NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
+    NSLog(@"%@", wa);
+
+    return urlRequest;
+}
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = info[UIImagePickerControllerEditedImage];
     if (!image) {
         image = info[UIImagePickerControllerOriginalImage];
     }
+
+    /*MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
+    NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
+    [imageDict setObject:tab.access_token forKey:@"access_token"];
+    [imageDict setObject:image forKey:@"image"];
+    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://www.boxbuy.cc/images/add" andPostData:imageDict];
+    //建立连接，设置代理
+    NSError *requestError = [[NSError alloc] init];
+    NSHTTPURLResponse *requestResponse;
+    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
+    NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
+
+    NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
+    NSLog(@"Response data: %@", responseData);
+
+    NSError *jsonError = nil;
+    NSDictionary *jsonData = [NSJSONSerialization
+                              JSONObjectWithData:requestHandler
+                              options:NSJSONReadingMutableContainers
+                              error:&jsonError];
+    NSLog(@"Response with json ==> %@", jsonData);
+     */
+
     [self dismissViewControllerAnimated:YES completion:NULL];
-    self.imageData = [UIImageJPEGRepresentation(image, 0.5) base64EncodedStringWithOptions:0];
-    id data = self.imageData;
-    NSLog(@"%@", data);
+    self.imageEncodedData = [UIImageJPEGRepresentation(image, 0.0) base64EncodedStringWithOptions:0];
+    id data = self.imageEncodedData;
     [self.bridge callHandler:@"getImageData" data:data];
 }
 
 - (void)webViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_BuyingWebView handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"takePhoto"]) {
-            self.imageData = NULL;
+            self.imageEncodedData = NULL;
             [self takePhoto];
-            responseCallback(self.imageData);
+            responseCallback(@"0.0");
         }
     }];
 }

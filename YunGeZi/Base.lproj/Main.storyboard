@@ -232,7 +232,7 @@
             </objects>
             <point key="canvasLocation" x="-966.5" y="595.5"/>
         </scene>
-        <!--我的-->
+        <!--个人信息-->
         <scene sceneID="Mvx-cR-9IS">
             <objects>
                 <viewController id="XJX-x6-mLu" customClass="AccountViewController" sceneMemberID="viewController">
@@ -258,7 +258,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="我的" id="gwq-Mc-nq9"/>
-                    <navigationItem key="navigationItem" id="Yqs-ud-Q9X"/>
+                    <navigationItem key="navigationItem" title="个人信息" id="Yqs-ud-Q9X"/>
                     <connections>
                         <outlet property="AccountWebView" destination="mrZ-5z-NYR" id="OBh-2m-TF0"/>
                         <segue destination="AYO-so-LKW" kind="show" identifier="showMyOrder" id="RBA-Kz-LoH"/>
@@ -269,7 +269,7 @@
             </objects>
             <point key="canvasLocation" x="-514.5" y="1371.5"/>
         </scene>
-        <!--Shop View Controller-->
+        <!--我的店铺-->
         <scene sceneID="5Mc-12-NBE">
             <objects>
                 <viewController id="4Ql-Hu-1p4" customClass="ShopViewController" sceneMemberID="viewController">
@@ -294,15 +294,50 @@
                             <constraint firstAttribute="trailing" secondItem="RaS-sB-Xfo" secondAttribute="trailing" id="pxi-yp-Bzf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="我的店铺" id="NvC-sj-qhg"/>
                     <connections>
                         <outlet property="shopWebView" destination="RaS-sB-Xfo" id="oRc-N1-eNG"/>
+                        <segue destination="3l7-Tc-WQP" kind="show" identifier="showDetailInShop" id="PLi-ry-FbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPi-qS-pNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-54.5" y="2150.5"/>
         </scene>
-        <!--Order View Controller-->
+        <!--Object Detail In Shop View Controller-->
+        <scene sceneID="hDI-rJ-FjP">
+            <objects>
+                <viewController id="3l7-Tc-WQP" customClass="ObjectDetailInShopViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SlV-eC-wvK"/>
+                        <viewControllerLayoutGuide type="bottom" id="fTK-6n-gxA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0f1-WK-LMR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4nm-i1-YUy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4nm-i1-YUy" firstAttribute="leading" secondItem="0f1-WK-LMR" secondAttribute="leading" id="A8B-II-7Jj"/>
+                            <constraint firstItem="4nm-i1-YUy" firstAttribute="bottom" secondItem="fTK-6n-gxA" secondAttribute="top" id="JQ0-aq-Vdc"/>
+                            <constraint firstItem="4nm-i1-YUy" firstAttribute="top" secondItem="0f1-WK-LMR" secondAttribute="top" id="dxz-Sg-P7P"/>
+                            <constraint firstAttribute="trailing" secondItem="4nm-i1-YUy" secondAttribute="trailing" id="v9Y-R8-cOd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="objectDetailInShopWebView" destination="4nm-i1-YUy" id="awd-fr-AhP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZCW-qt-syy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="415.5" y="2150.5"/>
+        </scene>
+        <!--我的订单-->
         <scene sceneID="vde-a0-ZK4">
             <objects>
                 <viewController id="AYO-so-LKW" customClass="OrderViewController" sceneMemberID="viewController">
@@ -311,6 +346,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
+                    <navigationItem key="navigationItem" title="我的订单" id="qA2-mu-Cgh"/>
                     <connections>
                         <outlet property="orderWebView" destination="hTw-Qu-sAB" id="PPj-uG-aIO"/>
                     </connections>

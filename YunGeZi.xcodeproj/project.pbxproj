@@ -11,6 +11,7 @@
 		7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
 		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
+		7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */; };
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
 		7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* BuyingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
@@ -55,6 +56,8 @@
 		7603A8281AFC58F6007E4B78 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		7603A82A1AFC682A007E4B78 /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
 		7603A82B1AFC682A007E4B78 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
+		7603A82D1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInShopViewController.h; sourceTree = "<group>"; };
+		7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInShopViewController.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		7651D2C01AF07434003184A8 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		7651D2C21AF0771B003184A8 /* BuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyingViewController.h; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */,
 				7603A8211AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.h */,
 				7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */,
+				7603A82D1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.h */,
+				7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */,
 				76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */,
 				76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */,
 				76B6ACF61AFA27D200A987C2 /* registerViewController.h */,
@@ -333,6 +338,7 @@
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
+				7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
 				7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */,
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,

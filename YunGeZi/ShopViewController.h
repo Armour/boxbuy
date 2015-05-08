@@ -10,4 +10,6 @@
 
 @interface ShopViewController : UIViewController
 
+@property (strong, nonatomic) NSString *userid;
+
 @end
