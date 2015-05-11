@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AccountViewController : UIViewController
+@interface AccountViewController : UIViewController <UIWebViewDelegate>
 
 @end

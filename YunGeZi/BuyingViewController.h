@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BuyingViewController : UIViewController
+@interface BuyingViewController : UIViewController <UIWebViewDelegate>
 
 @end

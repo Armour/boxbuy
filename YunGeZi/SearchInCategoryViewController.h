@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchInCategoryViewController : UIViewController
+@interface SearchInCategoryViewController : UIViewController <UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString *searchQuery;
 @property (strong, nonatomic) NSString *objectNumber;

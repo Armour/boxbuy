@@ -14,6 +14,7 @@
 @interface BuyingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *BuyingWebView;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
 @property WebViewJavascriptBridge* bridge;
 
@@ -147,8 +148,33 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.bridge callHandler:@"getImageData" data:data];
 }
 
-- (void)webViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_BuyingWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+- (void)addIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)addWebViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_BuyingWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"takePhoto"]) {
             self.imageEncodedData = NULL;
             [self takePhoto];
@@ -157,12 +183,17 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self webViewBridge];
+- (void)loadWebViewRequest {
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/add.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_BuyingWebView loadRequest:request];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addWebViewBridge];
+    [self addIndicator];
+    [self loadWebViewRequest];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectBuyInMainViewController : UIViewController
+@interface ObjectBuyInMainViewController : UIViewController <UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString* objectNumber;
 

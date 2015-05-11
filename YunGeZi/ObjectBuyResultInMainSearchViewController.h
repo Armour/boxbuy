@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectBuyResultInMainSearchViewController : UIViewController
+@interface ObjectBuyResultInMainSearchViewController : UIViewController <UIWebViewDelegate>
 
 @end

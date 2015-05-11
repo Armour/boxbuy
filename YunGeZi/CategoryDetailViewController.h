@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CategoryDetailViewController : UIViewController
+@interface CategoryDetailViewController : UIViewController <UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString* categoryNumber;
 @property (strong, nonatomic) NSString *objectNumber;

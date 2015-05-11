@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *MainPageWebView;
 @property (strong, nonatomic) UISearchBar *mainPageSearchBar;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSString *searchQuery;
 @property (strong, nonatomic) NSString *objectNumber;
 @property WebViewJavascriptBridge* bridge;
@@ -50,23 +51,66 @@
     self.navigationItem.titleView = searchView;
 }
 
-- (void)webViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_MainPageWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searchQuery = searchBar.text;
+    [self.mainPageSearchBar resignFirstResponder];
+    if (![self.searchQuery isEqual: @""]) {
+        [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
+    } else {
+
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.mainPageSearchBar resignFirstResponder];
+}
+
+- (void)addIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)addWebViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.MainPageWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         self.objectNumber = data;
         [self performSegueWithIdentifier:@"detailFromMain" sender:self];
         responseCallback(self.objectNumber);
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self addSearchBar];
-    [self webViewBridge];
-
+- (void)loadWebViewRequest {
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?access_token=%@&refresh_token=%@&expire_time=%@&login=1", tab.access_token, tab.refresh_token, tab.expire_time];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_MainPageWebView loadRequest:request];
+    [self.MainPageWebView loadRequest:request];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addWebViewBridge];
+    [self addSearchBar];
+    [self addIndicator];
+    [self loadWebViewRequest];
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color
@@ -88,19 +132,6 @@
     [self.view endEditing:YES];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searchQuery = searchBar.text;
-    [self.mainPageSearchBar resignFirstResponder];
-    if (![self.searchQuery isEqual: @""]) {
-        [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
-    } else {
-
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self.mainPageSearchBar resignFirstResponder];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -111,10 +142,8 @@
     if ([segue.identifier isEqualToString:@"showSearchResultInMain"]) {
         SearchInMainViewController *controller = (SearchInMainViewController *)segue.destinationViewController;
         NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        NSLog(@"%@",urlencodedQuery);
         // Holy shit! Why there need to encode twice? = =
         urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        NSLog(@"%@",urlencodedQuery);
         [controller setSearchQuery:urlencodedQuery];
     } else if([segue.identifier isEqualToString:@"detailFromMain"]) {
         ObjectDetailInMainViewController *controller = (ObjectDetailInMainViewController *)segue.destinationViewController;

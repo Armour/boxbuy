@@ -13,6 +13,7 @@
 @interface SearchInCategoryViewController ()
 
 @property (strong, nonatomic) IBOutlet UIWebView *searchResultWebView;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property WebViewJavascriptBridge* bridge;
 
 @end
@@ -32,20 +33,50 @@
     _searchQuery = searchQuery;
 }
 
-- (void)webViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_searchResultWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+- (void)addIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)addWebViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_searchResultWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         self.objectNumber = data;
         [self performSegueWithIdentifier:@"detailFromCategorySearch" sender:self];
         responseCallback(self.objectNumber);
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self webViewBridge];
+- (void)loadWebViewRequest {
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?q=%@", self.searchQuery];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_searchResultWebView loadRequest:request];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addWebViewBridge];
+    [self addIndicator];
+    [self loadWebViewRequest];
 }
 
 - (void)didReceiveMemoryWarning {

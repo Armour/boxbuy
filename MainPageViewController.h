@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainPageViewController : UIViewController <UISearchBarDelegate>
+@interface MainPageViewController : UIViewController <UISearchBarDelegate, UIWebViewDelegate>
 
 @end

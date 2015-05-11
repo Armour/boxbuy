@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectBuyInMainSearchViewController : UIViewController
+@interface ObjectBuyInMainSearchViewController : UIViewController <UIWebViewDelegate>
 
 @property(strong, nonatomic) NSString *objectNumber;
 

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface forgetPasswordViewController : UIViewController
+@interface forgetPasswordViewController : UIViewController <UIWebViewDelegate>
 
 @end

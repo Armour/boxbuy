@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopViewController : UIViewController
+@interface ShopViewController : UIViewController <UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString *userid;
 

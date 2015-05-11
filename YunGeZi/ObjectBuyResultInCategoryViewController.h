@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectBuyResultInCategoryViewController : UIViewController
+@interface ObjectBuyResultInCategoryViewController : UIViewController <UIWebViewDelegate>
 
 @end

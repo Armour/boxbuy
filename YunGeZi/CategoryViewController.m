@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *CategoryWebView;
 @property (strong, nonatomic) UISearchBar *categorySearchBar;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSString *searchQuery;
 @property (strong, nonatomic) NSString *categoryNumber;
 @property WebViewJavascriptBridge* bridge;
@@ -50,21 +51,65 @@
     self.navigationItem.titleView = searchView;
 }
 
-- (void)webViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_CategoryWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searchQuery = searchBar.text;
+    [self.categorySearchBar resignFirstResponder];
+    if (![self.searchQuery isEqual: @""]) {
+        [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
+    } else {
+
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.categorySearchBar resignFirstResponder];
+}
+
+- (void)addIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)addWebViewBridge {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_CategoryWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         self.categoryNumber = data;
         [self performSegueWithIdentifier:@"showCategoryResult" sender:self];
         responseCallback(self.categoryNumber);
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self addSearchBar];
-    [self webViewBridge];
-     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/index.html"];
+- (void)loadWebViewRequest {
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/index.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_CategoryWebView loadRequest:request];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addWebViewBridge];
+    [self addSearchBar];
+    [self addIndicator];
+    [self loadWebViewRequest];
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color
@@ -80,20 +125,6 @@
     UIGraphicsEndImageContext();
 
     return image;
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searchQuery = searchBar.text;
-    [self.categorySearchBar resignFirstResponder];
-    if (![self.searchQuery isEqual: @""]) {
-        [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
-    } else {
-        
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self.categorySearchBar resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
