@@ -40,9 +40,19 @@
     }];
 }
 
++ (NSArray *)category {
+    return @[@"箱包", @"鞋子", @"衣服", @"家居", @"学习", @"运动", @"玩乐", @"食饮", @"电子", @"美护", @"非实物", @"交通工具"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self webViewBridge];
+    NSMutableString *title = [[NSMutableString alloc] initWithString:@""];
+    NSArray *array = [CategoryDetailViewController category];
+    NSInteger index = [self.categoryNumber integerValue] - 20;
+    NSLog(@"%@ %lul", self.categoryNumber, (unsigned long)index);
+    [title appendString:array[index]];
+    self.navigationItem.title = title;
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?c=%@", self.categoryNumber];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_categoryDetailWebView loadRequest:request];

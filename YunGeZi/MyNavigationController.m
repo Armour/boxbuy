@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.barTintColor = [UIColor purpleColor];
+    self.navigationBar.tintColor = [UIColor whiteColor];
+
+    UIColor * color = [UIColor whiteColor];
+    NSDictionary * dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    self.navigationBar.titleTextAttributes = dict;
 }
 
 - (void)didReceiveMemoryWarning {

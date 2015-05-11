@@ -21,7 +21,8 @@
 - (void)webViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_objectDetailInShopWebView handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"deleted"]) {
-            [self.navigationController popViewControllerAnimated:NO];
+            [self popAlert:@"删除商品" withMessage:@"删除成功~\(≧▽≦)/~"];
+            [self.navigationController popToRootViewControllerAnimated:NO];
         }
         responseCallback(@".");
     }];
@@ -38,6 +39,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
 }
 
 @end
