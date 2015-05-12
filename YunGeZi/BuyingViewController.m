@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *BuyingWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
 @property WebViewJavascriptBridge* bridge;
 
@@ -52,13 +53,12 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
      }*/
     imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     imagePicker.allowsEditing = YES;
-    /*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
         [popover presentPopoverFromRect:CGRectMake(self.view.bounds.size.width / 2, self.view.bounds.size.height / 3, 10, 10) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
         [self presentViewController:imagePicker animated:YES completion:NULL];
-    }*/
-    [self presentViewController:imagePicker animated:YES completion:NULL];
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -116,9 +116,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = info[UIImagePickerControllerEditedImage];
-    if (!image) {
+    if (!image)
         image = info[UIImagePickerControllerOriginalImage];
-    }
 
     /*MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
@@ -143,9 +142,20 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
      */
 
     [self dismissViewControllerAnimated:YES completion:NULL];
-    self.imageEncodedData = [UIImageJPEGRepresentation(image, 0.0) base64EncodedStringWithOptions:0];
-    id data = self.imageEncodedData;
-    [self.bridge callHandler:@"getImageData" data:data];
+
+    dispatch_queue_t requestQueue = dispatch_queue_create("photoUpLoad", NULL);
+    dispatch_async(requestQueue, ^{
+        [self.photoActivityIndicator setHidden:NO];
+        [self.photoActivityIndicator startAnimating];
+        self.imageEncodedData = [UIImageJPEGRepresentation(image, 0.0) base64EncodedStringWithOptions:0];
+        id data = self.imageEncodedData;
+        [self.bridge callHandler:@"getImageData" data:data];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.photoActivityIndicator stopAnimating];
+            [self.photoActivityIndicator setHidden:TRUE];
+        });
+    });
+
 }
 
 - (void)addIndicator {
@@ -155,6 +165,13 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
     [self.view bringSubviewToFront:self.activityIndicator];
+
+    self.photoActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.photoActivityIndicator setCenter:self.view.center];
+    [self.photoActivityIndicator setHidesWhenStopped:TRUE];
+    [self.photoActivityIndicator setHidden:YES];
+    [self.view addSubview:self.photoActivityIndicator];
+    [self.view bringSubviewToFront:self.photoActivityIndicator];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

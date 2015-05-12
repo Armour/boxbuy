@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/BuyingViewController.m"
-            timestampString = "453026103.080064"
+            timestampString = "453041074.714596"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "-randomStringWithLength:"
             landmarkType = "5">
          </BreakpointContent>
