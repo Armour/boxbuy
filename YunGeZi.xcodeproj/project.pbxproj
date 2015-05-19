@@ -23,6 +23,8 @@
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
 		7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* BuyingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
+		769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F99491B0B77FF00161818 /* libMobClickLibrary.a */; };
+		769F994E1B0B788D00161818 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F994D1B0B788D00161818 /* libz.dylib */; };
 		76A2515E1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */; };
 		76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */; };
 		76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A251611AFB866A0017F285 /* CategoryDetailViewController.m */; };
@@ -88,6 +90,9 @@
 		7651D2C31AF0771B003184A8 /* BuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyingViewController.m; sourceTree = "<group>"; };
 		7651D2C51AF079BD003184A8 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		7651D2C61AF079BD003184A8 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		769F99491B0B77FF00161818 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = ../libMobClickLibrary.a; sourceTree = "<group>"; };
+		769F994A1B0B77FF00161818 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = ../MobClick.h; sourceTree = "<group>"; };
+		769F994D1B0B788D00161818 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		76A2515B1AFB7CF80017F285 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
@@ -132,6 +137,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				769F994E1B0B788D00161818 /* libz.dylib in Frameworks */,
+				769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +152,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		769F994C1B0B782300161818 /* Analyze */ = {
+			isa = PBXGroup;
+			children = (
+				769F99491B0B77FF00161818 /* libMobClickLibrary.a */,
+				769F994A1B0B77FF00161818 /* MobClick.h */,
+			);
+			name = Analyze;
+			sourceTree = "<group>";
+		};
 		76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +174,7 @@
 		76E333231AEDF8C30077BACF = {
 			isa = PBXGroup;
 			children = (
+				769F994D1B0B788D00161818 /* libz.dylib */,
 				76E3332E1AEDF8C40077BACF /* YunGeZi */,
 				76E3334B1AEDF8C40077BACF /* YunGeZiTests */,
 				76E3332D1AEDF8C40077BACF /* Products */,
@@ -232,6 +249,7 @@
 				76C522F71AF0622E00476769 /* MyTabBarController.h */,
 				76C522F81AF0622E00476769 /* MyTabBarController.m */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
+				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
 			);
@@ -528,6 +546,10 @@
 				INFOPLIST_FILE = YunGeZi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -540,6 +562,10 @@
 				INFOPLIST_FILE = YunGeZi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
