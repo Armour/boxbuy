@@ -92,8 +92,12 @@
 
 - (void)addWebViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.MainPageWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        self.objectNumber = data;
-        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        if ([data isEqualToString:@"verify"]) {
+            [self performSegueWithIdentifier:@"showVerification" sender:self];
+        } else {
+            self.objectNumber = data;
+            [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        }
         responseCallback(self.objectNumber);
     }];
 }
