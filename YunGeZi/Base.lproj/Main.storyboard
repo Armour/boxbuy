@@ -272,7 +272,7 @@
             </objects>
             <point key="canvasLocation" x="-514.5" y="1371.5"/>
         </scene>
-        <!--Change Nick Name View Controller-->
+        <!--修改昵称-->
         <scene sceneID="JeS-lh-d1N">
             <objects>
                 <viewController id="xWx-yG-ynS" customClass="ChangeNickNameViewController" sceneMemberID="viewController">
@@ -291,12 +291,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="66n-5e-9S4" firstAttribute="bottom" secondItem="toM-KR-7vF" secondAttribute="top" id="3XE-ZC-qGG"/>
-                            <constraint firstAttribute="trailing" secondItem="66n-5e-9S4" secondAttribute="trailing" id="Omm-vc-kZW"/>
-                            <constraint firstItem="66n-5e-9S4" firstAttribute="top" secondItem="GMb-pQ-Yeh" secondAttribute="top" id="fDj-lZ-YSz"/>
-                            <constraint firstItem="66n-5e-9S4" firstAttribute="leading" secondItem="GMb-pQ-Yeh" secondAttribute="leading" id="g1w-hm-LOT"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="top" secondItem="GMb-pQ-Yeh" secondAttribute="top" id="H3g-kQ-asV"/>
+                            <constraint firstAttribute="trailing" secondItem="66n-5e-9S4" secondAttribute="trailing" id="LhC-mb-bvf"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="leading" secondItem="GMb-pQ-Yeh" secondAttribute="leading" id="Mju-Mq-pzM"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="bottom" secondItem="toM-KR-7vF" secondAttribute="top" id="Ygz-EW-8Wf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="修改昵称" id="UO8-yk-UL7">
+                        <barButtonItem key="backBarButtonItem" title=" " id="0xc-mM-HRT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="changeNickNameWebView" destination="66n-5e-9S4" id="qal-uJ-NYo"/>
                     </connections>
@@ -701,7 +704,7 @@
             </objects>
             <point key="canvasLocation" x="1303.5" y="-192.5"/>
         </scene>
-        <!--Verification View Controller-->
+        <!--认证身份-->
         <scene sceneID="Hq5-Pe-OGw">
             <objects>
                 <viewController id="el8-x4-WrI" customClass="VerificationViewController" sceneMemberID="viewController">
@@ -726,6 +729,9 @@
                             <constraint firstItem="iJx-Oe-JtA" firstAttribute="leading" secondItem="bA0-0a-vgh" secondAttribute="leading" id="ziN-Ex-D6y"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="认证身份" id="jKW-UZ-vrd">
+                        <barButtonItem key="backBarButtonItem" title=" " id="0nl-5w-gKs"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="verificationWebView" destination="iJx-Oe-JtA" id="pTA-o3-3Kk"/>
                     </connections>

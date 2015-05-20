@@ -8,6 +8,7 @@
 
 #import "VerificationViewController.h"
 #import "WebViewJavascriptBridge.h"
+#import "MyNavigationController.h"
 
 @interface VerificationViewController ()
 
@@ -48,13 +49,15 @@
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_verificationWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"success"]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
+            MyNavigationController * nav = (MyNavigationController *)self.navigationController;
+            nav.shouldUpdateWebView = TRUE;
         }
         responseCallback(@"0.0");
     }];
 }
 
 - (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/setname.html"];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/auth.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_verificationWebView loadRequest:request];
 }

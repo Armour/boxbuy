@@ -10,4 +10,6 @@
 
 @interface MyNavigationController : UINavigationController
 
+@property BOOL shouldUpdateWebView;
+
 @end

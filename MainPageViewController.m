@@ -11,6 +11,7 @@
 #import "SearchInMainViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "ObjectDetailViewInMainController.h"
+#import "MyNavigationController.h"
 
 @interface MainPageViewController ()
 
@@ -92,7 +93,8 @@
 
 - (void)addWebViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.MainPageWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        if ([data isEqualToString:@"verify"]) {
+        NSLog(@"%@", data);
+        if ([data isEqualToString:@"auth"]) {
             [self performSegueWithIdentifier:@"showVerification" sender:self];
         } else {
             self.objectNumber = data;
@@ -117,6 +119,14 @@
     [self loadWebViewRequest];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    MyNavigationController * nav = (MyNavigationController *)self.navigationController;
+    if (nav.shouldUpdateWebView) {
+        [_MainPageWebView reload];
+        nav.shouldUpdateWebView = FALSE;
+    }
+}
+
 - (UIImage *)imageWithColor:(UIColor *)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
@@ -135,7 +145,6 @@
 - (IBAction)tapMainPageView:(UITapGestureRecognizer *)sender {
     [self.view endEditing:YES];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

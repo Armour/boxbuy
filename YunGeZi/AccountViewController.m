@@ -10,6 +10,7 @@
 #import "MyTabBarController.h"
 #import "WebViewJavascriptBridge.h"
 #import "ShopViewController.h"
+#import "MyNavigationController.h"
 
 @interface AccountViewController ()
 
@@ -72,6 +73,14 @@
     [self addWebViewBridge];
     [self addIndicator];
     [self loadWebViewRequest];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    MyNavigationController * nav = (MyNavigationController *)self.navigationController;
+    if (nav.shouldUpdateWebView) {
+        [_AccountWebView reload];
+        nav.shouldUpdateWebView = FALSE;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
