@@ -265,11 +265,42 @@
                         <outlet property="AccountWebView" destination="mrZ-5z-NYR" id="OBh-2m-TF0"/>
                         <segue destination="AYO-so-LKW" kind="show" identifier="showMyOrder" id="RBA-Kz-LoH"/>
                         <segue destination="4Ql-Hu-1p4" kind="show" identifier="showMyShop" id="zfL-Az-EsI"/>
+                        <segue destination="xWx-yG-ynS" kind="show" identifier="showChangeNickName" id="kCn-tK-bsT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wm-Td-eas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-514.5" y="1371.5"/>
+        </scene>
+        <!--Change Nick Name View Controller-->
+        <scene sceneID="JeS-lh-d1N">
+            <objects>
+                <viewController id="xWx-yG-ynS" customClass="ChangeNickNameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="etA-MK-CI6"/>
+                        <viewControllerLayoutGuide type="bottom" id="toM-KR-7vF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GMb-pQ-Yeh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66n-5e-9S4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="bottom" secondItem="toM-KR-7vF" secondAttribute="top" id="3XE-ZC-qGG"/>
+                            <constraint firstAttribute="trailing" secondItem="66n-5e-9S4" secondAttribute="trailing" id="Omm-vc-kZW"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="top" secondItem="GMb-pQ-Yeh" secondAttribute="top" id="fDj-lZ-YSz"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="leading" secondItem="GMb-pQ-Yeh" secondAttribute="leading" id="g1w-hm-LOT"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0QK-ld-WTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-514.5" y="2150.5"/>
         </scene>
         <!--我的店铺-->
         <scene sceneID="5Mc-12-NBE">

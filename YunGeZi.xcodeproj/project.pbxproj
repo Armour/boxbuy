@@ -25,6 +25,7 @@
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
 		769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F99491B0B77FF00161818 /* libMobClickLibrary.a */; };
 		769F994E1B0B788D00161818 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F994D1B0B788D00161818 /* libz.dylib */; };
+		769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */; };
 		76A2515E1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */; };
 		76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */; };
 		76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A251611AFB866A0017F285 /* CategoryDetailViewController.m */; };
@@ -93,6 +94,8 @@
 		769F99491B0B77FF00161818 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = ../libMobClickLibrary.a; sourceTree = "<group>"; };
 		769F994A1B0B77FF00161818 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = ../MobClick.h; sourceTree = "<group>"; };
 		769F994D1B0B788D00161818 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		769F994F1B0C2A0200161818 /* ChangeNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewController.h; sourceTree = "<group>"; };
+		769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameViewController.m; sourceTree = "<group>"; };
 		76A2515B1AFB7CF80017F285 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				7609A1171AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m */,
 				7609A1191AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.h */,
 				7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */,
+				769F994F1B0C2A0200161818 /* ChangeNickNameViewController.h */,
+				769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */,
 				76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */,
 				76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */,
 				76B6ACF61AFA27D200A987C2 /* registerViewController.h */,
@@ -391,6 +396,7 @@
 				7609A1121AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m in Sources */,
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
+				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
 				7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */,
 				7609A1151AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m in Sources */,
 				7609A10F1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m in Sources */,

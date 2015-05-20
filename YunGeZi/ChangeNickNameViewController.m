@@ -1,26 +1,24 @@
 //
-//  AccountViewController.m
+//  ChangeNickNameViewController.m
 //  YunGeZi
 //
-//  Created by Armour on 4/29/15.
+//  Created by Armour on 5/20/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "AccountViewController.h"
-#import "MyTabBarController.h"
+#import "ChangeNickNameViewController.h"
 #import "WebViewJavascriptBridge.h"
-#import "ShopViewController.h"
 
-@interface AccountViewController ()
+@interface ChangeNickNameViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *AccountWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *changeNickNameWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property WebViewJavascriptBridge* bridge;
-@property (strong, nonatomic) NSString *userid;
 
 @end
 
-@implementation AccountViewController
+@implementation ChangeNickNameViewController
+
 
 - (void)addIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -48,23 +46,18 @@
 }
 
 - (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_AccountWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"%@",data);
-        self.userid = data;
-        if ([data isEqualToString:@"order"]) {
-            [self performSegueWithIdentifier:@"showMyOrder" sender:self];
-        } else if ([data isEqualToString:@"shop"]){
-            [self performSegueWithIdentifier:@"showMyShop" sender:self];
-        } else if ([data isEqualToString:@"nickname"]){
-        [self performSegueWithIdentifier:@"showChangeNickName" sender:self];
-    }
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_changeNickNameWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+        if ([data isEqualToString:@"success"]) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        responseCallback(@"0.0");
     }];
 }
 
 - (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/index.html"];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@""];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_AccountWebView loadRequest:request];
+    [_changeNickNameWebView loadRequest:request];
 }
 
 - (void)viewDidLoad {
@@ -77,13 +70,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showMyShop"]) {
-        ShopViewController *controller = (ShopViewController *)segue.destinationViewController;
-        [controller setUserid:self.userid];
-    }
 }
 
 @end
