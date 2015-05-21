@@ -1,5 +1,5 @@
 //
-//  BuyingViewController.h
+//  SellingViewController.h
 //  YunGeZi
 //
 //  Created by Armour on 4/29/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BuyingViewController : UIViewController <UIWebViewDelegate>
+@interface SellingViewController : UIViewController <UIWebViewDelegate>
 
 @end

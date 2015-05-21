@@ -21,7 +21,7 @@
 		7609A11B1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */; };
 		7609A11E1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */; };
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
-		7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* BuyingViewController.m */; };
+		7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* SellingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
 		769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F99491B0B77FF00161818 /* libMobClickLibrary.a */; };
 		769F994E1B0B788D00161818 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F994D1B0B788D00161818 /* libz.dylib */; };
@@ -88,8 +88,8 @@
 		7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		7651D2C01AF07434003184A8 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
-		7651D2C21AF0771B003184A8 /* BuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyingViewController.h; sourceTree = "<group>"; };
-		7651D2C31AF0771B003184A8 /* BuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyingViewController.m; sourceTree = "<group>"; };
+		7651D2C21AF0771B003184A8 /* SellingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingViewController.h; sourceTree = "<group>"; };
+		7651D2C31AF0771B003184A8 /* SellingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellingViewController.m; sourceTree = "<group>"; };
 		7651D2C51AF079BD003184A8 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		7651D2C61AF079BD003184A8 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		769F99491B0B77FF00161818 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = ../libMobClickLibrary.a; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 				76F426AA1AEF271B00A5849A /* MainPageViewController.m */,
 				7651D2BF1AF07434003184A8 /* CategoryViewController.h */,
 				7651D2C01AF07434003184A8 /* CategoryViewController.m */,
-				7651D2C21AF0771B003184A8 /* BuyingViewController.h */,
-				7651D2C31AF0771B003184A8 /* BuyingViewController.m */,
+				7651D2C21AF0771B003184A8 /* SellingViewController.h */,
+				7651D2C31AF0771B003184A8 /* SellingViewController.m */,
 				7651D2C51AF079BD003184A8 /* AccountViewController.h */,
 				7651D2C61AF079BD003184A8 /* AccountViewController.m */,
 				76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */,
@@ -426,7 +426,7 @@
 				76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
 				7609A1181AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m in Sources */,
-				7651D2C41AF0771B003184A8 /* BuyingViewController.m in Sources */,
+				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
 				76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 				7609A11E1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m in Sources */,

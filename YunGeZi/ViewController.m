@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MyTabBarController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MobClick.h"
 
 @interface ViewController ()
 
@@ -199,6 +200,18 @@ enum {
                                            otherButtonTitles: nil];
     //[alert addButtonWithTitle:@"GOO"];
     [alert show];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"IndexPage"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"IndexPage"];
 }
 
 @end

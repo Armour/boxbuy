@@ -11,6 +11,7 @@
 #import "SearchInCategoryViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "CategoryDetailViewController.h"
+#import "MobClick.h"
 
 @interface CategoryViewController ()
 
@@ -143,6 +144,18 @@
         CategoryDetailViewController *controller = (CategoryDetailViewController *)segue.destinationViewController;
         [controller setCategoryNumber:self.categoryNumber];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"CategoryPage"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"CategoryPage"];
 }
 
 @end

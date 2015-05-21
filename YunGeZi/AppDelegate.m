@@ -9,16 +9,22 @@
 #import "AppDelegate.h"
 #import "MobClick.h"
 
+#define kUMAnalyticsAppKey @"555b3a7467e58e32890033cf"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [MobClick startWithAppkey:@"555b3a7467e58e32890033cf" reportPolicy:BATCH channelId:@""];
+    [MobClick startWithAppkey:kUMAnalyticsAppKey reportPolicy:BATCH channelId:@""];
+
+    // version标识
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+
     return YES;
 }
 

@@ -12,6 +12,7 @@
 #import "WebViewJavascriptBridge.h"
 #import "ObjectDetailViewInMainController.h"
 #import "MyNavigationController.h"
+#import "MobClick.h"
 
 @interface MainPageViewController ()
 
@@ -162,6 +163,18 @@
         ObjectDetailInMainViewController *controller = (ObjectDetailInMainViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"MainPage"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"MainPage"];
 }
 
 @end

@@ -6,14 +6,15 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "BuyingViewController.h"
+#import "SellingViewController.h"
 #import "MyTabBarController.h"
 #import "WebViewJavascriptBridge.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "MobClick.h"
 
-@interface BuyingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIWebView *BuyingWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *SellingWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
@@ -23,7 +24,7 @@
 
 @end
 
-@implementation BuyingViewController
+@implementation SellingViewController
 
 NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -191,7 +192,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_BuyingWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_SellingWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"takePhoto"]) {
             self.imageEncodedData = NULL;
             [self takePhoto];
@@ -203,7 +204,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)loadWebViewRequest {
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/add.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_BuyingWebView loadRequest:request];
+    [_SellingWebView loadRequest:request];
 }
 
 - (void)viewDidLoad {
@@ -216,6 +217,18 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"SellingPage"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"SellingPage"];
 }
 
 @end
