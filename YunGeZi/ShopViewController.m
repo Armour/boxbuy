@@ -9,6 +9,7 @@
 #import "ShopViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "ObjectDetailInShopViewController.h"
+#import "MobClick.h"
 
 @interface ShopViewController ()
 
@@ -77,6 +78,18 @@
         ObjectDetailInShopViewController *controller = (ObjectDetailInShopViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"我的店铺"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"我的店铺"];
 }
 
 @end

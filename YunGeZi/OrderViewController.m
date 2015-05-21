@@ -7,6 +7,7 @@
 //
 
 #import "OrderViewController.h"
+#import "MobClick.h"
 
 @interface OrderViewController ()
 
@@ -58,6 +59,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"我的订单"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"我的订单"];
 }
 
 @end

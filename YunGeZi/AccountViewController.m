@@ -11,6 +11,7 @@
 #import "WebViewJavascriptBridge.h"
 #import "ShopViewController.h"
 #import "MyNavigationController.h"
+#import "MobClick.h"
 
 @interface AccountViewController ()
 
@@ -54,10 +55,10 @@
         self.userid = data;
         if ([data isEqualToString:@"order"]) {
             [self performSegueWithIdentifier:@"showMyOrder" sender:self];
-        } else if ([data isEqualToString:@"shop"]){
-            [self performSegueWithIdentifier:@"showMyShop" sender:self];
         } else if ([data isEqualToString:@"nickname"]){
-        [self performSegueWithIdentifier:@"showChangeNickName" sender:self];
+            [self performSegueWithIdentifier:@"showChangeNickName" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"showMyShop" sender:self];
     }
     }];
 }
@@ -93,6 +94,18 @@
         ShopViewController *controller = (ShopViewController *)segue.destinationViewController;
         [controller setUserid:self.userid];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"我的"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"我的"];
 }
 
 @end

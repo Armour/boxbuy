@@ -9,6 +9,7 @@
 #import "CategoryDetailViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "ObjectDetailInCategoryViewController.h"
+#import "MobClick.h"
 
 @interface CategoryDetailViewController ()
 
@@ -98,6 +99,26 @@
         ObjectDetailInCategoryViewController *controller = (ObjectDetailInCategoryViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSMutableString *title = [[NSMutableString alloc] initWithString:@""];
+    NSArray *array = [CategoryDetailViewController category];
+    NSInteger index = [self.categoryNumber integerValue] - 20;
+    [title appendString:array[index]];
+    [MobClick beginLogPageView:[[NSString alloc] initWithFormat:@"分类详情：%@", title]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    NSMutableString *title = [[NSMutableString alloc] initWithString:@""];
+    NSArray *array = [CategoryDetailViewController category];
+    NSInteger index = [self.categoryNumber integerValue] - 20;
+    [title appendString:array[index]];
+    [MobClick endLogPageView:[[NSString alloc] initWithFormat:@"分类详情：%@", title]];
 }
 
 @end

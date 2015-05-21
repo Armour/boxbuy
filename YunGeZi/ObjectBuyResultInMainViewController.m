@@ -8,6 +8,7 @@
 
 #import "ObjectBuyResultInMainViewController.h"
 #import "WebViewJavascriptBridge.h"
+#import "MobClick.h"
 
 @interface ObjectBuyResultInMainViewController ()
 
@@ -69,6 +70,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"商品详情"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"商品详情"];
 }
 
 @end

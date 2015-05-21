@@ -8,6 +8,7 @@
 
 #import "forgetPasswordViewController.h"
 #import "WebViewJavascriptBridge.h"
+#import "MobClick.h"
 
 @interface forgetPasswordViewController ()
 
@@ -84,6 +85,18 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"修改密码"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"修改密码"];
 }
 
 @end

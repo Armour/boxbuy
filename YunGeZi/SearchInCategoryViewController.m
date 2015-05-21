@@ -9,6 +9,7 @@
 #import "SearchInCategoryViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "ObjectDetailInCategorySearchViewController.h"
+#import "MobClick.h"
 
 @interface SearchInCategoryViewController ()
 
@@ -89,6 +90,18 @@
         ObjectDetailInCategorySearchViewController *controller = (ObjectDetailInCategorySearchViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"搜索结果"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"搜索结果"];
 }
 
 @end

@@ -149,13 +149,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"CategoryPage"];
+    [MobClick beginLogPageView:@"分类"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"CategoryPage"];
+    [MobClick endLogPageView:@"分类"];
 }
 
 @end

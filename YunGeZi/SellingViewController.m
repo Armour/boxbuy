@@ -222,13 +222,13 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"SellingPage"];
+    [MobClick beginLogPageView:@"我要卖"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"SellingPage"];
+    [MobClick endLogPageView:@"我要卖"];
 }
 
 @end

@@ -205,13 +205,13 @@ enum {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"IndexPage"];
+    [MobClick beginLogPageView:@"登录界面"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"IndexPage"];
+    [MobClick endLogPageView:@"登录界面"];
 }
 
 @end

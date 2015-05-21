@@ -168,13 +168,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"MainPage"];
+    [MobClick beginLogPageView:@"主页"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"MainPage"];
+    [MobClick endLogPageView:@"主页"];
 }
 
 @end

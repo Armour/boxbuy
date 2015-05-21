@@ -9,6 +9,7 @@
 #import "VerificationViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MyNavigationController.h"
+#import "MobClick.h"
 
 @interface VerificationViewController ()
 
@@ -74,5 +75,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"身份认证"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"身份认证"];
+}
 
 @end

@@ -8,6 +8,7 @@
 
 #import "registerViewController.h"
 #import "WebViewJavascriptBridge.h"
+#import "MobClick.h"
 
 @interface registerViewController ()
 
@@ -83,6 +84,18 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"注册新账号"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"注册新账号"];
 }
 
 @end

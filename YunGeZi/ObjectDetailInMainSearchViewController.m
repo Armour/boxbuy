@@ -9,6 +9,7 @@
 #import "ObjectDetailInMainSearchViewController.h"
 #import "ObjectBuyInMainSearchViewController.h"
 #import "WebViewJavascriptBridge.h"
+#import "MobClick.h"
 
 @interface ObjectDetailInMainSearchViewController ()
 
@@ -89,6 +90,18 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"商品详情"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"商品详情"];
 }
 
 @end
