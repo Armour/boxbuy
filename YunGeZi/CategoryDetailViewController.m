@@ -77,7 +77,7 @@
     NSInteger index = [self.categoryNumber integerValue] - 20;
     [title appendString:array[index]];
     self.navigationItem.title = title;
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool.html?c=%@", self.categoryNumber];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool_1_3.html?c=%@", self.categoryNumber];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_categoryDetailWebView loadRequest:request];
 }
