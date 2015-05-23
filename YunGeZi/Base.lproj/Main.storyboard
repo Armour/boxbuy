@@ -25,10 +25,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8rK-39-7Mo" firstAttribute="top" secondItem="rqC-wF-iOE" secondAttribute="top" id="I1j-gb-hr9"/>
-                            <constraint firstItem="8rK-39-7Mo" firstAttribute="bottom" secondItem="ZFP-aW-cH9" secondAttribute="top" id="VHg-Yo-YYB"/>
-                            <constraint firstAttribute="trailing" secondItem="8rK-39-7Mo" secondAttribute="trailing" id="Zxn-rB-0Fd"/>
-                            <constraint firstItem="8rK-39-7Mo" firstAttribute="leading" secondItem="rqC-wF-iOE" secondAttribute="leading" id="tjP-kd-7sP"/>
+                            <constraint firstItem="8rK-39-7Mo" firstAttribute="leading" secondItem="rqC-wF-iOE" secondAttribute="leading" id="3xM-ed-4ta"/>
+                            <constraint firstAttribute="trailing" secondItem="8rK-39-7Mo" secondAttribute="trailing" id="Zuc-rR-hev"/>
+                            <constraint firstItem="8rK-39-7Mo" firstAttribute="bottom" secondItem="ZFP-aW-cH9" secondAttribute="top" id="jex-1N-tdX"/>
+                            <constraint firstItem="8rK-39-7Mo" firstAttribute="top" secondItem="rqC-wF-iOE" secondAttribute="top" id="oI4-cO-mkr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -59,10 +59,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fxd-6I-iqo" firstAttribute="top" secondItem="SIy-xd-HwQ" secondAttribute="top" id="6CE-N9-vlK"/>
-                            <constraint firstAttribute="trailing" secondItem="fxd-6I-iqo" secondAttribute="trailing" id="KZq-Bi-e0n"/>
-                            <constraint firstItem="fxd-6I-iqo" firstAttribute="leading" secondItem="SIy-xd-HwQ" secondAttribute="leading" id="ZVu-Eo-V70"/>
-                            <constraint firstItem="fxd-6I-iqo" firstAttribute="bottom" secondItem="HOp-O2-0hZ" secondAttribute="top" id="mcF-Ku-oJH"/>
+                            <constraint firstAttribute="trailing" secondItem="fxd-6I-iqo" secondAttribute="trailing" id="JPR-J2-SCo"/>
+                            <constraint firstItem="fxd-6I-iqo" firstAttribute="bottom" secondItem="HOp-O2-0hZ" secondAttribute="top" id="LXe-zb-Hw3"/>
+                            <constraint firstItem="fxd-6I-iqo" firstAttribute="leading" secondItem="SIy-xd-HwQ" secondAttribute="leading" id="YXf-A1-Wck"/>
+                            <constraint firstItem="fxd-6I-iqo" firstAttribute="top" secondItem="SIy-xd-HwQ" secondAttribute="top" id="dOB-KB-HC7"/>
                         </constraints>
                     </view>
                     <connections>
@@ -217,10 +217,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kPY-zW-gR0" firstAttribute="top" secondItem="rfL-d6-bMX" secondAttribute="top" id="6li-Qq-gVD"/>
-                            <constraint firstAttribute="trailing" secondItem="kPY-zW-gR0" secondAttribute="trailing" id="O6q-dZ-Y7z"/>
-                            <constraint firstItem="kPY-zW-gR0" firstAttribute="bottom" secondItem="m4U-2q-9Wk" secondAttribute="top" id="r9Q-Od-LVN"/>
-                            <constraint firstItem="kPY-zW-gR0" firstAttribute="leading" secondItem="rfL-d6-bMX" secondAttribute="leading" id="tqS-CE-fRf"/>
+                            <constraint firstItem="kPY-zW-gR0" firstAttribute="leading" secondItem="rfL-d6-bMX" secondAttribute="leading" id="6MH-4Q-7lW"/>
+                            <constraint firstItem="kPY-zW-gR0" firstAttribute="bottom" secondItem="m4U-2q-9Wk" secondAttribute="top" id="R3n-Yt-cqr"/>
+                            <constraint firstItem="kPY-zW-gR0" firstAttribute="top" secondItem="rfL-d6-bMX" secondAttribute="top" id="S7R-fH-4Rh"/>
+                            <constraint firstAttribute="trailing" secondItem="kPY-zW-gR0" secondAttribute="trailing" id="vWC-iY-hMa"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="我要卖" id="IUF-SK-tL6"/>
@@ -251,10 +251,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="top" secondItem="FRS-Xv-mjq" secondAttribute="top" id="3Hl-R0-kSh"/>
-                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="leading" secondItem="FRS-Xv-mjq" secondAttribute="leading" id="Bue-b6-XR8"/>
-                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="bottom" secondItem="ZQ0-7Y-ayr" secondAttribute="top" id="Rtt-Yz-0SK"/>
-                            <constraint firstAttribute="trailing" secondItem="mrZ-5z-NYR" secondAttribute="trailing" id="vXd-C7-OUZ"/>
+                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="top" secondItem="FRS-Xv-mjq" secondAttribute="top" id="8Xj-hE-pfx"/>
+                            <constraint firstAttribute="trailing" secondItem="mrZ-5z-NYR" secondAttribute="trailing" id="Qhw-ba-6Fe"/>
+                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="leading" secondItem="FRS-Xv-mjq" secondAttribute="leading" id="ruR-GJ-kVl"/>
+                            <constraint firstItem="mrZ-5z-NYR" firstAttribute="bottom" secondItem="ZQ0-7Y-ayr" secondAttribute="top" id="zQ4-Cx-R7U"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="我的" id="gwq-Mc-nq9"/>
@@ -291,10 +291,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="66n-5e-9S4" firstAttribute="top" secondItem="GMb-pQ-Yeh" secondAttribute="top" id="H3g-kQ-asV"/>
-                            <constraint firstAttribute="trailing" secondItem="66n-5e-9S4" secondAttribute="trailing" id="LhC-mb-bvf"/>
-                            <constraint firstItem="66n-5e-9S4" firstAttribute="leading" secondItem="GMb-pQ-Yeh" secondAttribute="leading" id="Mju-Mq-pzM"/>
-                            <constraint firstItem="66n-5e-9S4" firstAttribute="bottom" secondItem="toM-KR-7vF" secondAttribute="top" id="Ygz-EW-8Wf"/>
+                            <constraint firstAttribute="trailing" secondItem="66n-5e-9S4" secondAttribute="trailing" id="4bm-CZ-YId"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="top" secondItem="GMb-pQ-Yeh" secondAttribute="top" id="9by-V9-wil"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="leading" secondItem="GMb-pQ-Yeh" secondAttribute="leading" id="Mja-A7-tsO"/>
+                            <constraint firstItem="66n-5e-9S4" firstAttribute="bottom" secondItem="toM-KR-7vF" secondAttribute="top" id="QPp-3H-EOf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="修改昵称" id="UO8-yk-UL7">
@@ -364,10 +364,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4nm-i1-YUy" firstAttribute="leading" secondItem="0f1-WK-LMR" secondAttribute="leading" id="A8B-II-7Jj"/>
-                            <constraint firstItem="4nm-i1-YUy" firstAttribute="bottom" secondItem="fTK-6n-gxA" secondAttribute="top" id="JQ0-aq-Vdc"/>
-                            <constraint firstItem="4nm-i1-YUy" firstAttribute="top" secondItem="0f1-WK-LMR" secondAttribute="top" id="dxz-Sg-P7P"/>
-                            <constraint firstAttribute="trailing" secondItem="4nm-i1-YUy" secondAttribute="trailing" id="v9Y-R8-cOd"/>
+                            <constraint firstItem="4nm-i1-YUy" firstAttribute="bottom" secondItem="fTK-6n-gxA" secondAttribute="top" id="8ri-fz-Svk"/>
+                            <constraint firstItem="4nm-i1-YUy" firstAttribute="leading" secondItem="0f1-WK-LMR" secondAttribute="leading" id="E2B-77-8n1"/>
+                            <constraint firstAttribute="trailing" secondItem="4nm-i1-YUy" secondAttribute="trailing" id="b4A-kM-tzJ"/>
+                            <constraint firstItem="4nm-i1-YUy" firstAttribute="top" secondItem="0f1-WK-LMR" secondAttribute="top" id="pmX-Bs-s35"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="我的商品" id="Oj1-dQ-j3k">
@@ -438,10 +438,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="bottom" secondItem="6ZS-0o-Y7Y" secondAttribute="top" id="HCz-Ef-bFO"/>
-                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="top" secondItem="uwZ-Zm-708" secondAttribute="top" id="Jnf-KZ-LlM"/>
-                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="leading" secondItem="uwZ-Zm-708" secondAttribute="leading" id="a1x-Zg-BNR"/>
-                            <constraint firstAttribute="trailing" secondItem="2jU-mD-Vv0" secondAttribute="trailing" id="co9-jU-fSh"/>
+                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="top" secondItem="uwZ-Zm-708" secondAttribute="top" id="B3Q-Dg-k36"/>
+                            <constraint firstAttribute="trailing" secondItem="2jU-mD-Vv0" secondAttribute="trailing" id="KBy-80-vfO"/>
+                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="bottom" secondItem="6ZS-0o-Y7Y" secondAttribute="top" id="WWg-QU-4eL"/>
+                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="leading" secondItem="uwZ-Zm-708" secondAttribute="leading" id="gC5-1H-RGi"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="分类" id="P7c-dl-NSG"/>
@@ -650,10 +650,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="sGM-mh-6X4" secondAttribute="trailing" id="9f9-2Y-C1j"/>
-                            <constraint firstItem="sGM-mh-6X4" firstAttribute="top" secondItem="3I7-r7-vWo" secondAttribute="top" id="Xge-22-Vvo"/>
-                            <constraint firstItem="sGM-mh-6X4" firstAttribute="bottom" secondItem="KjK-XP-gYW" secondAttribute="top" id="gEC-SH-ycn"/>
-                            <constraint firstItem="sGM-mh-6X4" firstAttribute="leading" secondItem="3I7-r7-vWo" secondAttribute="leading" id="ntp-V5-g3W"/>
+                            <constraint firstItem="sGM-mh-6X4" firstAttribute="leading" secondItem="3I7-r7-vWo" secondAttribute="leading" id="K7P-b7-b6j"/>
+                            <constraint firstAttribute="trailing" secondItem="sGM-mh-6X4" secondAttribute="trailing" id="PZE-8n-boN"/>
+                            <constraint firstItem="sGM-mh-6X4" firstAttribute="bottom" secondItem="KjK-XP-gYW" secondAttribute="top" id="iYu-Iv-Q5o"/>
+                            <constraint firstItem="sGM-mh-6X4" firstAttribute="top" secondItem="3I7-r7-vWo" secondAttribute="top" id="kzg-iC-wrn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="购买商品" id="8yo-HT-MSV">
@@ -687,10 +687,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0EC-0R-nHM" firstAttribute="leading" secondItem="Ckq-pV-AHl" secondAttribute="leading" id="I8f-cj-dyM"/>
-                            <constraint firstAttribute="trailing" secondItem="0EC-0R-nHM" secondAttribute="trailing" id="O4I-G2-P8L"/>
-                            <constraint firstItem="0EC-0R-nHM" firstAttribute="bottom" secondItem="CDB-CW-GNP" secondAttribute="top" id="fFc-gs-jqe"/>
-                            <constraint firstItem="0EC-0R-nHM" firstAttribute="top" secondItem="Ckq-pV-AHl" secondAttribute="top" id="wSZ-4S-axl"/>
+                            <constraint firstItem="0EC-0R-nHM" firstAttribute="leading" secondItem="Ckq-pV-AHl" secondAttribute="leading" id="KB5-O9-fa2"/>
+                            <constraint firstItem="0EC-0R-nHM" firstAttribute="bottom" secondItem="CDB-CW-GNP" secondAttribute="top" id="Lnm-CD-k02"/>
+                            <constraint firstAttribute="trailing" secondItem="0EC-0R-nHM" secondAttribute="trailing" id="XR0-dO-jsw"/>
+                            <constraint firstItem="0EC-0R-nHM" firstAttribute="top" secondItem="Ckq-pV-AHl" secondAttribute="top" id="gGI-fe-Blr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="确认订单" id="RYv-jg-Ckg">
@@ -723,10 +723,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="iJx-Oe-JtA" firstAttribute="bottom" secondItem="zz5-1O-AMl" secondAttribute="top" id="5Wl-yw-nKo"/>
-                            <constraint firstItem="iJx-Oe-JtA" firstAttribute="top" secondItem="bA0-0a-vgh" secondAttribute="top" id="Dlp-g7-HCM"/>
-                            <constraint firstAttribute="trailing" secondItem="iJx-Oe-JtA" secondAttribute="trailing" id="Fkq-nj-ViX"/>
-                            <constraint firstItem="iJx-Oe-JtA" firstAttribute="leading" secondItem="bA0-0a-vgh" secondAttribute="leading" id="ziN-Ex-D6y"/>
+                            <constraint firstItem="iJx-Oe-JtA" firstAttribute="top" secondItem="bA0-0a-vgh" secondAttribute="top" id="7PC-l4-Oim"/>
+                            <constraint firstItem="iJx-Oe-JtA" firstAttribute="leading" secondItem="bA0-0a-vgh" secondAttribute="leading" id="JPG-4M-NSD"/>
+                            <constraint firstItem="iJx-Oe-JtA" firstAttribute="bottom" secondItem="zz5-1O-AMl" secondAttribute="top" id="VYz-90-gUk"/>
+                            <constraint firstAttribute="trailing" secondItem="iJx-Oe-JtA" secondAttribute="trailing" id="u3b-xJ-0dG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="认证身份" id="jKW-UZ-vrd">
@@ -759,10 +759,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ztw-Di-gS4" firstAttribute="top" secondItem="EJ8-Gr-Uf8" secondAttribute="top" id="6La-6Q-w83"/>
-                            <constraint firstAttribute="trailing" secondItem="Ztw-Di-gS4" secondAttribute="trailing" id="F80-Lg-6xR"/>
-                            <constraint firstItem="Ztw-Di-gS4" firstAttribute="leading" secondItem="EJ8-Gr-Uf8" secondAttribute="leading" id="QVc-2a-wa4"/>
-                            <constraint firstItem="Ztw-Di-gS4" firstAttribute="bottom" secondItem="zjp-td-KjU" secondAttribute="top" id="bPL-pZ-qv6"/>
+                            <constraint firstItem="Ztw-Di-gS4" firstAttribute="bottom" secondItem="zjp-td-KjU" secondAttribute="top" id="0I0-kD-4iz"/>
+                            <constraint firstAttribute="trailing" secondItem="Ztw-Di-gS4" secondAttribute="trailing" id="X5X-eV-4QM"/>
+                            <constraint firstItem="Ztw-Di-gS4" firstAttribute="leading" secondItem="EJ8-Gr-Uf8" secondAttribute="leading" id="ZlA-Mc-Mmm"/>
+                            <constraint firstItem="Ztw-Di-gS4" firstAttribute="top" secondItem="EJ8-Gr-Uf8" secondAttribute="top" id="w1D-0f-vNI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="商品详情" id="j74-gz-O1Q">
@@ -796,10 +796,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Z0J-zl-fhn" firstAttribute="bottom" secondItem="fvR-sH-FU5" secondAttribute="top" id="8yQ-JE-7WH"/>
-                            <constraint firstItem="Z0J-zl-fhn" firstAttribute="top" secondItem="AJ5-fm-VZN" secondAttribute="top" id="Kmm-qh-CX4"/>
-                            <constraint firstAttribute="trailing" secondItem="Z0J-zl-fhn" secondAttribute="trailing" id="cBF-Gu-zY8"/>
-                            <constraint firstItem="Z0J-zl-fhn" firstAttribute="leading" secondItem="AJ5-fm-VZN" secondAttribute="leading" id="xct-ko-GrF"/>
+                            <constraint firstItem="Z0J-zl-fhn" firstAttribute="top" secondItem="AJ5-fm-VZN" secondAttribute="top" id="A4d-xe-FeH"/>
+                            <constraint firstAttribute="trailing" secondItem="Z0J-zl-fhn" secondAttribute="trailing" id="E0p-cs-w2E"/>
+                            <constraint firstItem="Z0J-zl-fhn" firstAttribute="leading" secondItem="AJ5-fm-VZN" secondAttribute="leading" id="g78-4W-53e"/>
+                            <constraint firstItem="Z0J-zl-fhn" firstAttribute="bottom" secondItem="fvR-sH-FU5" secondAttribute="top" id="zoe-wt-BIZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="购买商品" id="276-BZ-SEP">
@@ -833,10 +833,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="j8S-GI-ur6" firstAttribute="bottom" secondItem="WW4-Ra-Ba6" secondAttribute="top" id="35J-ha-Uqe"/>
-                            <constraint firstItem="j8S-GI-ur6" firstAttribute="top" secondItem="fUM-MX-gWK" secondAttribute="top" id="C4B-uF-mKv"/>
-                            <constraint firstItem="j8S-GI-ur6" firstAttribute="leading" secondItem="fUM-MX-gWK" secondAttribute="leading" id="WyE-Ff-u9q"/>
-                            <constraint firstAttribute="trailing" secondItem="j8S-GI-ur6" secondAttribute="trailing" id="asR-tU-bsh"/>
+                            <constraint firstItem="j8S-GI-ur6" firstAttribute="top" secondItem="fUM-MX-gWK" secondAttribute="top" id="5Ab-OV-akS"/>
+                            <constraint firstItem="j8S-GI-ur6" firstAttribute="bottom" secondItem="WW4-Ra-Ba6" secondAttribute="top" id="Nwj-mu-hpi"/>
+                            <constraint firstAttribute="trailing" secondItem="j8S-GI-ur6" secondAttribute="trailing" id="Yg1-cP-hBK"/>
+                            <constraint firstItem="j8S-GI-ur6" firstAttribute="leading" secondItem="fUM-MX-gWK" secondAttribute="leading" id="qeL-P4-Qku"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="确认订单" id="qcZ-tI-Iug">
@@ -891,10 +891,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="top" secondItem="UgW-46-GRF" secondAttribute="top" id="89W-o7-DqA"/>
-                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="leading" secondItem="UgW-46-GRF" secondAttribute="leading" id="AZe-bh-eqe"/>
-                            <constraint firstAttribute="trailing" secondItem="Dgb-Qf-jbN" secondAttribute="trailing" id="PgG-MP-OUG"/>
-                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="bottom" secondItem="mUl-7m-3Vs" secondAttribute="top" id="Z0r-ik-aA8"/>
+                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="bottom" secondItem="mUl-7m-3Vs" secondAttribute="top" id="Onm-Ew-YfT"/>
+                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="top" secondItem="UgW-46-GRF" secondAttribute="top" id="hxf-nP-GXu"/>
+                            <constraint firstAttribute="trailing" secondItem="Dgb-Qf-jbN" secondAttribute="trailing" id="sfv-pl-4Sj"/>
+                            <constraint firstItem="Dgb-Qf-jbN" firstAttribute="leading" secondItem="UgW-46-GRF" secondAttribute="leading" id="tW4-lH-awb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="bwh-Nj-tQI"/>
@@ -937,10 +937,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="leading" secondItem="oDK-y8-645" secondAttribute="leading" id="1Hv-B1-r7U"/>
-                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="top" secondItem="oDK-y8-645" secondAttribute="top" id="FRR-bN-qn8"/>
-                            <constraint firstAttribute="trailing" secondItem="1nl-tl-Kpt" secondAttribute="trailing" id="Xk9-9C-Wqu"/>
-                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="bottom" secondItem="rEb-ST-ivx" secondAttribute="top" id="s0q-EM-vq9"/>
+                            <constraint firstAttribute="trailing" secondItem="1nl-tl-Kpt" secondAttribute="trailing" id="DW6-7A-5A8"/>
+                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="top" secondItem="oDK-y8-645" secondAttribute="top" id="MNF-KP-sB0"/>
+                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="leading" secondItem="oDK-y8-645" secondAttribute="leading" id="pYc-vK-6Oc"/>
+                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="bottom" secondItem="rEb-ST-ivx" secondAttribute="top" id="rwB-QW-DLz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title=" 搜索结果" id="pgu-yx-6ZP">
@@ -974,10 +974,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="leading" secondItem="4jF-IL-vG9" secondAttribute="leading" id="0ES-gM-U6B"/>
-                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="top" secondItem="4jF-IL-vG9" secondAttribute="top" id="ELJ-2h-2AB"/>
-                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="bottom" secondItem="2h5-fY-6Rp" secondAttribute="top" id="NAE-lg-8cy"/>
-                            <constraint firstAttribute="trailing" secondItem="9RI-Zh-mdM" secondAttribute="trailing" id="xyr-v0-inL"/>
+                            <constraint firstAttribute="trailing" secondItem="9RI-Zh-mdM" secondAttribute="trailing" id="27L-eZ-8C8"/>
+                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="leading" secondItem="4jF-IL-vG9" secondAttribute="leading" id="6JK-nc-kwk"/>
+                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="bottom" secondItem="2h5-fY-6Rp" secondAttribute="top" id="9jL-US-26W"/>
+                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="top" secondItem="4jF-IL-vG9" secondAttribute="top" id="yyz-6i-f4L"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="商品详情" id="zLe-Cv-MHp">
@@ -1011,10 +1011,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="9CP-1p-8n5" secondAttribute="trailing" id="6B8-Rb-4cl"/>
-                            <constraint firstItem="9CP-1p-8n5" firstAttribute="leading" secondItem="nLy-lY-Mid" secondAttribute="leading" id="BOM-cO-Bso"/>
-                            <constraint firstItem="9CP-1p-8n5" firstAttribute="top" secondItem="nLy-lY-Mid" secondAttribute="top" id="rnT-Xo-zuB"/>
-                            <constraint firstItem="9CP-1p-8n5" firstAttribute="bottom" secondItem="a34-Fr-yGu" secondAttribute="top" id="yMQ-Lj-7TR"/>
+                            <constraint firstItem="9CP-1p-8n5" firstAttribute="top" secondItem="nLy-lY-Mid" secondAttribute="top" id="UMO-qL-oeQ"/>
+                            <constraint firstItem="9CP-1p-8n5" firstAttribute="bottom" secondItem="a34-Fr-yGu" secondAttribute="top" id="XZf-hl-NHi"/>
+                            <constraint firstItem="9CP-1p-8n5" firstAttribute="leading" secondItem="nLy-lY-Mid" secondAttribute="leading" id="lbQ-Dd-8ly"/>
+                            <constraint firstAttribute="trailing" secondItem="9CP-1p-8n5" secondAttribute="trailing" id="ufh-hP-fxf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="购买商品" id="oyz-pd-yzX">
@@ -1048,10 +1048,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="I1w-qf-g7p" firstAttribute="leading" secondItem="3Cr-nI-y0L" secondAttribute="leading" id="9ZP-at-Iw1"/>
-                            <constraint firstItem="I1w-qf-g7p" firstAttribute="bottom" secondItem="OXA-wL-5rF" secondAttribute="top" id="lok-Kc-rFd"/>
-                            <constraint firstAttribute="trailing" secondItem="I1w-qf-g7p" secondAttribute="trailing" id="rgJ-6M-25c"/>
-                            <constraint firstItem="I1w-qf-g7p" firstAttribute="top" secondItem="3Cr-nI-y0L" secondAttribute="top" id="yMz-Gs-ki4"/>
+                            <constraint firstItem="I1w-qf-g7p" firstAttribute="leading" secondItem="3Cr-nI-y0L" secondAttribute="leading" id="Sbv-pw-v65"/>
+                            <constraint firstItem="I1w-qf-g7p" firstAttribute="bottom" secondItem="OXA-wL-5rF" secondAttribute="top" id="hRJ-hn-LGb"/>
+                            <constraint firstItem="I1w-qf-g7p" firstAttribute="top" secondItem="3Cr-nI-y0L" secondAttribute="top" id="j06-Dk-XwA"/>
+                            <constraint firstAttribute="trailing" secondItem="I1w-qf-g7p" secondAttribute="trailing" id="qwV-HE-4w3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="确认订单" id="mDY-WO-ItF">
