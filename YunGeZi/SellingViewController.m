@@ -8,17 +8,14 @@
 
 #import "SellingViewController.h"
 #import "MyTabBarController.h"
-#import "WebViewJavascriptBridge.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "MobClick.h"
 
 @interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIWebView *SellingWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
-@property WebViewJavascriptBridge* bridge;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -149,8 +146,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [self.photoActivityIndicator setHidden:NO];
         [self.photoActivityIndicator startAnimating];
         self.imageEncodedData = [UIImageJPEGRepresentation(image, 0.0) base64EncodedStringWithOptions:0];
-        id data = self.imageEncodedData;
-        [self.bridge callHandler:@"getImageData" data:data];
+        //id data = self.imageEncodedData;
+        //[self.bridge callHandler:@"getImageData" data:data];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.photoActivityIndicator stopAnimating];
             [self.photoActivityIndicator setHidden:TRUE];
@@ -191,27 +188,9 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.activityIndicator setHidden:YES];
 }
 
-- (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_SellingWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        if ([data isEqualToString:@"takePhoto"]) {
-            self.imageEncodedData = NULL;
-            [self takePhoto];
-            responseCallback(@"0.0");
-        }
-    }];
-}
-
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/add.html"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_SellingWebView loadRequest:request];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addWebViewBridge];
-    [self addIndicator];
-    [self loadWebViewRequest];
+    //[self addIndicator];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -207,11 +207,11 @@
                         <viewControllerLayoutGuide type="bottom" id="m4U-2q-9Wk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rfL-d6-bMX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPY-zW-gR0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -224,13 +224,11 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="我要卖" id="IUF-SK-tL6"/>
-                    <connections>
-                        <outlet property="SellingWebView" destination="kPY-zW-gR0" id="Ol7-Cw-Wvc"/>
-                    </connections>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSM-ea-mfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-966.5" y="595.5"/>
+            <point key="canvasLocation" x="1158.5" y="572.5"/>
         </scene>
         <!--个人信息-->
         <scene sceneID="Mvx-cR-9IS">
@@ -270,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wm-Td-eas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514.5" y="1371.5"/>
+            <point key="canvasLocation" x="-504.5" y="1723.5"/>
         </scene>
         <!--修改昵称-->
         <scene sceneID="JeS-lh-d1N">
@@ -306,7 +304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0QK-ld-WTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514.5" y="2150.5"/>
+            <point key="canvasLocation" x="-44.5" y="2172.5"/>
         </scene>
         <!--我的店铺-->
         <scene sceneID="5Mc-12-NBE">
@@ -343,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPi-qS-pNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="2150.5"/>
+            <point key="canvasLocation" x="414.5" y="2172.5"/>
         </scene>
         <!--我的商品-->
         <scene sceneID="hDI-rJ-FjP">
@@ -379,7 +377,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCW-qt-syy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="415.5" y="2150.5"/>
+            <point key="canvasLocation" x="879.5" y="2172.5"/>
         </scene>
         <!--我的订单-->
         <scene sceneID="vde-a0-ZK4">
@@ -399,7 +397,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rb-qf-8hY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="1371.5"/>
+            <point key="canvasLocation" x="-49.5" y="1353.5"/>
         </scene>
         <!--我的-->
         <scene sceneID="BQB-xY-XGS">
@@ -456,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Jy-Oc-HXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514.5" y="-192.5"/>
+            <point key="canvasLocation" x="-504.5" y="-687.5"/>
         </scene>
         <!--分类:-->
         <scene sceneID="JbC-QQ-qqX">
@@ -477,7 +475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8E-Eb-edd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="585.5"/>
+            <point key="canvasLocation" x="-44.5" y="-192.5"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="5N6-Y9-NOq">
@@ -514,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZA-Pq-FoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402.5" y="585.5"/>
+            <point key="canvasLocation" x="402.5" y="-192.5"/>
         </scene>
         <!--购买商品-->
         <scene sceneID="6Wt-aQ-yjp">
@@ -551,7 +549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="arx-dY-2tR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851.5" y="585.5"/>
+            <point key="canvasLocation" x="851.5" y="-192.5"/>
         </scene>
         <!--确认订单-->
         <scene sceneID="8zf-xX-PdG">
@@ -587,7 +585,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YW8-hV-txn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303.5" y="585.5"/>
+            <point key="canvasLocation" x="1303.5" y="-192.5"/>
         </scene>
         <!--搜索结果-->
         <scene sceneID="hqA-rs-ii0">
@@ -608,7 +606,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pOA-cM-Z02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="-192.5"/>
+            <point key="canvasLocation" x="-44.5" y="-967.5"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="gtF-QN-Itk">
@@ -629,7 +627,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAt-ph-Xpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402.5" y="-192.5"/>
+            <point key="canvasLocation" x="402.5" y="-967.5"/>
         </scene>
         <!--购买商品-->
         <scene sceneID="nYf-HZ-2aB">
@@ -666,7 +664,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7v-Wb-jPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851.5" y="-192.5"/>
+            <point key="canvasLocation" x="851.5" y="-967.5"/>
         </scene>
         <!--确认订单-->
         <scene sceneID="eTO-6B-pOP">
@@ -702,7 +700,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kvw-k2-B54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303.5" y="-192.5"/>
+            <point key="canvasLocation" x="1303.5" y="-980.5"/>
         </scene>
         <!--认证身份-->
         <scene sceneID="Hq5-Pe-OGw">
@@ -738,7 +736,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wmc-Ot-MMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514.5" y="-1738.5"/>
+            <point key="canvasLocation" x="-44.5" y="-2514.5"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="Mxn-YC-1ge">
@@ -775,7 +773,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhs-xQ-qdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="-1738.5"/>
+            <point key="canvasLocation" x="402.5" y="-2514.5"/>
         </scene>
         <!--购买商品-->
         <scene sceneID="q3o-fh-mfx">
@@ -812,7 +810,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eEB-uJ-bqR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407.5" y="-1738.5"/>
+            <point key="canvasLocation" x="851.5" y="-2514.5"/>
         </scene>
         <!--确认订单-->
         <scene sceneID="vdV-64-gRI">
@@ -848,7 +846,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sBs-Da-GHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851.5" y="-1738.5"/>
+            <point key="canvasLocation" x="1303.5" y="-2514.5"/>
         </scene>
         <!--首页-->
         <scene sceneID="Lee-FU-l6Z">
@@ -916,7 +914,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-514.5" y="-967.5"/>
+            <point key="canvasLocation" x="-504.5" y="-1758.5"/>
         </scene>
         <!-- 搜索结果-->
         <scene sceneID="iCh-YQ-ETw">
@@ -953,7 +951,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDo-TI-H1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="-967.5"/>
+            <point key="canvasLocation" x="-44.5" y="-1758.5"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="HfK-no-8HN">
@@ -990,7 +988,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AyR-r0-ka9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407.5" y="-967.5"/>
+            <point key="canvasLocation" x="402.5" y="-1758.5"/>
         </scene>
         <!--购买商品-->
         <scene sceneID="Gom-Wt-cBj">
@@ -1027,7 +1025,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kEB-vD-Cq1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851.5" y="-967.5"/>
+            <point key="canvasLocation" x="851.5" y="-1758.5"/>
         </scene>
         <!--确认订单-->
         <scene sceneID="oEh-wn-Btl">
@@ -1063,7 +1061,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ds1-O0-pWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303.5" y="-967.5"/>
+            <point key="canvasLocation" x="1303.5" y="-1758.5"/>
         </scene>
         <!--分类-->
         <scene sceneID="iLa-vI-gYS">
@@ -1095,13 +1093,120 @@
                     <connections>
                         <segue destination="4qF-fO-Vlr" kind="relationship" relationship="viewControllers" id="akl-lU-jiv"/>
                         <segue destination="56K-0e-EBg" kind="relationship" relationship="viewControllers" id="GQp-EE-63R"/>
-                        <segue destination="GqD-f6-mOr" kind="relationship" relationship="viewControllers" id="mQQ-sS-tiY"/>
+                        <segue destination="HuI-HL-8TD" kind="relationship" relationship="viewControllers" id="BXv-fh-mY0"/>
                         <segue destination="3T2-bN-Jg2" kind="relationship" relationship="viewControllers" id="uMb-CI-wiQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3a-O7-OrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1512.5" y="201.5"/>
+        </scene>
+        <!--发布商品-->
+        <scene sceneID="6Zr-dh-Rmo">
+            <objects>
+                <viewController id="Guo-Ac-9uo" customClass="SellingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9QX-kj-osv"/>
+                        <viewControllerLayoutGuide type="bottom" id="kUG-4v-tdn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bcX-XM-bde">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Context here" translatesAutoresizingMaskIntoConstraints="NO" id="1g7-Yb-ZGb">
+                                <rect key="frame" x="16" y="246" width="343" height="199"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="    分类：请选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxd-Nh-sBK">
+                                <rect key="frame" x="16" y="450" width="343" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="    校区：请选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCt-Ds-QI9">
+                                <rect key="frame" x="16" y="505" width="168" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="    成色：请选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9D-g5-0gU">
+                                <rect key="frame" x="189" y="505" width="168" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="    现价：请选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0v-zb-Y0z">
+                                <rect key="frame" x="16" y="560" width="168" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="    数量：请选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkH-fA-yGc">
+                                <rect key="frame" x="189" y="560" width="168" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="宝贝图片：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt9-sQ-k2F">
+                                <rect key="frame" x="16" y="72" width="115" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8t7-SS-by8">
+                                <rect key="frame" x="16" y="117" width="80" height="80"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LRo-6h-fpx">
+                                <rect key="frame" x="103" y="117" width="80" height="80"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hee-JM-aVs">
+                                <rect key="frame" x="190" y="116" width="80" height="80"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0sW-fh-Foz">
+                                <rect key="frame" x="277" y="117" width="80" height="80"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="header" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-cR-cs0">
+                                <rect key="frame" x="16" y="201" width="342" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="发布商品" id="2Fr-aY-EiN">
+                        <barButtonItem key="backBarButtonItem" title=" " id="qIk-u9-xWo"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m18-RJ-nuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-504.5" y="585.5"/>
+        </scene>
+        <!--我要卖-->
+        <scene sceneID="GmM-t8-GgC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HuI-HL-8TD" customClass="MyNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我要卖" id="TYF-T3-dHG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z44-1y-lx8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Guo-Ac-9uo" kind="relationship" relationship="rootViewController" id="ogB-UJ-V8k"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p0S-dH-mzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-966.5" y="585.5"/>
         </scene>
     </scenes>
     <resources>
