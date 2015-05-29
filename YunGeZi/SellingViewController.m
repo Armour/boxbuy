@@ -11,7 +11,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "MobClick.h"
 
-@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
+@property (strong, nonatomic) NSArray *pickerData;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -197,8 +198,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.view endEditing:YES];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)initTxetViewWithPlaceholder {
     self.objectName.delegate = self;
     self.objectContent.delegate = self;
     self.objectName.text = @"给宝贝起个名字吧~";
@@ -206,6 +206,35 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectName.textColor = [UIColor lightGrayColor];
     self.objectContent.textColor = [UIColor lightGrayColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initTxetViewWithPlaceholder];
+    self.pickerData =  @[ @[@"1", @"2", @"3", @"4"],
+                          @[@"a", @"b", @"c", @"d"],
+                          @[@"!", @"#", @"$", @"%"],
+                          @[@"w", @"x", @"y", @"z"] ];
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 4;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    NSArray *tmp = self.pickerData[component];
+    return tmp.count;
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    //NSLog(@"%@",self.pickerData[component][row]);
+    return [[NSAttributedString alloc] initWithString:self.pickerData[component][row]];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
