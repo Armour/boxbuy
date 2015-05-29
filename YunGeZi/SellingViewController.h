@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SellingViewController : UIViewController <UIWebViewDelegate>
+@interface SellingViewController : UIViewController <UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextView *objectName;
+@property (weak, nonatomic) IBOutlet UITextView *objectContent;
+@property (strong, nonatomic) NSString *objectCategory;
+@property (strong, nonatomic) NSString *objectLocation;
+@property (strong, nonatomic) NSString *objectQuality;
+@property (strong, nonatomic) NSString *objectPrice;
+@property (strong, nonatomic) NSString *objectNumber;
 
 @end

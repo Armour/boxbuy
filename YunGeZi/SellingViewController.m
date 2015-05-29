@@ -13,6 +13,11 @@
 
 @interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *categoryButton;
+@property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UIButton *qualityButton;
+@property (weak, nonatomic) IBOutlet UIButton *priceButton;
+@property (weak, nonatomic) IBOutlet UIButton *numberButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
@@ -188,14 +193,51 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.activityIndicator setHidden:YES];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //[self addIndicator];
+- (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.objectName.delegate = self;
+    self.objectContent.delegate = self;
+    self.objectName.text = @"给宝贝起个名字吧~";
+    self.objectContent.text = @"简单介绍下你的宝贝";
+    self.objectName.textColor = [UIColor lightGrayColor];
+    self.objectContent.textColor = [UIColor lightGrayColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (textView.tag == 5) {
+        if ([textView.text isEqualToString:@"给宝贝起个名字吧~"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    } else if (textView.tag == 6) {
+        if ([textView.text isEqualToString:@"简单介绍下你的宝贝"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView.tag == 5) {
+        if ([textView.text isEqualToString:@""]) {
+            textView.text = @"给宝贝起个名字吧~";
+            textView.textColor = [UIColor lightGrayColor];
+        }
+    } else if (textView.tag == 6) {
+        if ([textView.text isEqualToString:@""]) {
+            textView.text = @"简单介绍下你的宝贝";
+            textView.textColor = [UIColor lightGrayColor];
+        }
+    }
+    [textView resignFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated
