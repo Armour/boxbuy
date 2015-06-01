@@ -10,8 +10,9 @@
 #import "MyTabBarController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "MobClick.h"
+#import "ActionSheetStringPicker.h"
 
-@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
@@ -21,7 +22,6 @@
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
-@property (strong, nonatomic) NSArray *pickerData;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -211,30 +211,9 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTxetViewWithPlaceholder];
-    self.pickerData =  @[ @[@"1", @"2", @"3", @"4"],
-                          @[@"a", @"b", @"c", @"d"],
-                          @[@"!", @"#", @"$", @"%"],
-                          @[@"w", @"x", @"y", @"z"] ];
-    self.picker.dataSource = self;
-    self.picker.delegate = self;
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 4;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    NSArray *tmp = self.pickerData[component];
-    return tmp.count;
-}
-
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    //NSLog(@"%@",self.pickerData[component][row]);
-    return [[NSAttributedString alloc] initWithString:self.pickerData[component][row]];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-
+    //self.pickerView.picker.dataSource = self.pickerView;
+    //self.pickerView.picker.delegate = self.pickerView;
+    //[self.pickerView hidePickerView];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -267,6 +246,86 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         }
     }
     [textView resignFirstResponder];
+}
+
+- (IBAction)chooseCategoryButtonTouchUpInside:(UIButton *)sender {
+    NSArray *option = [NSArray arrayWithObjects:@"学习", @"鞋子", @"电子", @"箱包", @"衣服", nil];
+    [ActionSheetStringPicker showPickerWithTitle:@"选择类别"
+                                            rows:option
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           NSLog(@"Picker: %@", picker);
+                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+                                           NSLog(@"Selected Value: %@", selectedValue);
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         NSLog(@"Block Picker Canceled");
+                                     }
+                                          origin:sender];
+}
+
+- (IBAction)chooseLocationButtonTouchUpInside:(UIButton *)sender {
+    NSArray *option = [NSArray arrayWithObjects:@"之江", @"玉泉", @"紫金港", @"西溪", @"华家池", nil];
+    [ActionSheetStringPicker showPickerWithTitle:@"选择校区"
+                                            rows:option
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           NSLog(@"Picker: %@", picker);
+                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+                                           NSLog(@"Selected Value: %@", selectedValue);
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         NSLog(@"Block Picker Canceled");
+                                     }
+                                          origin:sender];
+}
+
+- (IBAction)chooseQualityButtonTouchUpInside:(UIButton *)sender {
+    NSArray *option = [NSArray arrayWithObjects:@"七成新", @"八成新", @"九成新", @"九五新", @"全新", nil];
+    [ActionSheetStringPicker showPickerWithTitle:@"选择成色"
+                                            rows:option
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           NSLog(@"Picker: %@", picker);
+                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+                                           NSLog(@"Selected Value: %@", selectedValue);
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         NSLog(@"Block Picker Canceled");
+                                     }
+                                          origin:sender];
+}
+
+- (IBAction)choosePriceButtonTouchUpInside:(UIButton *)sender {
+    NSArray *option = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
+    [ActionSheetStringPicker showPickerWithTitle:@"选择价格"
+                                            rows:option
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           NSLog(@"Picker: %@", picker);
+                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+                                           NSLog(@"Selected Value: %@", selectedValue);
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         NSLog(@"Block Picker Canceled");
+                                     }
+                                          origin:sender];
+}
+
+- (IBAction)chooseNumberButtonTouchUpInside:(UIButton *)sender {
+    NSArray *option = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
+    [ActionSheetStringPicker showPickerWithTitle:@"选择数量"
+                                            rows:option
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           NSLog(@"Picker: %@", picker);
+                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+                                           NSLog(@"Selected Value: %@", selectedValue);
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         NSLog(@"Block Picker Canceled");
+                                     }
+                                          origin:sender];
 }
 
 - (void)viewWillAppear:(BOOL)animated

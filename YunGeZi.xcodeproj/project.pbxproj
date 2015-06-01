@@ -20,6 +20,7 @@
 		7609A1181AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1171AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m */; };
 		7609A11B1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */; };
 		7609A11E1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */; };
+		764826DE1B195106008D1D7D /* MyPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764826DD1B195106008D1D7D /* MyPickerView.m */; };
 		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
 		7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* SellingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
@@ -47,6 +48,7 @@
 		76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E333411AEDF8C40077BACF /* LaunchScreen.xib */; };
 		76E3334F1AEDF8C40077BACF /* YunGeZiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */; };
 		76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F426AA1AEF271B00A5849A /* MainPageViewController.m */; };
+		A21B52BE0A0E682927476A0F /* libPods-YunGeZi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YunGeZi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7603A8211AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategorySearchViewController.h; sourceTree = "<group>"; };
 		7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7603A8241AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategoryViewController.h; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 		7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyResultInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7609A11C1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyInCategorySearchViewController.h; sourceTree = "<group>"; };
 		7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInCategorySearchViewController.m; sourceTree = "<group>"; };
+		764826DC1B195106008D1D7D /* MyPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPickerView.h; path = ../MyPickerView.h; sourceTree = "<group>"; };
+		764826DD1B195106008D1D7D /* MyPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyPickerView.m; path = ../MyPickerView.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		7651D2C01AF07434003184A8 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		7651D2C21AF0771B003184A8 /* SellingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingViewController.h; sourceTree = "<group>"; };
@@ -136,6 +141,8 @@
 		76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YunGeZiTests.m; sourceTree = "<group>"; };
 		76F426A91AEF271B00A5849A /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPageViewController.h; path = ../MainPageViewController.h; sourceTree = "<group>"; };
 		76F426AA1AEF271B00A5849A /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPageViewController.m; path = ../MainPageViewController.m; sourceTree = "<group>"; };
+		B3BA420B256C265BECE28343 /* Pods-YunGeZi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YunGeZi.release.xcconfig"; path = "Pods/Target Support Files/Pods-YunGeZi/Pods-YunGeZi.release.xcconfig"; sourceTree = "<group>"; };
+		E1910930A10495029112E4AC /* Pods-YunGeZi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YunGeZi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YunGeZi/Pods-YunGeZi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +152,7 @@
 			files = (
 				769F994E1B0B788D00161818 /* libz.dylib in Frameworks */,
 				769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */,
+				A21B52BE0A0E682927476A0F /* libPods-YunGeZi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +166,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C940EA2F05BFC2F5E529E6D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1910930A10495029112E4AC /* Pods-YunGeZi.debug.xcconfig */,
+				B3BA420B256C265BECE28343 /* Pods-YunGeZi.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		45A4F25A5E812793B1E0A96B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +209,8 @@
 				76E3332E1AEDF8C40077BACF /* YunGeZi */,
 				76E3334B1AEDF8C40077BACF /* YunGeZiTests */,
 				76E3332D1AEDF8C40077BACF /* Products */,
+				2C940EA2F05BFC2F5E529E6D /* Pods */,
+				45A4F25A5E812793B1E0A96B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
+				764826DC1B195106008D1D7D /* MyPickerView.h */,
+				764826DD1B195106008D1D7D /* MyPickerView.m */,
 				76E333391AEDF8C40077BACF /* ViewController.h */,
 				76E3333A1AEDF8C40077BACF /* ViewController.m */,
 				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
@@ -303,9 +332,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76E333521AEDF8C40077BACF /* Build configuration list for PBXNativeTarget "YunGeZi" */;
 			buildPhases = (
+				8BBB7C242A3511046E79723D /* Check Pods Manifest.lock */,
 				76E333281AEDF8C40077BACF /* Sources */,
 				76E333291AEDF8C40077BACF /* Frameworks */,
 				76E3332A1AEDF8C40077BACF /* Resources */,
+				434894032BBE2703EB16EB74 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -392,6 +423,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		434894032BBE2703EB16EB74 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YunGeZi/Pods-YunGeZi-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BBB7C242A3511046E79723D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		76E333281AEDF8C40077BACF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -403,6 +467,7 @@
 				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
 				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
 				7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */,
+				764826DE1B195106008D1D7D /* MyPickerView.m in Sources */,
 				7609A1151AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m in Sources */,
 				7609A10F1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m in Sources */,
 				7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */,
@@ -553,6 +618,7 @@
 		};
 		76E333531AEDF8C40077BACF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1910930A10495029112E4AC /* Pods-YunGeZi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YunGeZi/Info.plist;
@@ -564,11 +630,13 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Debug;
 		};
 		76E333541AEDF8C40077BACF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3BA420B256C265BECE28343 /* Pods-YunGeZi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YunGeZi/Info.plist;

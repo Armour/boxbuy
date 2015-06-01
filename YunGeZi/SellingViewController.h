@@ -17,6 +17,5 @@
 @property (strong, nonatomic) NSString *objectQuality;
 @property (strong, nonatomic) NSString *objectPrice;
 @property (strong, nonatomic) NSString *objectNumber;
-@property (weak, nonatomic) IBOutlet UIPickerView *picker;
 
 @end
