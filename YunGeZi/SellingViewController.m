@@ -11,6 +11,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "MobClick.h"
 #import "ActionSheetStringPicker.h"
+#import "ActionSheetCustomPicker.h"
+#import "ActionSheetPickerCustomPickerDelegate.h"
 
 @interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -249,19 +251,15 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)chooseCategoryButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"学习", @"鞋子", @"电子", @"箱包", @"衣服", nil];
-    [ActionSheetStringPicker showPickerWithTitle:@"选择类别"
-                                            rows:option
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           NSLog(@"Picker: %@", picker);
-                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-                                           NSLog(@"Selected Value: %@", selectedValue);
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-                                         NSLog(@"Block Picker Canceled");
-                                     }
-                                          origin:sender];
+    ActionSheetPickerCustomPickerDelegate *delg = [[ActionSheetPickerCustomPickerDelegate alloc] init];
+    NSNumber *yass1 = @0;
+    NSNumber *yass2 = @0;
+    NSArray *initialSelections = @[yass1, yass2];
+    [ActionSheetCustomPicker showPickerWithTitle:@"选择类别"
+                                        delegate:delg
+                                showCancelButton:YES
+                                          origin:sender
+                               initialSelections:initialSelections];
 }
 
 - (IBAction)chooseLocationButtonTouchUpInside:(UIButton *)sender {
