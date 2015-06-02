@@ -201,18 +201,19 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (void)initTxetViewWithPlaceholder {
-    self.objectName.delegate = self;
-    self.objectContent.delegate = self;
-    self.objectName.text = @"给宝贝起个名字吧~";
-    self.objectContent.text = @"简单介绍下你的宝贝";
-    self.objectName.textColor = [UIColor lightGrayColor];
-    self.objectContent.textColor = [UIColor lightGrayColor];
+    self.objectNameTextView.delegate = self;
+    self.objectContentTextView.delegate = self;
+    self.objectNameTextView.text = @"给宝贝起个名字吧~";
+    self.objectContentTextView.text = @"简单介绍下你的宝贝";
+    self.objectNameTextView.textColor = [UIColor lightGrayColor];
+    self.objectContentTextView.textColor = [UIColor lightGrayColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTxetViewWithPlaceholder];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -247,6 +248,15 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [textView resignFirstResponder];
 }
 
+- (void) handleCategorySelection: (NSNotification*) aNotification
+{
+    NSDictionary *dict = [[NSDictionary alloc] init];
+    dict = [aNotification userInfo];
+    NSString *tmp = [[NSString alloc] initWithFormat:@"%@(%@)", dict[@"0"], dict[@"1"]];
+    self.objectCategory = tmp;
+    [self.categoryButton setTitle:[NSString stringWithFormat:@"    类别：%@", tmp] forState:UIControlStateNormal];
+}
+
 - (IBAction)chooseCategoryButtonTouchUpInside:(UIButton *)sender {
     ActionSheetPickerCustomPickerDelegate *delg = [[ActionSheetPickerCustomPickerDelegate alloc] init];
     NSNumber *yass1 = @0;
@@ -265,10 +275,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                             rows:option
                                 initialSelection:0
                                        doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           NSLog(@"Picker: %@", picker);
-                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-                                           NSLog(@"Selected Value: %@", selectedValue);
                                            [self.locationButton setTitle:[NSString stringWithFormat:@"    校区：%@", selectedValue] forState:UIControlStateNormal];
+                                           self.objectLocation = selectedValue;
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          NSLog(@"Block Picker Canceled");
@@ -282,10 +290,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                             rows:option
                                 initialSelection:0
                                        doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           NSLog(@"Picker: %@", picker);
-                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-                                           NSLog(@"Selected Value: %@", selectedValue);
                                            [self.qualityButton setTitle:[NSString stringWithFormat:@"    成色：%@", selectedValue] forState:UIControlStateNormal];
+                                           self.objectQuality = selectedValue;
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          NSLog(@"Block Picker Canceled");
@@ -335,6 +341,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我要卖"];
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

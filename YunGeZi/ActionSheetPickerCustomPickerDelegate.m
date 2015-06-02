@@ -39,15 +39,18 @@
 }
 
 - (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin {
-    NSString *resultMessage;
-    if (!self.selectedKey && !self.selectedScale) {
-        resultMessage = [NSString stringWithFormat:@"Nothing is selected, inital selections: %@, %@",
-                         level_1[(NSUInteger) [(UIPickerView *) actionSheetPicker.pickerView selectedRowInComponent:0]],
-                         level_2_0[(NSUInteger) [(UIPickerView *) actionSheetPicker.pickerView selectedRowInComponent:1]]];
-    } else {
-        resultMessage = [NSString stringWithFormat:@"%@ %@ selected.", self.selectedKey, self.selectedScale];
-    }
-    NSLog(@"%@", resultMessage);
+    if (!self.selectedKey)
+        self.selectedKey = level_1[(NSUInteger) [(UIPickerView *) actionSheetPicker.pickerView selectedRowInComponent:0]];
+    if (!self.selectedScale)
+        self.selectedScale = level_2_display[(NSUInteger) [(UIPickerView *) actionSheetPicker.pickerView selectedRowInComponent:1]];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.selectedKey, @"0", self.selectedScale, @"1", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CategorySelectFinished" object:self userInfo:dict];
+
+    /*
+     *NSString *resultMessage;
+     *resultMessage = [NSString stringWithFormat:@"%@ %@ selected.", self.selectedKey, self.selectedScale];
+     *NSLog(@"%@", resultMessage);
+    */
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -83,11 +86,6 @@
     return 0;
 }
 
-/*- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
- {
- return
- }
- */
 // these methods return either a plain UIString, or a view (e.g UILabel) to display the row for the component.
 // for the view versions, we cache any hidden and thus unused views and pass them back for reuse.
 // If you return back a different object, the old one will be released. the view will be centered in the row rect

@@ -1287,8 +1287,8 @@
                         <outlet property="categoryButton" destination="DKN-5A-Kbf" id="I31-DO-HYj"/>
                         <outlet property="locationButton" destination="DWr-DH-kf2" id="4ub-H8-Oi7"/>
                         <outlet property="numberButton" destination="brz-TS-kwL" id="MI4-Qb-i2m"/>
-                        <outlet property="objectContent" destination="1g7-Yb-ZGb" id="STe-bw-Pul"/>
-                        <outlet property="objectName" destination="OwN-cR-cs0" id="JVT-Lx-MBH"/>
+                        <outlet property="objectContentTextView" destination="1g7-Yb-ZGb" id="OFC-rl-dcq"/>
+                        <outlet property="objectNameTextView" destination="OwN-cR-cs0" id="4cF-hb-hnW"/>
                         <outlet property="priceButton" destination="3f9-gV-rCQ" id="2ID-LR-D2q"/>
                         <outlet property="qualityButton" destination="xjd-9H-hHu" id="Mom-LX-0PL"/>
                     </connections>
