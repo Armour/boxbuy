@@ -213,9 +213,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTxetViewWithPlaceholder];
-    //self.pickerView.picker.dataSource = self.pickerView;
-    //self.pickerView.picker.delegate = self.pickerView;
-    //[self.pickerView hidePickerView];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -271,6 +268,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                            NSLog(@"Picker: %@", picker);
                                            NSLog(@"Selected Index: %ld", (long)selectedIndex);
                                            NSLog(@"Selected Value: %@", selectedValue);
+                                           [self.locationButton setTitle:[NSString stringWithFormat:@"    校区：%@", selectedValue] forState:UIControlStateNormal];
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          NSLog(@"Block Picker Canceled");
@@ -287,6 +285,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                            NSLog(@"Picker: %@", picker);
                                            NSLog(@"Selected Index: %ld", (long)selectedIndex);
                                            NSLog(@"Selected Value: %@", selectedValue);
+                                           [self.qualityButton setTitle:[NSString stringWithFormat:@"    成色：%@", selectedValue] forState:UIControlStateNormal];
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          NSLog(@"Block Picker Canceled");
