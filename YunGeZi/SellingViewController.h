@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SellingViewController : UIViewController <UITextViewDelegate>
+@interface SellingViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *objectNameTextView;
 @property (weak, nonatomic) IBOutlet UITextView *objectContentTextView;

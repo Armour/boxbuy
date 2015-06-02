@@ -76,7 +76,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 // returns width of column and height of row for each component.
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+/*- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     switch (component) {
         case 0: return 160.0f;
         case 1: return 160.0f;
@@ -84,7 +84,7 @@
     }
 
     return 0;
-}
+}*/
 
 // these methods return either a plain UIString, or a view (e.g UILabel) to display the row for the component.
 // for the view versions, we cache any hidden and thus unused views and pass them back for reuse.

@@ -9,6 +9,7 @@
 #import "SellingViewController.h"
 #import "MyTabBarController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <QuartzCore/QuartzCore.h>
 #import "MobClick.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetCustomPicker.h"
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *qualityButton;
 @property (weak, nonatomic) IBOutlet UIButton *priceButton;
 @property (weak, nonatomic) IBOutlet UIButton *numberButton;
+@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
@@ -204,15 +206,20 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectNameTextView.delegate = self;
     self.objectContentTextView.delegate = self;
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
-    self.objectContentTextView.text = @"简单介绍下你的宝贝";
+    self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
     self.objectNameTextView.textColor = [UIColor lightGrayColor];
     self.objectContentTextView.textColor = [UIColor lightGrayColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
+- (void)prepareTextField {
+    self.priceTextField.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTxetViewWithPlaceholder];
+    [self prepareTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
 }
 
@@ -224,7 +231,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             textView.textColor = [UIColor blackColor];
         }
     } else if (textView.tag == 6) {
-        if ([textView.text isEqualToString:@"简单介绍下你的宝贝"]) {
+        if ([textView.text isEqualToString:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
@@ -241,7 +248,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         }
     } else if (textView.tag == 6) {
         if ([textView.text isEqualToString:@""]) {
-            textView.text = @"简单介绍下你的宝贝";
+            textView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
             textView.textColor = [UIColor lightGrayColor];
         }
     }
@@ -285,7 +292,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)chooseQualityButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"七成新", @"八成新", @"九成新", @"九五新", @"全新", nil];
+    NSArray *option = [NSArray arrayWithObjects:@"全新", @"九五新", @"九成新", @"八五新", @"八成新", @"七五新", @"七成新", @"六五新", @"六成新", @"六五新", @"六成新", nil];
     [ActionSheetStringPicker showPickerWithTitle:@"选择成色"
                                             rows:option
                                 initialSelection:0
@@ -300,30 +307,26 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)choosePriceButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
-    [ActionSheetStringPicker showPickerWithTitle:@"选择价格"
-                                            rows:option
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           NSLog(@"Picker: %@", picker);
-                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-                                           NSLog(@"Selected Value: %@", selectedValue);
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-                                         NSLog(@"Block Picker Canceled");
-                                     }
-                                          origin:sender];
+    [self.priceTextField becomeFirstResponder];
 }
 
 - (IBAction)chooseNumberButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
+    NSArray *option = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
+                                                @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20",
+                                                @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29", @"30",
+                                                @"31", @"32", @"33", @"34", @"35", @"36", @"37", @"38", @"39", @"40",
+                                                @"41", @"42", @"43", @"44", @"45", @"46", @"47", @"48", @"49", @"50",
+                                                @"51", @"52", @"53", @"54", @"55", @"56", @"57", @"58", @"59", @"60",
+                                                @"61", @"62", @"63", @"64", @"65", @"66", @"67", @"68", @"69", @"70",
+                                                @"71", @"72", @"73", @"74", @"75", @"76", @"77", @"78", @"79", @"80",
+                                                @"81", @"82", @"83", @"84", @"85", @"86", @"87", @"88", @"89", @"90",
+                                                @"91", @"92", @"93", @"94", @"95", @"96", @"97", @"98", @"99", nil];
     [ActionSheetStringPicker showPickerWithTitle:@"选择数量"
                                             rows:option
                                 initialSelection:0
                                        doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           NSLog(@"Picker: %@", picker);
-                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-                                           NSLog(@"Selected Value: %@", selectedValue);
+                                           [self.numberButton setTitle:[NSString stringWithFormat:@"    数量：%@", selectedValue] forState:UIControlStateNormal];
+                                           self.objectNumber = selectedValue;
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          NSLog(@"Block Picker Canceled");
