@@ -59,7 +59,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [alert show];
         return;
      }*/
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.allowsEditing = YES;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
@@ -182,22 +182,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.view bringSubviewToFront:self.photoActivityIndicator];
 }
 
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
     [self.view endEditing:YES];
 }
@@ -210,6 +194,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectNameTextView.textColor = [UIColor lightGrayColor];
     self.objectContentTextView.textColor = [UIColor lightGrayColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
+    [self takePhoto];
 }
 
 - (void)prepareTextField {
