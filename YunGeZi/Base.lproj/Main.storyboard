@@ -1344,7 +1344,12 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="发布商品" id="2Fr-aY-EiN">
-                        <barButtonItem key="backBarButtonItem" title=" " id="qIk-u9-xWo"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="G6S-U4-7e9"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="kQL-cM-lPo">
+                            <connections>
+                                <action selector="publishButtonTouchUpInside:" destination="Guo-Ac-9uo" id="EAu-e1-ZxM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="categoryButton" destination="DKN-5A-Kbf" id="I31-DO-HYj"/>

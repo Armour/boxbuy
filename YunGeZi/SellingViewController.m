@@ -204,8 +204,19 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.priceTextField.delegate = self;
 }
 
+- (void)initObjectAttribute {
+    self.objectCategory = @"请选择";
+    self.objectLocation = @"请选择";
+    self.objectNumber = @"请选择";
+    self.objectPrice = @"";
+    self.objectQuality = @"请选择";
+    self.objectNameTextView.text = @"给宝贝起个名字吧~";
+    self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initObjectAttribute];
     [self initTxetViewWithPlaceholder];
     [self prepareTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
@@ -234,11 +245,15 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             textView.text = @"给宝贝起个名字吧~";
             textView.textColor = [UIColor lightGrayColor];
         }
+        self.objectName = textView.text;
     } else if (textView.tag == 6) {
         if ([textView.text isEqualToString:@""]) {
             textView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
             textView.textColor = [UIColor lightGrayColor];
         }
+        self.objectContent = textView.text;
+    } else if (textView.tag == 7) {
+        self.objectPrice = textView.text;
     }
     [textView resignFirstResponder];
 }
@@ -265,7 +280,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)chooseLocationButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"之江", @"玉泉", @"紫金港", @"西溪", @"华家池", nil];
+    NSArray *option = [NSArray arrayWithObjects:@"请选择", @"之江", @"玉泉", @"紫金港", @"西溪", @"华家池", nil];
     [ActionSheetStringPicker showPickerWithTitle:@"选择校区"
                                             rows:option
                                 initialSelection:0
@@ -280,7 +295,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)chooseQualityButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"全新", @"九五新", @"九成新", @"八五新", @"八成新", @"七五新", @"七成新", @"六五新", @"六成新", @"六五新", @"六成新", nil];
+    NSArray *option = [NSArray arrayWithObjects:@"请选择", @"全新", @"九五新", @"九成新", @"八五新", @"八成新", @"七五新", @"七成新", @"六五新", @"六成新", @"五五新", @"五成新", nil];
     [ActionSheetStringPicker showPickerWithTitle:@"选择成色"
                                             rows:option
                                 initialSelection:0
@@ -299,7 +314,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)chooseNumberButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
+    NSArray *option = [NSArray arrayWithObjects:@"请选择", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                                                 @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20",
                                                 @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29", @"30",
                                                 @"31", @"32", @"33", @"34", @"35", @"36", @"37", @"38", @"39", @"40",
@@ -322,6 +337,57 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                           origin:sender];
 }
 
+- (BOOL)checkPrice {
+    NSString *price = [[NSString alloc] init];
+    NSArray *digit = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"."];
+    int dot = 0;
+    BOOL flag = true;
+    price = self.priceTextField.text;
+    for (int i = 0; i < price.length; i++) {
+        NSString *ch = [price substringWithRange:NSMakeRange(i, 1)];
+        if (![digit containsObject:ch]) {
+            flag = false;
+        } else if ([ch isEqual:@"."]) {
+            if (++dot > 1)
+                flag = false;
+            if (i == 0 || i != price.length - 2)
+                flag = false;
+        }
+    }
+    //NSLog(@"%d %d",flag, dot);
+    if (!flag) {
+        [self popAlert:@"信息不完整" withMessage:@"哇您的价格好像填错啦。。\n (最多精确到小数点后一位哦)"];
+    }
+    return flag;
+}
+
+- (IBAction)publishButtonTouchUpInside:(UIBarButtonItem *)sender {
+    [self.view endEditing:YES];
+    if (![self checkPrice])
+        return;
+
+    self.objectPrice = self.priceTextField.text;
+    self.objectName = self.objectNameTextView.text;
+    self.objectContent = self.objectContentTextView.text;
+    NSLog(@"%@ %@", self.objectName, self.objectContent);
+
+    if ([self.objectName isEqual:@""] || [self.objectName isEqual:@"给宝贝起个名字吧~"]) {
+        [self popAlert:@"信息不完整" withMessage:@"给您的宝贝取个名字吧~"];
+    } else if ([self.objectContent isEqual:@""] || [self.objectContent isEqual:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
+        [self popAlert:@"信息不完整" withMessage:@"跟大家讲讲您的宝贝的故事吧~"];
+    } else if ([self.objectCategory isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选分类 >_<"];
+    } else if ([self.objectLocation isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选校区 >_<"];
+    }  else if ([self.objectQuality isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选成色 >_<"];
+    }else if ([self.objectPrice isEqual: @""]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没填价格 >_<"];
+    } else if ([self.objectNumber isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选数量 >_<"];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -336,6 +402,15 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
 }
 
 @end
