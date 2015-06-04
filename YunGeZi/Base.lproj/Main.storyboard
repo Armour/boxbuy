@@ -1238,6 +1238,58 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPm-B2-Hw1">
+                                <rect key="frame" x="138" y="95" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="8re-W5-fpM"/>
+                                    <constraint firstAttribute="height" constant="20" id="uRN-7D-UEQ"/>
+                                </constraints>
+                                <state key="normal" image="close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="photoDeleteButtonOneTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="Opr-vx-YBQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8B-3x-Tki">
+                                <rect key="frame" x="207" y="95" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="1Vw-3q-Ipg"/>
+                                    <constraint firstAttribute="height" constant="20" id="lKD-hR-s6o"/>
+                                </constraints>
+                                <state key="normal" image="close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="photoDeleteButtonTwoTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="Jq0-lE-5eo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNa-yc-lCi">
+                                <rect key="frame" x="276" y="95" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="AYT-bt-0OB"/>
+                                    <constraint firstAttribute="width" constant="20" id="rEg-1i-JyU"/>
+                                </constraints>
+                                <state key="normal" image="close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="photoDeleteButtonThreeTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="24C-KN-KW3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n90-fY-xHF">
+                                <rect key="frame" x="346" y="95" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="ECS-wt-1d3"/>
+                                    <constraint firstAttribute="width" constant="20" id="KQG-1u-6BW"/>
+                                </constraints>
+                                <state key="normal" image="close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="photoDeleteButtonFourTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="gsj-95-vgk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96287089646464641" green="0.96287089646464641" blue="0.96287089646464641" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -1253,16 +1305,21 @@
                             <constraint firstItem="hee-JM-aVs" firstAttribute="width" secondItem="LRo-6h-fpx" secondAttribute="width" id="3Ev-Hh-62a"/>
                             <constraint firstItem="1g7-Yb-ZGb" firstAttribute="trailing" secondItem="OwN-cR-cs0" secondAttribute="trailing" id="3Sc-Q3-e1O"/>
                             <constraint firstItem="OwN-cR-cs0" firstAttribute="top" secondItem="lc9-PA-LQO" secondAttribute="bottom" constant="8" id="4NJ-wi-wFO"/>
+                            <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="l8B-3x-Tki" secondAttribute="top" constant="8" id="5Xh-OZ-xbq"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="width" secondItem="lc9-PA-LQO" secondAttribute="width" id="5ud-NK-rXT"/>
                             <constraint firstItem="LRo-6h-fpx" firstAttribute="top" secondItem="0sW-fh-Foz" secondAttribute="top" id="6La-wc-fUR"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="width" secondItem="0sW-fh-Foz" secondAttribute="width" id="7A3-hy-0Jv"/>
+                            <constraint firstItem="hee-JM-aVs" firstAttribute="trailing" secondItem="l8B-3x-Tki" secondAttribute="trailing" constant="-10" id="7Ta-HO-pO2"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="0sW-fh-Foz" secondAttribute="top" id="7Up-1I-hdT"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="9QX-kj-osv" secondAttribute="bottom" constant="48" id="8OB-hJ-znr"/>
                             <constraint firstItem="brz-TS-kwL" firstAttribute="leading" secondItem="xjd-9H-hHu" secondAttribute="leading" id="8Or-et-1C0"/>
                             <constraint firstItem="zsL-oH-Uyh" firstAttribute="leading" secondItem="bcX-XM-bde" secondAttribute="leadingMargin" constant="70" id="8YD-ne-Qhu"/>
                             <constraint firstItem="DKN-5A-Kbf" firstAttribute="trailing" secondItem="1g7-Yb-ZGb" secondAttribute="trailing" id="9h6-FE-qx3"/>
+                            <constraint firstItem="0sW-fh-Foz" firstAttribute="top" secondItem="LNa-yc-lCi" secondAttribute="top" constant="8" id="9sT-EM-evl"/>
                             <constraint firstItem="gSH-u0-GhH" firstAttribute="top" secondItem="0sW-fh-Foz" secondAttribute="top" id="BK0-jl-eLc"/>
                             <constraint firstItem="OwN-cR-cs0" firstAttribute="leading" secondItem="1g7-Yb-ZGb" secondAttribute="leading" id="BYh-je-DFI"/>
+                            <constraint firstItem="hee-JM-aVs" firstAttribute="trailing" secondItem="l8B-3x-Tki" secondAttribute="trailing" constant="-8" id="BdQ-gU-BgA"/>
+                            <constraint firstItem="gSH-u0-GhH" firstAttribute="trailing" secondItem="n90-fY-xHF" secondAttribute="trailing" constant="-8" id="CF1-s4-Uw9"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="height" secondItem="0sW-fh-Foz" secondAttribute="height" id="CsJ-a9-irK"/>
                             <constraint firstItem="LRo-6h-fpx" firstAttribute="top" secondItem="hee-JM-aVs" secondAttribute="top" id="CvO-Lr-q9B"/>
                             <constraint firstItem="zsL-oH-Uyh" firstAttribute="top" secondItem="DWr-DH-kf2" secondAttribute="bottom" constant="18" id="DGp-aH-2XI"/>
@@ -1276,10 +1333,12 @@
                             <constraint firstItem="3f9-gV-rCQ" firstAttribute="top" secondItem="DWr-DH-kf2" secondAttribute="bottom" constant="8" symbolic="YES" id="KpF-mb-XVL"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="lc9-PA-LQO" secondAttribute="top" id="L0U-os-BcH"/>
                             <constraint firstItem="lc9-PA-LQO" firstAttribute="top" secondItem="qt9-sQ-k2F" secondAttribute="bottom" constant="10" id="MbD-TU-ifw"/>
+                            <constraint firstItem="IPm-B2-Hw1" firstAttribute="trailing" secondItem="LRo-6h-fpx" secondAttribute="trailing" constant="8" id="Mfb-Fx-c7E"/>
                             <constraint firstItem="3f9-gV-rCQ" firstAttribute="top" secondItem="zsL-oH-Uyh" secondAttribute="top" constant="-13" id="P96-AM-LWp"/>
                             <constraint firstItem="brz-TS-kwL" firstAttribute="height" secondItem="3f9-gV-rCQ" secondAttribute="height" id="Pu9-6T-B8h"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="gSH-u0-GhH" secondAttribute="top" id="Raj-Cc-oAM"/>
                             <constraint firstItem="brz-TS-kwL" firstAttribute="width" secondItem="3f9-gV-rCQ" secondAttribute="width" id="Rzh-dY-33M"/>
+                            <constraint firstItem="0sW-fh-Foz" firstAttribute="leading" secondItem="IPm-B2-Hw1" secondAttribute="trailing" constant="65" id="SHZ-in-Uf5"/>
                             <constraint firstItem="DWr-DH-kf2" firstAttribute="baseline" secondItem="xjd-9H-hHu" secondAttribute="firstBaseline" id="SXT-NE-ihS"/>
                             <constraint firstItem="gSH-u0-GhH" firstAttribute="leading" secondItem="0sW-fh-Foz" secondAttribute="trailing" constant="6" id="Szs-gb-145"/>
                             <constraint firstItem="lc9-PA-LQO" firstAttribute="leading" secondItem="OwN-cR-cs0" secondAttribute="leading" id="TUV-Gx-f3y"/>
@@ -1287,13 +1346,17 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gSH-u0-GhH" secondAttribute="trailing" constant="1" id="UbD-DW-VtM"/>
                             <constraint firstAttribute="bottom" secondItem="zsL-oH-Uyh" secondAttribute="bottom" constant="20" symbolic="YES" id="Vgx-3n-tvf"/>
                             <constraint firstItem="DKN-5A-Kbf" firstAttribute="top" secondItem="1g7-Yb-ZGb" secondAttribute="bottom" constant="8" symbolic="YES" id="Vr9-uK-14E"/>
+                            <constraint firstItem="IPm-B2-Hw1" firstAttribute="top" secondItem="LRo-6h-fpx" secondAttribute="top" constant="-8" id="Wae-hD-JxV"/>
                             <constraint firstItem="xjd-9H-hHu" firstAttribute="firstBaseline" secondItem="DWr-DH-kf2" secondAttribute="baseline" id="YDD-w7-oJ1"/>
                             <constraint firstItem="3f9-gV-rCQ" firstAttribute="top" secondItem="brz-TS-kwL" secondAttribute="top" id="YK6-BI-3Oo"/>
+                            <constraint firstItem="gSH-u0-GhH" firstAttribute="top" secondItem="n90-fY-xHF" secondAttribute="top" constant="8" id="Z7z-wb-MnX"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="width" secondItem="0sW-fh-Foz" secondAttribute="width" id="ZaA-Gh-Yf6"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="LRo-6h-fpx" secondAttribute="top" id="Zzu-9F-suX"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="height" secondItem="lc9-PA-LQO" secondAttribute="height" id="al8-U7-qTg"/>
+                            <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="l8B-3x-Tki" secondAttribute="top" constant="10" id="bRv-3l-KKW"/>
                             <constraint firstItem="LRo-6h-fpx" firstAttribute="leading" secondItem="lc9-PA-LQO" secondAttribute="trailing" constant="6" id="bva-RF-wGv"/>
                             <constraint firstItem="xjd-9H-hHu" firstAttribute="trailing" secondItem="brz-TS-kwL" secondAttribute="trailing" id="cGF-m1-j4Y"/>
+                            <constraint firstItem="IPm-B2-Hw1" firstAttribute="leading" secondItem="lc9-PA-LQO" secondAttribute="trailing" constant="59" id="clu-d5-qXe"/>
                             <constraint firstItem="1g7-Yb-ZGb" firstAttribute="top" secondItem="OwN-cR-cs0" secondAttribute="bottom" constant="8" symbolic="YES" id="gi2-p2-cUD"/>
                             <constraint firstItem="kUG-4v-tdn" firstAttribute="top" secondItem="3f9-gV-rCQ" secondAttribute="bottom" constant="8" symbolic="YES" id="goN-Wh-5f6"/>
                             <constraint firstItem="OwN-cR-cs0" firstAttribute="top" secondItem="LRo-6h-fpx" secondAttribute="bottom" constant="8" symbolic="YES" id="goZ-5R-FvZ"/>
@@ -1305,16 +1368,19 @@
                             <constraint firstItem="hee-JM-aVs" firstAttribute="top" secondItem="0sW-fh-Foz" secondAttribute="top" id="kcd-i0-1c2"/>
                             <constraint firstItem="OwN-cR-cs0" firstAttribute="trailing" secondItem="bcX-XM-bde" secondAttribute="trailingMargin" id="lPv-zx-RMO"/>
                             <constraint firstItem="zsL-oH-Uyh" firstAttribute="baseline" secondItem="3f9-gV-rCQ" secondAttribute="firstBaseline" id="lbH-iU-qY4"/>
+                            <constraint firstItem="0sW-fh-Foz" firstAttribute="trailing" secondItem="LNa-yc-lCi" secondAttribute="trailing" constant="-8" id="og5-fy-yHK"/>
                             <constraint firstItem="DWr-DH-kf2" firstAttribute="trailing" secondItem="3f9-gV-rCQ" secondAttribute="trailing" id="opD-OB-vu2"/>
                             <constraint firstItem="xjd-9H-hHu" firstAttribute="baseline" secondItem="DWr-DH-kf2" secondAttribute="firstBaseline" id="owQ-N1-i0O"/>
                             <constraint firstItem="zsL-oH-Uyh" firstAttribute="baseline" secondItem="3f9-gV-rCQ" secondAttribute="baseline" id="pNn-iI-bTB"/>
                             <constraint firstItem="DWr-DH-kf2" firstAttribute="width" secondItem="xjd-9H-hHu" secondAttribute="width" id="pTw-DS-OAg"/>
                             <constraint firstItem="zsL-oH-Uyh" firstAttribute="baseline" secondItem="brz-TS-kwL" secondAttribute="firstBaseline" id="pvx-42-QK9"/>
                             <constraint firstItem="OwN-cR-cs0" firstAttribute="top" secondItem="gSH-u0-GhH" secondAttribute="bottom" constant="8" symbolic="YES" id="qFn-Lp-Lpt"/>
+                            <constraint firstItem="IPm-B2-Hw1" firstAttribute="top" secondItem="9QX-kj-osv" secondAttribute="bottom" constant="31" id="qbv-bF-QK3"/>
                             <constraint firstItem="xjd-9H-hHu" firstAttribute="height" secondItem="DWr-DH-kf2" secondAttribute="height" id="qg5-fO-fbM"/>
                             <constraint firstItem="OwN-cR-cs0" firstAttribute="leading" secondItem="bcX-XM-bde" secondAttribute="leadingMargin" id="rsW-Qm-5Bx"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="width" secondItem="gSH-u0-GhH" secondAttribute="width" id="ryM-TJ-ps3"/>
                             <constraint firstItem="DWr-DH-kf2" firstAttribute="top" secondItem="DKN-5A-Kbf" secondAttribute="bottom" constant="8" symbolic="YES" id="u6Z-7y-aE3"/>
+                            <constraint firstItem="IPm-B2-Hw1" firstAttribute="trailing" secondItem="LRo-6h-fpx" secondAttribute="trailing" constant="10" id="uAO-1Z-3JE"/>
                             <constraint firstItem="hee-JM-aVs" firstAttribute="width" secondItem="LRo-6h-fpx" secondAttribute="width" id="wa0-ob-yC4"/>
                             <constraint firstItem="0sW-fh-Foz" firstAttribute="leading" secondItem="hee-JM-aVs" secondAttribute="trailing" constant="5" id="yL8-xe-Ih6"/>
                         </constraints>
@@ -1323,14 +1389,20 @@
                                 <exclude reference="6La-wc-fUR"/>
                                 <exclude reference="CvO-Lr-q9B"/>
                                 <exclude reference="J1a-1x-wn6"/>
+                                <exclude reference="clu-d5-qXe"/>
+                                <exclude reference="qbv-bF-QK3"/>
+                                <exclude reference="uAO-1Z-3JE"/>
                                 <exclude reference="Khp-T7-d34"/>
                                 <exclude reference="17I-vn-rHE"/>
                                 <exclude reference="7A3-hy-0Jv"/>
+                                <exclude reference="7Ta-HO-pO2"/>
                                 <exclude reference="7Up-1I-hdT"/>
                                 <exclude reference="8OB-hJ-znr"/>
+                                <exclude reference="bRv-3l-KKW"/>
                                 <exclude reference="kcd-i0-1c2"/>
                                 <exclude reference="wa0-ob-yC4"/>
                                 <exclude reference="2uX-2j-gcz"/>
+                                <exclude reference="SHZ-in-Uf5"/>
                                 <exclude reference="BK0-jl-eLc"/>
                                 <exclude reference="SXT-NE-ihS"/>
                                 <exclude reference="Hfc-iX-GNe"/>
@@ -1357,6 +1429,10 @@
                         <outlet property="numberButton" destination="brz-TS-kwL" id="MI4-Qb-i2m"/>
                         <outlet property="objectContentTextView" destination="1g7-Yb-ZGb" id="OFC-rl-dcq"/>
                         <outlet property="objectNameTextView" destination="OwN-cR-cs0" id="4cF-hb-hnW"/>
+                        <outlet property="photoDeleteButton_1" destination="IPm-B2-Hw1" id="jlh-QT-Py5"/>
+                        <outlet property="photoDeleteButton_2" destination="l8B-3x-Tki" id="8V9-N0-TVE"/>
+                        <outlet property="photoDeleteButton_3" destination="LNa-yc-lCi" id="Y2o-w8-G2p"/>
+                        <outlet property="photoDeleteButton_4" destination="n90-fY-xHF" id="PdL-jV-zTB"/>
                         <outlet property="photoView_1" destination="LRo-6h-fpx" id="Kv6-JJ-qQ3"/>
                         <outlet property="photoView_2" destination="hee-JM-aVs" id="NHS-YL-L05"/>
                         <outlet property="photoView_3" destination="0sW-fh-Foz" id="1p2-8P-HRK"/>
@@ -1396,6 +1472,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close" width="50" height="50"/>
         <image name="logo" width="1278" height="1036"/>
         <image name="takePhoto" width="296" height="296"/>
     </resources>

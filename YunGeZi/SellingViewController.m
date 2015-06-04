@@ -31,6 +31,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_3;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_4;
 @property (nonatomic) NSUInteger photoNumber;
+@property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_1;
+@property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_2;
+@property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_3;
+@property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_4;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -490,6 +494,18 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSLog(@"%@", self.objectQuality);
     NSLog(@"%@", self.objectPrice);
     NSLog(@"%@", self.objectNumber);
+}
+
+- (IBAction)photoDeleteButtonOneTouchUpInside:(UIButton *)sender {
+}
+
+- (IBAction)photoDeleteButtonTwoTouchUpInside:(UIButton *)sender {
+}
+
+- (IBAction)photoDeleteButtonThreeTouchUpInside:(UIButton *)sender {
+}
+
+- (IBAction)photoDeleteButtonFourTouchUpInside:(UIButton *)sender {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
