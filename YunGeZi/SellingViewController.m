@@ -227,7 +227,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [UIView beginAnimations:@"TextFieldKeyboardAppear" context:nil];
     //设置动画的间隔时间
     [UIView setAnimationDuration:0.20];
-    //⭐️使用当前正在运行的状态开始下一段动画
+    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textField.tag == 7) {
         //设置视图移动的位移
@@ -243,7 +243,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [UIView beginAnimations:@"TextFieldKeyboardDisappear" context:nil];
     //设置动画的间隔时间
     [UIView setAnimationDuration:0.20];
-    //⭐️使用当前正在运行的状态开始下一段动画
+    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textField.tag == 7) {
         //设置视图移动的位移
@@ -261,13 +261,12 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     return YES;
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     //设置动画的名字
     [UIView beginAnimations:@"TextViewKeyboardAppear" context:nil];
     //设置动画的间隔时间
     [UIView setAnimationDuration:0.20];
-    //⭐️使用当前正在运行的状态开始下一段动画
+    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
         if ([textView.text isEqualToString:@"给宝贝起个名字吧~"]) {
@@ -289,13 +288,12 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [textView becomeFirstResponder];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
+- (void)textViewDidEndEditing:(UITextView *)textView {
     //设置动画的名字
     [UIView beginAnimations:@"TextViewKeyboardDisappear" context:nil];
     //设置动画的间隔时间
     [UIView setAnimationDuration:0.20];
-    //⭐️使用当前正在运行的状态开始下一段动画
+    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
         if ([textView.text isEqualToString:@""]) {
@@ -333,8 +331,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     return YES;
 }
 
-- (void) handleCategorySelection: (NSNotification*) aNotification
-{
+- (void) handleCategorySelection: (NSNotification*) aNotification {
     NSDictionary *dict = [[NSDictionary alloc] init];
     dict = [aNotification userInfo];
     NSString *tmp = [[NSString alloc] initWithFormat:@"%@(%@)", dict[@"0"], dict[@"1"]];
@@ -444,7 +441,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectPrice = self.priceTextField.text;
     self.objectName = self.objectNameTextView.text;
     self.objectContent = self.objectContentTextView.text;
-    NSLog(@"%@ %@", self.objectName, self.objectContent);
 
     if ([self.objectName isEqual:@""] || [self.objectName isEqual:@"给宝贝起个名字吧~"]) {
         [self popAlert:@"信息不完整" withMessage:@"给您的宝贝取个名字吧~"];
@@ -460,8 +456,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [self popAlert:@"信息不完整" withMessage:@"您好像没填价格 >_<"];
     } else if ([self.objectNumber isEqual: @"请选择"]) {
         [self popAlert:@"信息不完整" withMessage:@"您好像没选数量 >_<"];
-    }
-    [self publish];
+    } else
+        [self publish];
 }
 
 - (void)publish {
@@ -474,14 +470,12 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSLog(@"%@", self.objectNumber);
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"我要卖"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我要卖"];
 }

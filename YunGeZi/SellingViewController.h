@@ -12,8 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *objectNameTextView;
 @property (weak, nonatomic) IBOutlet UITextView *objectContentTextView;
-@property (weak, nonatomic) NSString *objectName;
-@property (weak, nonatomic) NSString *objectContent;
+@property (strong, nonatomic) NSString *objectName;
+@property (strong, nonatomic) NSString *objectContent;
 @property (strong, nonatomic) NSString *objectCategory;
 @property (strong, nonatomic) NSString *objectLocation;
 @property (strong, nonatomic) NSString *objectQuality;
