@@ -26,6 +26,11 @@
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData;
+@property (weak, nonatomic) IBOutlet UIImageView *photoView_1;
+@property (weak, nonatomic) IBOutlet UIImageView *photoView_2;
+@property (weak, nonatomic) IBOutlet UIImageView *photoView_3;
+@property (weak, nonatomic) IBOutlet UIImageView *photoView_4;
+@property (nonatomic) NSUInteger photoNumber;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -47,9 +52,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-    /*if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] &&
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] &&
         [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
+        NSLog(@"!!!!both");
     } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
@@ -58,8 +64,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"照片获取失败" message:@"没有可用的照片来源" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
         return;
-     }*/
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
+     }
+    //imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.allowsEditing = YES;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
@@ -126,6 +132,24 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     UIImage *image = info[UIImagePickerControllerEditedImage];
     if (!image)
         image = info[UIImagePickerControllerOriginalImage];
+    switch (self.photoNumber) {
+        case 0:
+            self.photoView_1.image = image;
+            break;
+        case 1:
+            self.photoView_2.image = image;
+            break;
+        case 2:
+            self.photoView_3.image = image;
+            break;
+        case 3:
+            self.photoView_4.image = image;
+            break;
+        default:
+            break;
+    }
+    self.photoNumber++;
+    [self dismissViewControllerAnimated:YES completion:NULL];
 
     /*MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
@@ -149,9 +173,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSLog(@"Response with json ==> %@", jsonData);
      */
 
-    [self dismissViewControllerAnimated:YES completion:NULL];
 
-    dispatch_queue_t requestQueue = dispatch_queue_create("photoUpLoad", NULL);
+    /*(dispatch_queue_t requestQueue = dispatch_queue_create("photoUpLoad", NULL);
     dispatch_async(requestQueue, ^{
         [self.photoActivityIndicator setHidden:NO];
         [self.photoActivityIndicator startAnimating];
@@ -162,8 +185,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             [self.photoActivityIndicator stopAnimating];
             [self.photoActivityIndicator setHidden:TRUE];
         });
-    });
-
+    });*/
 }
 
 - (void)addIndicator {
@@ -197,7 +219,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
-    [self takePhoto];
+    if (self.photoNumber == 4) {
+        [self popAlert:@"图片数量超限" withMessage:@"哇您好像已经为您的宝贝照了很多照片啦~"];
+    } else
+        [self takePhoto];
 }
 
 - (void)prepareTextField {
@@ -205,6 +230,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (void)initObjectAttribute {
+    self.photoNumber = 0;
     self.objectCategory = @"请选择";
     self.objectLocation = @"请选择";
     self.objectNumber = @"请选择";
@@ -226,7 +252,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     //设置动画的名字
     [UIView beginAnimations:@"TextFieldKeyboardAppear" context:nil];
     //设置动画的间隔时间
-    [UIView setAnimationDuration:0.20];
+    [UIView setAnimationDuration:0.3];
     //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textField.tag == 7) {
@@ -242,7 +268,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     //设置动画的名字
     [UIView beginAnimations:@"TextFieldKeyboardDisappear" context:nil];
     //设置动画的间隔时间
-    [UIView setAnimationDuration:0.20];
+    [UIView setAnimationDuration:0.15];
     //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textField.tag == 7) {
@@ -265,7 +291,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     //设置动画的名字
     [UIView beginAnimations:@"TextViewKeyboardAppear" context:nil];
     //设置动画的间隔时间
-    [UIView setAnimationDuration:0.20];
+    [UIView setAnimationDuration:0.3];
     //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
@@ -281,7 +307,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             textView.textColor = [UIColor blackColor];
         }
         //设置视图移动的位移
-        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 50, self.view.frame.size.width, self.view.frame.size.height);
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 100, self.view.frame.size.width, self.view.frame.size.height);
     }
     //设置动画结束
     [UIView commitAnimations];
@@ -292,7 +318,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     //设置动画的名字
     [UIView beginAnimations:@"TextViewKeyboardDisappear" context:nil];
     //设置动画的间隔时间
-    [UIView setAnimationDuration:0.20];
+    [UIView setAnimationDuration:0.15];
     //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
@@ -309,12 +335,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             textView.textColor = [UIColor lightGrayColor];
         }
         //设置视图移动的位移
-        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 50, self.view.frame.size.width, self.view.frame.size.height);
-        self.objectContent = textView.text;
-    } else if (textView.tag == 7) {
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 100, self.view.frame.size.width, self.view.frame.size.height);
-        self.objectPrice = textView.text;
+        self.objectContent = textView.text;
     }
     [textView resignFirstResponder];
     //设置动画结束

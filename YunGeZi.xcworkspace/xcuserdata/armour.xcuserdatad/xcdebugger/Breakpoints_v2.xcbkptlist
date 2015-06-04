@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455085384.512509"
+            timestampString = "455092982.473101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "458"
+            endingLineNumber = "458"
             landmarkName = "-publishButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455085384.512509"
+            timestampString = "455092982.473101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "436"
-            endingLineNumber = "436"
+            startingLineNumber = "455"
+            endingLineNumber = "455"
             landmarkName = "-publishButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455085384.512509"
+            timestampString = "455092982.473101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "-publishButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,12 +58,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455084853.429392"
+            timestampString = "455092231.870301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
             landmarkName = "-textViewDidBeginEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YunGeZi/SellingViewController.m"
+            timestampString = "455092447.674884"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "-textFieldDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

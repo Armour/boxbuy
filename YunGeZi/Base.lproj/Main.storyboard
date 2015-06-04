@@ -1357,6 +1357,10 @@
                         <outlet property="numberButton" destination="brz-TS-kwL" id="MI4-Qb-i2m"/>
                         <outlet property="objectContentTextView" destination="1g7-Yb-ZGb" id="OFC-rl-dcq"/>
                         <outlet property="objectNameTextView" destination="OwN-cR-cs0" id="4cF-hb-hnW"/>
+                        <outlet property="photoView_1" destination="LRo-6h-fpx" id="Kv6-JJ-qQ3"/>
+                        <outlet property="photoView_2" destination="hee-JM-aVs" id="NHS-YL-L05"/>
+                        <outlet property="photoView_3" destination="0sW-fh-Foz" id="1p2-8P-HRK"/>
+                        <outlet property="photoView_4" destination="gSH-u0-GhH" id="xij-Fc-4x6"/>
                         <outlet property="priceButton" destination="3f9-gV-rCQ" id="2ID-LR-D2q"/>
                         <outlet property="priceTextField" destination="zsL-oH-Uyh" id="dBe-Gh-Yto"/>
                         <outlet property="qualityButton" destination="xjd-9H-hHu" id="Mom-LX-0PL"/>

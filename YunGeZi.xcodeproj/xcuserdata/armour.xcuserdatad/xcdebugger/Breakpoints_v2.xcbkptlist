@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "454945849.322812"
+            timestampString = "455092231.870301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "-randomStringWithLength:"
             landmarkType = "5">
          </BreakpointContent>
