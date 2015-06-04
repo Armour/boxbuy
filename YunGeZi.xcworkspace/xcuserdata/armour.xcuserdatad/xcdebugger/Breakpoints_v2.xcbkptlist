@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455043303.585817"
+            timestampString = "455072857.630472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "-publishButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>

@@ -222,40 +222,115 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    //设置动画的名字
+    [UIView beginAnimations:@"TextFieldKeyboardAppear" context:nil];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration:0.20];
+    //⭐️使用当前正在运行的状态开始下一段动画
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    if (textField.tag == 7) {
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 200, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    //设置动画结束
+    [UIView commitAnimations];
+    [textField becomeFirstResponder];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    //设置动画的名字
+    [UIView beginAnimations:@"TextFieldKeyboardDisappear" context:nil];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration:0.20];
+    //⭐️使用当前正在运行的状态开始下一段动画
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    if (textField.tag == 7) {
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 200, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    //设置动画结束
+    [textField resignFirstResponder];
+    [UIView commitAnimations];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.tag == 7) {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    //设置动画的名字
+    [UIView beginAnimations:@"TextViewKeyboardAppear" context:nil];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration:0.20];
+    //⭐️使用当前正在运行的状态开始下一段动画
+    [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
         if ([textView.text isEqualToString:@"给宝贝起个名字吧~"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
     } else if (textView.tag == 6) {
         if ([textView.text isEqualToString:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 50, self.view.frame.size.width, self.view.frame.size.height);
     }
+    //设置动画结束
+    [UIView commitAnimations];
     [textView becomeFirstResponder];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    //设置动画的名字
+    [UIView beginAnimations:@"TextViewKeyboardDisappear" context:nil];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration:0.20];
+    //⭐️使用当前正在运行的状态开始下一段动画
+    [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
         if ([textView.text isEqualToString:@""]) {
             textView.text = @"给宝贝起个名字吧~";
             textView.textColor = [UIColor lightGrayColor];
         }
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         self.objectName = textView.text;
     } else if (textView.tag == 6) {
         if ([textView.text isEqualToString:@""]) {
             textView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
             textView.textColor = [UIColor lightGrayColor];
         }
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 50, self.view.frame.size.width, self.view.frame.size.height);
         self.objectContent = textView.text;
     } else if (textView.tag == 7) {
+        //设置视图移动的位移
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 100, self.view.frame.size.width, self.view.frame.size.height);
         self.objectPrice = textView.text;
     }
     [textView resignFirstResponder];
+    //设置动画结束
+    [UIView commitAnimations];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (textView.tag == 5) {
+        if ([text isEqualToString:@"\n"]) {
+            [textView resignFirstResponder];
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (void) handleCategorySelection: (NSNotification*) aNotification
@@ -386,6 +461,17 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     } else if ([self.objectNumber isEqual: @"请选择"]) {
         [self popAlert:@"信息不完整" withMessage:@"您好像没选数量 >_<"];
     }
+    [self publish];
+}
+
+- (void)publish {
+    NSLog(@"%@", self.objectName);
+    NSLog(@"%@", self.objectContent);
+    NSLog(@"%@", self.objectCategory);
+    NSLog(@"%@", self.objectLocation);
+    NSLog(@"%@", self.objectQuality);
+    NSLog(@"%@", self.objectPrice);
+    NSLog(@"%@", self.objectNumber);
 }
 
 - (void)viewWillAppear:(BOOL)animated
