@@ -15,7 +15,7 @@
 #import "ActionSheetCustomPicker.h"
 #import "ActionSheetPickerCustomPickerDelegate.h"
 
-@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
@@ -30,11 +30,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_2;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_3;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_4;
-@property (nonatomic) NSUInteger photoNumber;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_1;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_2;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_3;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_4;
+@property (nonatomic) NSUInteger photoNumber;
+@property (nonatomic) NSUInteger photoWhichShouldDelete;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -235,6 +236,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 - (void)initObjectAttribute {
     self.photoNumber = 0;
+    self.photoWhichShouldDelete = 0;
     self.objectCategory = @"请选择";
     self.objectLocation = @"请选择";
     self.objectNumber = @"请选择";
@@ -497,15 +499,35 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)photoDeleteButtonOneTouchUpInside:(UIButton *)sender {
+    if (self.photoNumber >= 1) {
+        self.photoWhichShouldDelete = 1;
+        [self popDeleteAlert:@"删除照片" withMessage:@"您确定要删除这张照片吗？"];
+    } else
+        return;
 }
 
 - (IBAction)photoDeleteButtonTwoTouchUpInside:(UIButton *)sender {
+    if (self.photoNumber >= 2) {
+        self.photoWhichShouldDelete = 2;
+        [self popDeleteAlert:@"删除照片" withMessage:@"您确定要删除这张照片吗？"];
+    } else
+        return;
 }
 
 - (IBAction)photoDeleteButtonThreeTouchUpInside:(UIButton *)sender {
+    if (self.photoNumber >= 3) {
+        self.photoWhichShouldDelete = 3;
+        [self popDeleteAlert:@"删除照片" withMessage:@"您确定要删除这张照片吗？"];
+    } else
+        return;
 }
 
 - (IBAction)photoDeleteButtonFourTouchUpInside:(UIButton *)sender {
+    if (self.photoNumber >= 4) {
+        self.photoWhichShouldDelete = 4;
+        [self popDeleteAlert:@"删除照片" withMessage:@"您确定要删除这张照片吗？"];
+    } else
+        return;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -522,12 +544,84 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        switch (self.photoWhichShouldDelete) {
+            case 1:
+                if (self.photoNumber == 1) {
+                    self.photoView_1.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                if (self.photoNumber == 2) {
+                    self.photoView_1.image = self.photoView_2.image;
+                    self.photoView_2.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                if (self.photoNumber == 3) {
+                    self.photoView_1.image = self.photoView_2.image;
+                    self.photoView_2.image = self.photoView_3.image;
+                    self.photoView_3.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                if (self.photoNumber == 4) {
+                    self.photoView_1.image = self.photoView_2.image;
+                    self.photoView_2.image = self.photoView_3.image;
+                    self.photoView_3.image = self.photoView_4.image;
+                    self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                break;
+
+            case 2:
+                if (self.photoNumber == 2) {
+                    self.photoView_2.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                if (self.photoNumber == 3) {
+                    self.photoView_2.image = self.photoView_3.image;
+                    self.photoView_3.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                if (self.photoNumber == 4) {
+                    self.photoView_2.image = self.photoView_3.image;
+                    self.photoView_3.image = self.photoView_4.image;
+                    self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                break;
+
+            case 3:
+                if (self.photoNumber == 3) {
+                    self.photoView_3.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                if (self.photoNumber == 4) {
+                    self.photoView_3.image = self.photoView_4.image;
+                    self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                break;
+
+            case 4:
+                if (self.photoNumber == 4) {
+                    self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                }
+                break;
+
+            default:
+                break;
+        }
+        self.photoWhichShouldDelete = 0;
+        self.photoNumber--;
+    }
+}
+
 - (void) popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
-                                                   delegate:self
+                                                   delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
+    [alert show];
+}
+
+- (void) popDeleteAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"是的"
+                                          otherButtonTitles:@"取消", nil];
     [alert show];
 }
 
