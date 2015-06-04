@@ -70,7 +70,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [alert show];
         return;
      }
-    //imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.allowsEditing = YES;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
@@ -154,43 +153,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             break;
     }
     self.photoNumber++;
+    [self refreshDeleteIcon];
     [self dismissViewControllerAnimated:YES completion:NULL];
-
-    /*MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
-    [imageDict setObject:tab.access_token forKey:@"access_token"];
-    [imageDict setObject:image forKey:@"image"];
-    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://www.boxbuy.cc/images/add" andPostData:imageDict];
-    //建立连接，设置代理
-    NSError *requestError = [[NSError alloc] init];
-    NSHTTPURLResponse *requestResponse;
-    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
-    NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
-
-    NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
-    NSLog(@"Response data: %@", responseData);
-
-    NSError *jsonError = nil;
-    NSDictionary *jsonData = [NSJSONSerialization
-                              JSONObjectWithData:requestHandler
-                              options:NSJSONReadingMutableContainers
-                              error:&jsonError];
-    NSLog(@"Response with json ==> %@", jsonData);
-     */
-
-
-    /*(dispatch_queue_t requestQueue = dispatch_queue_create("photoUpLoad", NULL);
-    dispatch_async(requestQueue, ^{
-        [self.photoActivityIndicator setHidden:NO];
-        [self.photoActivityIndicator startAnimating];
-        self.imageEncodedData = [UIImageJPEGRepresentation(image, 0.0) base64EncodedStringWithOptions:0];
-        //id data = self.imageEncodedData;
-        //[self.bridge callHandler:@"getImageData" data:data];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.photoActivityIndicator stopAnimating];
-            [self.photoActivityIndicator setHidden:TRUE];
-        });
-    });*/
 }
 
 - (void)addIndicator {
@@ -237,6 +201,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)initObjectAttribute {
     self.photoNumber = 0;
     self.photoWhichShouldDelete = 0;
+    self.photoDeleteButton_1.hidden = true;
+    self.photoDeleteButton_2.hidden = true;
+    self.photoDeleteButton_3.hidden = true;
+    self.photoDeleteButton_4.hidden = true;
     self.objectCategory = @"请选择";
     self.objectLocation = @"请选择";
     self.objectNumber = @"请选择";
@@ -498,6 +466,25 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSLog(@"%@", self.objectNumber);
 }
 
+- (void)refreshDeleteIcon {
+    self.photoDeleteButton_1.hidden = true;
+    self.photoDeleteButton_2.hidden = true;
+    self.photoDeleteButton_3.hidden = true;
+    self.photoDeleteButton_4.hidden = true;
+    switch (self.photoNumber) {
+        case 4:
+            self.photoDeleteButton_4.hidden = false;
+        case 3:
+            self.photoDeleteButton_3.hidden = false;
+        case 2:
+            self.photoDeleteButton_2.hidden = false;
+        case 1:
+            self.photoDeleteButton_1.hidden = false;
+        default:
+            break;
+    }
+}
+
 - (IBAction)photoDeleteButtonOneTouchUpInside:(UIButton *)sender {
     if (self.photoNumber >= 1) {
         self.photoWhichShouldDelete = 1;
@@ -604,6 +591,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         }
         self.photoWhichShouldDelete = 0;
         self.photoNumber--;
+        [self refreshDeleteIcon];
     }
 }
 
