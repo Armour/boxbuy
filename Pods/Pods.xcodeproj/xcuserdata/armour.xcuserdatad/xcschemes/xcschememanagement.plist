@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-YunGeZi-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-YunGeZi-ActionSheetPicker-3.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>670AD40288D02EA1C354710A</key>
+		<key>2D4C4D085DA6735EAA8D427A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CCD83E455BC9CDB67631F375</key>
+		<key>C27187D692DCBD1A3B58E1F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFDC21B7621300518CEBF844</key>
 		<dict>
 			<key>primary</key>
 			<true/>
