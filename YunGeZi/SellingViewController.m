@@ -38,9 +38,21 @@
 @property (nonatomic) NSUInteger photoNumber;
 @property (nonatomic) NSUInteger photoWhichShouldDelete;
 
+- (NSString *)randomStringWithLength:(int)len;
+
 @end
 
 @implementation SellingViewController
+
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+- (NSString *)randomStringWithLength:(int)len {
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%c", [letters characterAtIndex: arc4random_uniform((unsigned int)[letters length])]];
+    }
+    return randomString;
+}
 
 - (void)takePhoto {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -114,11 +126,14 @@
 }
 
 - (void)makeUrlRequest {
+    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
+    id encodedImageData = [UIImageJPEGRepresentation(self.photoView_1.image, 0.0) base64EncodedStringWithOptions:0];
+    NSLog(@"!!!!! \n %@", encodedImageData);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameters = @{@"foo": @"bar"};
-    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
-    [manager POST:@"http://example.com/resources.json" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileURL:filePath name:@"image" error:nil];
+    [manager POST:@"http://img.boxbuy.cc/images/add" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFormData:[tab.access_token dataUsingEncoding:NSUTF8StringEncoding] name:@"access_token"];
+        [formData appendPartWithFormData:[[self randomStringWithLength:15] dataUsingEncoding:NSUTF8StringEncoding] name:@"fileElementName"];
+        [formData appendPartWithFormData: encodedImageData name:@"fileToUpload"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -289,6 +304,7 @@
 }
 
 - (IBAction)chooseCategoryButtonTouchUpInside:(UIButton *)sender {
+    [self.view endEditing:YES];
     ActionSheetPickerCustomPickerDelegate *delg = [[ActionSheetPickerCustomPickerDelegate alloc] init];
     NSNumber *yass1 = @0;
     NSNumber *yass2 = @0;
@@ -417,6 +433,7 @@
     NSLog(@"%@", self.objectQuality);
     NSLog(@"%@", self.objectPrice);
     NSLog(@"%@", self.objectNumber);
+    [self makeUrlRequest];
 }
 
 - (void)refreshDeleteIcon {
