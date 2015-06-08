@@ -38,6 +38,7 @@
 		76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */; };
 		76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */; };
 		76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */; };
+		76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */; };
 		76C3F9B41AFBB0B400821B9B /* ObjectDetailViewInMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B31AFBB0B400821B9B /* ObjectDetailViewInMainController.m */; };
 		76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */; };
 		76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C522F81AF0622E00476769 /* MyTabBarController.m */; };
@@ -123,6 +124,8 @@
 		76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInMainViewController.h; sourceTree = "<group>"; };
 		76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInCategoryViewController.h; sourceTree = "<group>"; };
 		76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInCategoryViewController.m; sourceTree = "<group>"; };
+		76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingEnsureViewController.h; sourceTree = "<group>"; };
+		76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellingEnsureViewController.m; sourceTree = "<group>"; };
 		76C3F9B21AFBB0B400821B9B /* ObjectDetailViewInMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailViewInMainController.h; sourceTree = "<group>"; };
 		76C3F9B31AFBB0B400821B9B /* ObjectDetailViewInMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailViewInMainController.m; sourceTree = "<group>"; };
 		76C3F9B51AFBB83600821B9B /* ObjectDetailInMainSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInMainSearchViewController.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */,
 				7651D2C21AF0771B003184A8 /* SellingViewController.h */,
 				7651D2C31AF0771B003184A8 /* SellingViewController.m */,
+				76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */,
+				76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */,
 				76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */,
 				76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */,
 				76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */,
@@ -469,6 +474,7 @@
 				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewInMainController.m in Sources */,
 				7609A1121AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m in Sources */,
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
+				76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
 				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
 				7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */,

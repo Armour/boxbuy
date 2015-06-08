@@ -15,6 +15,7 @@
 #import "ActionSheetCustomPicker.h"
 #import "ActionSheetPickerCustomPickerDelegate.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "SellingEnsureViewController.h"
 
 @interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
@@ -91,6 +92,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     switch (self.photoNumber) {
         case 0:
             self.photoView_1.image = image;
+            self.imageEncodedData = [UIImageJPEGRepresentation(self.photoView_1.image, 0.0) base64EncodedStringWithOptions:0];
+            NSLog(@"%f", [self.photoView_1.image scale]);
             break;
         case 1:
             self.photoView_2.image = image;
@@ -125,20 +128,76 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.view bringSubviewToFront:self.photoActivityIndicator];
 }
 
-- (void)makeUrlRequest {
+- (NSMutableURLRequest *)createURLRequestWithURL:(NSString *)URL andPostData:(NSMutableDictionary *)postDictionary {
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
+    NSMutableData *postData = [NSMutableData data];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSMutableString * wa = [[NSMutableString alloc] init];
+    //convert post distionary into a string
+    if (postDictionary) {
+        for (NSString *key in postDictionary) {
+            [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [wa appendFormat:@"\r\n--%@\r\n", boundary];
+            id postValue = [postDictionary valueForKey:key];
+            if ([postValue isKindOfClass:[NSString class]]) {
+                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
+                [wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                [wa appendFormat:@"%@", postValue];
+                //NSLog(@"!!!%@ %@", key, postValue);
+            } else if ([postValue isKindOfClass:[UIImage class]]) {
+                NSString *tmpStr = [self randomStringWithLength:8];
+                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr]  dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
+
+                [wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                [wa appendFormat:@"Content-Type: image/jpeg\r\n"];
+                [wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                [wa appendString:@"!!!Image Data Here!!!"];
+                //NSLog(@">.<%@ %@", key, postValue);
+            } else {
+                [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
+            }
+        }
+        [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [wa appendFormat:@"\r\n--%@--\r\n", boundary];
+    }
+
+    //setup the request
+    [urlRequest setURL:[NSURL URLWithString:URL]];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary] forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setHTTPBody:postData];
+
+    NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
+    NSLog(@"%@", wa);
+
+    return urlRequest;
+}
+
+- (void)uploadPhoto {
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    id encodedImageData = [UIImageJPEGRepresentation(self.photoView_1.image, 0.0) base64EncodedStringWithOptions:0];
-    NSLog(@"!!!!! \n %@", encodedImageData);
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://img.boxbuy.cc/images/add" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFormData:[tab.access_token dataUsingEncoding:NSUTF8StringEncoding] name:@"access_token"];
-        [formData appendPartWithFormData:[[self randomStringWithLength:15] dataUsingEncoding:NSUTF8StringEncoding] name:@"fileElementName"];
-        [formData appendPartWithFormData: encodedImageData name:@"fileToUpload"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Success: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+    NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
+    NSString *tmpRandom = [self randomStringWithLength:18];
+    [imageDict setObject:tab.access_token forKey:@"access_token"];
+    [imageDict setObject:tmpRandom forKey:@"fileElementName"];
+    [imageDict setObject:self.imageEncodedData forKey:tmpRandom];
+    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://img.boxbuy.cc/images/add" andPostData:imageDict];
+    //建立连接，设置代理
+    NSError *requestError = [[NSError alloc] init];
+    NSHTTPURLResponse *requestResponse;
+    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
+    NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
+    NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
+    NSLog(@"Response data: %@", responseData);
+    NSError *jsonError = nil;
+    NSDictionary *jsonData = [NSJSONSerialization
+                              JSONObjectWithData:requestHandler
+                              options:NSJSONReadingMutableContainers
+                              error:&jsonError];
+    NSLog(@"Response with json ==> %@", jsonData);
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
@@ -433,7 +492,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSLog(@"%@", self.objectQuality);
     NSLog(@"%@", self.objectPrice);
     NSLog(@"%@", self.objectNumber);
-    [self makeUrlRequest];
+    [self uploadPhoto];
+    [self performSegueWithIdentifier:@"publish" sender:self];
 }
 
 - (void)refreshDeleteIcon {
@@ -581,6 +641,22 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                           cancelButtonTitle:@"是的"
                                           otherButtonTitles:@"取消", nil];
     [alert show];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"publish"]){
+        SellingEnsureViewController *controller = (SellingEnsureViewController *)segue.destinationViewController;
+        //[controller setAccess_token:self.access_token];
+        //[controller setRefresh_token:self.refresh_token];
+        //[controller setExpire_time:self.expire_time];
+        NSLog(@"%@", self.objectName);
+        NSLog(@"%@", self.objectContent);
+        NSLog(@"%@", self.objectCategory);
+        NSLog(@"%@", self.objectLocation);
+        NSLog(@"%@", self.objectQuality);
+        NSLog(@"%@", self.objectPrice);
+        NSLog(@"%@", self.objectNumber);
+    }
 }
 
 @end

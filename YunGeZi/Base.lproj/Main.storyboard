@@ -1440,6 +1440,7 @@
                         <outlet property="priceButton" destination="3f9-gV-rCQ" id="2ID-LR-D2q"/>
                         <outlet property="priceTextField" destination="zsL-oH-Uyh" id="dBe-Gh-Yto"/>
                         <outlet property="qualityButton" destination="xjd-9H-hHu" id="Mom-LX-0PL"/>
+                        <segue destination="wjA-Ky-Eag" kind="show" identifier="publish" id="1R9-lo-J9C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m18-RJ-nuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1450,6 +1451,29 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-504.5" y="585.5"/>
+        </scene>
+        <!--Selling Ensure View Controller-->
+        <scene sceneID="3W2-cN-vyD">
+            <objects>
+                <viewController id="wjA-Ky-Eag" customClass="SellingEnsureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OiS-fd-lTz"/>
+                        <viewControllerLayoutGuide type="bottom" id="lN7-Et-DMt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rbp-ev-IO1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PEh-uX-1Vr">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8f-if-8YM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-44.5" y="585.5"/>
         </scene>
         <!--我要卖-->
         <scene sceneID="GmM-t8-GgC">
