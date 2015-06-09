@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *numberButton;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData_1;
 @property (strong, nonatomic) NSString *imageEncodedData_2;
 @property (strong, nonatomic) NSString *imageEncodedData_3;
@@ -45,6 +44,7 @@
 @property (strong, nonatomic) NSString *photoUpLoadID_4;
 @property (nonatomic) NSUInteger photoNumber;
 @property (nonatomic) NSUInteger photoWhichShouldDelete;
+@property (strong, nonatomic) NSMutableDictionary *dict;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -128,31 +128,24 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
     [self.view bringSubviewToFront:self.activityIndicator];
-
-    self.photoActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.photoActivityIndicator setCenter:self.view.center];
-    [self.photoActivityIndicator setHidesWhenStopped:TRUE];
-    [self.photoActivityIndicator setHidden:YES];
-    [self.view addSubview:self.photoActivityIndicator];
-    [self.view bringSubviewToFront:self.photoActivityIndicator];
 }
 
 - (NSMutableURLRequest *)createURLRequestWithURL:(NSString *)URL andPostData:(NSMutableDictionary *)postDictionary {
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
     NSMutableData *postData = [NSMutableData data];
     NSString *boundary = @"---------------------------14737809831466499882746641449";
-    //NSMutableString * wa = [[NSMutableString alloc] init];
+    NSMutableString * wa = [[NSMutableString alloc] init];
     //convert post distionary into a string
     if (postDictionary) {
         for (NSString *key in postDictionary) {
             [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            //[wa appendFormat:@"\r\n--%@\r\n", boundary];
+            [wa appendFormat:@"\r\n--%@\r\n", boundary];
             id postValue = [postDictionary valueForKey:key];
             if ([postValue isKindOfClass:[NSString class]]) {
                 [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
-                //[wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
-                //[wa appendFormat:@"%@", postValue];
+                [wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                [wa appendFormat:@"%@", postValue];
                 //NSLog(@"!!!%@ %@", key, postValue);
             } else if ([postValue isKindOfClass:[UIImage class]]) {
                 NSString *tmpStr = [self randomStringWithLength:18];
@@ -161,17 +154,17 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                 [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
 
-                //[wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
-                //[wa appendFormat:@"Content-Type: image/jpeg\r\n"];
-                //[wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
-                //[wa appendString:@"!!!Image Data Here!!!"];
+                [wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                [wa appendFormat:@"Content-Type: image/jpeg\r\n"];
+                [wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                [wa appendString:@"!!!Image Data Here!!!"];
                 //NSLog(@">.<%@ %@", key, postValue);
             } else {
                 [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
             }
         }
         [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        //[wa appendFormat:@"\r\n--%@--\r\n", boundary];
+        [wa appendFormat:@"\r\n--%@--\r\n", boundary];
     }
 
     //setup the request
@@ -180,8 +173,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary] forHTTPHeaderField:@"Content-Type"];
     [urlRequest setHTTPBody:postData];
 
-    //NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
-    //NSLog(@"%@", wa);
+    NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
+    NSLog(@"%@", wa);
 
     return urlRequest;
 }
@@ -217,6 +210,49 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         self.photoUpLoadID_3 = [self getImageID:self.imageEncodedData_3];
     if (self.photoNumber >= 4)
         self.photoUpLoadID_4 = [self getImageID:self.imageEncodedData_4];
+}
+
+- (NSString *)imageJsonArray {
+    NSMutableString *tmp = [[NSMutableString alloc] initWithString:@"["];
+    if (self.photoNumber >= 1)
+        [tmp appendString:[[NSString alloc] initWithFormat:@"{\"imageid\":\"%@\"}", self.photoUpLoadID_1]];
+    if (self.photoNumber >= 2)
+        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_2]];
+    if (self.photoNumber >= 3)
+        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_3]];
+    if (self.photoNumber >= 4)
+        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_4]];
+    [tmp appendString:@"]"];
+    NSLog(@"%@", tmp);
+    return tmp;
+}
+
+- (void)uploadItem {
+    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
+    NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
+    [itemDict setObject:tab.access_token forKey:@"access_token"];
+    [itemDict setObject:self.objectName forKey:@"title"];
+    [itemDict setObject:self.objectPrice forKey:@"price"];
+    [itemDict setObject:self.objectNumber forKey:@"amount"];
+    [itemDict setObject:self.dict[self.objectQuality] forKey:@"degree"];
+    [itemDict setObject:self.objectContent forKey:@"content"];
+    [itemDict setObject:self.dict[self.objectLocation] forKey:@"location"];
+    [itemDict setObject:self.objectCategory forKey:@"classid"];
+    [itemDict setObject:@"0" forKey:@"payment"];
+    [itemDict setObject:@"0" forKey:@"transport"];
+    [itemDict setObject:@"0" forKey:@"cover"];
+    [itemDict setObject:@"" forKey:@"EAN13"];
+    [itemDict setObject:[self imageJsonArray] forKey:@"images"];
+    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/addItem" andPostData:itemDict];
+    NSError *requestError = [[NSError alloc] init];
+    NSHTTPURLResponse *requestResponse;
+    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
+    NSError *jsonError = nil;
+    NSDictionary *jsonData = [NSJSONSerialization
+                              JSONObjectWithData:requestHandler
+                              options:NSJSONReadingMutableContainers
+                              error:&jsonError];
+    NSLog(@"Response with json ==> %@", jsonData);
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
@@ -258,6 +294,23 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectQuality = @"请选择";
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
     self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
+    self.dict = [[NSMutableDictionary alloc] init];
+    [self.dict setValue:@"100" forKey:@"全新"];
+    [self.dict setValue:@"95" forKey:@"九五新"];
+    [self.dict setValue:@"90" forKey:@"九成新"];
+    [self.dict setValue:@"85" forKey:@"八五新"];
+    [self.dict setValue:@"80" forKey:@"八成新"];
+    [self.dict setValue:@"75" forKey:@"七五新"];
+    [self.dict setValue:@"70" forKey:@"七成新"];
+    [self.dict setValue:@"65" forKey:@"六五新"];
+    [self.dict setValue:@"60" forKey:@"六成新"];
+    [self.dict setValue:@"55" forKey:@"五五新"];
+    [self.dict setValue:@"50" forKey:@"五成新"];
+    [self.dict setValue:@"0" forKey:@"之江"];
+    [self.dict setValue:@"1" forKey:@"玉泉"];
+    [self.dict setValue:@"2" forKey:@"紫金港"];
+    [self.dict setValue:@"3" forKey:@"西溪"];
+    [self.dict setValue:@"4" forKey:@"华家池"];
 }
 
 - (void)viewDidLoad {
@@ -508,7 +561,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 - (void)publish {
     [self uploadPhoto];
-    [self performSegueWithIdentifier:@"publish" sender:self];
+    [self uploadItem];
+    //[self performSegueWithIdentifier:@"publish" sender:self];
 }
 
 - (void)refreshDeleteIcon {
