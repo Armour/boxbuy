@@ -27,7 +27,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *photoActivityIndicator;
-@property (strong, nonatomic) NSString *imageEncodedData;
+@property (strong, nonatomic) NSString *imageEncodedData_1;
+@property (strong, nonatomic) NSString *imageEncodedData_2;
+@property (strong, nonatomic) NSString *imageEncodedData_3;
+@property (strong, nonatomic) NSString *imageEncodedData_4;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_1;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_2;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView_3;
@@ -36,6 +39,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_2;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_3;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_4;
+@property (strong, nonatomic) NSString *photoUpLoadID_1;
+@property (strong, nonatomic) NSString *photoUpLoadID_2;
+@property (strong, nonatomic) NSString *photoUpLoadID_3;
+@property (strong, nonatomic) NSString *photoUpLoadID_4;
 @property (nonatomic) NSUInteger photoNumber;
 @property (nonatomic) NSUInteger photoWhichShouldDelete;
 
@@ -92,17 +99,19 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     switch (self.photoNumber) {
         case 0:
             self.photoView_1.image = image;
-            self.imageEncodedData = [UIImageJPEGRepresentation(self.photoView_1.image, 0.0) base64EncodedStringWithOptions:0];
-            NSLog(@"%f", [self.photoView_1.image scale]);
+            self.imageEncodedData_1 = [UIImageJPEGRepresentation(self.photoView_1.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 1:
             self.photoView_2.image = image;
+            self.imageEncodedData_2 = [UIImageJPEGRepresentation(self.photoView_2.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 2:
             self.photoView_3.image = image;
+            self.imageEncodedData_3 = [UIImageJPEGRepresentation(self.photoView_3.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 3:
             self.photoView_4.image = image;
+            self.imageEncodedData_4 = [UIImageJPEGRepresentation(self.photoView_4.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         default:
             break;
@@ -132,37 +141,37 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
     NSMutableData *postData = [NSMutableData data];
     NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSMutableString * wa = [[NSMutableString alloc] init];
+    //NSMutableString * wa = [[NSMutableString alloc] init];
     //convert post distionary into a string
     if (postDictionary) {
         for (NSString *key in postDictionary) {
             [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [wa appendFormat:@"\r\n--%@\r\n", boundary];
+            //[wa appendFormat:@"\r\n--%@\r\n", boundary];
             id postValue = [postDictionary valueForKey:key];
             if ([postValue isKindOfClass:[NSString class]]) {
                 [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
-                [wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
-                [wa appendFormat:@"%@", postValue];
+                //[wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                //[wa appendFormat:@"%@", postValue];
                 //NSLog(@"!!!%@ %@", key, postValue);
             } else if ([postValue isKindOfClass:[UIImage class]]) {
-                NSString *tmpStr = [self randomStringWithLength:8];
+                NSString *tmpStr = [self randomStringWithLength:18];
                 [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr]  dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
 
-                [wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
-                [wa appendFormat:@"Content-Type: image/jpeg\r\n"];
-                [wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
-                [wa appendString:@"!!!Image Data Here!!!"];
+                //[wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                //[wa appendFormat:@"Content-Type: image/jpeg\r\n"];
+                //[wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                //[wa appendString:@"!!!Image Data Here!!!"];
                 //NSLog(@">.<%@ %@", key, postValue);
             } else {
                 [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
             }
         }
         [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [wa appendFormat:@"\r\n--%@--\r\n", boundary];
+        //[wa appendFormat:@"\r\n--%@--\r\n", boundary];
     }
 
     //setup the request
@@ -171,33 +180,43 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary] forHTTPHeaderField:@"Content-Type"];
     [urlRequest setHTTPBody:postData];
 
-    NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
-    NSLog(@"%@", wa);
+    //NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
+    //NSLog(@"%@", wa);
 
     return urlRequest;
 }
 
-- (void)uploadPhoto {
+- (NSString *)getImageID:(NSString *)encodedData {
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
     NSString *tmpRandom = [self randomStringWithLength:18];
     [imageDict setObject:tab.access_token forKey:@"access_token"];
     [imageDict setObject:tmpRandom forKey:@"fileElementName"];
-    [imageDict setObject:self.imageEncodedData forKey:tmpRandom];
+    [imageDict setObject:encodedData forKey:tmpRandom];
     NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://img.boxbuy.cc/images/add" andPostData:imageDict];
     //建立连接，设置代理
     NSError *requestError = [[NSError alloc] init];
     NSHTTPURLResponse *requestResponse;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
-    NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
-    NSString *responseData = [[NSString alloc] initWithData:requestHandler encoding:NSUTF8StringEncoding];
-    NSLog(@"Response data: %@", responseData);
+    //NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
     NSError *jsonError = nil;
     NSDictionary *jsonData = [NSJSONSerialization
                               JSONObjectWithData:requestHandler
                               options:NSJSONReadingMutableContainers
                               error:&jsonError];
     NSLog(@"Response with json ==> %@", jsonData);
+    return jsonData[@"imageid"];
+}
+
+- (void)uploadPhoto {
+    if (self.photoNumber >= 1)
+        self.photoUpLoadID_1 = [self getImageID:self.imageEncodedData_1];
+    if (self.photoNumber >= 2)
+        self.photoUpLoadID_2 = [self getImageID:self.imageEncodedData_2];
+    if (self.photoNumber >= 3)
+        self.photoUpLoadID_3 = [self getImageID:self.imageEncodedData_3];
+    if (self.photoNumber >= 4)
+        self.photoUpLoadID_4 = [self getImageID:self.imageEncodedData_4];
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
@@ -480,18 +499,14 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [self popAlert:@"信息不完整" withMessage:@"您好像没填价格 >_<"];
     } else if ([self.objectNumber isEqual: @"请选择"]) {
         [self popAlert:@"信息不完整" withMessage:@"您好像没选数量 >_<"];
-    } else
+    } else if (self.photoNumber == 0) {
+        [self popAlert:@"未上传图片" withMessage:@"为您的宝贝拍几张照片吧~"];
+    } else {
         [self publish];
+    }
 }
 
 - (void)publish {
-    NSLog(@"%@", self.objectName);
-    NSLog(@"%@", self.objectContent);
-    NSLog(@"%@", self.objectCategory);
-    NSLog(@"%@", self.objectLocation);
-    NSLog(@"%@", self.objectQuality);
-    NSLog(@"%@", self.objectPrice);
-    NSLog(@"%@", self.objectNumber);
     [self uploadPhoto];
     [self performSegueWithIdentifier:@"publish" sender:self];
 }
@@ -571,17 +586,23 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                 if (self.photoNumber == 2) {
                     self.photoView_1.image = self.photoView_2.image;
                     self.photoView_2.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
                 }
                 if (self.photoNumber == 3) {
                     self.photoView_1.image = self.photoView_2.image;
                     self.photoView_2.image = self.photoView_3.image;
                     self.photoView_3.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
                 }
                 if (self.photoNumber == 4) {
                     self.photoView_1.image = self.photoView_2.image;
                     self.photoView_2.image = self.photoView_3.image;
                     self.photoView_3.image = self.photoView_4.image;
                     self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
+                    self.imageEncodedData_3 = self.imageEncodedData_4;
                 }
                 break;
 
@@ -592,11 +613,14 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                 if (self.photoNumber == 3) {
                     self.photoView_2.image = self.photoView_3.image;
                     self.photoView_3.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
                 }
                 if (self.photoNumber == 4) {
                     self.photoView_2.image = self.photoView_3.image;
                     self.photoView_3.image = self.photoView_4.image;
                     self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
+                    self.imageEncodedData_3 = self.imageEncodedData_4;
                 }
                 break;
 
@@ -607,6 +631,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                 if (self.photoNumber == 4) {
                     self.photoView_3.image = self.photoView_4.image;
                     self.photoView_4.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_3 = self.imageEncodedData_4;
                 }
                 break;
 
@@ -644,18 +669,22 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     if([segue.identifier isEqualToString:@"publish"]){
         SellingEnsureViewController *controller = (SellingEnsureViewController *)segue.destinationViewController;
-        //[controller setAccess_token:self.access_token];
-        //[controller setRefresh_token:self.refresh_token];
-        //[controller setExpire_time:self.expire_time];
-        NSLog(@"%@", self.objectName);
-        NSLog(@"%@", self.objectContent);
-        NSLog(@"%@", self.objectCategory);
-        NSLog(@"%@", self.objectLocation);
-        NSLog(@"%@", self.objectQuality);
-        NSLog(@"%@", self.objectPrice);
-        NSLog(@"%@", self.objectNumber);
+        [controller setAccess_token:tab.access_token];
+        [controller setObjectCategory:self.objectCategory];
+        [controller setObjectContent:self.objectContent];
+        [controller setObjectLocation:self.objectLocation];
+        [controller setObjectName:self.objectName];
+        [controller setObjectNumber:self.objectNumber];
+        [controller setObjectPrice:self.objectPrice];
+        [controller setObjectQuality:self.objectQuality];
+        [controller setPhotoNumber:self.photoNumber];
+        [controller setImage_id_1:self.photoUpLoadID_1];
+        [controller setImage_id_2:self.photoUpLoadID_2];
+        [controller setImage_id_3:self.photoUpLoadID_3];
+        [controller setImage_id_4:self.photoUpLoadID_4];
     }
 }
 
