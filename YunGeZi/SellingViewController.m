@@ -299,7 +299,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (void)initObjectAttribute {
-    [self getSchools];
+    self.school = @"0";
     self.photoNumber = 0;
     self.photoWhichShouldDelete = 0;
     self.photoDeleteButton_1.hidden = true;
@@ -314,6 +314,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
     self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
     self.dict = [[NSMutableDictionary alloc] init];
+    [self getSchools];
     // 成色程度
     [self.dict setValue:@"100" forKey:@"全新"];
     [self.dict setValue:@"95" forKey:@"九五新"];
@@ -610,7 +611,53 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)chooseLocationButtonTouchUpInside:(UIButton *)sender {
-    NSArray *option = [NSArray arrayWithObjects:@"请选择", @"之江", @"玉泉", @"紫金港", @"西溪", @"华家池", nil];
+    NSArray *option;
+    // default  0
+    if ([self.school isEqual: @"0"])
+        option = [NSArray arrayWithObjects:@"请选择", nil];
+    // 浙江大学  1
+    if ([self.school isEqual: @"1"])
+        option = [NSArray arrayWithObjects:@"请选择", @"紫金港", @"玉泉", @"西溪", @"华家池", @"之江", nil];
+    // 杭州电子科技大学  2
+    if ([self.school isEqual: @"2"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙主校区", @"下沙东校区", @"文一校区", @"东岳校区", nil];
+    // 杭州师范大学  3
+    if ([self.school isEqual: @"3"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", @"钱江校区", @"大塔儿巷校区", @"玉皇山校区", nil];
+    // 浙江财经大学  5
+    if ([self.school isEqual: @"5"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", nil];
+    // 浙江传播学院  6
+    if ([self.school isEqual: @"6"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", @"桐乡校区", nil];
+    // 浙江大学城市学院  7
+    if ([self.school isEqual: @"7"])
+        option = [NSArray arrayWithObjects:@"请选择", @"主校区", nil];
+    // 浙江工商大学  8
+    if ([self.school isEqual: @"8"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", @"教工路校区", nil];
+    // 浙江工业大学  9
+    if ([self.school isEqual: @"9"])
+        option = [NSArray arrayWithObjects:@"请选择", @"屏峰校区", @"朝晖校区", nil];
+    // 浙江经贸职业技术学院  12
+    if ([self.school isEqual: @"12"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", nil];
+    // 浙江科技学院  13
+    if ([self.school isEqual: @"12"])
+        option = [NSArray arrayWithObjects:@"请选择", @"小和山校区", nil];
+    // 浙江理工大学  14
+    if ([self.school isEqual: @"14"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", @"文一校区", @"益乐校区", @"西城校区", @"北景园校区", nil];
+    // 浙江树人大学  15
+    if ([self.school isEqual: @"15"])
+        option = [NSArray arrayWithObjects:@"请选择", @"主校区", nil];
+    // 中国计量学院  17
+    if ([self.school isEqual: @"17"])
+        option = [NSArray arrayWithObjects:@"请选择", @"下沙校区", nil];
+    // 中国美术学院  18
+    if ([self.school isEqual: @"18"])
+        option = [NSArray arrayWithObjects:@"请选择", @"南山校区", @"象山校区", nil];
+
     [ActionSheetStringPicker showPickerWithTitle:@"选择校区"
                                             rows:option
                                 initialSelection:0
@@ -704,7 +751,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [self popAlert:@"信息不完整" withMessage:@"给您的宝贝取个名字吧~"];
     } else if ([self.objectContent isEqual:@""] || [self.objectContent isEqual:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
         [self popAlert:@"信息不完整" withMessage:@"跟大家讲讲您的宝贝的故事吧~"];
-    } else if ([self.objectCategory isEqual: @"请选择"]) {
+    } else if ([self.objectCategory isEqual: @"请选择"] || [self.dict valueForKey:self.objectCategory]== nil) {
         [self popAlert:@"信息不完整" withMessage:@"您好像没选分类 >_<"];
     } else if ([self.objectLocation isEqual: @"请选择"]) {
         [self popAlert:@"信息不完整" withMessage:@"您好像没选校区 >_<"];
