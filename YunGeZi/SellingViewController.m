@@ -237,7 +237,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [itemDict setObject:self.dict[self.objectQuality] forKey:@"degree"];
     [itemDict setObject:self.objectContent forKey:@"content"];
     [itemDict setObject:self.dict[self.objectLocation] forKey:@"location"];
-    [itemDict setObject:self.objectCategory forKey:@"classid"];
+    [itemDict setObject:self.dict[self.objectCategory] forKey:@"classid"];
     [itemDict setObject:@"0" forKey:@"payment"];
     [itemDict setObject:@"0" forKey:@"transport"];
     [itemDict setObject:@"0" forKey:@"cover"];
@@ -280,7 +280,26 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.priceTextField.delegate = self;
 }
 
+- (void)getSchools {
+    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
+    NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
+    [itemDict setObject:tab.access_token forKey:@"access_token"];
+    [itemDict setObject:@"me" forKey:@"userid"];
+    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/getUserData" andPostData:itemDict];
+    NSError *requestError = [[NSError alloc] init];
+    NSHTTPURLResponse *requestResponse;
+    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
+    NSError *jsonError = nil;
+    NSDictionary *jsonData = [NSJSONSerialization
+                              JSONObjectWithData:requestHandler
+                              options:NSJSONReadingMutableContainers
+                              error:&jsonError];
+    NSLog(@"Response with json ==> %@", jsonData[@"Account"][@"schoolid"]);
+    self.school = jsonData[@"Account"][@"schoolid"];
+}
+
 - (void)initObjectAttribute {
+    [self getSchools];
     self.photoNumber = 0;
     self.photoWhichShouldDelete = 0;
     self.photoDeleteButton_1.hidden = true;
@@ -295,6 +314,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
     self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
     self.dict = [[NSMutableDictionary alloc] init];
+    // 成色程度
     [self.dict setValue:@"100" forKey:@"全新"];
     [self.dict setValue:@"95" forKey:@"九五新"];
     [self.dict setValue:@"90" forKey:@"九成新"];
@@ -306,11 +326,153 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.dict setValue:@"60" forKey:@"六成新"];
     [self.dict setValue:@"55" forKey:@"五五新"];
     [self.dict setValue:@"50" forKey:@"五成新"];
-    [self.dict setValue:@"0" forKey:@"之江"];
-    [self.dict setValue:@"1" forKey:@"玉泉"];
-    [self.dict setValue:@"2" forKey:@"紫金港"];
+    // 浙江大学  1
+    [self.dict setValue:@"1" forKey:@"紫金港"];
+    [self.dict setValue:@"2" forKey:@"玉泉"];
     [self.dict setValue:@"3" forKey:@"西溪"];
     [self.dict setValue:@"4" forKey:@"华家池"];
+    [self.dict setValue:@"5" forKey:@"之江"];
+    // 杭州电子科技大学  2
+    [self.dict setValue:@"1" forKey:@"下沙主校区"];
+    [self.dict setValue:@"2" forKey:@"下沙东校区"];
+    [self.dict setValue:@"3" forKey:@"文一校区"];
+    [self.dict setValue:@"4" forKey:@"东岳校区"];
+    // 杭州师范大学  3
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    [self.dict setValue:@"2" forKey:@"钱江校区"];
+    [self.dict setValue:@"3" forKey:@"大塔儿巷校区"];
+    [self.dict setValue:@"4" forKey:@"玉皇山校区"];
+    // 浙江财经大学  5
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    // 浙江传播学院  6
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    [self.dict setValue:@"2" forKey:@"桐乡校区"];
+    // 浙江大学城市学院  7
+    [self.dict setValue:@"1" forKey:@"主校区"];
+    // 浙江工商大学  8
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    [self.dict setValue:@"2" forKey:@"教工路校区"];
+    // 浙江工业大学  9
+    [self.dict setValue:@"1" forKey:@"屏峰校区"];
+    [self.dict setValue:@"2" forKey:@"朝晖校区"];
+    // 浙江经贸职业技术学院  12
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    // 浙江科技学院  13
+    [self.dict setValue:@"1" forKey:@"小和山校区"];
+    // 浙江理工大学  14
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    [self.dict setValue:@"2" forKey:@"文一校区"];
+    [self.dict setValue:@"3" forKey:@"益乐校区"];
+    [self.dict setValue:@"4" forKey:@"西城校区"];
+    [self.dict setValue:@"5" forKey:@"北景园校区"];
+    // 浙江树人大学  15
+    [self.dict setValue:@"1" forKey:@"主校区"];
+    // 中国计量学院  17
+    [self.dict setValue:@"1" forKey:@"下沙校区"];
+    // 中国美术学院  18
+    [self.dict setValue:@"1" forKey:@"南山校区"];
+    [self.dict setValue:@"2" forKey:@"象山校区"];
+    // 分类：电子
+    [self.dict setValue:@"2801" forKey:@"电子(电脑)"];
+    [self.dict setValue:@"2802" forKey:@"电子(相机)"];
+    [self.dict setValue:@"2803" forKey:@"电子(手机)"];
+    [self.dict setValue:@"2804" forKey:@"电子(移动存储)"];
+    [self.dict setValue:@"2805" forKey:@"电子(游戏机)"];
+    [self.dict setValue:@"2806" forKey:@"电子(手环)"];
+    [self.dict setValue:@"2807" forKey:@"电子(配件)"];
+    [self.dict setValue:@"2808" forKey:@"电子(平板)"];
+    // 分类：箱包
+    [self.dict setValue:@"2001" forKey:@"箱包(拉杆箱)"];
+    [self.dict setValue:@"2002" forKey:@"箱包(双肩包)"];
+    [self.dict setValue:@"2003" forKey:@"箱包(单肩包)"];
+    [self.dict setValue:@"2004" forKey:@"箱包(箱包配件)"];
+    [self.dict setValue:@"2005" forKey:@"箱包(托运箱)"];
+    [self.dict setValue:@"2006" forKey:@"箱包(钱包)"];
+    [self.dict setValue:@"2007" forKey:@"箱包(情侣包)"];
+    // 分类：鞋子
+    [self.dict setValue:@"2101" forKey:@"鞋子(休闲鞋)"];
+    [self.dict setValue:@"2102" forKey:@"鞋子(高跟鞋)"];
+    [self.dict setValue:@"2103" forKey:@"鞋子(情侣鞋)"];
+    [self.dict setValue:@"2104" forKey:@"鞋子(正装鞋)"];
+    [self.dict setValue:@"2105" forKey:@"鞋子(帆布鞋)"];
+    [self.dict setValue:@"2106" forKey:@"鞋子(板鞋)"];
+    [self.dict setValue:@"2107" forKey:@"鞋子(拖鞋)"];
+    [self.dict setValue:@"2108" forKey:@"鞋子(凉鞋)"];
+    [self.dict setValue:@"2109" forKey:@"鞋子(棉鞋)"];
+    [self.dict setValue:@"2110" forKey:@"鞋子(靴子)"];
+    // 分类：衣服
+    [self.dict setValue:@"2201" forKey:@"衣服(T恤)"];
+    [self.dict setValue:@"2202" forKey:@"衣服(卫衣)"];
+    [self.dict setValue:@"2203" forKey:@"衣服(夹克)"];
+    [self.dict setValue:@"2204" forKey:@"衣服(棉衣)"];
+    [self.dict setValue:@"2205" forKey:@"衣服(衬衫)"];
+    [self.dict setValue:@"2206" forKey:@"衣服(针织衫)"];
+    [self.dict setValue:@"2207" forKey:@"衣服(毛衣)"];
+    [self.dict setValue:@"2208" forKey:@"衣服(羽绒服)"];
+    [self.dict setValue:@"2209" forKey:@"衣服(情侣装)"];
+    [self.dict setValue:@"2210" forKey:@"衣服(正装)"];
+    [self.dict setValue:@"2211" forKey:@"衣服(运动装)"];
+    // 分类：家居
+    [self.dict setValue:@"2301" forKey:@"家居(餐具)"];
+    [self.dict setValue:@"2302" forKey:@"家居(装修用品)"];
+    [self.dict setValue:@"2303" forKey:@"家居(床上用品)"];
+    [self.dict setValue:@"2304" forKey:@"家居(办公用品)"];
+    [self.dict setValue:@"2305" forKey:@"家居(装饰摆件)"];
+    [self.dict setValue:@"2306" forKey:@"家居(挂饰/壁饰)"];
+    [self.dict setValue:@"2307" forKey:@"家居(收纳)"];
+    [self.dict setValue:@"2308" forKey:@"家居(电器)"];
+    [self.dict setValue:@"2309" forKey:@"家居(清洁用品)"];
+    [self.dict setValue:@"2310" forKey:@"家居(浴室用品)"];
+    // 分类：学习
+    [self.dict setValue:@"2401" forKey:@"学习(教材/教辅)"];
+    [self.dict setValue:@"2402" forKey:@"学习(历年考题)"];
+    [self.dict setValue:@"2403" forKey:@"学习(学霸笔记)"];
+    [self.dict setValue:@"2404" forKey:@"学习(考试专用)"];
+    [self.dict setValue:@"2405" forKey:@"学习(课外书籍)"];
+    [self.dict setValue:@"2406" forKey:@"学习(考试用具)"];
+    // 分类：运动
+    [self.dict setValue:@"2501" forKey:@"运动(球拍)"];
+    [self.dict setValue:@"2502" forKey:@"运动(球)"];
+    [self.dict setValue:@"2503" forKey:@"运动(配件)"];
+    [self.dict setValue:@"2504" forKey:@"运动(健身器材)"];
+    // 分类：玩乐
+    [self.dict setValue:@"2601" forKey:@"玩乐(桌游牌)"];
+    [self.dict setValue:@"2602" forKey:@"玩乐(游戏机)"];
+    [self.dict setValue:@"2603" forKey:@"玩乐(玩具)"];
+    [self.dict setValue:@"2604" forKey:@"玩乐(玩偶)"];
+    [self.dict setValue:@"2605" forKey:@"玩乐(装饰品)"];
+    [self.dict setValue:@"2606" forKey:@"玩乐(乐器)"];
+    [self.dict setValue:@"2607" forKey:@"玩乐(游戏配件)"];
+    [self.dict setValue:@"2608" forKey:@"玩乐(乐器配件)"];
+    // 分类：食饮
+    [self.dict setValue:@"2701" forKey:@"食饮(坚果/蜜饯)"];
+    [self.dict setValue:@"2702" forKey:@"食饮(糖果/巧克力)"];
+    [self.dict setValue:@"2703" forKey:@"食饮(糕点)"];
+    [self.dict setValue:@"2704" forKey:@"食饮(方便速食)"];
+    [self.dict setValue:@"2705" forKey:@"食饮(营养品)"];
+    [self.dict setValue:@"2706" forKey:@"食饮(饮料)"];
+    [self.dict setValue:@"2707" forKey:@"食饮(药剂)"];
+    [self.dict setValue:@"2708" forKey:@"食饮(特产)"];
+    [self.dict setValue:@"2709" forKey:@"食饮(保健品)"];
+    [self.dict setValue:@"2710" forKey:@"食饮(酒品)"];
+    [self.dict setValue:@"2711" forKey:@"食饮(其他)"];
+    // 分类：美护
+    [self.dict setValue:@"2901" forKey:@"美护(化妆品)"];
+    [self.dict setValue:@"2902" forKey:@"美护(保暖品)"];
+    [self.dict setValue:@"2903" forKey:@"美护(保健品)"];
+    [self.dict setValue:@"2904" forKey:@"美护(洗浴用品)"];
+    [self.dict setValue:@"2905" forKey:@"美护(美发用品)"];
+    [self.dict setValue:@"2906" forKey:@"美护(饰品)"];
+    // 分类：非实物
+    [self.dict setValue:@"3001" forKey:@"非实物(租赁)"];
+    [self.dict setValue:@"3002" forKey:@"非实物(劳力)"];
+    [self.dict setValue:@"3003" forKey:@"非实物(账号)"];
+    [self.dict setValue:@"3004" forKey:@"非实物(其他)"];
+    // 分类：交通工具
+    [self.dict setValue:@"3101" forKey:@"交通工具(滑板轮滑)"];
+    [self.dict setValue:@"3102" forKey:@"交通工具(自行车)"];
+    [self.dict setValue:@"3103" forKey:@"交通工具(电动车)"];
+    [self.dict setValue:@"3104" forKey:@"交通工具(汽车)"];
 }
 
 - (void)viewDidLoad {

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455525152.977079"
+            timestampString = "456324590.529811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "530"
-            endingLineNumber = "530"
-            landmarkName = "-checkPrice"
+            startingLineNumber = "565"
+            endingLineNumber = "565"
+            landmarkName = "-chooseLocationButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455525152.977079"
+            timestampString = "456324590.529811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
-            landmarkName = "-checkPrice"
+            startingLineNumber = "562"
+            endingLineNumber = "562"
+            landmarkName = "-chooseLocationButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455525152.977079"
+            timestampString = "456324590.529811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
-            landmarkName = "-checkPrice"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
+            landmarkName = "-chooseLocationButtonTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455525152.977079"
+            timestampString = "456324590.529811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "-textFieldShouldReturn:"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
+            landmarkName = "-initObjectAttribute"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "455525152.977079"
+            timestampString = "456324590.529811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-initObjectAttribute"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
