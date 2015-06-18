@@ -193,12 +193,15 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
     //NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
     NSError *jsonError = nil;
-    NSDictionary *jsonData = [NSJSONSerialization
-                              JSONObjectWithData:requestHandler
-                              options:NSJSONReadingMutableContainers
-                              error:&jsonError];
-    NSLog(@"Response with json ==> %@", jsonData);
-    return jsonData[@"imageid"];
+    if (requestHandler != nil) {
+        NSDictionary *jsonData = [NSJSONSerialization
+                                  JSONObjectWithData:requestHandler
+                                  options:NSJSONReadingMutableContainers
+                                  error:&jsonError];
+        NSLog(@"Response with json ==> %@", jsonData);
+        return jsonData[@"imageid"];
+    }
+    return @"";
 }
 
 - (void)uploadPhoto {
@@ -214,13 +217,13 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 - (NSString *)imageJsonArray {
     NSMutableString *tmp = [[NSMutableString alloc] initWithString:@"["];
-    if (self.photoNumber >= 1)
+    if (self.photoNumber >= 1 && ![self.photoUpLoadID_1  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@"{\"imageid\":\"%@\"}", self.photoUpLoadID_1]];
-    if (self.photoNumber >= 2)
+    if (self.photoNumber >= 2 && ![self.photoUpLoadID_2  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_2]];
-    if (self.photoNumber >= 3)
+    if (self.photoNumber >= 3 && ![self.photoUpLoadID_3  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_3]];
-    if (self.photoNumber >= 4)
+    if (self.photoNumber >= 4 && ![self.photoUpLoadID_4  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_4]];
     [tmp appendString:@"]"];
     NSLog(@"%@", tmp);
@@ -248,11 +251,13 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSHTTPURLResponse *requestResponse;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
     NSError *jsonError = nil;
-    NSDictionary *jsonData = [NSJSONSerialization
-                              JSONObjectWithData:requestHandler
-                              options:NSJSONReadingMutableContainers
-                              error:&jsonError];
-    NSLog(@"Response with json ==> %@", jsonData);
+    if (requestHandler != nil) {
+        NSDictionary *jsonData = [NSJSONSerialization
+                                  JSONObjectWithData:requestHandler
+                                  options:NSJSONReadingMutableContainers
+                                  error:&jsonError];
+        NSLog(@"Response with json ==> %@", jsonData);
+    }
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
@@ -290,12 +295,14 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     NSHTTPURLResponse *requestResponse;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
     NSError *jsonError = nil;
-    NSDictionary *jsonData = [NSJSONSerialization
-                              JSONObjectWithData:requestHandler
-                              options:NSJSONReadingMutableContainers
-                              error:&jsonError];
-    NSLog(@"Response with json ==> %@", jsonData[@"Account"][@"schoolid"]);
-    self.school = jsonData[@"Account"][@"schoolid"];
+    if (requestHandler != nil) {
+        NSDictionary *jsonData = [NSJSONSerialization
+                                  JSONObjectWithData:requestHandler
+                                  options:NSJSONReadingMutableContainers
+                                  error:&jsonError];
+        //NSLog(@"Response with json ==> %@", jsonData[@"Account"][@"schoolid"]);
+        self.school = jsonData[@"Account"][@"schoolid"];
+    }
 }
 
 - (void)initObjectAttribute {
