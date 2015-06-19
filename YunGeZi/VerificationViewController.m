@@ -49,6 +49,7 @@
 - (void)addWebViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_verificationWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"success"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"VerifySchoolSuccessful" object:self userInfo:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
             MyNavigationController * nav = (MyNavigationController *)self.navigationController;
             nav.shouldUpdateWebView = TRUE;

@@ -198,7 +198,6 @@ enum {
                                                     delegate:self
                                            cancelButtonTitle:@"OK"
                                            otherButtonTitles: nil];
-    //[alert addButtonWithTitle:@"GOO"];
     [alert show];
 }
 

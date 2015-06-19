@@ -49,6 +49,7 @@
 @property (nonatomic) NSUInteger photoNumber;
 @property (nonatomic) NSUInteger photoWhichShouldDelete;
 @property (strong, nonatomic) NSMutableDictionary *dict;
+@property (weak, nonatomic) NSString *letters;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -56,12 +57,10 @@
 
 @implementation SellingViewController
 
-NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
 - (NSString *)randomStringWithLength:(int)len {
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%c", [letters characterAtIndex: arc4random_uniform((unsigned int)[letters length])]];
+        [randomString appendFormat: @"%c", [self.letters characterAtIndex: arc4random_uniform((unsigned int)[self.letters length])]];
     }
     return randomString;
 }
@@ -254,9 +253,9 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [itemDict setObject:self.objectContent forKey:@"content"];
     [itemDict setObject:self.dict[self.objectLocation] forKey:@"location"];
     [itemDict setObject:self.dict[self.objectCategory] forKey:@"classid"];
-    [itemDict setObject:@"0" forKey:@"payment"];
-    [itemDict setObject:@"0" forKey:@"transport"];
-    [itemDict setObject:@"0" forKey:@"cover"];
+    [itemDict setObject:@"1" forKey:@"payment"];
+    [itemDict setObject:@"1" forKey:@"transport"];
+    [itemDict setObject:self.photoUpLoadID_0 forKey:@"cover"];
     [itemDict setObject:@"" forKey:@"EAN13"];
     [itemDict setObject:[self imageJsonArray] forKey:@"images"];
     NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/addItem" andPostData:itemDict];
@@ -298,27 +297,14 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.priceTextField.delegate = self;
 }
 
-- (void)getSchools {
+- (void)setSchoolID {
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
-    [itemDict setObject:tab.access_token forKey:@"access_token"];
-    [itemDict setObject:@"me" forKey:@"userid"];
-    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/getUserData" andPostData:itemDict];
-    NSError *requestError = [[NSError alloc] init];
-    NSHTTPURLResponse *requestResponse;
-    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
-    NSError *jsonError = nil;
-    if (requestHandler != nil) {
-        NSDictionary *jsonData = [NSJSONSerialization
-                                  JSONObjectWithData:requestHandler
-                                  options:NSJSONReadingMutableContainers
-                                  error:&jsonError];
-        //NSLog(@"Response with json ==> %@", jsonData[@"Account"][@"schoolid"]);
-        self.school = jsonData[@"Account"][@"schoolid"];
-    }
+    [tab getSchool];
+    self.school = tab.school_id;
 }
 
 - (void)initObjectAttribute {
+    self.letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";       // used to generate random name of image
     self.school = @"0";
     self.photoNumber = 0;
     self.photoWhichShouldDelete = 0;
@@ -339,7 +325,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     [self.photoView_2 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self.photoView_3 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self.photoView_4 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
-    [self getSchools];
+    [self setSchoolID];
     [self refreshPhotoIcon];
     [self refreshDeleteIcon];
     // 成色程度

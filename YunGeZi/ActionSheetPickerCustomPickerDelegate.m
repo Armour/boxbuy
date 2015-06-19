@@ -45,12 +45,6 @@
         self.selectedScale = level_2_display[(NSUInteger) [(UIPickerView *) actionSheetPicker.pickerView selectedRowInComponent:1]];
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.selectedKey, @"0", self.selectedScale, @"1", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CategorySelectFinished" object:self userInfo:dict];
-
-    /*
-     *NSString *resultMessage;
-     *resultMessage = [NSString stringWithFormat:@"%@ %@ selected.", self.selectedKey, self.selectedScale];
-     *NSLog(@"%@", resultMessage);
-    */
 }
 
 /////////////////////////////////////////////////////////////////////////
