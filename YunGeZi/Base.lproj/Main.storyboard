@@ -1302,7 +1302,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="photoDeleteButtonOneTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="Opr-vx-YBQ"/>
+                                    <action selector="photoDeleteButtonTwoTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="Bis-Vy-tu5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8B-3x-Tki">
@@ -1315,7 +1315,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="photoDeleteButtonTwoTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="Jq0-lE-5eo"/>
+                                    <action selector="photoDeleteButtonThreeTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="enh-ms-Q0f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNa-yc-lCi">
@@ -1328,7 +1328,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="photoDeleteButtonThreeTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="24C-KN-KW3"/>
+                                    <action selector="photoDeleteButtonFourTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="KnI-bj-UQq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n90-fY-xHF">
@@ -1341,7 +1341,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="photoDeleteButtonFourTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="gsj-95-vgk"/>
+                                    <action selector="photoDeleteButtonFiveTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="zt8-Uw-aKN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDP-Ll-k72">
@@ -1354,7 +1354,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="photoDeleteButtonOneTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="UpR-bk-Bvr"/>
+                                    <action selector="photoDeleteButtonOneTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="ruN-GL-kdi"/>
                                 </connections>
                             </button>
                         </subviews>

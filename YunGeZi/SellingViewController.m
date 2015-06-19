@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *numberButton;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) NSString *imageEncodedData_0;
 @property (strong, nonatomic) NSString *imageEncodedData_1;
 @property (strong, nonatomic) NSString *imageEncodedData_2;
 @property (strong, nonatomic) NSString *imageEncodedData_3;
@@ -40,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_2;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_3;
 @property (weak, nonatomic) IBOutlet UIButton *photoDeleteButton_4;
+@property (strong, nonatomic) NSString *photoUpLoadID_0;
 @property (strong, nonatomic) NSString *photoUpLoadID_1;
 @property (strong, nonatomic) NSString *photoUpLoadID_2;
 @property (strong, nonatomic) NSString *photoUpLoadID_3;
@@ -100,18 +102,22 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         image = info[UIImagePickerControllerOriginalImage];
     switch (self.photoNumber) {
         case 0:
+            self.photoView_0.imageView.image = image;
+            self.imageEncodedData_0 = [UIImageJPEGRepresentation(self.photoView_0.imageView.image, 0.0) base64EncodedStringWithOptions:0];
+            break;
+        case 1:
             self.photoView_1.imageView.image = image;
             self.imageEncodedData_1 = [UIImageJPEGRepresentation(self.photoView_1.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
-        case 1:
+        case 2:
             self.photoView_2.imageView.image = image;
             self.imageEncodedData_2 = [UIImageJPEGRepresentation(self.photoView_2.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
-        case 2:
+        case 3:
             self.photoView_3.imageView.image = image;
             self.imageEncodedData_3 = [UIImageJPEGRepresentation(self.photoView_3.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
-        case 3:
+        case 4:
             self.photoView_4.imageView.image = image;
             self.imageEncodedData_4 = [UIImageJPEGRepresentation(self.photoView_4.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
@@ -119,6 +125,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             break;
     }
     self.photoNumber++;
+    [self refreshPhotoIcon];
     [self refreshDeleteIcon];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -208,24 +215,28 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 - (void)uploadPhoto {
     if (self.photoNumber >= 1)
-        self.photoUpLoadID_1 = [self getImageID:self.imageEncodedData_1];
+        self.photoUpLoadID_0 = [self getImageID:self.imageEncodedData_0];
     if (self.photoNumber >= 2)
-        self.photoUpLoadID_2 = [self getImageID:self.imageEncodedData_2];
+        self.photoUpLoadID_1 = [self getImageID:self.imageEncodedData_1];
     if (self.photoNumber >= 3)
-        self.photoUpLoadID_3 = [self getImageID:self.imageEncodedData_3];
+        self.photoUpLoadID_2 = [self getImageID:self.imageEncodedData_2];
     if (self.photoNumber >= 4)
+        self.photoUpLoadID_3 = [self getImageID:self.imageEncodedData_3];
+    if (self.photoNumber >= 5)
         self.photoUpLoadID_4 = [self getImageID:self.imageEncodedData_4];
 }
 
 - (NSString *)imageJsonArray {
     NSMutableString *tmp = [[NSMutableString alloc] initWithString:@"["];
-    if (self.photoNumber >= 1 && ![self.photoUpLoadID_1  isEqual: @""])
-        [tmp appendString:[[NSString alloc] initWithFormat:@"{\"imageid\":\"%@\"}", self.photoUpLoadID_1]];
-    if (self.photoNumber >= 2 && ![self.photoUpLoadID_2  isEqual: @""])
+    if (self.photoNumber >= 1 && ![self.photoUpLoadID_0  isEqual: @""])
+        [tmp appendString:[[NSString alloc] initWithFormat:@"{\"imageid\":\"%@\"}", self.photoUpLoadID_0]];
+    if (self.photoNumber >= 2 && ![self.photoUpLoadID_1  isEqual: @""])
+        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_1]];
+    if (self.photoNumber >= 3 && ![self.photoUpLoadID_2  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_2]];
-    if (self.photoNumber >= 3 && ![self.photoUpLoadID_3  isEqual: @""])
+    if (self.photoNumber >= 4 && ![self.photoUpLoadID_3  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_3]];
-    if (self.photoNumber >= 4 && ![self.photoUpLoadID_4  isEqual: @""])
+    if (self.photoNumber >= 5 && ![self.photoUpLoadID_4  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_4]];
     [tmp appendString:@"]"];
     NSLog(@"%@", tmp);
@@ -277,7 +288,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
-    if (self.photoNumber == 4) {
+    if (self.photoNumber == 5) {
         [self popAlert:@"图片数量超限" withMessage:@"哇您好像已经为您的宝贝照了很多照片啦~"];
     } else
         [self takePhoto];
@@ -488,6 +499,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initObjectAttribute];
+    [self refreshPhotoIcon];
+    [self refreshDeleteIcon];
     [self initTxetViewWithPlaceholder];
     [self prepareTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
@@ -784,19 +797,44 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 }
 
 - (void)refreshDeleteIcon {
+    self.photoDeleteButton_0.hidden = true;
     self.photoDeleteButton_1.hidden = true;
     self.photoDeleteButton_2.hidden = true;
     self.photoDeleteButton_3.hidden = true;
     self.photoDeleteButton_4.hidden = true;
     switch (self.photoNumber) {
-        case 4:
+        case 5:
             self.photoDeleteButton_4.hidden = false;
-        case 3:
+        case 4:
             self.photoDeleteButton_3.hidden = false;
-        case 2:
+        case 3:
             self.photoDeleteButton_2.hidden = false;
-        case 1:
+        case 2:
             self.photoDeleteButton_1.hidden = false;
+        case 1:
+            self.photoDeleteButton_0.hidden = false;
+        default:
+            break;
+    }
+}
+
+- (void)refreshPhotoIcon {
+    self.photoView_0.hidden = true;
+    self.photoView_1.hidden = true;
+    self.photoView_2.hidden = true;
+    self.photoView_3.hidden = true;
+    self.photoView_4.hidden = true;
+    switch (self.photoNumber) {
+        case 4:
+            self.photoView_4.hidden = false;
+        case 3:
+            self.photoView_3.hidden = false;
+        case 2:
+            self.photoView_2.hidden = false;
+        case 1:
+            self.photoView_1.hidden = false;
+        case 0:
+            self.photoView_0.hidden = false;
         default:
             break;
     }
@@ -834,6 +872,14 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         return;
 }
 
+- (IBAction)photoDeleteButtonFiveTouchUpInside:(UIButton *)sender {
+    if (self.photoNumber >= 5) {
+        self.photoWhichShouldDelete = 5;
+        [self popDeleteAlert:@"删除照片" withMessage:@"您确定要删除这张照片吗？"];
+    } else
+        return;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"我要卖"];
@@ -853,63 +899,116 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         switch (self.photoWhichShouldDelete) {
             case 1:
                 if (self.photoNumber == 1) {
-                    self.photoView_1.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.photoView_0.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_0 = nil;
                 }
                 if (self.photoNumber == 2) {
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
-                    self.imageEncodedData_1 = self.imageEncodedData_2;
+                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
+                    self.photoView_1.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_0 = self.imageEncodedData_1;
+                    self.imageEncodedData_1 = nil;
                 }
                 if (self.photoNumber == 3) {
+                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
+                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
+                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_0 = self.imageEncodedData_1;
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
+                    self.imageEncodedData_2 = nil;
+                }
+                if (self.photoNumber == 4) {
+                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
                     self.photoView_1.imageView.image = self.photoView_2.imageView.image;
                     self.photoView_2.imageView.image = self.photoView_3.imageView.image;
                     self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_0 = self.imageEncodedData_1;
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
+                    self.imageEncodedData_3 = nil;
                 }
-                if (self.photoNumber == 4) {
+                if (self.photoNumber == 5) {
+                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
                     self.photoView_1.imageView.image = self.photoView_2.imageView.image;
                     self.photoView_2.imageView.image = self.photoView_3.imageView.image;
                     self.photoView_3.imageView.image = self.photoView_4.imageView.image;
                     self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_0 = self.imageEncodedData_1;
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = self.imageEncodedData_4;
+                    self.imageEncodedData_4 = nil;
                 }
                 break;
 
             case 2:
                 if (self.photoNumber == 2) {
-                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.photoView_1.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = nil;
                 }
                 if (self.photoNumber == 3) {
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
-                    self.imageEncodedData_2 = self.imageEncodedData_3;
+                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
+                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
+                    self.imageEncodedData_2 = nil;
                 }
                 if (self.photoNumber == 4) {
+                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
+                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
+                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
+                    self.imageEncodedData_3 = nil;
+                }
+                if (self.photoNumber == 5) {
+                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
                     self.photoView_2.imageView.image = self.photoView_3.imageView.image;
                     self.photoView_3.imageView.image = self.photoView_4.imageView.image;
                     self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = self.imageEncodedData_4;
+                    self.imageEncodedData_4 = nil;
                 }
                 break;
 
             case 3:
                 if (self.photoNumber == 3) {
-                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_2 = nil;
                 }
                 if (self.photoNumber == 4) {
+                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
+                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
+                    self.imageEncodedData_3 = nil;
+                }
+                if (self.photoNumber == 5) {
+                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
                     self.photoView_3.imageView.image = self.photoView_4.imageView.image;
                     self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = self.imageEncodedData_4;
+                    self.imageEncodedData_4 = nil;
                 }
                 break;
 
             case 4:
                 if (self.photoNumber == 4) {
+                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_3 = nil;
+                }
+                if (self.photoNumber == 5) {
+                    self.photoView_3.imageView.image = self.photoView_4.imageView.image;
                     self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_3 = self.imageEncodedData_4;
+                    self.imageEncodedData_4 = nil;
+                }
+                break;
+
+            case 5:
+                if (self.photoNumber == 5) {
+                    self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    self.imageEncodedData_4 = nil;
                 }
                 break;
 
@@ -918,6 +1017,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         }
         self.photoWhichShouldDelete = 0;
         self.photoNumber--;
+        [self refreshPhotoIcon];
         [self refreshDeleteIcon];
     }
 }
