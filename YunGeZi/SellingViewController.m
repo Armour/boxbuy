@@ -102,23 +102,23 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         image = info[UIImagePickerControllerOriginalImage];
     switch (self.photoNumber) {
         case 0:
-            self.photoView_0.imageView.image = image;
+            [self.photoView_0 setBackgroundImage:image forState:UIControlStateDisabled];
             self.imageEncodedData_0 = [UIImageJPEGRepresentation(self.photoView_0.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 1:
-            self.photoView_1.imageView.image = image;
+            [self.photoView_1 setBackgroundImage:image forState:UIControlStateDisabled];
             self.imageEncodedData_1 = [UIImageJPEGRepresentation(self.photoView_1.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 2:
-            self.photoView_2.imageView.image = image;
+            [self.photoView_2 setBackgroundImage:image forState:UIControlStateDisabled];
             self.imageEncodedData_2 = [UIImageJPEGRepresentation(self.photoView_2.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 3:
-            self.photoView_3.imageView.image = image;
+            [self.photoView_3 setBackgroundImage:image forState:UIControlStateDisabled];
             self.imageEncodedData_3 = [UIImageJPEGRepresentation(self.photoView_3.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         case 4:
-            self.photoView_4.imageView.image = image;
+            [self.photoView_4 setBackgroundImage:image forState:UIControlStateDisabled];
             self.imageEncodedData_4 = [UIImageJPEGRepresentation(self.photoView_4.imageView.image, 0.0) base64EncodedStringWithOptions:0];
             break;
         default:
@@ -334,7 +334,14 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
     self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
     self.dict = [[NSMutableDictionary alloc] init];
+    [self.photoView_0 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_1 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_2 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_3 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_4 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self getSchools];
+    [self refreshPhotoIcon];
+    [self refreshDeleteIcon];
     // 成色程度
     [self.dict setValue:@"100" forKey:@"全新"];
     [self.dict setValue:@"95" forKey:@"九五新"];
@@ -499,8 +506,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initObjectAttribute];
-    [self refreshPhotoIcon];
-    [self refreshDeleteIcon];
     [self initTxetViewWithPlaceholder];
     [self prepareTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
@@ -824,15 +829,26 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     self.photoView_2.hidden = true;
     self.photoView_3.hidden = true;
     self.photoView_4.hidden = true;
+    self.photoView_0.enabled = true;
+    self.photoView_1.enabled = true;
+    self.photoView_2.enabled = true;
+    self.photoView_3.enabled = true;
+    self.photoView_4.enabled = true;
     switch (self.photoNumber) {
+        case 5:
+            self.photoView_4.enabled = false;
         case 4:
             self.photoView_4.hidden = false;
+            self.photoView_3.enabled = false;
         case 3:
             self.photoView_3.hidden = false;
+            self.photoView_2.enabled = false;
         case 2:
             self.photoView_2.hidden = false;
+            self.photoView_1.enabled = false;
         case 1:
             self.photoView_1.hidden = false;
+            self.photoView_0.enabled = false;
         case 0:
             self.photoView_0.hidden = false;
         default:
@@ -899,39 +915,34 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         switch (self.photoWhichShouldDelete) {
             case 1:
                 if (self.photoNumber == 1) {
-                    self.photoView_0.imageView.image = [UIImage imageNamed:@"takePhoto"];
                     self.imageEncodedData_0 = nil;
                 }
                 if (self.photoNumber == 2) {
-                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
-                    self.photoView_1.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_0 setBackgroundImage:[self.photoView_1 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_0 = self.imageEncodedData_1;
                     self.imageEncodedData_1 = nil;
                 }
                 if (self.photoNumber == 3) {
-                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_0 setBackgroundImage:[self.photoView_1 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_1 setBackgroundImage:[self.photoView_2 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_0 = self.imageEncodedData_1;
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = nil;
                 }
                 if (self.photoNumber == 4) {
-                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_0 setBackgroundImage:[self.photoView_1 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_1 setBackgroundImage:[self.photoView_2 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_2 setBackgroundImage:[self.photoView_3 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_0 = self.imageEncodedData_1;
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = nil;
                 }
                 if (self.photoNumber == 5) {
-                    self.photoView_0.imageView.image = self.photoView_1.imageView.image;
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = self.photoView_4.imageView.image;
-                    self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_0 setBackgroundImage:[self.photoView_1 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_1 setBackgroundImage:[self.photoView_2 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_2 setBackgroundImage:[self.photoView_3 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_3 setBackgroundImage:[self.photoView_4 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_0 = self.imageEncodedData_1;
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
@@ -942,28 +953,24 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
             case 2:
                 if (self.photoNumber == 2) {
-                    self.photoView_1.imageView.image = [UIImage imageNamed:@"takePhoto"];
                     self.imageEncodedData_1 = nil;
                 }
                 if (self.photoNumber == 3) {
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_1 setBackgroundImage:[self.photoView_2 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = nil;
                 }
                 if (self.photoNumber == 4) {
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_1 setBackgroundImage:[self.photoView_2 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_2 setBackgroundImage:[self.photoView_3 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = nil;
                 }
                 if (self.photoNumber == 5) {
-                    self.photoView_1.imageView.image = self.photoView_2.imageView.image;
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = self.photoView_4.imageView.image;
-                    self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_1 setBackgroundImage:[self.photoView_2 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_2 setBackgroundImage:[self.photoView_3 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_3 setBackgroundImage:[self.photoView_4 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_1 = self.imageEncodedData_2;
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = self.imageEncodedData_4;
@@ -973,19 +980,16 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
             case 3:
                 if (self.photoNumber == 3) {
-                    self.photoView_2.imageView.image = [UIImage imageNamed:@"takePhoto"];
                     self.imageEncodedData_2 = nil;
                 }
                 if (self.photoNumber == 4) {
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_2 setBackgroundImage:[self.photoView_3 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = nil;
                 }
                 if (self.photoNumber == 5) {
-                    self.photoView_2.imageView.image = self.photoView_3.imageView.image;
-                    self.photoView_3.imageView.image = self.photoView_4.imageView.image;
-                    self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_2 setBackgroundImage:[self.photoView_3 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+                    [self.photoView_3 setBackgroundImage:[self.photoView_4 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_2 = self.imageEncodedData_3;
                     self.imageEncodedData_3 = self.imageEncodedData_4;
                     self.imageEncodedData_4 = nil;
@@ -994,12 +998,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
             case 4:
                 if (self.photoNumber == 4) {
-                    self.photoView_3.imageView.image = [UIImage imageNamed:@"takePhoto"];
                     self.imageEncodedData_3 = nil;
                 }
                 if (self.photoNumber == 5) {
-                    self.photoView_3.imageView.image = self.photoView_4.imageView.image;
-                    self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
+                    [self.photoView_3 setBackgroundImage:[self.photoView_4 backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
                     self.imageEncodedData_3 = self.imageEncodedData_4;
                     self.imageEncodedData_4 = nil;
                 }
@@ -1007,7 +1009,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
             case 5:
                 if (self.photoNumber == 5) {
-                    self.photoView_4.imageView.image = [UIImage imageNamed:@"takePhoto"];
                     self.imageEncodedData_4 = nil;
                 }
                 break;
