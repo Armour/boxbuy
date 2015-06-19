@@ -103,23 +103,23 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     switch (self.photoNumber) {
         case 0:
             [self.photoView_0 setBackgroundImage:image forState:UIControlStateDisabled];
-            self.imageEncodedData_0 = [UIImageJPEGRepresentation(self.photoView_0.imageView.image, 0.0) base64EncodedStringWithOptions:0];
+            self.imageEncodedData_0 = [UIImageJPEGRepresentation([self.photoView_0 backgroundImageForState:UIControlStateDisabled], 0.0) base64EncodedStringWithOptions:0];
             break;
         case 1:
             [self.photoView_1 setBackgroundImage:image forState:UIControlStateDisabled];
-            self.imageEncodedData_1 = [UIImageJPEGRepresentation(self.photoView_1.imageView.image, 0.0) base64EncodedStringWithOptions:0];
+            self.imageEncodedData_1 = [UIImageJPEGRepresentation([self.photoView_1 backgroundImageForState:UIControlStateDisabled], 0.0) base64EncodedStringWithOptions:0];
             break;
         case 2:
             [self.photoView_2 setBackgroundImage:image forState:UIControlStateDisabled];
-            self.imageEncodedData_2 = [UIImageJPEGRepresentation(self.photoView_2.imageView.image, 0.0) base64EncodedStringWithOptions:0];
+            self.imageEncodedData_2 = [UIImageJPEGRepresentation([self.photoView_2 backgroundImageForState:UIControlStateDisabled], 0.0) base64EncodedStringWithOptions:0];
             break;
         case 3:
             [self.photoView_3 setBackgroundImage:image forState:UIControlStateDisabled];
-            self.imageEncodedData_3 = [UIImageJPEGRepresentation(self.photoView_3.imageView.image, 0.0) base64EncodedStringWithOptions:0];
+            self.imageEncodedData_3 = [UIImageJPEGRepresentation([self.photoView_3 backgroundImageForState:UIControlStateDisabled], 0.0) base64EncodedStringWithOptions:0];
             break;
         case 4:
             [self.photoView_4 setBackgroundImage:image forState:UIControlStateDisabled];
-            self.imageEncodedData_4 = [UIImageJPEGRepresentation(self.photoView_4.imageView.image, 0.0) base64EncodedStringWithOptions:0];
+            self.imageEncodedData_4 = [UIImageJPEGRepresentation([self.photoView_4 backgroundImageForState:UIControlStateDisabled], 0.0) base64EncodedStringWithOptions:0];
             break;
         default:
             break;
