@@ -249,34 +249,50 @@
 }
 
 - (void)uploadItem {
+    [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
-    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
-    [itemDict setObject:tab.access_token forKey:@"access_token"];
-    [itemDict setObject:self.objectName forKey:@"title"];
-    [itemDict setObject:[self handlePrice: self.objectPrice] forKey:@"price"];
-    [itemDict setObject:self.objectNumber forKey:@"amount"];
-    [itemDict setObject:self.dict[self.objectQuality] forKey:@"degree"];
-    [itemDict setObject:self.objectContent forKey:@"content"];
-    [itemDict setObject:self.dict[self.objectLocation] forKey:@"location"];
-    [itemDict setObject:self.dict[self.objectCategory] forKey:@"classid"];
-    [itemDict setObject:@"1" forKey:@"payment"];
-    [itemDict setObject:@"1" forKey:@"transport"];
-    [itemDict setObject:self.photoUpLoadID_0 forKey:@"cover"];
-    [itemDict setObject:[self imageJsonArray] forKey:@"images"];
-    NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/addItem" andPostData:itemDict];
-    NSError *requestError = [[NSError alloc] init];
-    NSHTTPURLResponse *requestResponse;
-    NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
-    NSError *jsonError = nil;
-    NSLog(@"%@", requestResponse);
-    //if (requestHandler != nil) {
-        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:requestHandler
-                                                                 options:NSJSONReadingMutableContainers
-                                                                   error:&jsonError];
-        NSLog(@"Response with json ==> %@", jsonData);
-    //}
-    [self.activityIndicator stopAnimating];
+    dispatch_queue_t requestQueue = dispatch_queue_create("webRequestInUploadItem", NULL);
+    dispatch_async(requestQueue, ^{
+        @try {
+            MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
+            NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
+            [itemDict setObject:tab.access_token forKey:@"access_token"];
+            [itemDict setObject:self.objectName forKey:@"title"];
+            [itemDict setObject:[self handlePrice: self.objectPrice] forKey:@"price"];
+            [itemDict setObject:self.objectNumber forKey:@"amount"];
+            [itemDict setObject:self.dict[self.objectQuality] forKey:@"degree"];
+            [itemDict setObject:self.objectContent forKey:@"content"];
+            [itemDict setObject:self.dict[self.objectLocation] forKey:@"location"];
+            [itemDict setObject:self.dict[self.objectCategory] forKey:@"classid"];
+            [itemDict setObject:@"1" forKey:@"payment"];
+            [itemDict setObject:@"1" forKey:@"transport"];
+            [itemDict setObject:self.photoUpLoadID_0 forKey:@"cover"];
+            [itemDict setObject:[self imageJsonArray] forKey:@"images"];
+            NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/addItem" andPostData:itemDict];
+            NSError *requestError = [[NSError alloc] init];
+            NSHTTPURLResponse *requestResponse;
+            NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
+            NSError *jsonError = nil;
+            NSLog(@"%@", requestResponse);
+            //if (requestHandler != nil) {
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:requestHandler
+                                                                     options:NSJSONReadingMutableContainers
+                                                                       error:&jsonError];
+            NSLog(@"Response with json ==> %@", jsonData);
+            //}
+        }
+        @catch (NSException *exception) {
+            //NSLog(@"Exception: %@", exception);
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator setHidden:TRUE];
+            [self popAlert:@"上传失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator setHidden:TRUE];
+            [self popAlert:@"上传成功" withMessage:@"刷新吧少年！"];
+        });
+    });
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
