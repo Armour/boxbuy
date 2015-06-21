@@ -228,15 +228,15 @@
 - (NSString *)imageJsonArray {
     NSMutableString *tmp = [[NSMutableString alloc] initWithString:@"["];
     if (self.photoNumber >= 1 && ![self.photoUpLoadID_0  isEqual: @""])
-        [tmp appendString:[[NSString alloc] initWithFormat:@"{\"imageid\":\"%@\"}", self.photoUpLoadID_0]];
+        [tmp appendString:[[NSString alloc] initWithFormat:@"%@", self.photoUpLoadID_0]];
     if (self.photoNumber >= 2 && ![self.photoUpLoadID_1  isEqual: @""])
-        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_1]];
+        [tmp appendString:[[NSString alloc] initWithFormat:@",%@", self.photoUpLoadID_1]];
     if (self.photoNumber >= 3 && ![self.photoUpLoadID_2  isEqual: @""])
-        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_2]];
+        [tmp appendString:[[NSString alloc] initWithFormat:@",%@", self.photoUpLoadID_2]];
     if (self.photoNumber >= 4 && ![self.photoUpLoadID_3  isEqual: @""])
-        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_3]];
+        [tmp appendString:[[NSString alloc] initWithFormat:@",%@", self.photoUpLoadID_3]];
     if (self.photoNumber >= 5 && ![self.photoUpLoadID_4  isEqual: @""])
-        [tmp appendString:[[NSString alloc] initWithFormat:@",{\"imageid\":\"%@\"}", self.photoUpLoadID_4]];
+        [tmp appendString:[[NSString alloc] initWithFormat:@",%@", self.photoUpLoadID_4]];
     [tmp appendString:@"]"];
     NSLog(@"%@", tmp);
     return tmp;
@@ -249,8 +249,6 @@
 }
 
 - (void)uploadItem {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
     dispatch_queue_t requestQueue = dispatch_queue_create("webRequestInUploadItem", NULL);
     dispatch_async(requestQueue, ^{
         @try {
@@ -290,7 +288,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
-            [self popAlert:@"上传成功" withMessage:@"刷新吧少年！"];
+            [self initObjectAttribute];
+            [self popAlert:@"上传成功" withMessage:@"快去看看您的商品吧!（记得下拉刷新哦~）"];
         });
     });
 }
@@ -341,16 +340,26 @@
     self.objectPrice = @"";
     self.objectQuality = @"请选择";
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
+    self.objectNameTextView.textColor = [UIColor lightGrayColor];
     self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
-    self.dict = [[NSMutableDictionary alloc] init];
+    self.objectContentTextView.textColor = [UIColor lightGrayColor];
     [self.photoView_0 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self.photoView_1 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self.photoView_2 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self.photoView_3 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [self.photoView_4 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.categoryButton setTitle:@"    分类：请选择" forState:UIControlStateNormal];
+    [self.locationButton setTitle:@"    地点：请选择" forState:UIControlStateNormal];
+    [self.qualityButton setTitle:@"    成色：请选择" forState:UIControlStateNormal];
+    [self.numberButton setTitle:@"    数量：请选择" forState:UIControlStateNormal];
+    [self.priceTextField setText:@""];
     [self setSchoolID];
     [self refreshPhotoIcon];
     [self refreshDeleteIcon];
+}
+
+- (void)initDict {
+    self.dict = [[NSMutableDictionary alloc] init];
     // 成色程度
     [self.dict setValue:@"100" forKey:@"全新"];
     [self.dict setValue:@"95" forKey:@"九五新"];
@@ -514,6 +523,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initDict];
     [self initObjectAttribute];
     [self initTxetViewWithPlaceholder];
     [self prepareTextField];
@@ -808,9 +818,10 @@
 }
 
 - (void)publish {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
     [self uploadPhoto];
     [self uploadItem];
-    //[self performSegueWithIdentifier:@"publish" sender:self];
 }
 
 - (void)refreshDeleteIcon {
