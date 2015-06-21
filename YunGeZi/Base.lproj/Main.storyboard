@@ -308,6 +308,7 @@
                     <connections>
                         <outlet property="shopWebView" destination="RaS-sB-Xfo" id="oRc-N1-eNG"/>
                         <segue destination="3l7-Tc-WQP" kind="show" identifier="showDetailInShop" id="PLi-ry-FbB"/>
+                        <segue destination="el8-x4-WrI" kind="show" identifier="showVerificationInShop" id="Lwo-LW-fPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPi-qS-pNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1227,8 +1228,8 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="jnL-Yl-9Yj"/>
                                         <exclude reference="Cft-b4-fe1"/>
+                                        <exclude reference="jnL-Yl-9Yj"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1531,11 +1532,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="50" height="50"/>
+        <image name="close" width="128" height="128"/>
         <image name="logo" width="1278" height="1036"/>
-        <image name="takePhoto" width="296" height="296"/>
+        <image name="takePhoto" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6TJ-1G-zhD"/>
+        <segue reference="Lwo-LW-fPN"/>
     </inferredMetricsTieBreakers>
 </document>

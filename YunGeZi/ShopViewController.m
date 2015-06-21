@@ -49,9 +49,13 @@
 
 - (void)addWebViewBridge {
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:_shopWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        self.objectNumber = data;
-        [self performSegueWithIdentifier:@"showDetailInShop" sender:self];
-        responseCallback(self.objectNumber);
+        if ([data isEqualToString:@"auth"]) {
+            [self performSegueWithIdentifier:@"showVerificationInShop" sender:self];
+        } else {
+            self.objectNumber = data;
+            [self performSegueWithIdentifier:@"showDetailInShop" sender:self];
+        }
+        responseCallback(@"0");
     }];
 }
 

@@ -91,6 +91,7 @@
 
 - (void) handleVerifySchoolNotification: (NSNotification*) aNotification {
     [self getSchool];
+    NSLog(@"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 - (void)didReceiveMemoryWarning {

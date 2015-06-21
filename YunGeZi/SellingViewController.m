@@ -242,12 +242,19 @@
     return tmp;
 }
 
+- (NSString *)handlePrice:(NSString *)originalPrice {
+    float tmp = [originalPrice floatValue];
+    tmp *= 100;
+    return [[NSString alloc] initWithFormat:@"%f", tmp];
+}
+
 - (void)uploadItem {
+    [self.activityIndicator startAnimating];
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
     [itemDict setObject:tab.access_token forKey:@"access_token"];
     [itemDict setObject:self.objectName forKey:@"title"];
-    [itemDict setObject:self.objectPrice forKey:@"price"];
+    [itemDict setObject:[self handlePrice: self.objectPrice] forKey:@"price"];
     [itemDict setObject:self.objectNumber forKey:@"amount"];
     [itemDict setObject:self.dict[self.objectQuality] forKey:@"degree"];
     [itemDict setObject:self.objectContent forKey:@"content"];
@@ -256,20 +263,20 @@
     [itemDict setObject:@"1" forKey:@"payment"];
     [itemDict setObject:@"1" forKey:@"transport"];
     [itemDict setObject:self.photoUpLoadID_0 forKey:@"cover"];
-    [itemDict setObject:@"" forKey:@"EAN13"];
     [itemDict setObject:[self imageJsonArray] forKey:@"images"];
     NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://v2.api.boxbuy.cc/addItem" andPostData:itemDict];
     NSError *requestError = [[NSError alloc] init];
     NSHTTPURLResponse *requestResponse;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
     NSError *jsonError = nil;
-    if (requestHandler != nil) {
-        NSDictionary *jsonData = [NSJSONSerialization
-                                  JSONObjectWithData:requestHandler
-                                  options:NSJSONReadingMutableContainers
-                                  error:&jsonError];
+    NSLog(@"%@", requestResponse);
+    //if (requestHandler != nil) {
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:requestHandler
+                                                                 options:NSJSONReadingMutableContainers
+                                                                   error:&jsonError];
         NSLog(@"Response with json ==> %@", jsonData);
-    }
+    //}
+    [self.activityIndicator stopAnimating];
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
@@ -494,6 +501,7 @@
     [self initObjectAttribute];
     [self initTxetViewWithPlaceholder];
     [self prepareTextField];
+    [self addIndicator];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
 }
 
@@ -624,6 +632,8 @@
 }
 
 - (IBAction)chooseLocationButtonTouchUpInside:(UIButton *)sender {
+    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
+    self.school = tab.school_id;
     NSArray *option;
     // default  0
     if ([self.school isEqual: @"0"])
