@@ -249,9 +249,12 @@
 }
 
 - (void)uploadItem {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
     dispatch_queue_t requestQueue = dispatch_queue_create("webRequestInUploadItem", NULL);
     dispatch_async(requestQueue, ^{
         @try {
+            [self uploadPhoto];
             MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
             NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
             [itemDict setObject:tab.access_token forKey:@"access_token"];
@@ -292,6 +295,10 @@
             [self popAlert:@"上传成功" withMessage:@"快去看看您的商品吧!（记得下拉刷新哦~）"];
         });
     });
+}
+
+- (void)publish {
+    [self uploadItem];
 }
 
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
@@ -815,13 +822,6 @@
     } else {
         [self publish];
     }
-}
-
-- (void)publish {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    [self uploadPhoto];
-    [self uploadItem];
 }
 
 - (void)refreshDeleteIcon {
