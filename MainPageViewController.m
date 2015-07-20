@@ -126,6 +126,7 @@
         [_MainPageWebView reload];
         nav.shouldUpdateWebView = FALSE;
     }
+    [super viewDidAppear:animated];
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color

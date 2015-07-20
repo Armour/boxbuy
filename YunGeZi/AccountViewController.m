@@ -82,6 +82,7 @@
         [_AccountWebView reload];
         nav.shouldUpdateWebView = FALSE;
     }
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
