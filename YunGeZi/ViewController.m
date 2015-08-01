@@ -61,7 +61,7 @@ enum {
 }
 
 - (void)prepareMyButton {
-    [self.loginButton setBackgroundColor:[UIColor purpleColor]];
+    [self.loginButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
     self.loginButton.layer.cornerRadius = 10.0f;
 }
 

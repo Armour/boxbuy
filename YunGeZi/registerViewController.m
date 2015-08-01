@@ -9,67 +9,55 @@
 #import "registerViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface registerViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *registerWebView;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *captchaButton;
+@property (weak, nonatomic) IBOutlet UIButton *pcodeButton;
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSString *captcha;
+@property (strong, nonatomic) NSString *message;
 @property WebViewJavascriptBridge* bridge;
 
 @end
 
 @implementation registerViewController
 
-- (void)addIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setCenter:self.view.center];
-    [self.activityIndicator setHidesWhenStopped:TRUE];
-    [self.activityIndicator setHidden:YES];
-    [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
+- (NSString *)timeStamp {
+    return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
 }
 
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
+- (void)prepareMyButton {
+    [self.registerButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
+    self.registerButton.layer.cornerRadius = 10.0f;
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+- (void)refreshCaptcha {
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
+    [self.captchaButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]]] forState:UIControlStateNormal];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+- (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
+    [self refreshCaptcha];
 }
 
-- (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_registerWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {        if ([data isEqualToString:@"true"]) {
-        [self popAlert:@"注册账户" withMessage:@"注册成功~ =w="];
-        [self performSegueWithIdentifier:@"backToLoginFromRegister" sender:self];
-    } else if ([data isEqualToString:@"false"]) {
-        [self popAlert:@"注册账户" withMessage:@"注册失败..QAQ"];
-        [self performSegueWithIdentifier:@"backToLoginFromRegister" sender:self];
-    } else if ([data isEqualToString:@"back"]) {
-        [self performSegueWithIdentifier:@"backToLoginFromRegister" sender:self];
+/*- (BOOL)checkCaptcha {
+
+}
+
+- (IBAction)pcodeButtonTouchUpInside:(UIButton *)sender {
+    if (![self checkCaptcha]) {
+        [self popAlert:<#(NSString *)#> withMessage:<#(NSString *)#>];
     }
-        responseCallback(@"0.0");
-    }];
-}
-
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/register.html"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_registerWebView loadRequest:request];
-}
+}*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addWebViewBridge];
-    [self addIndicator];
-    [self loadWebViewRequest];
+    [self prepareMyButton];
+    [self refreshCaptcha];
 }
 
 - (void)didReceiveMemoryWarning {
