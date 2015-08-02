@@ -16,10 +16,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *captchaButton;
 @property (weak, nonatomic) IBOutlet UIButton *pcodeButton;
-@property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *password;
-@property (strong, nonatomic) NSString *captcha;
-@property (strong, nonatomic) NSString *message;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *captchaTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pcodeTextField;
 @property WebViewJavascriptBridge* bridge;
 
 @end
@@ -35,6 +35,25 @@
     self.registerButton.layer.cornerRadius = 10.0f;
 }
 
+- (BOOL)checkRegex:(NSString *)string withPattern:(NSString *)pattern {
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range:NSMakeRange(0, [string length])];
+    return match != nil;
+}
+
+- (BOOL)checkPhoneNumber {
+    return [self checkRegex:self.phoneTextField.text withPattern:@"[0-9]{11}"];
+}
+
+- (BOOL)checkPassword {
+    return [self checkRegex:self.passwordTextField.text withPattern:@"[\\S]{6,16}"];
+}
+
+- (BOOL)checkCaptcha {
+    return [self checkRegex:self.captchaTextField.text withPattern:@"[a-zA-Z0-9]{4}"];
+}
+
 - (void)refreshCaptcha {
     NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
     [self.captchaButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]]] forState:UIControlStateNormal];
@@ -44,15 +63,14 @@
     [self refreshCaptcha];
 }
 
-/*- (BOOL)checkCaptcha {
-
-}
-
 - (IBAction)pcodeButtonTouchUpInside:(UIButton *)sender {
-    if (![self checkCaptcha]) {
-        [self popAlert:<#(NSString *)#> withMessage:<#(NSString *)#>];
-    }
-}*/
+    if (![self checkPhoneNumber])
+        [self popAlert:@"格式错误" withMessage:@"手机号格式错误"];
+    else if (![self checkCaptcha])
+        [self popAlert:@"格式错误" withMessage:@"图片验证码格式错误"];
+    else if (![self checkPassword])
+        [self popAlert:@"格式错误" withMessage:@"密码格式错误"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

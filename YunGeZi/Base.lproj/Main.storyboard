@@ -84,12 +84,12 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入图片验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Zc-We-1di">
-                                <rect key="frame" x="83" y="243" width="221" height="30"/>
+                                <rect key="frame" x="83" y="243" width="136" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入短信验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RXg-ip-aEX">
-                                <rect key="frame" x="83" y="303" width="221" height="30"/>
+                                <rect key="frame" x="83" y="303" width="136" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -130,7 +130,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="captchaButton" destination="u4e-Sd-x4y" id="HXi-1U-xIK"/>
+                        <outlet property="captchaTextField" destination="3Zc-We-1di" id="qiW-42-azV"/>
+                        <outlet property="passwordTextField" destination="8gf-1A-Yuv" id="OlA-ER-cBt"/>
                         <outlet property="pcodeButton" destination="WrK-55-Uut" id="G37-l5-gtG"/>
+                        <outlet property="pcodeTextField" destination="RXg-ip-aEX" id="JSH-PV-T8U"/>
+                        <outlet property="phoneTextField" destination="gba-Sn-yH7" id="DCE-if-f68"/>
                         <outlet property="registerButton" destination="OVP-Mv-anj" id="ALd-4r-FKC"/>
                     </connections>
                 </viewController>
