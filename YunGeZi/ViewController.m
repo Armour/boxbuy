@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
 #import "MyTabBarController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "MobClick.h"
 
 @interface ViewController ()
@@ -23,6 +23,11 @@
 
 @implementation ViewController
 
+enum {
+    textUsernameTag = 0,
+    textPasswordTag = 1
+};
+
 @synthesize access_token = _access_token;
 
 - (NSString *)access_token {
@@ -36,13 +41,13 @@
     _access_token = access_token;
 }
 
-enum {
-    textUsernameTag = 0,
-    textPasswordTag
-};
-
 - (BOOL)shouldAutorotate {
     return false;
+}
+
+- (void)prepareMyButton {
+    [self.loginButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
+    self.loginButton.layer.cornerRadius = 10.0f;
 }
 
 - (void)prepareMyTextField {
@@ -60,9 +65,20 @@ enum {
     self.textPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
 }
 
-- (void)prepareMyButton {
-    [self.loginButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
-    self.loginButton.layer.cornerRadius = 10.0f;
+- (void)prepareMyIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyButton];
+    [self prepareMyTextField];
+    [self prepareMyIndicator];
 }
 
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
@@ -89,7 +105,6 @@ enum {
             NSError *requestError = [[NSError alloc] init];
             NSHTTPURLResponse *requestResponse;
             NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
-            //NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
 
             NSError *jsonError = nil;
             NSDictionary *jsonData = [NSJSONSerialization
@@ -105,7 +120,6 @@ enum {
             status = [jsonData[@"err"] integerValue];
         }
         @catch (NSException *exception) {
-            //NSLog(@"Exception: %@", exception);
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
             [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
@@ -124,28 +138,11 @@ enum {
     });
 }
 
-- (void)addIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setCenter:self.view.center];
-    [self.activityIndicator setHidesWhenStopped:TRUE];
-    [self.activityIndicator setHidden:YES];
-    [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self addIndicator];
-    [self prepareMyButton];
-    [self prepareMyTextField];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     switch (textField.tag) {
         case textUsernameTag:
             self.textUsername.layer.borderColor = [[UIColor colorWithRed:0 green:204 blue:100 alpha:1] CGColor];
@@ -159,7 +156,7 @@ enum {
     return YES;
 }
 
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     switch (textField.tag) {
         case textUsernameTag:
             self.textUsername.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -167,7 +164,6 @@ enum {
         case textPasswordTag:
             self.textPassword.layer.borderColor = [[UIColor lightGrayColor] CGColor];
             break;
-
         default:
             break;
     }
@@ -192,7 +188,7 @@ enum {
     }
 }
 
-- (void) popAlert:(NSString *)title withMessage:(NSString *)message {
+- (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                      message:message
                                                     delegate:self
@@ -201,14 +197,12 @@ enum {
     [alert show];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"登录界面"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"登录界面"];
 }

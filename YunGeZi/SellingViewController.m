@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "SellingViewController.h"
-#import "MyTabBarController.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
-#import "MobClick.h"
+#import "MyTabBarController.h"
+#import "SellingViewController.h"
+#import "SellingEnsureViewController.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetCustomPicker.h"
 #import "ActionSheetPickerCustomPickerDelegate.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "SellingEnsureViewController.h"
+#import "MobClick.h"
 
 @interface SellingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
@@ -54,6 +53,7 @@
 - (NSString *)randomStringWithLength:(int)len;
 
 @end
+
 
 @implementation SellingViewController
 
@@ -95,7 +95,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = info[UIImagePickerControllerEditedImage];
     if (!image)
         image = info[UIImagePickerControllerOriginalImage];
@@ -129,31 +129,22 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)addIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setCenter:self.view.center];
-    [self.activityIndicator setHidesWhenStopped:TRUE];
-    [self.activityIndicator setHidden:YES];
-    [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
-}
-
 - (NSMutableURLRequest *)createURLRequestWithURL:(NSString *)URL andPostData:(NSMutableDictionary *)postDictionary {
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
     NSMutableData *postData = [NSMutableData data];
     NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSMutableString * wa = [[NSMutableString alloc] init];
+    NSMutableString * postStr = [[NSMutableString alloc] init];
     //convert post distionary into a string
     if (postDictionary) {
         for (NSString *key in postDictionary) {
             [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [wa appendFormat:@"\r\n--%@\r\n", boundary];
+            [postStr appendFormat:@"\r\n--%@\r\n", boundary];
             id postValue = [postDictionary valueForKey:key];
             if ([postValue isKindOfClass:[NSString class]]) {
                 [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
-                [wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
-                [wa appendFormat:@"%@", postValue];
+                [postStr appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                [postStr appendFormat:@"%@", postValue];
                 //NSLog(@"!!!%@ %@", key, postValue);
             } else if ([postValue isKindOfClass:[UIImage class]]) {
                 NSString *tmpStr = [self randomStringWithLength:18];
@@ -162,17 +153,17 @@
                 [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
 
-                [wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
-                [wa appendFormat:@"Content-Type: image/jpeg\r\n"];
-                [wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
-                [wa appendString:@"!!!Image Data Here!!!"];
+                [postStr appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                [postStr appendFormat:@"Content-Type: image/jpeg\r\n"];
+                [postStr appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                [postStr appendString:@"!!!Image Data Here!!!"];
                 //NSLog(@">.<%@ %@", key, postValue);
             } else {
                 [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
             }
         }
         [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [wa appendFormat:@"\r\n--%@--\r\n", boundary];
+        [postStr appendFormat:@"\r\n--%@--\r\n", boundary];
     }
 
     //setup the request
@@ -182,7 +173,7 @@
     [urlRequest setHTTPBody:postData];
 
     NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
-    NSLog(@"%@", wa);
+    NSLog(@"%@", postStr);
 
     return urlRequest;
 }
@@ -195,7 +186,6 @@
     [imageDict setObject:tmpRandom forKey:@"fileElementName"];
     [imageDict setObject:encodedData forKey:tmpRandom];
     NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://img.boxbuy.cc/images/add" andPostData:imageDict];
-    //建立连接，设置代理
     NSError *requestError = [[NSError alloc] init];
     NSHTTPURLResponse *requestResponse;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
@@ -283,7 +273,6 @@
             //}
         }
         @catch (NSException *exception) {
-            //NSLog(@"Exception: %@", exception);
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
             [self popAlert:@"上传失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
@@ -297,22 +286,8 @@
     });
 }
 
-- (void)publish {
-    [self uploadItem];
-}
-
 - (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
     [self.view endEditing:YES];
-}
-
-- (void)initTxetViewWithPlaceholder {
-    self.objectNameTextView.delegate = self;
-    self.objectContentTextView.delegate = self;
-    self.objectNameTextView.text = @"给宝贝起个名字吧~";
-    self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
-    self.objectNameTextView.textColor = [UIColor lightGrayColor];
-    self.objectContentTextView.textColor = [UIColor lightGrayColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
@@ -322,47 +297,10 @@
         [self takePhoto];
 }
 
-- (void)prepareTextField {
-    self.priceTextField.delegate = self;
-}
-
 - (void)setSchoolID {
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     [tab getSchool];
     self.school = tab.school_id;
-}
-
-- (void)initObjectAttribute {
-    self.letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";       // used to generate random name of image
-    self.school = @"0";
-    self.photoNumber = 0;
-    self.photoWhichShouldDelete = 0;
-    self.photoDeleteButton_1.hidden = true;
-    self.photoDeleteButton_2.hidden = true;
-    self.photoDeleteButton_3.hidden = true;
-    self.photoDeleteButton_4.hidden = true;
-    self.objectCategory = @"请选择";
-    self.objectLocation = @"请选择";
-    self.objectNumber = @"请选择";
-    self.objectPrice = @"";
-    self.objectQuality = @"请选择";
-    self.objectNameTextView.text = @"给宝贝起个名字吧~";
-    self.objectNameTextView.textColor = [UIColor lightGrayColor];
-    self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
-    self.objectContentTextView.textColor = [UIColor lightGrayColor];
-    [self.photoView_0 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
-    [self.photoView_1 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
-    [self.photoView_2 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
-    [self.photoView_3 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
-    [self.photoView_4 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
-    [self.categoryButton setTitle:@"    分类：请选择" forState:UIControlStateNormal];
-    [self.locationButton setTitle:@"    地点：请选择" forState:UIControlStateNormal];
-    [self.qualityButton setTitle:@"    成色：请选择" forState:UIControlStateNormal];
-    [self.numberButton setTitle:@"    数量：请选择" forState:UIControlStateNormal];
-    [self.priceTextField setText:@""];
-    [self setSchoolID];
-    [self refreshPhotoIcon];
-    [self refreshDeleteIcon];
 }
 
 - (void)initDict {
@@ -528,14 +466,74 @@
     [self.dict setValue:@"3104" forKey:@"交通工具(汽车)"];
 }
 
+- (void)initObjectAttribute {
+    self.letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";       // used to generate random name of image
+    self.school = @"0";
+    self.photoNumber = 0;
+    self.photoWhichShouldDelete = 0;
+    self.photoDeleteButton_1.hidden = true;
+    self.photoDeleteButton_2.hidden = true;
+    self.photoDeleteButton_3.hidden = true;
+    self.photoDeleteButton_4.hidden = true;
+    self.objectCategory = @"请选择";
+    self.objectLocation = @"请选择";
+    self.objectNumber = @"请选择";
+    self.objectPrice = @"";
+    self.objectQuality = @"请选择";
+    self.objectNameTextView.text = @"给宝贝起个名字吧~";
+    self.objectNameTextView.textColor = [UIColor lightGrayColor];
+    self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
+    self.objectContentTextView.textColor = [UIColor lightGrayColor];
+    [self.photoView_0 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_1 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_2 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_3 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.photoView_4 setBackgroundImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
+    [self.categoryButton setTitle:@"    分类：请选择" forState:UIControlStateNormal];
+    [self.locationButton setTitle:@"    地点：请选择" forState:UIControlStateNormal];
+    [self.qualityButton setTitle:@"    成色：请选择" forState:UIControlStateNormal];
+    [self.numberButton setTitle:@"    数量：请选择" forState:UIControlStateNormal];
+    [self.priceTextField setText:@""];
+    [self setSchoolID];
+    [self refreshPhotoIcon];
+    [self refreshDeleteIcon];
+}
+
+- (void)prepareMyTxetView {
+    self.objectNameTextView.delegate = self;
+    self.objectContentTextView.delegate = self;
+    self.objectNameTextView.text = @"给宝贝起个名字吧~";
+    self.objectContentTextView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
+    self.objectNameTextView.textColor = [UIColor lightGrayColor];
+    self.objectContentTextView.textColor = [UIColor lightGrayColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)prepareMyTextField {
+    self.priceTextField.delegate = self;
+}
+
+- (void)prepareMyIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initDict];
     [self initObjectAttribute];
-    [self initTxetViewWithPlaceholder];
-    [self prepareTextField];
-    [self addIndicator];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
+    [self prepareMyTxetView];
+    [self prepareMyTextField];
+    [self prepareMyIndicator];
+    [self prepareMyNotification];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -571,9 +569,8 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField.tag == 7) {
+    if (textField.tag == 7)
         [textField resignFirstResponder];
-    }
     return YES;
 }
 
@@ -634,18 +631,17 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (textView.tag == 5) {
+    if (textView.tag == 5)
         if ([text isEqualToString:@"\n"]) {
             [textView resignFirstResponder];
             return NO;
         }
-    }
     return YES;
 }
 
-- (void) handleCategorySelection: (NSNotification*) aNotification {
+- (void)handleCategorySelection:(NSNotification*) noti {
     NSDictionary *dict = [[NSDictionary alloc] init];
-    dict = [aNotification userInfo];
+    dict = [noti userInfo];
     NSString *tmp = [[NSString alloc] initWithFormat:@"%@(%@)", dict[@"0"], dict[@"1"]];
     self.objectCategory = tmp;
     [self.categoryButton setTitle:[NSString stringWithFormat:@"    类别：%@", tmp] forState:UIControlStateNormal];
@@ -654,9 +650,9 @@
 - (IBAction)chooseCategoryButtonTouchUpInside:(UIButton *)sender {
     [self.view endEditing:YES];
     ActionSheetPickerCustomPickerDelegate *delg = [[ActionSheetPickerCustomPickerDelegate alloc] init];
-    NSNumber *yass1 = @0;
-    NSNumber *yass2 = @0;
-    NSArray *initialSelections = @[yass1, yass2];
+    NSNumber *init1 = @0;
+    NSNumber *init2 = @0;
+    NSArray *initialSelections = @[init1, init2];
     [ActionSheetCustomPicker showPickerWithTitle:@"选择类别"
                                         delegate:delg
                                 showCancelButton:YES
@@ -787,10 +783,8 @@
                 flag = false;
         }
     }
-    //NSLog(@"%d %d",flag, dot);
-    if (!flag) {
+    if (!flag)
         [self popAlert:@"信息不完整" withMessage:@"哇您的价格好像填错啦。。\n (最多精确到小数点后一位哦)"];
-    }
     return flag;
 }
 
@@ -820,7 +814,7 @@
     } else if (self.photoNumber == 0) {
         [self popAlert:@"未上传图片" withMessage:@"为您的宝贝拍几张照片吧~"];
     } else {
-        [self publish];
+        [self uploadItem];
     }
 }
 
@@ -929,7 +923,7 @@
     [MobClick endLogPageView:@"我要卖"];
 }
 
--(void)dealloc {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -1046,7 +1040,7 @@
     }
 }
 
-- (void) popAlert:(NSString *)title withMessage:(NSString *)message {
+- (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
@@ -1055,7 +1049,7 @@
     [alert show];
 }
 
-- (void) popDeleteAlert:(NSString *)title withMessage:(NSString *)message {
+- (void)popDeleteAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:self
@@ -1064,6 +1058,7 @@
     [alert show];
 }
 
+/* we do not need ensure in version 1
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     if([segue.identifier isEqualToString:@"publish"]){
@@ -1083,5 +1078,6 @@
         [controller setImage_id_4:self.photoUpLoadID_4];
     }
 }
+*/
 
 @end

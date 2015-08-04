@@ -18,6 +18,7 @@
 
 @end
 
+
 @implementation MyTabBarController
 
 @synthesize access_token = _access_token;
@@ -89,14 +90,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleVerifySchoolNotification:) name:@"VerifySchoolSuccessful" object:nil];
 }
 
-- (void) handleVerifySchoolNotification: (NSNotification*) aNotification {
+- (void)handleVerifySchoolNotification: (NSNotification*) aNotification {
     [self getSchool];
-    NSLog(@"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSString *)randomStringWithLength:(int)len {
@@ -111,18 +110,18 @@
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
     NSMutableData *postData = [NSMutableData data];
     NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSMutableString * wa = [[NSMutableString alloc] init];
+    NSMutableString * postStr = [[NSMutableString alloc] init];
     //convert post distionary into a string
     if (postDictionary) {
         for (NSString *key in postDictionary) {
             [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [wa appendFormat:@"\r\n--%@\r\n", boundary];
+            [postStr appendFormat:@"\r\n--%@\r\n", boundary];
             id postValue = [postDictionary valueForKey:key];
             if ([postValue isKindOfClass:[NSString class]]) {
                 [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
-                [wa appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
-                [wa appendFormat:@"%@", postValue];
+                [postStr appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                [postStr appendFormat:@"%@", postValue];
                 //NSLog(@"!!!%@ %@", key, postValue);
             } else if ([postValue isKindOfClass:[UIImage class]]) {
                 NSString *tmpStr = [self randomStringWithLength:18];
@@ -131,17 +130,17 @@
                 [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
 
-                [wa appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
-                [wa appendFormat:@"Content-Type: image/jpeg\r\n"];
-                [wa appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
-                [wa appendString:@"!!!Image Data Here!!!"];
+                [postStr appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                [postStr appendFormat:@"Content-Type: image/jpeg\r\n"];
+                [postStr appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                [postStr appendString:@"!!!Image Data Here!!!"];
                 //NSLog(@">.<%@ %@", key, postValue);
             } else {
                 [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
             }
         }
         [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [wa appendFormat:@"\r\n--%@--\r\n", boundary];
+        [postStr appendFormat:@"\r\n--%@--\r\n", boundary];
     }
 
     //setup the request
@@ -151,7 +150,7 @@
     [urlRequest setHTTPBody:postData];
 
     NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
-    NSLog(@"%@", wa);
+    NSLog(@"%@", postStr);
 
     return urlRequest;
 }

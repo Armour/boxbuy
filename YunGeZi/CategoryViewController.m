@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "CategoryViewController.h"
 #import "MyTabBarController.h"
+#import "CategoryViewController.h"
+#import "CategoryDetailViewController.h"
 #import "SearchInCategoryViewController.h"
 #import "WebViewJavascriptBridge.h"
-#import "CategoryDetailViewController.h"
 #import "MobClick.h"
 
 @interface CategoryViewController ()
@@ -23,6 +23,7 @@
 @property WebViewJavascriptBridge* bridge;
 
 @end
+
 
 @implementation CategoryViewController
 
@@ -39,56 +40,26 @@
     _searchQuery = searchQuery;
 }
 
-- (void)addSearchBar {
+- (void)prepareMySearchBar {
     self.categorySearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(self.view.bounds.size.width*0.027f,0.0f,self.view.bounds.size.width * 0.9f,44.0f)];
     self.categorySearchBar.delegate = self;
     self.categorySearchBar.backgroundImage = [self imageWithColor:[UIColor clearColor]];
     [self.categorySearchBar setPlaceholder:@"输入您想要的宝贝"];
 
-    // put the searchBar to searchView into navigationBar
+    // put the searchbar to searchview into navigationBar
     UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     searchView.backgroundColor = [UIColor clearColor];
     [searchView addSubview:self.categorySearchBar];
     self.navigationItem.titleView = searchView;
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searchQuery = searchBar.text;
-    [self.categorySearchBar resignFirstResponder];
-    if (![self.searchQuery isEqual: @""]) {
-        [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
-    } else {
-
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self.categorySearchBar resignFirstResponder];
-}
-
-- (void)addIndicator {
+- (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
     [self.view bringSubviewToFront:self.activityIndicator];
-}
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
 }
 
 - (void)addWebViewBridge {
@@ -107,14 +78,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareMySearchBar];
+    [self prepareMyIndicator];
     [self addWebViewBridge];
-    [self addSearchBar];
-    [self addIndicator];
     [self loadWebViewRequest];
 }
 
-- (UIImage *)imageWithColor:(UIColor *)color
-{
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searchQuery = searchBar.text;
+    [self.categorySearchBar resignFirstResponder];
+    if (![self.searchQuery isEqual: @""]) {
+        [self performSegueWithIdentifier:@"showSearchResultInCategory" sender:self];
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.categorySearchBar resignFirstResponder];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -130,14 +128,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showSearchResultInCategory"]){
         SearchInCategoryViewController *controller = (SearchInCategoryViewController *)segue.destinationViewController;
         NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        // Holy shit! Why there need to encode twice? = =
+        // Holy shit! Why there need to be encode twice? = = I think the code in website need to be rewrite...
         urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         [controller setSearchQuery:urlencodedQuery];
     } else if ([segue.identifier isEqualToString:@"showCategoryResult"]){
@@ -146,14 +143,12 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"分类"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"分类"];
 }

@@ -12,6 +12,7 @@
 
 @end
 
+
 @implementation MyPickerView
 
 @synthesize pickerData = _pickerData;
@@ -39,8 +40,7 @@
     return self;
 }
 
--(void)showPickerView
-{
+- (void)showPickerView {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
@@ -52,8 +52,7 @@
     }];
 }
 
--(void)hidePickerView
-{
+- (void)hidePickerView {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
@@ -80,7 +79,6 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-
 }
 
 @end

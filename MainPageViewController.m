@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "MainPageViewController.h"
 #import "MyTabBarController.h"
-#import "SearchInMainViewController.h"
-#import "WebViewJavascriptBridge.h"
-#import "ObjectDetailViewInMainController.h"
 #import "MyNavigationController.h"
+#import "MainPageViewController.h"
+#import "SearchInMainViewController.h"
+#import "ObjectDetailViewInMainController.h"
+#import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
 
 @interface MainPageViewController ()
@@ -24,6 +24,7 @@
 @property WebViewJavascriptBridge* bridge;
 
 @end
+
 
 @implementation MainPageViewController
 
@@ -40,56 +41,26 @@
     _searchQuery = searchQuery;
 }
 
-- (void)addSearchBar {
+- (void)prepareMySearchBar {
     self.mainPageSearchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(self.view.bounds.size.width*0.027f,0.0f,self.view.bounds.size.width * 0.9f,44.0f)];
     self.mainPageSearchBar.delegate = self;
     self.mainPageSearchBar.backgroundImage = [self imageWithColor:[UIColor clearColor]];
     [self.mainPageSearchBar setPlaceholder:@"输入您想要的宝贝"];
 
-    // put the searchBar to searchView into navigationBar
+    // put the searchbar to searchview into navigationBar
     UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     searchView.backgroundColor = [UIColor clearColor];
     [searchView addSubview:self.mainPageSearchBar];
     self.navigationItem.titleView = searchView;
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searchQuery = searchBar.text;
-    [self.mainPageSearchBar resignFirstResponder];
-    if (![self.searchQuery isEqual: @""]) {
-        [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
-    } else {
-
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self.mainPageSearchBar resignFirstResponder];
-}
-
-- (void)addIndicator {
+- (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
     [self.view bringSubviewToFront:self.activityIndicator];
-}
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
 }
 
 - (void)addWebViewBridge {
@@ -114,23 +85,50 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareMySearchBar];
+    [self prepareMyIndicator];
     [self addWebViewBridge];
-    [self addSearchBar];
-    [self addIndicator];
     [self loadWebViewRequest];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searchQuery = searchBar.text;
+    [self.mainPageSearchBar resignFirstResponder];
+    if (![self.searchQuery isEqual: @""]) {
+        [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.mainPageSearchBar resignFirstResponder];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     MyNavigationController * nav = (MyNavigationController *)self.navigationController;
-    if (nav.shouldUpdateWebView) {
+    if (nav.shouldUpdateWebView) {          // if need update webview
         [_MainPageWebView reload];
         nav.shouldUpdateWebView = FALSE;
     }
     [super viewDidAppear:animated];
 }
 
-- (UIImage *)imageWithColor:(UIColor *)color
-{
+- (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -150,14 +148,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showSearchResultInMain"]) {
         SearchInMainViewController *controller = (SearchInMainViewController *)segue.destinationViewController;
         NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        // Holy shit! Why there need to encode twice? = =
+        // Holy shit! Why there need to be encode twice? = = I think the code in website need to be rewrite...
         urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         [controller setSearchQuery:urlencodedQuery];
     } else if([segue.identifier isEqualToString:@"detailFromMain"]) {
@@ -166,14 +163,12 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"主页"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"主页"];
 }

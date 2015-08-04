@@ -16,9 +16,10 @@
 
 @end
 
+
 @implementation OrderViewController
 
-- (void)addIndicator {
+- (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
@@ -27,7 +28,20 @@
     [self.view bringSubviewToFront:self.activityIndicator];
 }
 
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (void)loadWebViewRequest {
+    self.orderWebView.delegate = self;
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/order.html"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
+    [_orderWebView loadRequest:request];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyIndicator];
+    [self loadWebViewRequest];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
     return YES;
@@ -43,32 +57,16 @@
     [self.activityIndicator setHidden:YES];
 }
 
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/order.html"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_orderWebView loadRequest:request];
-}
-
-- (void)viewDidLoad {
-    self.orderWebView.delegate = self;
-    [super viewDidLoad];
-    [self addIndicator];
-    [self loadWebViewRequest];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"我的订单"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我的订单"];
 }
