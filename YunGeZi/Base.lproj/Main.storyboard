@@ -46,7 +46,6 @@
         <!--快速注册-->
         <scene sceneID="J8D-y2-6Sg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="obV-JF-Xzg" customClass="registerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PFx-55-OUY"/>
@@ -108,7 +107,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4e-Sd-x4y">
                                 <rect key="frame" x="242" y="237" width="85" height="41"/>
-                                <state key="normal">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="点击刷新">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -138,6 +139,7 @@
                         <outlet property="registerButton" destination="OVP-Mv-anj" id="ALd-4r-FKC"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1346.5" y="1069.5"/>
         </scene>

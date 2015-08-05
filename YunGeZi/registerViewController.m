@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pcodeTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorCaptcha;
+@property BOOL firstTimeRefreshCaptcha;
 
 @end
 
@@ -51,8 +53,10 @@
 
 - (void)prepareMyButton {
     [self.registerButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
+    [self.captchaButton setBackgroundColor:[UIColor colorWithRed:0.99 green:0.66 blue:0.15 alpha:1.00]];
     [self.pcodeButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
     self.registerButton.layer.cornerRadius = 10.0f;
+    self.captchaButton.layer.cornerRadius = 3.0f;
     self.pcodeButton.layer.cornerRadius = 3.0f;
 }
 
@@ -63,18 +67,43 @@
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
     [self.view bringSubviewToFront:self.activityIndicator];
+
+    self.firstTimeRefreshCaptcha = YES;
+    self.activityIndicatorCaptcha = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicatorCaptcha setCenter:self.captchaButton.center];
+    [self.activityIndicatorCaptcha setHidesWhenStopped:TRUE];
+    [self.activityIndicatorCaptcha setHidden:YES];
+    [self.view addSubview:self.activityIndicatorCaptcha];
+    [self.view bringSubviewToFront:self.activityIndicatorCaptcha];
 }
 
 - (void)refreshCaptcha {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
-    [self.captchaButton setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]]] forState:UIControlStateNormal];
+    [self.activityIndicatorCaptcha setHidden:NO];
+    [self.activityIndicatorCaptcha startAnimating];
+    dispatch_queue_t requestQueue = dispatch_queue_create("refreshCaptcha", NULL);
+    dispatch_async(requestQueue, ^{
+        NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
+        NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]];
+        [self.captchaButton setBackgroundImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self firstTimeRefreshCaptcha]) {
+                [self.captchaButton setTitle:@"" forState:UIControlStateNormal];
+                [self setFirstTimeRefreshCaptcha:NO];
+            }
+            if (data == nil) {
+                [self.captchaButton setTitle:@"点击刷新" forState:UIControlStateNormal];
+                [self setFirstTimeRefreshCaptcha:YES];
+            }
+            [self.activityIndicatorCaptcha stopAnimating];
+            [self.activityIndicatorCaptcha setHidden:TRUE];
+        });
+    });
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
     [self prepareMyIndicator];
-    [self refreshCaptcha];
 }
 
 - (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
