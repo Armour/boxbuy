@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -46,7 +46,6 @@
         <!--快速注册-->
         <scene sceneID="J8D-y2-6Sg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="obV-JF-Xzg" customClass="registerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PFx-55-OUY"/>
@@ -115,6 +114,15 @@
                                     <action selector="captchaButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="6ZX-Yo-m8p"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-Vg-0z3">
+                                <rect key="frame" x="312" y="160" width="30" height="30"/>
+                                <state key="normal" title="Button" image="close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPasswdButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="MK6-U0-Cf1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -136,8 +144,10 @@
                         <outlet property="pcodeTextField" destination="RXg-ip-aEX" id="JSH-PV-T8U"/>
                         <outlet property="phoneTextField" destination="gba-Sn-yH7" id="DCE-if-f68"/>
                         <outlet property="registerButton" destination="OVP-Mv-anj" id="ALd-4r-FKC"/>
+                        <outlet property="showPasswdButton" destination="jnh-Vg-0z3" id="ISM-mt-aL7"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1346.5" y="1069.5"/>
         </scene>

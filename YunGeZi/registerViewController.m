@@ -19,12 +19,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *captchaTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pcodeTextField;
+@property (weak, nonatomic) IBOutlet UIButton *showPasswdButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
+@property (nonatomic) BOOL isShowPasswd;
 
 @end
 
 
 @implementation registerViewController
+
+@synthesize isShowPasswd;
 
 - (NSString *)timeStamp {
     return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
@@ -75,6 +80,7 @@
     [self prepareMyButton];
     [self prepareMyIndicator];
     [self refreshCaptcha];
+    self.isShowPasswd = NO;
 }
 
 - (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
@@ -146,6 +152,16 @@
     else
         [self getPcode];
     // post to https://secure.boxbuy.cc/sendPhoneCode
+}
+
+- (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
+    self.isShowPasswd ^= 1;
+    self.passwordTextField.secureTextEntry = !self.isShowPasswd;
+    // TODO: image name
+    NSString* imageName = self.isShowPasswd ? @"logo" : @"close";
+    [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
+                           forState:UIControlStateNormal];
+    [self.passwordTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
