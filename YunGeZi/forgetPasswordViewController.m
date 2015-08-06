@@ -106,8 +106,8 @@
     dispatch_async(requestQueue, ^{
         NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
         NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]];
-        [self.captchaButton setBackgroundImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.captchaButton setBackgroundImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
             if ([self firstTimeRefreshCaptcha]) {
                 [self.captchaButton setTitle:@"" forState:UIControlStateNormal];
                 [self setFirstTimeRefreshCaptcha:NO];
