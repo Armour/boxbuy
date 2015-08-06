@@ -33,6 +33,7 @@
 @implementation registerViewController
 
 @synthesize isShowPasswd;
+@synthesize firstTimeRefreshCaptcha;
 
 - (NSString *)timeStamp {
     return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
@@ -89,7 +90,7 @@
 }
 
 - (void)prepareMyNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimer" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInRegister" object:nil];
 }
 
 - (void)viewDidLoad {
@@ -153,9 +154,10 @@
                                                                      error:&jsonError];
               if ([data[@"err"] integerValue] == 0) {
                   [self popAlert:@"" withMessage:[NSString stringWithFormat:@"短信已发送至%@，请注意查收", self.phoneTextField.text]];
-                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeSuccessful" object:self userInfo:nil];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInRegisterSuccessful" object:self userInfo:nil];
               } else {
                   [self popAlert:@"错误" withMessage:[NSString stringWithFormat:@"%@", data[@"msg"]]];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInRegisterSuccessful" object:self userInfo:nil];
               }
               [self.activityIndicator stopAnimating];
           }
