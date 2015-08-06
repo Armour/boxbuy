@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CHTCollectionViewWaterfallLayout.h"
 
-@interface MainPageViewController : UIViewController <UISearchBarDelegate, UIWebViewDelegate>
-
+@interface MainPageViewController : UIViewController <UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
 @end

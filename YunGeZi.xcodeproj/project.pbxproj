@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
+		474C5EFF1B732E7F00CDE2AF /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 474C5EFD1B732E7F00CDE2AF /* WaterfallCellView.xib */; };
+		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
 		7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */; };
 		7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
@@ -65,6 +68,11 @@
 
 /* Begin PBXFileReference section */
 		1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YunGeZi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellView.h; sourceTree = "<group>"; };
+		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
+		474C5EFD1B732E7F00CDE2AF /* WaterfallCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaterfallCellView.xib; sourceTree = "<group>"; };
+		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
+		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
 		7603A8211AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategorySearchViewController.h; sourceTree = "<group>"; };
 		7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7603A8241AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategoryViewController.h; sourceTree = "<group>"; };
@@ -301,6 +309,11 @@
 				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
+				474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */,
+				474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */,
+				474C5EFD1B732E7F00CDE2AF /* WaterfallCellView.xib */,
+				474C5F001B73553300CDE2AF /* WaterfallCellModel.h */,
+				474C5F011B73553300CDE2AF /* WaterfallCellModel.m */,
 			);
 			path = YunGeZi;
 			sourceTree = "<group>";
@@ -419,6 +432,7 @@
 			files = (
 				76A2515E1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt in Resources */,
 				76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */,
+				474C5EFF1B732E7F00CDE2AF /* WaterfallCellView.xib in Resources */,
 				76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */,
 				76E333401AEDF8C40077BACF /* Images.xcassets in Resources */,
 			);
@@ -485,6 +499,7 @@
 				76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */,
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
+				474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */,
 				7609A10C1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m in Sources */,
@@ -506,6 +521,7 @@
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
 				76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
+				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,
 				7609A11E1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,13 +21,16 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CHTCollectionViewWaterfallLayout (0.9.1)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - AFNetworking (~> 2.0)
+  - CHTCollectionViewWaterfallLayout
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: cc9f90ae785070623e9b972270013c3242190fb0
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  CHTCollectionViewWaterfallLayout: 1a8da4fc662702cbddda8926ced266036a829f84
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2
