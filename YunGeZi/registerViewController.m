@@ -224,8 +224,7 @@
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
     self.isShowPasswd ^= 1;
     self.passwordTextField.secureTextEntry = !self.isShowPasswd;
-    // TODO: image name
-    NSString* imageName = self.isShowPasswd ? @"logo" : @"close";
+    NSString* imageName = self.isShowPasswd ? @"eye_open" : @"eye_close";
     [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
                            forState:UIControlStateNormal];
     [self.passwordTextField becomeFirstResponder];

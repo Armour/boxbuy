@@ -31,12 +31,12 @@
                                 <rect key="frame" x="16" y="457" width="343" height="190"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入用于登录的手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gba-Sn-yH7">
-                                <rect key="frame" x="83" y="101" width="221" height="30"/>
+                                <rect key="frame" x="83" y="101" width="206" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置6~16位密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8gf-1A-Yuv">
-                                <rect key="frame" x="83" y="160" width="221" height="30"/>
+                                <rect key="frame" x="83" y="160" width="206" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -75,8 +75,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-Vg-0z3">
-                                <rect key="frame" x="312" y="160" width="30" height="30"/>
-                                <state key="normal" title="Button" image="close">
+                                <rect key="frame" x="297" y="160" width="30" height="30"/>
+                                <state key="normal" title="Button" image="eye_close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1627,8 +1627,8 @@
                                 <rect key="frame" x="16" y="81" width="343" height="128"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWl-NG-DXL">
-                                <rect key="frame" x="312" y="160" width="30" height="30"/>
-                                <state key="normal" title="Button" image="close">
+                                <rect key="frame" x="297" y="160" width="30" height="30"/>
+                                <state key="normal" title="Button" image="eye_close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1636,12 +1636,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置6~16位密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJM-5K-HB0">
-                                <rect key="frame" x="83" y="160" width="221" height="30"/>
+                                <rect key="frame" x="83" y="160" width="206" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入用于登录的手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ql-Uc-CCj">
-                                <rect key="frame" x="83" y="101" width="221" height="30"/>
+                                <rect key="frame" x="83" y="101" width="206" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -1724,6 +1724,7 @@
     </scenes>
     <resources>
         <image name="close" width="128" height="128"/>
+        <image name="eye_close" width="400" height="400"/>
         <image name="logo" width="1278" height="1036"/>
         <image name="register1" width="2693" height="907"/>
         <image name="register2" width="2693" height="907"/>
