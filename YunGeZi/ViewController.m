@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSString *access_token;
 @property (strong, nonatomic) NSString *refresh_token;
 @property (strong, nonatomic) NSString *expire_time;
+@property (strong, nonatomic) NSTimer *timer;
+@property (nonatomic) NSInteger timerCount;
 
 @end
 
@@ -70,11 +72,37 @@ enum {
     [self.view bringSubviewToFront:self.activityIndicator];
 }
 
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startCountDown) name:@"GetPcodeSuccessful" object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
     [self prepareMyTextField];
     [self prepareMyIndicator];
+    [self prepareMyNotification];
+}
+
+- (void)onCountDown {
+    NSDictionary *dict;
+    dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:self.timerCount] forKey:@"count"];
+    if (self.timerCount != 0) {
+        self.timerCount--;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CountDownTimer" object:self userInfo:dict];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CountDownTimer" object:self userInfo:dict];
+        [self.timer invalidate];
+    }
+}
+
+- (void)startCountDown {
+    self.timerCount = 60;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                  target:self
+                                                selector:@selector(onCountDown)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
