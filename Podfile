@@ -5,6 +5,7 @@ target 'YunGeZi' do
 pod 'ActionSheetPicker-3.0'
 pod "AFNetworking", "~> 2.0"
 pod 'CHTCollectionViewWaterfallLayout'
+pod 'SDWebImage', '~>3.7'
 end
 
 target 'YunGeZiTests' do

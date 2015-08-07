@@ -12,6 +12,8 @@
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
+#import "SDWebImage/UIImageView+WebCache.h"
+
 
 #define WATERFALL_CELL @"WaterfallCell"
 #define ITEMS_PER_PAGE 30
@@ -20,7 +22,7 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *waterfallView;
 @property (nonatomic) NSUInteger pageCount;
-@property (nonatomic) NSUInteger itemCount;
+//@property (nonatomic) NSUInteger itemCount;
 @property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
 
@@ -30,7 +32,7 @@
 @implementation MainPageViewController
 
 @synthesize pageCount;
-@synthesize itemCount;
+//@synthesize itemCount;
 @synthesize isFetching;
 @synthesize cellModels;
 
@@ -70,8 +72,8 @@
     [self fillCellModelsForPage:1];
 }
 
-- (void)fillCellModelsForPage:(NSUInteger)page {
-    if (isFetching) {
+- (void)fillCellModelsForPage:(NSUInteger)page {    // page start from 1
+    if (isFetching || page <= self.pageCount) {
         return;
     }
     isFetching = YES;
@@ -81,10 +83,10 @@
                     @"p" : @(page),
                     @"pp" : @ITEMS_PER_PAGE}
           success:^(AFHTTPRequestOperation *operation, id response){
-              NSLog(@"JSON => %@", response);
+              //NSLog(@"JSON => %@", response);
               if (page == 1) {
                   self.pageCount = [[response valueForKeyPath:@"totalpage"] integerValue];
-                  self.itemCount = [[response valueForKeyPath:@"total"] integerValue];
+                  //self.itemCount = [[response valueForKeyPath:@"total"] integerValue];
                   cellModels = [[NSMutableArray alloc] init];
               }
               for (id obj in [response valueForKeyPath:@"result"]) {
@@ -92,14 +94,15 @@
                   [model setImageHash:[obj valueForKeyPath:@"Cover.hash"]];
                   [model setImageId:[obj valueForKeyPath:@"Item.cover"]];
                   [model setItemTitle:[obj valueForKeyPath:@"Item.title"]];
-                  [model setItemOldPrice:[obj valueForKeyPath:@"Item.oldprice"]];
-                  [model setItemNewPrice:[obj valueForKeyPath:@"Item.price"]];
+                  [model setItemOldPrice:[NSString stringWithFormat:@"%f", [[obj valueForKeyPath:@"Item.oldprice"] floatValue] / 100]];
+                  [model setItemNewPrice:[NSString stringWithFormat:@"%f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
                   [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headidconid"]];
                   [model setSellerState:@"这是毛？"];
                   [cellModels addObject:model];
               }
+              [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
               isFetching = NO;
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -110,9 +113,8 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    // TODO
-    return 100;
-    //return self.itemCount;
+    NSLog(@"Item Count:  %ld", self.cellModels.count);
+    return self.cellModels.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -121,6 +123,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
+        NSLog(@"Start Fetching!!!");
         [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
@@ -129,6 +132,11 @@
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
     [cell setSellerState:model.sellerState];
+    // TODO: This will async load image from web but seems to block [self fillCellModelsForPage] --> Unable to load model info from web
+    /*
+    [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
+    [cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
+     */
     return cell;
 }
 
