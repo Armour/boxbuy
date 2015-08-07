@@ -29,7 +29,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *sellerPhotoHash;
 
 - (NSString *)imagePathWithSize:(IMAGE_SIZE)size;
-
 - (NSString *)photoPathWithSize:(IMAGE_SIZE)size;
 
 @end

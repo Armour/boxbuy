@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WaterfallCellView">
-            <connections>
-                <outlet property="collectionViewCell" destination="gTV-IL-0wX" id="yky-XU-gOd"/>
-                <outlet property="contentView" destination="gTV-IL-0wX" id="p47-JY-GJy"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WaterfallCellView"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WaterfallCell" id="gTV-IL-0wX" customClass="WaterfallCellView">
             <rect key="frame" x="0.0" y="0.0" width="211" height="249"/>
@@ -19,10 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="211" height="249"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zoE-vZ-rkp">
-                        <rect key="frame" x="0.0" y="0.0" width="211" height="121"/>
+                        <rect key="frame" x="0.0" y="0.0" width="211" height="125"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSE-47-l3W">
-                        <rect key="frame" x="70" y="166" width="133" height="20"/>
+                        <rect key="frame" x="70" y="167" width="133" height="20"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -35,24 +30,24 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ymb-Rx-g7y">
-                        <rect key="frame" x="8" y="191" width="50" height="50"/>
+                        <rect key="frame" x="8" y="192" width="50" height="49"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwN-bs-1pB">
-                        <rect key="frame" x="70" y="191" width="133" height="21"/>
+                        <rect key="frame" x="70" y="192" width="133" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWX-qg-60D">
-                        <rect key="frame" x="70" y="220" width="133" height="21"/>
+                        <rect key="frame" x="70" y="220.5" width="133" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMq-DO-P2F">
-                        <rect key="frame" x="8" y="125" width="195" height="32"/>
+                        <rect key="frame" x="8" y="130" width="195" height="29"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="32" id="cJ1-El-qlU"/>
+                            <constraint firstAttribute="height" constant="29" id="cJ1-El-qlU"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -65,7 +60,7 @@
                 <constraint firstItem="fwN-bs-1pB" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailingMargin" id="2F2-1x-VzW"/>
                 <constraint firstItem="fwN-bs-1pB" firstAttribute="top" secondItem="ymb-Rx-g7y" secondAttribute="top" id="2Xx-Nv-5Na"/>
                 <constraint firstItem="qMq-DO-P2F" firstAttribute="trailing" secondItem="zoE-vZ-rkp" secondAttribute="trailing" constant="-8" id="56A-Y1-EGB"/>
-                <constraint firstItem="JSE-47-l3W" firstAttribute="top" secondItem="qMq-DO-P2F" secondAttribute="bottom" constant="9" id="JJl-eT-6PZ"/>
+                <constraint firstItem="JSE-47-l3W" firstAttribute="top" secondItem="qMq-DO-P2F" secondAttribute="bottom" constant="8" id="JJl-eT-6PZ"/>
                 <constraint firstItem="fwN-bs-1pB" firstAttribute="leading" secondItem="ymb-Rx-g7y" secondAttribute="trailing" constant="12" id="OSn-W5-jRz"/>
                 <constraint firstItem="fwN-bs-1pB" firstAttribute="leading" secondItem="hWX-qg-60D" secondAttribute="leading" id="OxP-st-rxR"/>
                 <constraint firstItem="hWX-qg-60D" firstAttribute="trailing" secondItem="fwN-bs-1pB" secondAttribute="trailing" id="SjP-cF-jcH"/>
@@ -81,20 +76,18 @@
                 <constraint firstItem="fwN-bs-1pB" firstAttribute="trailing" secondItem="JSE-47-l3W" secondAttribute="trailing" id="lEj-6O-rM7"/>
                 <constraint firstAttribute="trailing" secondItem="zoE-vZ-rkp" secondAttribute="trailing" id="lpC-bi-BEE"/>
                 <constraint firstItem="ymb-Rx-g7y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="o4a-za-rCF"/>
-                <constraint firstItem="qMq-DO-P2F" firstAttribute="top" secondItem="zoE-vZ-rkp" secondAttribute="bottom" constant="4" id="uts-Zr-jPw"/>
+                <constraint firstItem="qMq-DO-P2F" firstAttribute="top" secondItem="zoE-vZ-rkp" secondAttribute="bottom" constant="5" id="uts-Zr-jPw"/>
             </constraints>
             <size key="customSize" width="211" height="249"/>
             <connections>
-                <outlet property="imageView" destination="zoE-vZ-rkp" id="ZLl-ig-Ozs"/>
                 <outlet property="itemImageView" destination="zoE-vZ-rkp" id="ncn-ad-2xv"/>
                 <outlet property="itemPriceLabel" destination="JSE-47-l3W" id="KBk-9x-96O"/>
                 <outlet property="itemTitleLabel" destination="qMq-DO-P2F" id="QB9-al-oJ5"/>
-                <outlet property="label" destination="qMq-DO-P2F" id="2ng-Iq-FY0"/>
                 <outlet property="sellerNameLabel" destination="fwN-bs-1pB" id="9ML-3p-lX8"/>
                 <outlet property="sellerPhotoImageView" destination="ymb-Rx-g7y" id="Sfd-wf-dUQ"/>
                 <outlet property="sellerStatsLabel" destination="hWX-qg-60D" id="Ilr-c8-xMi"/>
             </connections>
-            <point key="canvasLocation" x="-164.5" y="427.5"/>
+            <point key="canvasLocation" x="-245.5" y="492.5"/>
         </collectionViewCell>
     </objects>
 </document>

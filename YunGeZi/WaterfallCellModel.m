@@ -8,6 +8,11 @@
 
 #import "WaterfallCellModel.h"
 
+@interface WaterfallCellModel ()
+
+@end
+
+
 @implementation WaterfallCellModel
 
 @synthesize imageId;

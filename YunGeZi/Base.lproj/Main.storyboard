@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -938,14 +938,18 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lq1-d8-pUB" id="nok-eR-jYB"/>
+                                    <outlet property="delegate" destination="lq1-d8-pUB" id="pkc-5p-cDK"/>
+                                </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.88758680555555558" green="0.88758680555555558" blue="0.88758680555555558" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="bwh-Nj-tQI"/>
-                    <navigationItem key="navigationItem" id="xap-XS-NiK">
-                        <barButtonItem key="backBarButtonItem" title=" " id="aXt-lE-pFK"/>
+                    <navigationItem key="navigationItem" title="首页" id="xap-XS-NiK">
+                        <barButtonItem key="backBarButtonItem" title="  " id="aXt-lE-pFK"/>
                         <barButtonItem key="rightBarButtonItem" id="TR8-Dq-Zv9"/>
                     </navigationItem>
                     <connections>
@@ -1628,7 +1632,7 @@
         <image name="takePhoto" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mZn-cC-KQu"/>
+        <segue reference="IRI-1L-pUC"/>
         <segue reference="94F-h8-wDZ"/>
     </inferredMetricsTieBreakers>
 </document>

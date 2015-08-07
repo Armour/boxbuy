@@ -10,13 +10,18 @@
 
 @interface WaterfallCellView ()
 
-
 @end
+
 
 @implementation WaterfallCellView
 
-- (void)awakeFromNib {
-    [[NSBundle mainBundle] loadNibNamed:@"WaterfallCellView" owner:self options:nil];
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"WaterfallCellView" owner:self options:nil];
+        self = [nib objectAtIndex:0];
+    }
+    return self;
 }
 
 - (void)setItemImage:(UIImage *)image {
@@ -32,7 +37,7 @@
     [oldPriceStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, oldPriceStr.length)];
     [oldPriceStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, oldPriceStr.length)];
     NSMutableAttributedString *newPriceStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@元", newPrice]];
-    [newPriceStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:255 green:154 blue:21 alpha:1] range:NSMakeRange(0, newPriceStr.length)];
+    [newPriceStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1.00 green:0.66 blue:0.16 alpha:1.00] range:NSMakeRange(0, newPriceStr.length)];
     NSMutableAttributedString *str = oldPriceStr;
     [str appendAttributedString:[[NSAttributedString alloc] initWithString:@" " ]];
     [str appendAttributedString:newPriceStr];
@@ -41,7 +46,7 @@
 
 - (void)setSellerName:(NSString *)name {
     self.sellerNameLabel.text = name;
-    self.sellerNameLabel.textColor = [UIColor colorWithRed:48 green:198 blue:251 alpha:1];
+    self.sellerNameLabel.textColor = [UIColor colorWithRed:0.34 green:0.77 blue:0.97 alpha:1.00];
 }
 
 - (void)setSellerState:(NSString *)state {
