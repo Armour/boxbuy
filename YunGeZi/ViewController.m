@@ -17,6 +17,9 @@
 @property (strong, nonatomic) NSString *access_token;
 @property (strong, nonatomic) NSString *refresh_token;
 @property (strong, nonatomic) NSString *expire_time;
+@property (strong, nonatomic) NSTimer *timer;
+@property (nonatomic) NSInteger timerCountInRegister;
+@property (nonatomic) NSInteger timerCountInChangePassword;
 
 @end
 
@@ -70,11 +73,66 @@ enum {
     [self.view bringSubviewToFront:self.activityIndicator];
 }
 
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(startCountDownInRegister)
+                                                 name:@"GetPcodeInRegisterSuccessful"
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(startCountDownInChangePassword)
+                                                 name:@"GetPcodeInChangePasswordSuccessful"
+                                               object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
     [self prepareMyTextField];
     [self prepareMyIndicator];
+    [self prepareMyNotification];
+}
+
+- (void)onCountDownInRegister {
+    NSDictionary *dict;
+    dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:self.timerCountInRegister] forKey:@"count"];
+    if (self.timerCountInRegister != 0) {
+        self.timerCountInRegister--;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CountDownTimerInRegister" object:self userInfo:dict];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CountDownTimerInRegister" object:self userInfo:dict];
+        [self.timer invalidate];
+    }
+}
+
+- (void)onCountDownInChangePassword {
+    NSDictionary *dict;
+    dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:self.timerCountInChangePassword] forKey:@"count"];
+    if (self.timerCountInChangePassword != 0) {
+        self.timerCountInChangePassword--;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CountDownTimerInChangePassword" object:self userInfo:dict];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CountDownTimerInChangePassword" object:self userInfo:dict];
+        [self.timer invalidate];
+    }
+}
+
+- (void)startCountDownInRegister {
+    self.timerCountInRegister = 60;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                  target:self
+                                                selector:@selector(onCountDownInRegister)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
+- (void)startCountDownInChangePassword {
+    self.timerCountInChangePassword = 60;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                  target:self
+                                                selector:@selector(onCountDownInChangePassword)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {

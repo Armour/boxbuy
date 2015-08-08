@@ -9,40 +9,6 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Forget Password View Controller-->
-        <scene sceneID="EMj-zG-Tr0">
-            <objects>
-                <viewController id="62V-tC-gNT" customClass="forgetPasswordViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="75B-bR-YAW"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZFP-aW-cH9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rqC-wF-iOE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rK-39-7Mo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="8rK-39-7Mo" firstAttribute="leading" secondItem="rqC-wF-iOE" secondAttribute="leading" id="3xM-ed-4ta"/>
-                            <constraint firstAttribute="trailing" secondItem="8rK-39-7Mo" secondAttribute="trailing" id="Zuc-rR-hev"/>
-                            <constraint firstItem="8rK-39-7Mo" firstAttribute="bottom" secondItem="ZFP-aW-cH9" secondAttribute="top" id="jex-1N-tdX"/>
-                            <constraint firstItem="8rK-39-7Mo" firstAttribute="top" secondItem="rqC-wF-iOE" secondAttribute="top" id="oI4-cO-mkr"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="forgetPasswordWebView" destination="8rK-39-7Mo" id="Bwb-BE-KPd"/>
-                        <segue destination="vXZ-lx-hvc" kind="show" identifier="backToLoginFromChangePassword" id="mZn-cC-KQu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6QZ-fG-Pdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2241.5" y="1069.5"/>
-        </scene>
         <!--快速注册-->
         <scene sceneID="J8D-y2-6Sg">
             <objects>
@@ -55,17 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-Mv-anj">
-                                <rect key="frame" x="47" y="382" width="280" height="49"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="注册">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="registerButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="gOy-Hy-RRh"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="register1" translatesAutoresizingMaskIntoConstraints="NO" id="fGC-9B-qoL">
                                 <rect key="frame" x="16" y="81" width="343" height="128"/>
                             </imageView>
@@ -76,12 +31,12 @@
                                 <rect key="frame" x="16" y="457" width="343" height="190"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入用于登录的手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gba-Sn-yH7">
-                                <rect key="frame" x="83" y="101" width="221" height="30"/>
+                                <rect key="frame" x="83" y="101" width="206" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置6~16位密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8gf-1A-Yuv">
-                                <rect key="frame" x="83" y="160" width="221" height="30"/>
+                                <rect key="frame" x="83" y="160" width="206" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -98,7 +53,7 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a07-Il-UZk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WrK-55-Uut">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WrK-55-Uut">
                                 <rect key="frame" x="242" y="297" width="85" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="获取验证码">
@@ -108,7 +63,7 @@
                                     <action selector="pcodeButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="0Fd-1j-32m"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4e-Sd-x4y">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4e-Sd-x4y">
                                 <rect key="frame" x="242" y="237" width="85" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="点击刷新">
@@ -120,12 +75,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-Vg-0z3">
-                                <rect key="frame" x="312" y="160" width="30" height="30"/>
-                                <state key="normal" title="Button" image="close">
+                                <rect key="frame" x="297" y="160" width="30" height="30"/>
+                                <state key="normal" title="Button" image="eye_close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showPasswdButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="MK6-U0-Cf1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-Mv-anj">
+                                <rect key="frame" x="48" y="381" width="279" height="49"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="注册">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="gOy-Hy-RRh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -154,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1346.5" y="1069.5"/>
+            <point key="canvasLocation" x="-1657.5" y="1909.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -213,7 +179,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="62V-tC-gNT" kind="show" identifier="forgetPassword" id="q1Y-VR-vuW"/>
+                                    <segue destination="jxF-9T-SmV" kind="show" identifier="forgetPassword" id="gIi-tJ-88J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YAU-et-EkE">
@@ -318,7 +284,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wm-Td-eas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669.5" y="1371.5"/>
+            <point key="canvasLocation" x="1256.5" y="1371.5"/>
         </scene>
         <!--修改昵称-->
         <scene sceneID="JeS-lh-d1N">
@@ -448,7 +414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rb-qf-8hY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1129.5" y="1371.5"/>
+            <point key="canvasLocation" x="1716.5" y="1371.5"/>
         </scene>
         <!--我的-->
         <scene sceneID="BQB-xY-XGS">
@@ -465,7 +431,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbl-6V-Df5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="207.5" y="1371.5"/>
+            <point key="canvasLocation" x="794.5" y="1371.5"/>
         </scene>
         <!--分类-->
         <scene sceneID="Mjw-pt-FrH">
@@ -1561,7 +1527,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="669.5" y="585.5"/>
+            <point key="canvasLocation" x="1256.5" y="585.5"/>
         </scene>
         <!--Selling Ensure View Controller-->
         <scene sceneID="3W2-cN-vyD">
@@ -1584,7 +1550,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8f-if-8YM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1129.5" y="585.5"/>
+            <point key="canvasLocation" x="1716.5" y="585.5"/>
         </scene>
         <!--我要卖-->
         <scene sceneID="GmM-t8-GgC">
@@ -1603,7 +1569,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0S-dH-mzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="207.5" y="585.5"/>
+            <point key="canvasLocation" x="794.5" y="585.5"/>
         </scene>
         <!--My Navigation Controller-->
         <scene sceneID="bbf-6K-eXp">
@@ -1621,11 +1587,140 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6e-7o-xg9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1778.5" y="1069.5"/>
+            <point key="canvasLocation" x="-1657.5" y="1117.5"/>
+        </scene>
+        <!--My Navigation Controller-->
+        <scene sceneID="hBB-CU-n7d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jxF-9T-SmV" customClass="MyNavigationController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hQR-n8-R0F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QMi-wm-GZU" kind="relationship" relationship="rootViewController" id="T4T-Vs-ZEx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Izg-CS-LfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2289.5" y="1117.5"/>
+        </scene>
+        <!--忘记密码-->
+        <scene sceneID="LBt-we-0dt">
+            <objects>
+                <viewController id="QMi-wm-GZU" customClass="forgetPasswordViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tIj-fI-w84"/>
+                        <viewControllerLayoutGuide type="bottom" id="bRC-6T-ga6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Nxm-eD-Qzf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="register1" translatesAutoresizingMaskIntoConstraints="NO" id="mv4-Ob-fHV">
+                                <rect key="frame" x="16" y="81" width="343" height="128"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWl-NG-DXL">
+                                <rect key="frame" x="297" y="160" width="30" height="30"/>
+                                <state key="normal" title="Button" image="eye_close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPasswdButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="yMf-ET-z3Y"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置6~16位密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJM-5K-HB0">
+                                <rect key="frame" x="83" y="160" width="206" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入用于登录的手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ql-Uc-CCj">
+                                <rect key="frame" x="83" y="101" width="206" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="register2" translatesAutoresizingMaskIntoConstraints="NO" id="zAm-fK-pog">
+                                <rect key="frame" x="16" y="224" width="343" height="128"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLO-D5-VXX">
+                                <rect key="frame" x="242" y="297" width="85" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="获取验证码">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="pcodeButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="br5-ET-oKw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGd-0y-fAr">
+                                <rect key="frame" x="242" y="237" width="85" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="点击刷新">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="captchaButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="gC3-CT-SjT"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入短信验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MsM-WU-ff8">
+                                <rect key="frame" x="83" y="303" width="136" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入图片验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2gh-DI-beO">
+                                <rect key="frame" x="83" y="243" width="136" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zj2-jG-oxa">
+                                <rect key="frame" x="48" y="372" width="279" height="49"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="修改密码">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changePasswordButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="22u-YD-Iyx"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vuh-Ag-Ftr">
+                                <rect key="frame" x="16" y="457" width="343" height="190"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="忘记密码" id="XB8-xY-KKc">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Gj9-lx-25a"/>
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="xpH-HV-ej5">
+                            <connections>
+                                <segue destination="vXZ-lx-hvc" kind="popoverPresentation" identifier="backToLoginFromRegister2" popoverAnchorBarButtonItem="xpH-HV-ej5" id="WTi-fG-if7">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captchaButton" destination="NGd-0y-fAr" id="e1b-4j-x4P"/>
+                        <outlet property="captchaTextField" destination="2gh-DI-beO" id="8Yf-4b-enx"/>
+                        <outlet property="changePasswordButton" destination="zj2-jG-oxa" id="KGK-Be-MiJ"/>
+                        <outlet property="passwordTextField" destination="lJM-5K-HB0" id="dfR-sm-NKc"/>
+                        <outlet property="pcodeButton" destination="vLO-D5-VXX" id="Ofv-Aw-zRC"/>
+                        <outlet property="pcodeTextField" destination="MsM-WU-ff8" id="jnD-3a-alo"/>
+                        <outlet property="phoneTextField" destination="3Ql-Uc-CCj" id="QXd-d9-u7m"/>
+                        <outlet property="showPasswdButton" destination="rWl-NG-DXL" id="U5W-cD-PX9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Fv-bw-oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2289.5" y="1909.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="close" width="128" height="128"/>
+        <image name="eye_close" width="400" height="400"/>
         <image name="logo" width="1278" height="1036"/>
         <image name="register1" width="2693" height="907"/>
         <image name="register2" width="2693" height="907"/>
@@ -1634,5 +1729,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="IRI-1L-pUC"/>
         <segue reference="94F-h8-wDZ"/>
+        <segue reference="WTi-fG-if7"/>
+        <segue reference="Lwo-LW-fPN"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -23,9 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *showPasswdButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorCaptcha;
-@property BOOL firstTimeRefreshCaptcha;
 
 @property (nonatomic) BOOL isShowPasswd;
+@property (nonatomic) BOOL firstTimeRefreshCaptcha;
 
 @end
 
@@ -33,6 +33,7 @@
 @implementation registerViewController
 
 @synthesize isShowPasswd;
+@synthesize firstTimeRefreshCaptcha;
 
 - (NSString *)timeStamp {
     return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
@@ -68,6 +69,7 @@
     self.registerButton.layer.cornerRadius = 10.0f;
     self.captchaButton.layer.cornerRadius = 3.0f;
     self.pcodeButton.layer.cornerRadius = 3.0f;
+    self.isShowPasswd = NO;
 }
 
 - (void)prepareMyIndicator {
@@ -87,6 +89,17 @@
     [self.view bringSubviewToFront:self.activityIndicatorCaptcha];
 }
 
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInRegister" object:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyButton];
+    [self prepareMyIndicator];
+    [self prepareMyNotification];
+}
+
 - (void)refreshCaptcha {
     [self.activityIndicatorCaptcha setHidden:NO];
     [self.activityIndicatorCaptcha startAnimating];
@@ -94,8 +107,8 @@
     dispatch_async(requestQueue, ^{
         NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
         NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]];
-        [self.captchaButton setBackgroundImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.captchaButton setBackgroundImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
             if ([self firstTimeRefreshCaptcha]) {
                 [self.captchaButton setTitle:@"" forState:UIControlStateNormal];
                 [self setFirstTimeRefreshCaptcha:NO];
@@ -110,11 +123,15 @@
     });
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareMyButton];
-    [self prepareMyIndicator];
-    self.isShowPasswd = NO;
+- (void)refreshPcodeButton:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    NSInteger count = [[dict objectForKey:@"count"] intValue];
+    if (count != 0) {
+        self.pcodeButton.enabled = NO;
+        [self.pcodeButton setTitle:[[NSString alloc] initWithFormat:@"等待%2ld秒", (long)count] forState:UIControlStateDisabled];
+    } else {
+        self.pcodeButton.enabled = YES;
+    }
 }
 
 - (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
@@ -124,30 +141,31 @@
 - (void)getPcode {
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *postData = @{@"phone" : self.phoneTextField.text,
                                @"vcode" : self.captchaTextField.text};
     [manager POST:@"https://secure.boxbuy.cc/sendPhoneCode"
        parameters:postData
-        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            NSError *jsonError = [[NSError alloc] init];
-            NSDictionary *data = [NSJSONSerialization JSONObjectWithData:operation.responseData
-                                                                 options:NSJSONReadingMutableContainers
-                                                                   error:&jsonError];
-            if ([data[@"err"] integerValue] == 0) {
-                [self popAlert:@"" withMessage:[NSString stringWithFormat:@"短信已发送至%@，请注意查收", self.phoneTextField.text]];
-            } else {
-                [self popAlert:@"错误" withMessage:[NSString stringWithFormat:@"%@", data[@"msg"]]];
-            }
-            [self.activityIndicator stopAnimating];
-        }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"ERROR: %@", error);
-            [self popAlert:@"错误" withMessage:@"短息发送失败，请稍候重试"];
-            [self.activityIndicator stopAnimating];
-        }];
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              //NSLog(@"JSON: %@", responseObject);
+              NSError *jsonError = [[NSError alloc] init];
+              NSDictionary *data = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                   options:NSJSONReadingMutableContainers
+                                                                     error:&jsonError];
+              if ([data[@"err"] integerValue] == 0) {
+                  [self popAlert:@"" withMessage:[NSString stringWithFormat:@"短信已发送至%@，请注意查收", self.phoneTextField.text]];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInRegisterSuccessful" object:self userInfo:nil];
+              } else {
+                  [self popAlert:@"错误" withMessage:[NSString stringWithFormat:@"%@", data[@"msg"]]];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInRegisterSuccessful" object:self userInfo:nil];
+              }
+              [self.activityIndicator stopAnimating];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              //NSLog(@"ERROR: %@", error);
+              [self popAlert:@"错误" withMessage:@"短息发送失败，请稍候重试"];
+              [self.activityIndicator stopAnimating];
+          }];
 }
 
 - (IBAction)pcodeButtonTouchUpInside:(UIButton *)sender {
@@ -167,7 +185,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *postData = @{@"username" : self.phoneTextField.text,
                                @"password" : self.passwordTextField.text,
-                               @"pcode" : self.pcodeTextField.text};
+                               @"pcode"    : self.pcodeTextField.text};
     [manager POST:@"https://secure.boxbuy.cc/register"
        parameters:postData
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -206,8 +224,7 @@
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
     self.isShowPasswd ^= 1;
     self.passwordTextField.secureTextEntry = !self.isShowPasswd;
-    // TODO: image name
-    NSString* imageName = self.isShowPasswd ? @"logo" : @"close";
+    NSString* imageName = self.isShowPasswd ? @"eye_open" : @"eye_close";
     [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
                            forState:UIControlStateNormal];
     [self.passwordTextField becomeFirstResponder];
