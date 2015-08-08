@@ -4,6 +4,7 @@
 target 'YunGeZi' do
 pod 'ActionSheetPicker-3.0'
 pod 'AFNetworking', '~> 2.0'
+pod 'CBStoreHouseRefreshControl'
 pod 'CHTCollectionViewWaterfallLayout'
 pod 'DWBubbleMenuButton', '~> 1.0.1'
 pod 'REFrostedViewController', '~> 2.4'
