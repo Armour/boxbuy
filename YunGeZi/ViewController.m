@@ -8,7 +8,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
-#import "MyTabBarController.h"
 #import "MobClick.h"
 
 @interface ViewController ()
@@ -18,6 +17,7 @@
 @property (strong, nonatomic) NSString *refresh_token;
 @property (strong, nonatomic) NSString *expire_time;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) UIView *mask;
 @property (nonatomic) NSInteger timerCountInRegister;
 @property (nonatomic) NSInteger timerCountInChangePassword;
 
@@ -31,18 +31,40 @@ enum {
     textPasswordTag = 1
 };
 
-@synthesize access_token = _access_token;
+#pragma mark - Life Cycle
 
-- (NSString *)access_token {
-    if (!_access_token) {
-        _access_token = [[NSString alloc] init];
-    }
-    return _access_token;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"登录界面"];
 }
 
-- (void)setAccess_token:(NSString *)access_token {
-    _access_token = access_token;
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyButton];
+    [self prepareMyTextField];
+    [self prepareMyIndicator];
+    [self prepareMyNotification];
+    [self prepareMyMask];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"登录界面"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Prepare My Item
 
 - (void)prepareMyButton {
     [self.loginButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
@@ -65,12 +87,11 @@ enum {
 }
 
 - (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
 }
 
 - (void)prepareMyNotification {
@@ -85,13 +106,7 @@ enum {
                                                object:nil];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareMyButton];
-    [self prepareMyTextField];
-    [self prepareMyIndicator];
-    [self prepareMyNotification];
-}
+#pragma mark - Count Down
 
 - (void)onCountDownInRegister {
     NSDictionary *dict;
@@ -135,9 +150,30 @@ enum {
                                                  repeats:YES];
 }
 
+#pragma mark - Mask When Loading
+
+- (void)prepareMyMask {
+    self.mask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.mask setBackgroundColor:[UIColor grayColor]];
+    self.mask.alpha = 0.6;
+}
+
+- (void)addMask {
+    [self.view addSubview:self.mask];
+}
+
+- (void)removeMask {
+    [self.mask removeFromSuperview];
+}
+
+#pragma mark - LoginButton Clicked
+
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
+    [self.view endEditing:YES];
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
+    [self addMask];
+    [self.view bringSubviewToFront:self.activityIndicator];
     dispatch_queue_t requestQueue = dispatch_queue_create("webRequestInLogin", NULL);
     dispatch_async(requestQueue, ^{
         NSInteger status = -1;
@@ -177,24 +213,24 @@ enum {
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
             [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
+            [self removeMask];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
             if (status == 0) {
-                [self performSegueWithIdentifier:@"showTabBarController" sender:self];
+                [self performSegueWithIdentifier:@"goToMainPage" sender:self];
             } else if (status == 10004) {
                 [self popAlert:@"登录失败" withMessage:@"您输入的密码有误╮(╯_╰)╭"];
             } else if (status == 10002) {
                 [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在╮(╯_╰)╭"];
             }
+            [self removeMask];
         });
     });
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+#pragma mark - TextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     switch (textField.tag) {
@@ -208,6 +244,24 @@ enum {
             break;
     }
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [UIView beginAnimations:@"TextFieldKeyboardAppear" context:nil];
+    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    switch (textField.tag) {
+        case textUsernameTag:
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 100, self.view.frame.size.width, self.view.frame.size.height);
+            break;
+        case textPasswordTag:
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
+            break;
+        default:
+            break;
+    }
+    [UIView commitAnimations];
+    [textField becomeFirstResponder];
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -224,23 +278,36 @@ enum {
     return YES;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView beginAnimations:@"TextFieldKeyboardDisappear" context:nil];
+    [UIView setAnimationDuration:0.15];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    switch (textField.tag) {
+        case textUsernameTag:
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 100, self.view.frame.size.width, self.view.frame.size.height);
+            break;
+        case textPasswordTag:
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 150, self.view.frame.size.width, self.view.frame.size.height);
+            break;
+        default:
+            break;
+    }
+    [textField resignFirstResponder];
+    [UIView commitAnimations];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }
 
+#pragma mark - Gesture
+
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showTabBarController"]){
-        MyTabBarController *controller = (MyTabBarController *)segue.destinationViewController;
-        [controller setAccess_token:self.access_token];
-        [controller setRefresh_token:self.refresh_token];
-        [controller setExpire_time:self.expire_time];
-    }
-}
+#pragma mark - Alert
 
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
@@ -249,16 +316,6 @@ enum {
                                            cancelButtonTitle:@"OK"
                                            otherButtonTitles: nil];
     [alert show];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"登录界面"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"登录界面"];
 }
 
 @end

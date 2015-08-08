@@ -35,9 +35,38 @@
 @synthesize isShowPasswd;
 @synthesize firstTimeRefreshCaptcha;
 
-- (NSString *)timeStamp {
-    return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+#pragma mark - Life Cycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"注册新账号"];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyButton];
+    [self prepareMyIndicator];
+    [self prepareMyNotification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"注册新账号"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Check Regex
 
 - (BOOL)checkRegex:(NSString *)string withPattern:(NSString *)pattern {
     NSError *error = NULL;
@@ -61,6 +90,8 @@
 - (BOOL)checkPCode {
     return [self checkRegex:self.pcodeTextField.text withPattern:@"[0-9]{6}"];
 }
+
+#pragma mark - Prepare My Item
 
 - (void)prepareMyButton {
     [self.registerButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
@@ -93,11 +124,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInRegister" object:nil];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareMyButton];
-    [self prepareMyIndicator];
-    [self prepareMyNotification];
+#pragma mark - Captcha
+
+- (NSString *)timeStamp {
+    return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
 }
 
 - (void)refreshCaptcha {
@@ -123,6 +153,12 @@
     });
 }
 
+- (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
+    [self refreshCaptcha];
+}
+
+#pragma mark - Phone Code
+
 - (void)refreshPcodeButton:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
     NSInteger count = [[dict objectForKey:@"count"] intValue];
@@ -132,10 +168,6 @@
     } else {
         self.pcodeButton.enabled = YES;
     }
-}
-
-- (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
-    [self refreshCaptcha];
 }
 
 - (void)getPcode {
@@ -178,6 +210,8 @@
     else
         [self getPcode];
 }
+
+#pragma mark - Register
 
 - (void)tryRegister {
     [self.activityIndicator setHidden:NO];
@@ -230,9 +264,7 @@
     [self.passwordTextField becomeFirstResponder];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+#pragma mark - Alert
 
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
@@ -241,16 +273,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"注册新账号"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"注册新账号"];
 }
 
 @end

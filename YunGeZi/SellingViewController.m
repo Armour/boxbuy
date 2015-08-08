@@ -640,8 +640,7 @@
 }
 
 - (void)handleCategorySelection:(NSNotification*) noti {
-    NSDictionary *dict = [[NSDictionary alloc] init];
-    dict = [noti userInfo];
+    NSDictionary *dict = [noti userInfo];
     NSString *tmp = [[NSString alloc] initWithFormat:@"%@(%@)", dict[@"0"], dict[@"1"]];
     self.objectCategory = tmp;
     [self.categoryButton setTitle:[NSString stringWithFormat:@"    类别：%@", tmp] forState:UIControlStateNormal];
@@ -767,11 +766,10 @@
 }
 
 - (BOOL)checkPrice {
-    NSString *price = [[NSString alloc] init];
     NSArray *digit = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"."];
+    NSString *price = self.priceTextField.text;
     int dot = 0;
     BOOL flag = true;
-    price = self.priceTextField.text;
     for (int i = 0; i < price.length; i++) {
         NSString *ch = [price substringWithRange:NSMakeRange(i, 1)];
         if (![digit containsObject:ch]) {
