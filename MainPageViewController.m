@@ -12,7 +12,6 @@
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
-#import "SDWebImage/UIImageView+WebCache.h"
 
 
 #define WATERFALL_CELL @"WaterfallCell"
@@ -134,8 +133,10 @@
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
     [cell setSellerState:model.sellerState];
-    [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
-    [cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_SMALL]];
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_SMALL]];
+    //[cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
+    //[cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
     
     return cell;
 }

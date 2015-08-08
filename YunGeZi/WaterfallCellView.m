@@ -7,6 +7,8 @@
 //
 
 #import "WaterfallCellView.h"
+#import "SDWebImage/UIImageView+WebCache.h"
+#import "SDWebImage/UIButton+WebCache.h"
 
 @interface WaterfallCellView ()
 
@@ -20,12 +22,16 @@
     if (self) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"WaterfallCellView" owner:self options:nil];
         self = [nib objectAtIndex:0];
+        
+        self.contentView.layer.borderWidth = 1;
+        self.contentView.layer.borderColor =[UIColor blackColor].CGColor;
     }
     return self;
 }
 
-- (void)setItemImage:(UIImage *)image {
-    self.itemImageView.image = image;
+- (void)setItemImageWithStringAsync:(NSString *)imageString {
+    NSURL *url = [NSURL URLWithString:imageString];
+    [self.itemImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
 }
 
 - (void)setItemTitle:(NSString *)title {
@@ -53,8 +59,10 @@
     self.sellerStatsLabel.text = state;
 }
 
-- (void)setSellerPhoto:(UIImage *)photo {
-    self.sellerPhotoImageView.image = photo;
+
+- (void)setSellerPhotoWithStringAsync:(NSString *)photoString {
+    NSURL *url = [NSURL URLWithString:photoString];
+    [self.sellerPhotoImageView sd_setImageWithURL:url];
 }
 
 @end
