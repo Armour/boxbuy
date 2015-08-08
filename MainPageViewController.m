@@ -77,6 +77,8 @@
     layout.columnCount = 2;
     layout.footerHeight = 0;
     layout.headerHeight = 0;
+    layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
+    
     self.waterfallView.collectionViewLayout = layout;
 
     isFetching = NO;
@@ -140,16 +142,15 @@
         [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
-    [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
-    [cell setItemTitle:model.itemTitle];
-    [cell setSellerName:model.sellerName];
-    [cell setSellerState:model.sellerState];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_SMALL]];
-    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_SMALL]];
-    //[cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
-    //[cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
-    
+    if ([cell.itemTitleLabel.text isEqualToString:@"Title"]) {
+        WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+        [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
+        [cell setItemTitle:model.itemTitle];
+        [cell setSellerName:model.sellerName];
+        [cell setSellerState:model.sellerState];
+        [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_SMALL]];
+        [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_SMALL]];
+    }
     return cell;
 }
 
@@ -157,9 +158,18 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO
-    return CGSizeMake(arc4random() % 50 + 50, arc4random() % 50 + 50);
-    //return CGSizeMake(211, 249);
-    //return [self.cellSizes[indexPath.item] CGSizeValue];
+    
+    WaterfallCellView *cell = (WaterfallCellView *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (cell != nil) {
+        return cell.frame.size;
+    }
+    
+    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
+    CGFloat itemHeight = 95 + ceilf([model.itemTitle length] / 10) * 40 + 120;
+    CGSize size = CGSizeMake(itemWidth,  // Unused parameter
+                             itemHeight);
+    return size;
 }
 
 #pragma mark - Menu Button
