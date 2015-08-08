@@ -73,10 +73,11 @@
 }
 
 - (void)fillCellModelsForPage:(NSUInteger)page {    // page start from 1
-    if (isFetching || page <= self.pageCount) {
+    if (isFetching || ((page > 1) && (page > self.pageCount))) {
         return;
     }
     isFetching = YES;
+    NSLog(@"Start Fetching!!! Page: %ld", page);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
        parameters:@{@"schoolid" : @"0",
@@ -94,18 +95,20 @@
                   [model setImageHash:[obj valueForKeyPath:@"Cover.hash"]];
                   [model setImageId:[obj valueForKeyPath:@"Item.cover"]];
                   [model setItemTitle:[obj valueForKeyPath:@"Item.title"]];
-                  [model setItemOldPrice:[NSString stringWithFormat:@"%f", [[obj valueForKeyPath:@"Item.oldprice"] floatValue] / 100]];
-                  [model setItemNewPrice:[NSString stringWithFormat:@"%f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
+                  [model setItemOldPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.oldprice"] floatValue] / 100]];
+                  [model setItemNewPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
                   [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headidconid"]];
                   [model setSellerState:@"这是毛？"];
                   [cellModels addObject:model];
               }
+              NSLog(@"Fetch successed!");
               [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
               isFetching = NO;
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Fetch failed...");
               isFetching = NO;
           }];
 }
@@ -123,7 +126,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
-        NSLog(@"Start Fetching!!!");
         [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
@@ -132,11 +134,9 @@
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
     [cell setSellerState:model.sellerState];
-    // TODO: This will async load image from web but seems to block [self fillCellModelsForPage] --> Unable to load model info from web
-    /*
     [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
     [cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
-     */
+    
     return cell;
 }
 
