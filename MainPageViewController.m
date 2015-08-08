@@ -9,168 +9,145 @@
 #import "MyTabBarController.h"
 #import "MyNavigationController.h"
 #import "MainPageViewController.h"
-#import "SearchInMainViewController.h"
-#import "ObjectDetailViewInMainController.h"
-#import "WebViewJavascriptBridge.h"
-#import "MobClick.h"
+#import "WaterfallCellView.h"
+#import "WaterfallCellModel.h"
+#import "AFNetworking.h"
+
+
+#define WATERFALL_CELL @"WaterfallCell"
+#define ITEMS_PER_PAGE 30
 
 @interface MainPageViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *MainPageWebView;
-@property (strong, nonatomic) UISearchBar *mainPageSearchBar;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (strong, nonatomic) NSString *searchQuery;
-@property (strong, nonatomic) NSString *objectNumber;
-@property WebViewJavascriptBridge* bridge;
+@property (strong, nonatomic) IBOutlet UICollectionView *waterfallView;
+@property (nonatomic) NSUInteger pageCount;
+//@property (nonatomic) NSUInteger itemCount;
+@property (nonatomic) BOOL isFetching;
+@property (strong, nonatomic) NSMutableArray *cellModels;
 
 @end
 
 
 @implementation MainPageViewController
 
-@synthesize searchQuery = _searchQuery;
+@synthesize pageCount;
+//@synthesize itemCount;
+@synthesize isFetching;
+@synthesize cellModels;
 
-- (NSString *)searchQuery {
-    if (!_searchQuery) {
-        _searchQuery = [[NSString alloc] init];
-    }
-    return _searchQuery;
-}
+#pragma mark - Life Cycle
 
-- (void)setSearchQuery:(NSString *)searchQuery {
-    _searchQuery = searchQuery;
-}
-
-- (void)prepareMySearchBar {
-    self.mainPageSearchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(self.view.bounds.size.width*0.027f,0.0f,self.view.bounds.size.width * 0.9f,44.0f)];
-    self.mainPageSearchBar.delegate = self;
-    self.mainPageSearchBar.backgroundImage = [self imageWithColor:[UIColor clearColor]];
-    [self.mainPageSearchBar setPlaceholder:@"输入您想要的宝贝"];
-
-    // put the searchbar to searchview into navigationBar
-    UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    searchView.backgroundColor = [UIColor clearColor];
-    [searchView addSubview:self.mainPageSearchBar];
-    self.navigationItem.titleView = searchView;
-}
-
-- (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setCenter:self.view.center];
-    [self.activityIndicator setHidesWhenStopped:TRUE];
-    [self.activityIndicator setHidden:YES];
-    [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
-}
-
-- (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.MainPageWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"%@", data);
-        if ([data isEqualToString:@"auth"]) {
-            [self performSegueWithIdentifier:@"showVerification" sender:self];
-        } else {
-            self.objectNumber = data;
-            [self performSegueWithIdentifier:@"detailFromMain" sender:self];
-        }
-        responseCallback(self.objectNumber);
-    }];
-}
-
-- (void)loadWebViewRequest {
-    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/indexschool_1_3.html?access_token=%@&refresh_token=%@&expire_time=%@&login=1", tab.access_token, tab.refresh_token, tab.expire_time];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [self.MainPageWebView loadRequest:request];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self prepareMySearchBar];
-    [self prepareMyIndicator];
-    [self addWebViewBridge];
-    [self loadWebViewRequest];
+    [self initWaterfallView];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searchQuery = searchBar.text;
-    [self.mainPageSearchBar resignFirstResponder];
-    if (![self.searchQuery isEqual: @""]) {
-        [self performSegueWithIdentifier:@"showSearchResultInMain" sender:self];
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self.mainPageSearchBar resignFirstResponder];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    MyNavigationController * nav = (MyNavigationController *)self.navigationController;
-    if (nav.shouldUpdateWebView) {          // if need update webview
-        [_MainPageWebView reload];
-        nav.shouldUpdateWebView = FALSE;
-    }
-    [super viewDidAppear:animated];
-}
-
-- (UIImage *)imageWithColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-    return image;
-}
-
-- (IBAction)tapMainPageView:(UITapGestureRecognizer *)sender {
-    [self.view endEditing:YES];
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    self.waterfallView = nil;
+    self.cellModels = nil;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showSearchResultInMain"]) {
-        SearchInMainViewController *controller = (SearchInMainViewController *)segue.destinationViewController;
-        NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        // Holy shit! Why there need to be encode twice? = = I think the code in website need to be rewrite...
-        urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        [controller setSearchQuery:urlencodedQuery];
-    } else if([segue.identifier isEqualToString:@"detailFromMain"]) {
-        ObjectDetailInMainViewController *controller = (ObjectDetailInMainViewController *)segue.destinationViewController;
-        [controller setObjectNumber:self.objectNumber];
+#pragma mark - Inner Helper
+
+- (void)initWaterfallView {
+    [self.waterfallView registerClass:[WaterfallCellView class] forCellWithReuseIdentifier:WATERFALL_CELL];
+
+    CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
+    layout.columnCount = 2;
+    layout.footerHeight = 0;
+    layout.headerHeight = 0;
+    self.waterfallView.collectionViewLayout = layout;
+
+    isFetching = NO;
+    [self fillCellModelsForPage:1];
+}
+
+- (void)fillCellModelsForPage:(NSUInteger)page {    // page start from 1
+    if (isFetching || ((page > 1) && (page > self.pageCount))) {
+        return;
     }
+    isFetching = YES;
+    NSLog(@"Start Fetching!!! Page: %ld", page);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
+       parameters:@{@"schoolid" : @"0",
+                    @"p" : @(page),
+                    @"pp" : @ITEMS_PER_PAGE}
+          success:^(AFHTTPRequestOperation *operation, id response){
+              //NSLog(@"JSON => %@", response);
+              if (page == 1) {
+                  self.pageCount = [[response valueForKeyPath:@"totalpage"] integerValue];
+                  //self.itemCount = [[response valueForKeyPath:@"total"] integerValue];
+                  cellModels = [[NSMutableArray alloc] init];
+              }
+              for (id obj in [response valueForKeyPath:@"result"]) {
+                  WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
+                  [model setImageHash:[obj valueForKeyPath:@"Cover.hash"]];
+                  [model setImageId:[obj valueForKeyPath:@"Item.cover"]];
+                  [model setItemTitle:[obj valueForKeyPath:@"Item.title"]];
+                  [model setItemOldPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.oldprice"] floatValue] / 100]];
+                  [model setItemNewPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
+                  [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
+                  [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
+                  [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headidconid"]];
+                  [model setSellerState:@"这是毛？"];
+                  [cellModels addObject:model];
+              }
+              NSLog(@"Fetch successed!");
+              [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+              isFetching = NO;
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Fetch failed...");
+              isFetching = NO;
+          }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"主页"];
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"Item Count:  %ld", self.cellModels.count);
+    return self.cellModels.count;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"主页"];
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
+        [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
+    }
+    WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
+    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
+    [cell setItemTitle:model.itemTitle];
+    [cell setSellerName:model.sellerName];
+    [cell setSellerState:model.sellerState];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_SMALL]];
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_SMALL]];
+    //[cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
+    //[cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
+    
+    return cell;
+}
+
+#pragma mark - CHTCollectionViewDelegateWaterfallLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO
+    return CGSizeMake(arc4random() % 50 + 50, arc4random() % 50 + 50);
+    //return CGSizeMake(211, 249);
+    //return [self.cellSizes[indexPath.item] CGSizeValue];
 }
 
 @end

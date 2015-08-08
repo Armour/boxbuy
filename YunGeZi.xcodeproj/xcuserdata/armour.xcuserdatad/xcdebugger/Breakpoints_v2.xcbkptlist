@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MainPageViewController.m"
-            timestampString = "458985483.432263"
+            timestampString = "460612970.668718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
+            landmarkName = "@implementation MainPageViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
