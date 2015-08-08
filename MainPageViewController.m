@@ -6,12 +6,13 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "MyTabBarController.h"
 #import "MyNavigationController.h"
 #import "MainPageViewController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
+#import "DWBubbleMenuButton.h"
+#import "MobClick.h"
 
 
 #define WATERFALL_CELL @"WaterfallCell"
@@ -37,6 +38,11 @@
 
 #pragma mark - Life Cycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"首页"];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
@@ -44,6 +50,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initWaterfallView];
+    [self prepareMenuButton];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"首页"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -149,5 +161,23 @@
     //return CGSizeMake(211, 249);
     //return [self.cellSizes[indexPath.item] CGSizeValue];
 }
+
+#pragma mark - Menu Button
+
+- (void)prepareMenuButton {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 40.f, 40.f)];
+    label.text = @"Tap";
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.layer.cornerRadius = label.frame.size.height / 2.f;
+    label.backgroundColor =[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.5f];
+    label.clipsToBounds = YES;
+
+    DWBubbleMenuButton *upMenuView = [[DWBubbleMenuButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - label.frame.size.width - 20.f,self.view.frame.size.height - label.frame.size.height - 20.f, label.frame.size.width, label.frame.size.height) expansionDirection:DirectionUp];
+    upMenuView.homeButtonView = label;
+
+    //[upMenuView addButtons:[self createDemoButtonArray]];
+
+    [self.view addSubview:upMenuView];}
 
 @end
