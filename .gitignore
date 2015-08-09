@@ -27,5 +27,7 @@ xcuserdata
 *.ipa
 
 ## Pods
-Pods/
+Pods/*
+!Pods/CBStoreHouseRefreshControl/
 Podfile.lock
+

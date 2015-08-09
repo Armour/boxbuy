@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBStoreHouseRefreshControl.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 
 @interface MainPageViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
+
+@property (strong, nonatomic) CBStoreHouseRefreshControl *storeHouseRefreshControl;
 
 @end

@@ -51,6 +51,7 @@
     [super viewDidLoad];
     [self initWaterfallView];
     [self prepareMenuButton];
+    [self preparePullToRefresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -110,7 +111,7 @@
                   [model setItemNewPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
                   [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
-                  [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headidconid"]];
+                  [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
                   [model setSellerState:@"这是毛？"];
                   [cellModels addObject:model];
               }
@@ -145,8 +146,8 @@
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
     [cell setSellerState:model.sellerState];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_SMALL]];
-    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_SMALL]];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_ORIGIANL]];
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_ORIGIANL]];
     //[cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:[model imagePathWithSize:IMAGE_SIZE_SMALL]]];
     //[cell.sellerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:[model photoPathWithSize:IMAGE_SIZE_SMALL]]];
     
@@ -179,5 +180,48 @@
     //[upMenuView addButtons:[self createDemoButtonArray]];
 
     [self.view addSubview:upMenuView];}
+
+#pragma mark - Pull To Refresh
+
+- (void)preparePullToRefresh {
+    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.waterfallView
+                                                                            target:self
+                                                                     refreshAction:@selector(pullToRefreshTriggered:)
+                                                                             plist:@"storehouse"
+                                                                             color:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]
+                                                                         lineWidth:1
+                                                                        dropHeight:70
+                                                                             scale:1
+                                                              horizontalRandomness:150
+                                                           reverseLoadingAnimation:YES
+                                                           internalAnimationFactor:0.6];
+}
+
+#pragma mark - Notifying refresh control of scrolling
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.storeHouseRefreshControl scrollViewDidScroll];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self.storeHouseRefreshControl scrollViewDidEndDragging];
+}
+
+#pragma mark - Listening for the user to trigger a refresh
+
+- (void)pullToRefreshTriggered:(id)sender {
+    NSLog(@"Refresh~!");
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:3 inModes:@[NSRunLoopCommonModes]];
+}
+
+- (void)finishRefreshControl {
+    [self.waterfallView reloadData];
+    [self.storeHouseRefreshControl finishingLoading];
+    NSLog(@"Refresh Done!");
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 @end
