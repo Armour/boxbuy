@@ -68,7 +68,6 @@
 
 /* Begin PBXFileReference section */
 		1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YunGeZi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellView.h; sourceTree = "<group>"; };
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5EFD1B732E7F00CDE2AF /* WaterfallCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaterfallCellView.xib; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
@@ -99,6 +98,7 @@
 		7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyResultInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7609A11C1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyInCategorySearchViewController.h; sourceTree = "<group>"; };
 		7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInCategorySearchViewController.m; sourceTree = "<group>"; };
+		7613EB651B774BBA00C4FB9A /* WaterfallCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellView.h; sourceTree = "<group>"; };
 		76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPickerCustomPickerDelegate.h; sourceTree = "<group>"; };
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
 		764826DC1B195106008D1D7D /* MyPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPickerView.h; path = ../MyPickerView.h; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
-				474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */,
+				7613EB651B774BBA00C4FB9A /* WaterfallCellView.h */,
 				474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */,
 				474C5EFD1B732E7F00CDE2AF /* WaterfallCellView.xib */,
 				474C5F001B73553300CDE2AF /* WaterfallCellModel.h */,

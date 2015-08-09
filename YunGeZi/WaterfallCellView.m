@@ -7,6 +7,7 @@
 //
 
 #import "WaterfallCellView.h"
+#import "WaterfallCellModel.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
 
@@ -29,9 +30,18 @@
     return self;
 }
 
-- (void)setItemImageWithStringAsync:(NSString *)imageString {
+- (void)setItemImageWithStringAsync:(NSString *)imageString callback:(void (^)(BOOL, CGFloat, CGFloat))callback {
     NSURL *url = [NSURL URLWithString:imageString];
-    [self.itemImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
+    [self.itemImageButton sd_setBackgroundImageWithURL:url
+                                              forState:UIControlStateNormal
+                                      placeholderImage:[UIImage imageNamed:@"DefaultItemImage"]
+                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+                                                 if (error) {
+                                                     callback(NO, 0, 0);
+                                                 } else {
+                                                     callback(YES, image.size.width, image.size.height);
+                                                 }
+                                             }];
 }
 
 - (void)setItemTitle:(NSString *)title {

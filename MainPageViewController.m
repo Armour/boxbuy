@@ -105,6 +105,8 @@
               }
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
+                  [model setImageWidth:0];
+                  [model setImageHeight:0];
                   [model setImageHash:[obj valueForKeyPath:@"Cover.hash"]];
                   [model setImageId:[obj valueForKeyPath:@"Item.cover"]];
                   [model setItemTitle:[obj valueForKeyPath:@"Item.title"]];
@@ -148,8 +150,21 @@
         [cell setItemTitle:model.itemTitle];
         [cell setSellerName:model.sellerName];
         [cell setSellerState:model.sellerState];
-        [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_SMALL]];
-        [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_SMALL]];
+        [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_ORIGIANL]];
+        [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_ORIGIANL] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
+            if (succeeded) {
+                [model setImageWidth:width];
+                [model setImageHeight:height];
+                //[collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                //[collectionView reloadData];
+                /*[UIView setAnimationsEnabled:NO];
+                [collectionView performBatchUpdates:^{
+                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                } completion:^(BOOL finished) {
+                    [UIView setAnimationsEnabled:YES];
+                }];*/
+            }
+        }];
     }
     return cell;
 }
@@ -157,18 +172,19 @@
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO
     
     WaterfallCellView *cell = (WaterfallCellView *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (cell != nil) {
+    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+
+    if (cell != nil && !model.imageWidth) {
         return cell.frame.size;
     }
-    
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+
     CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
-    CGFloat itemHeight = 95 + ceilf([model.itemTitle length] / 10) * 40 + 120;
-    CGSize size = CGSizeMake(itemWidth,  // Unused parameter
-                             itemHeight);
+    CGFloat imageHight = model.imageWidth ? model.imageHeight / model.imageWidth * itemWidth : 0;
+    CGFloat itemHeight = imageHight + ceilf([model.itemTitle length] / 10) * 40 + 120;
+    CGSize size = CGSizeMake(itemWidth, itemHeight);
+    NSLog(@"!!!!!!!!!!!!!!!%f", imageHight);
     return size;
 }
 

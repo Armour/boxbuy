@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WaterfallCellView : UICollectionViewCell
+@class  WaterfallCellModel;
 
+@interface WaterfallCellView : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *itemImageButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
@@ -18,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sellerStatsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *sellerPhotoImageView;
 
-- (void)setItemImageWithStringAsync:(NSString *)imageString;
+- (void)setItemImageWithStringAsync:(NSString *)imageString callback:(void (^)(BOOL succeeded, CGFloat width, CGFloat height))callback;
 - (void)setItemTitle:(NSString *)title;
 - (void)setItemOldPrice:(NSString *)oldPrice NewPrice:(NSString *)newPrice;
 - (void)setSellerName:(NSString *)name;

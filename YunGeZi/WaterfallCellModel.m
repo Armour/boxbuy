@@ -17,6 +17,8 @@
 
 @synthesize imageId;
 @synthesize imageHash;
+@synthesize imageWidth;
+@synthesize imageHeight;
 @synthesize itemTitle;
 @synthesize itemOldPrice;
 @synthesize itemNewPrice;
