@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *itemPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sellerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sellerStatsLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *sellerPhotoImageView;
+@property (weak, nonatomic) IBOutlet UIButton *sellerPhotoImageButton;
 
 - (void)setItemImageWithStringAsync:(NSString *)imageString;
 - (void)setItemTitle:(NSString *)title;
