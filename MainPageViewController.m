@@ -118,6 +118,7 @@
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
                   [model setSellerState:@"这是毛？"];
                   [cellModels addObject:model];
+                  NSLog(@" 新商品!!!! %@ ", model.itemTitle);
               }
               NSLog(@"Fetch successed!");
               [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
@@ -132,7 +133,6 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"Item Count:  %ld", self.cellModels.count);
     return self.cellModels.count;
 }
 
@@ -142,31 +142,28 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
+        NSLog(@"####################################################");
         [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
-    if ([cell.itemTitleLabel.text isEqualToString:@"Title"]) {
-        WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
-        [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
-        [cell setItemTitle:model.itemTitle];
-        [cell setSellerName:model.sellerName];
-        [cell setSellerState:model.sellerState];
-        [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_ORIGIANL]];
-        [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_ORIGIANL] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
-            if (succeeded) {
-                [model setImageWidth:width];
-                [model setImageHeight:height];
-                //[collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                //[collectionView reloadData];
-                /*[UIView setAnimationsEnabled:NO];
-                [collectionView performBatchUpdates:^{
-                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                } completion:^(BOOL finished) {
-                    [UIView setAnimationsEnabled:YES];
-                }];*/
-            }
-        }];
-    }
+    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
+    [cell setItemTitle:model.itemTitle];
+    [cell setSellerName:model.sellerName];
+    [cell setSellerState:model.sellerState];
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_ORIGIANL]];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_ORIGIANL] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
+        if (succeeded) {
+            [model setImageWidth:width];
+            [model setImageHeight:height];
+            [UIView setAnimationsEnabled:NO];
+            [collectionView performBatchUpdates:^{
+                 [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            } completion:^(BOOL finished) {
+                 [UIView setAnimationsEnabled:YES];
+            }];
+        }
+    }];
     return cell;
 }
 
@@ -174,19 +171,19 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    WaterfallCellView *cell = (WaterfallCellView *)[collectionView cellForItemAtIndexPath:indexPath];
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
-
+    /*WaterfallCellView *cell = (WaterfallCellView *)[collectionView cellForItemAtIndexPath:indexPath];
     if (cell != nil && !model.imageWidth) {
         return cell.frame.size;
-    }
+    }*/
 
+    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
-    CGFloat imageHight = model.imageWidth ? model.imageHeight / model.imageWidth * itemWidth : 0;
+    CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : 0;
     CGFloat itemHeight = imageHight + ceilf([model.itemTitle length] / 10) * 40 + 120;
-    CGSize size = CGSizeMake(itemWidth, itemHeight);
-    NSLog(@"!!!!!!!!!!!!!!!%f", imageHight);
-    return size;
+    CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
+    if (model.imageWidth)
+        NSLog(@"!!!!!!!!!!!!!!!%f", imageHight);
+    return itemsize;
 }
 
 #pragma mark - Menu Button
@@ -205,7 +202,8 @@
 
     //[upMenuView addButtons:[self createDemoButtonArray]];
 
-    [self.view addSubview:upMenuView];}
+    [self.view addSubview:upMenuView];
+}
 
 #pragma mark - Pull To Refresh
 
