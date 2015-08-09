@@ -52,6 +52,7 @@
     [self initWaterfallView];
     [self prepareMenuButton];
     [self preparePullToRefresh];
+    [self prepareNavigationBar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -128,6 +129,44 @@
               NSLog(@"Fetch failed...");
               isFetching = NO;
           }];
+}
+
+- (UIBarButtonItem *)createUIBarButtonItemWithImageName:(NSString *)imageName
+                                                 target:(id)target
+                                                 action:(SEL)action {
+    UIButton *_button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [_button setImage:[UIImage imageNamed:imageName]
+             forState:UIControlStateNormal];
+    _button.tintColor = [UIColor whiteColor];
+    [_button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:_button];
+    item.tintColor = [UIColor whiteColor];
+    return item;
+}
+
+
+- (void)prepareNavigationBar {
+    UIBarButtonItem *leftDrawerButton = [self createUIBarButtonItemWithImageName:@"navicon"
+                                                                          target:nil
+                                                                          action:nil];
+    self.navigationItem.leftBarButtonItem = leftDrawerButton;
+    
+    UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"ios7-search-strong"
+                                                                      target:nil
+                                                                      action:nil];
+    UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"ios7-bell"
+                                                                            target:nil
+                                                                            action:nil];
+    UIBarButtonItem *moreMenuButton = [self createUIBarButtonItemWithImageName:@"ios7-more"
+                                                                        target:nil
+                                                                        action:nil];
+    NSArray *rightButtons = [NSArray arrayWithObjects:moreMenuButton, notificationButton, searchButton, nil];
+    self.navigationItem.rightBarButtonItems = rightButtons;
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
+    [titleLabel setText:@"云格子铺"];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    self.navigationItem.titleView = titleLabel;
 }
 
 #pragma mark - UICollectionViewDataSource
