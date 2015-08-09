@@ -230,8 +230,10 @@
                                                                      error:&jsonError];
               if ([data[@"err"] integerValue] == 0) {
                   [self popAlert:@"" withMessage:@"注册成功"];
+                  [self performSegueWithIdentifier:@"chooseSchool" sender:self];
               } else {
                   [self popAlert:@"错误" withMessage:@"注册失败"];
+                  [self performSegueWithIdentifier:@"chooseSchool" sender:self];    // delete this line when debug finished!
               }
               [self.activityIndicator stopAnimating];
               self.pcodeTextField.text = nil;
@@ -245,13 +247,13 @@
 }
 
 - (IBAction)registerButtonTouchUpInside:(UIButton *)sender {
-    if (![self checkPhoneNumber])
+    /*if (![self checkPhoneNumber])
         [self popAlert:@"格式错误" withMessage:@"手机号格式错误"];
     else if (![self checkPassword])
         [self popAlert:@"格式错误" withMessage:@"密码格式错误"];
     else if (![self checkPCode])
         [self popAlert:@"格式错误" withMessage:@"验证码格式错误"];
-    else
+    else*/
         [self tryRegister];
 }
 
