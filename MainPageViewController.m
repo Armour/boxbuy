@@ -187,14 +187,14 @@
     self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.waterfallView
                                                                             target:self
                                                                      refreshAction:@selector(pullToRefreshTriggered:)
-                                                                             plist:@"storehouse"
+                                                                             plist:@"boxbuy"
                                                                              color:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]
-                                                                         lineWidth:1
+                                                                         lineWidth:2
                                                                         dropHeight:70
-                                                                             scale:1
-                                                              horizontalRandomness:150
-                                                           reverseLoadingAnimation:YES
-                                                           internalAnimationFactor:0.6];
+                                                                             scale:0.8
+                                                              horizontalRandomness:300
+                                                           reverseLoadingAnimation:NO
+                                                           internalAnimationFactor:0.5];
 }
 
 #pragma mark - Notifying refresh control of scrolling

@@ -2,19 +2,67 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>startPoints</key>
-	<array>
-		<string>{0,0}</string>
-		<string>{10,0}</string>
-		<string>{10,10}</string>
-		<string>{0,10}</string>
-	</array>
-	<key>endPoints</key>
-	<array>
-		<string>{10,0}</string>
-		<string>{10,10}</string>
-		<string>{0,10}</string>
-		<string>{0,0}</string>
-	</array>
+    <key>startPoints</key>
+    <array>
+        <string>{1.5, 0.5}</string>
+        <string>{2.5, 0.5}</string>
+        <string>{18.5, 0.5}</string>
+        <string>{18.5, 18.5}</string>
+        <string>{2.5, 18.5}</string>
+        <string>{18.5, 18.5}</string>
+        <string>{18.5, 34.5}</string>
+        <string>{24.5, 18.5}</string>
+        <string>{39.5, 18.5}</string>
+        <string>{39.5, 34.5}</string>
+        <string>{24.5, 34.5}</string>
+        <string>{46.5, 18.5}</string>
+        <string>{61.5, 18.5}</string>
+        <string>{68.5, 0.5}</string>
+        <string>{69.5, 0.5}</string>
+        <string>{85.5, 0.5}</string>
+        <string>{85.5, 18.5}</string>
+        <string>{69.5, 18.5}</string>
+        <string>{85.5, 18.5}</string>
+        <string>{85.5, 34.5}</string>
+        <string>{92.5, 18.5}</string>
+        <string>{92.5, 34.5}</string>
+        <string>{108.5, 34.5}</string>
+        <string>{115.5, 18.5}</string>
+        <string>{115.5, 34.5}</string>
+        <string>{131.5, 34.5}</string>
+        <string>{131.5, 18.5}</string>
+        <string>{131.5, 50.5}</string>
+    </array>
+    <key>endPoints</key>
+    <array>
+        <string>{1.5, 34.5}</string>
+        <string>{18.5, 0.5}</string>
+        <string>{18.5, 18.5}</string>
+        <string>{2.5, 18.5}</string>
+        <string>{18.5, 18.5}</string>
+        <string>{18.5, 34.5}</string>
+        <string>{2.5, 34.5}</string>
+        <string>{39.5, 18.5}</string>
+        <string>{39.5, 34.5}</string>
+        <string>{24.5, 34.5}</string>
+        <string>{24.5, 18.5}</string>
+        <string>{61.5, 34.5}</string>
+        <string>{46.5, 34.5}</string>
+        <string>{68.5, 34.5}</string>
+        <string>{85.5, 0.5}</string>
+        <string>{85.5, 18.5}</string>
+        <string>{69.5, 18.5}</string>
+        <string>{85.5, 18.5}</string>
+        <string>{85.5, 34.5}</string>
+        <string>{69.5, 34.5}</string>
+        <string>{92.5, 34.5}</string>
+        <string>{108.5, 34.5}</string>
+        <string>{108.5, 18.5}</string>
+        <string>{115.5, 34.5}</string>
+        <string>{131.5, 34.5}</string>
+        <string>{131.5, 18.5}</string>
+        <string>{131.5, 50.5}</string>
+        <string>{115.5, 50.5}</string>
+    </array>
 </dict>
 </plist>
