@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RESideMenu.h"
 #import "CBStoreHouseRefreshControl.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 

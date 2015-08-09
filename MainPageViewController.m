@@ -36,7 +36,7 @@
 @synthesize isFetching;
 @synthesize cellModels;
 
-#pragma mark - Life Cycle
+#pragma mark - Life Circle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -131,6 +131,11 @@
           }];
 }
 
+#pragma mark - Action
+
+
+#pragma mark - Init Navigation Bar
+
 - (UIBarButtonItem *)createUIBarButtonItemWithImageName:(NSString *)imageName
                                                  target:(id)target
                                                  action:(SEL)action {
@@ -147,8 +152,8 @@
 
 - (void)prepareNavigationBar {
     UIBarButtonItem *leftDrawerButton = [self createUIBarButtonItemWithImageName:@"navicon"
-                                                                          target:nil
-                                                                          action:nil];
+                                                                          target:self
+                                                                          action:@selector(presentLeftMenuViewController:)];
     self.navigationItem.leftBarButtonItem = leftDrawerButton;
     
     UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"ios7-search-strong"

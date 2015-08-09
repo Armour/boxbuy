@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47110B271B77A181001C9B5A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B261B77A181001C9B5A /* RootViewController.m */; };
+		47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */; };
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
 		7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */; };
@@ -69,6 +71,10 @@
 
 /* Begin PBXFileReference section */
 		1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YunGeZi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47110B251B77A181001C9B5A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		47110B261B77A181001C9B5A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		47110B281B77A2DD001C9B5A /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellView.h; sourceTree = "<group>"; };
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
@@ -316,6 +322,10 @@
 				7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */,
 				474C5F001B73553300CDE2AF /* WaterfallCellModel.h */,
 				474C5F011B73553300CDE2AF /* WaterfallCellModel.m */,
+				47110B251B77A181001C9B5A /* RootViewController.h */,
+				47110B261B77A181001C9B5A /* RootViewController.m */,
+				47110B281B77A2DD001C9B5A /* LeftMenuViewController.h */,
+				47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */,
 			);
 			path = YunGeZi;
 			sourceTree = "<group>";
@@ -507,11 +517,13 @@
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */,
 				7609A10C1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m in Sources */,
+				47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
 				7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */,
 				7609A1091AFF58F800B134C9 /* ObjectBuyInMainViewController.m in Sources */,
 				769F99541B0CADED00161818 /* VerificationViewController.m in Sources */,
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
+				47110B271B77A181001C9B5A /* RootViewController.m in Sources */,
 				76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */,
 				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
 				7609A11B1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m in Sources */,

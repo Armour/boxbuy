@@ -122,6 +122,43 @@
             </objects>
             <point key="canvasLocation" x="-1657.5" y="1909.5"/>
         </scene>
+        <!--Left Menu View Controller-->
+        <scene sceneID="Nck-un-izt">
+            <objects>
+                <viewController storyboardIdentifier="leftMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HoH-mJ-wbW" customClass="LeftMenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tDA-ap-C9v"/>
+                        <viewControllerLayoutGuide type="bottom" id="GRY-9t-jq7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cUt-8N-CMa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ul6-lY-hUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3248" y="-90"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="VcR-SK-gLv">
+            <objects>
+                <viewController id="g99-Ha-WnK" customClass="RootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S8Z-KS-JAc"/>
+                        <viewControllerLayoutGuide type="bottom" id="BtF-Lj-37r"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gPO-oB-lL6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ai-Fn-AIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2581" y="-92"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -234,7 +271,7 @@
                         <outlet property="loginButton" destination="iMe-zj-9RM" id="wib-9u-GRH"/>
                         <outlet property="textPassword" destination="xgx-wh-eYN" id="qmf-qb-hOM"/>
                         <outlet property="textUsername" destination="Bd4-3V-uQw" id="GRK-ak-eIs"/>
-                        <segue destination="4qF-fO-Vlr" kind="show" identifier="goToMainPage" id="VvP-Ec-rag"/>
+                        <segue destination="g99-Ha-WnK" kind="show" identifier="goToMainPage" id="4ZE-kV-fhQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -868,8 +905,9 @@
         <!--首页-->
         <scene sceneID="Lee-FU-l6Z">
             <objects>
-                <navigationController id="4qF-fO-Vlr" customClass="MyNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="contentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4qF-fO-Vlr" customClass="MyNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="首页" id="caG-XG-5Wa"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pmE-4p-0RK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
