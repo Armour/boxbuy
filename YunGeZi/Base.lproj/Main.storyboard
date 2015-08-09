@@ -882,7 +882,7 @@
             </objects>
             <point key="canvasLocation" x="-1994.5" y="-615.5"/>
         </scene>
-        <!--首页-->
+        <!--云格子铺-->
         <scene sceneID="mZG-rm-UVg">
             <objects>
                 <viewController id="lq1-d8-pUB" customClass="MainPageViewController" sceneMemberID="viewController">
@@ -895,8 +895,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0x0-Cx-x4O">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.94049873737373735" green="0.94049873737373735" blue="0.94049873737373735" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ryp-9t-cEW">
                                     <size key="itemSize" width="107" height="109"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -910,11 +910,11 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.88758680555555558" green="0.88758680555555558" blue="0.88758680555555558" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.98753672271054072" green="1" blue="0.95127481852153206" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="bwh-Nj-tQI"/>
-                    <navigationItem key="navigationItem" title="首页" id="xap-XS-NiK">
+                    <navigationItem key="navigationItem" title="云格子铺" id="xap-XS-NiK">
                         <barButtonItem key="backBarButtonItem" title="  " id="aXt-lE-pFK"/>
                         <barButtonItem key="rightBarButtonItem" id="TR8-Dq-Zv9"/>
                     </navigationItem>

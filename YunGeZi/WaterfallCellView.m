@@ -69,10 +69,9 @@
     self.sellerStatsLabel.text = state;
 }
 
-
 - (void)setSellerPhotoWithStringAsync:(NSString *)photoString {
     NSURL *url = [NSURL URLWithString:photoString];
-    [self.sellerPhotoImageView sd_setImageWithURL:url];
+    [self.sellerPhotoImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
 }
 
 @end
