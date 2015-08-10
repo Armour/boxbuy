@@ -22,7 +22,6 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *waterfallView;
 @property (nonatomic) NSUInteger pageCount;
-//@property (nonatomic) NSUInteger itemCount;
 @property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
 
@@ -32,7 +31,6 @@
 @implementation MainPageViewController
 
 @synthesize pageCount;
-//@synthesize itemCount;
 @synthesize isFetching;
 @synthesize cellModels;
 
@@ -128,6 +126,7 @@
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Fetch failed...");
               isFetching = NO;
+              [self fillCellModelsForPage:page];
           }];
 }
 
@@ -186,10 +185,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
-        NSLog(@"####################################################");
         [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
+    cell.layer.masksToBounds = YES;
+    cell.layer.cornerRadius = 6.0f;
     WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
     [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
     [cell setItemTitle:model.itemTitle];
@@ -208,25 +208,18 @@
             }];
         }
     }];
+    [model setTitleHeight:cell.titleButtonHeightConstraint.constant];
     return cell;
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    /*WaterfallCellView *cell = (WaterfallCellView *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (cell != nil && !model.imageWidth) {
-        return cell.frame.size;
-    }*/
-
     WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
-    CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : 0;
-    CGFloat itemHeight = imageHight + ceilf([model.itemTitle length] / 10) * 40 + 120;
+    CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : 150;
+    CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
-    if (model.imageWidth)
-        NSLog(@"!!!!!!!!!!!!!!!%f", imageHight);
     return itemsize;
 }
 
@@ -279,11 +272,11 @@
 
 - (void)pullToRefreshTriggered:(id)sender {
     NSLog(@"Refresh~!");
-    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:3 inModes:@[NSRunLoopCommonModes]];
+    [self.waterfallView reloadData];
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:2.5 inModes:@[NSRunLoopCommonModes]];
 }
 
 - (void)finishRefreshControl {
-    [self.waterfallView reloadData];
     [self.storeHouseRefreshControl finishingLoading];
     NSLog(@"Refresh Done!");
 }

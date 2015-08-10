@@ -20,6 +20,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic) NSInteger imageWidth;
 @property (nonatomic) NSInteger imageHeight;
+@property (nonatomic) NSInteger titleHeight;
 @property (strong, nonatomic) NSString *imageId;
 @property (strong, nonatomic) NSString *imageHash;
 @property (strong, nonatomic) NSString *itemTitle;

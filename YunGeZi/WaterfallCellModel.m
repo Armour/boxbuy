@@ -19,6 +19,7 @@
 @synthesize imageHash;
 @synthesize imageWidth;
 @synthesize imageHeight;
+@synthesize titleHeight;
 @synthesize itemTitle;
 @synthesize itemOldPrice;
 @synthesize itemNewPrice;
