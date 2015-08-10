@@ -1009,7 +1009,7 @@
             </objects>
             <point key="canvasLocation" x="-1994.5" y="-615.5"/>
         </scene>
-        <!--云格子铺-->
+        <!--首页-->
         <scene sceneID="mZG-rm-UVg">
             <objects>
                 <viewController id="lq1-d8-pUB" customClass="MainPageViewController" sceneMemberID="viewController">
@@ -1047,7 +1047,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" id="bwh-Nj-tQI"/>
-                    <navigationItem key="navigationItem" title="云格子铺" id="xap-XS-NiK">
+                    <navigationItem key="navigationItem" id="xap-XS-NiK">
                         <barButtonItem key="backBarButtonItem" title="  " id="aXt-lE-pFK"/>
                         <barButtonItem key="rightBarButtonItem" id="TR8-Dq-Zv9"/>
                     </navigationItem>

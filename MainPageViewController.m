@@ -150,25 +150,29 @@
 
 
 - (void)prepareNavigationBar {
-    UIBarButtonItem *leftDrawerButton = [self createUIBarButtonItemWithImageName:@"navicon"
+    UIButton *spaceButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [spaceButton setTitle:@"" forState:UIControlStateNormal];
+    UIBarButtonItem *leftSpaceButton = [[UIBarButtonItem alloc] initWithCustomView:spaceButton];
+    UIBarButtonItem *leftNavButton = [self createUIBarButtonItemWithImageName:@"navicon"
                                                                           target:self
                                                                           action:@selector(presentLeftMenuViewController:)];
-    self.navigationItem.leftBarButtonItem = leftDrawerButton;
-    
-    UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"ios7-search-strong"
+    UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"search"
                                                                       target:nil
                                                                       action:nil];
-    UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"ios7-bell"
+    UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:nil
                                                                             action:nil];
-    UIBarButtonItem *moreMenuButton = [self createUIBarButtonItemWithImageName:@"ios7-more"
+    UIBarButtonItem *moreMenuButton = [self createUIBarButtonItemWithImageName:@"config"
                                                                         target:nil
                                                                         action:nil];
+    NSArray *leftButtons = [NSArray arrayWithObjects:leftNavButton, leftSpaceButton, nil];
     NSArray *rightButtons = [NSArray arrayWithObjects:moreMenuButton, notificationButton, searchButton, nil];
+    self.navigationItem.leftBarButtonItems = leftButtons;
     self.navigationItem.rightBarButtonItems = rightButtons;
-    
+
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
     [titleLabel setText:@"云格子铺"];
+    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:22]];
     [titleLabel setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = titleLabel;
 }
