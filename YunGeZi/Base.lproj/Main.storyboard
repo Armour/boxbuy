@@ -175,6 +175,7 @@
                         <outlet property="phoneTextField" destination="gba-Sn-yH7" id="DCE-if-f68"/>
                         <outlet property="registerButton" destination="OVP-Mv-anj" id="ALd-4r-FKC"/>
                         <outlet property="showPasswdButton" destination="jnh-Vg-0z3" id="ISM-mt-aL7"/>
+                        <segue destination="xiw-Lt-6B4" kind="show" identifier="chooseSchool" id="T6q-p1-5Dn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWq-aN-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,6 +218,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ai-Fn-AIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2581" y="-92"/>
+        </scene>
+        <!--选择学校-->
+        <scene sceneID="kqo-wx-dwp">
+            <objects>
+                <tableViewController id="xiw-Lt-6B4" customClass="ChooseSchoolTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zNE-yE-Lkp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SchoolCell" id="X0H-lS-fNB">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X0H-lS-fNB" id="T4f-F4-YOw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xiw-Lt-6B4" id="gkW-K1-vfX"/>
+                            <outlet property="delegate" destination="xiw-Lt-6B4" id="tHi-ye-Dlp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="选择学校" id="uOC-3M-7jX">
+                        <barButtonItem key="rightBarButtonItem" title="继续" id="Efe-RU-bwL"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feg-y5-ZlM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1657.5" y="2699.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -1865,7 +1895,7 @@
         <image name="takePhoto" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="IRI-1L-pUC"/>
         <segue reference="94F-h8-wDZ"/>
-        <segue reference="WTi-fG-if7"/>
     </inferredMetricsTieBreakers>
 </document>
