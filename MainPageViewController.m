@@ -14,9 +14,12 @@
 #import "DWBubbleMenuButton.h"
 #import "MobClick.h"
 
-
 #define WATERFALL_CELL @"WaterfallCell"
 #define ITEMS_PER_PAGE 30
+#define BUBBLE_ROTATION_ANIMATION_KEY @"BubbleRotationAnimation"
+#define BUBBLE_MASK_ANIMATION_KEY @"BubbleMaskAnimation"
+#define BUBBLE_ANIMATION_DURATION 0.5f
+#define BUBBLE_MASK_OPACITY 0.6f
 
 @interface MainPageViewController ()
 
@@ -24,6 +27,7 @@
 @property (nonatomic) NSUInteger pageCount;
 @property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
+@property (strong, nonatomic) UIView *bubbleMask;
 
 @end
 
@@ -48,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initWaterfallView];
-    [self prepareMenuButton];
+    [self prepareBubbleMenu];
     [self preparePullToRefresh];
     [self prepareNavigationBar];
 }
@@ -130,6 +134,36 @@
           }];
 }
 
+- (CABasicAnimation *)prepareBubbleRotationAnimationWithFromValue:(CGFloat)fromAngle
+                                                          toValue:(CGFloat)toAngle {
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.delegate = self;
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:fromAngle * (M_PI / 180.f)];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:toAngle * (M_PI / 180.f)];
+    rotationAnimation.removedOnCompletion = NO;
+    rotationAnimation.fillMode = kCAFillModeForwards;
+    rotationAnimation.duration = BUBBLE_ANIMATION_DURATION;
+    rotationAnimation.repeatCount = 1;
+    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [rotationAnimation setValue:@"BubbleRotation" forKey:BUBBLE_ROTATION_ANIMATION_KEY];
+    return rotationAnimation;
+}
+
+- (CABasicAnimation *)prepareBubbleMaskAnimationWithFromValue:(CGFloat)fromOpacity
+                                                      toValue:(CGFloat)toOpacity {
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    rotationAnimation.delegate = self;
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:fromOpacity];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:toOpacity];
+    rotationAnimation.removedOnCompletion = NO;
+    rotationAnimation.fillMode = kCAFillModeForwards;
+    rotationAnimation.duration = BUBBLE_ANIMATION_DURATION;
+    rotationAnimation.repeatCount = 1;
+    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    [rotationAnimation setValue:@"BubbleMask" forKey:BUBBLE_MASK_ANIMATION_KEY];
+    return rotationAnimation;
+}
+
 #pragma mark - Action
 
 
@@ -175,6 +209,61 @@
     [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:22]];
     [titleLabel setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = titleLabel;
+}
+
+#pragma mark - Init Bubble Menu
+
+- (UIButton *)createBubbleButtonWithImageName:(NSString *)imageName
+                                         size:(CGSize)size
+                                       target:(id)target
+                                       action:(SEL)action {
+    UIButton *_button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    [_button setImage:[UIImage imageNamed:imageName]
+             forState:UIControlStateNormal];
+    [_button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    _button.layer.cornerRadius = _button.frame.size.height / 2.f;
+    _button.clipsToBounds = YES;
+    return _button;
+}
+
+- (void)prepareBubbleMenu {
+    CGSize _frameViewSize = self.view.frame.size;
+    CGSize _buttonSize = CGSizeMake(55.f, 55.f);
+    
+    UIImageView *bubbleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f,
+                                                                             _buttonSize.width,
+                                                                             _buttonSize.height)];
+    [bubbleImage setImage:[UIImage imageNamed:@"close"]];
+    bubbleImage.layer.cornerRadius = _buttonSize.height / 2.f;
+    bubbleImage.clipsToBounds = YES;
+    
+    DWBubbleMenuButton *bubbleMenu = [[DWBubbleMenuButton alloc]
+                                      initWithFrame:CGRectMake(_frameViewSize.width - _buttonSize.width - 40,
+                                                               _frameViewSize.height - _buttonSize.height - 60,
+                                                               _buttonSize.width,
+                                                               _buttonSize.height)
+                                      expansionDirection:DirectionUp];
+    bubbleMenu.homeButtonView = bubbleImage;
+    bubbleMenu.animationDuration = BUBBLE_ANIMATION_DURATION;
+    
+    UIButton *recycleButton = [self createBubbleButtonWithImageName:@"DefaultUserImage"
+                                                               size:_buttonSize
+                                                             target:nil
+                                                             action:nil];
+    UIButton *sellButton = [self createBubbleButtonWithImageName:@"DefaultItemImage"
+                                                            size:_buttonSize
+                                                          target:nil
+                                                          action:nil];
+    NSArray *buttons = [NSArray arrayWithObjects:recycleButton, sellButton, nil];
+    [bubbleMenu addButtons:buttons];
+    
+    bubbleMenu.delegate = self;
+    [self.view addSubview:bubbleMenu];
+    
+    
+    self.bubbleMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.bubbleMask setBackgroundColor:[UIColor whiteColor]];
+    self.bubbleMask.alpha = BUBBLE_MASK_OPACITY;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -227,23 +316,29 @@
     return itemsize;
 }
 
-#pragma mark - Menu Button
+#pragma mark - DWBubbleMenuView
 
-- (void)prepareMenuButton {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 40.f, 40.f)];
-    label.text = @"Tap";
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.layer.cornerRadius = label.frame.size.height / 2.f;
-    label.backgroundColor =[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.5f];
-    label.clipsToBounds = YES;
+- (void)bubbleMenuButtonWillExpand:(DWBubbleMenuButton *)expandableView {
+    [expandableView.homeButtonView.layer addAnimation:[self prepareBubbleRotationAnimationWithFromValue:0.f
+                                                                                                toValue:90.f]
+                                               forKey:BUBBLE_ROTATION_ANIMATION_KEY];
+    [self.view insertSubview:self.bubbleMask belowSubview:expandableView];
+    [self.bubbleMask.layer addAnimation:[self prepareBubbleMaskAnimationWithFromValue:0.f
+                                                                              toValue:BUBBLE_MASK_OPACITY]
+                                 forKey:BUBBLE_MASK_ANIMATION_KEY];
+}
 
-    DWBubbleMenuButton *upMenuView = [[DWBubbleMenuButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - label.frame.size.width - 20.f,self.view.frame.size.height - label.frame.size.height - 20.f, label.frame.size.width, label.frame.size.height) expansionDirection:DirectionUp];
-    upMenuView.homeButtonView = label;
+- (void)bubbleMenuButtonWillCollapse:(DWBubbleMenuButton *)expandableView {
+    [expandableView.homeButtonView.layer addAnimation:[self prepareBubbleRotationAnimationWithFromValue:90.f
+                                                                                                toValue:0.f]
+                                               forKey:BUBBLE_ROTATION_ANIMATION_KEY];
+    [self.bubbleMask.layer addAnimation:[self prepareBubbleMaskAnimationWithFromValue:BUBBLE_MASK_OPACITY
+                                                                              toValue:0.f]
+                                 forKey:BUBBLE_MASK_ANIMATION_KEY];
+}
 
-    //[upMenuView addButtons:[self createDemoButtonArray]];
-
-    [self.view addSubview:upMenuView];
+- (void)bubbleMenuButtonDidCollapse:(DWBubbleMenuButton *)expandableView {
+    [self.bubbleMask removeFromSuperview];
 }
 
 #pragma mark - Pull To Refresh
