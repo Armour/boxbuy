@@ -1032,7 +1032,7 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reusableHeaderCell" id="I8O-gO-k26">
-                                    <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                    <rect key="frame" x="0.0" y="64" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
@@ -1243,13 +1243,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" text="123" translatesAutoresizingMaskIntoConstraints="NO" id="1g7-Yb-ZGb">
-                                <rect key="frame" x="16" y="268" width="568" height="165"/>
+                                <rect key="frame" x="16" y="268.5" width="568" height="164.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝图片：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt9-sQ-k2F">
-                                <rect key="frame" x="16" y="72" width="115" height="21"/>
+                                <rect key="frame" x="16" y="72" width="115" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="115" id="F0E-W0-u8X"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="ecS-e1-bSV"/>
@@ -1266,7 +1266,7 @@
                                 </variation>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" text="给宝贝起个名字吧~" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-cR-cs0">
-                                <rect key="frame" x="16" y="220" width="568" height="40"/>
+                                <rect key="frame" x="16" y="220.5" width="568" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2Qv-dH-x9t"/>
@@ -1290,7 +1290,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWr-DH-kf2">
-                                <rect key="frame" x="16" y="494" width="281" height="45"/>
+                                <rect key="frame" x="16" y="494" width="280.5" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TDJ-88-olK"/>
@@ -1305,7 +1305,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-9H-hHu">
-                                <rect key="frame" x="303" y="494" width="281" height="45"/>
+                                <rect key="frame" x="303.5" y="494" width="280.5" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="    成色：请选择">
@@ -1317,7 +1317,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3f9-gV-rCQ">
-                                <rect key="frame" x="16" y="547" width="281" height="45"/>
+                                <rect key="frame" x="16" y="547" width="280.5" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="QRb-rF-JcS"/>
@@ -1332,7 +1332,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brz-TS-kwL">
-                                <rect key="frame" x="303" y="547" width="281" height="45"/>
+                                <rect key="frame" x="303.5" y="547" width="280.5" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="    数量：请选择">
@@ -1353,7 +1353,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lc9-PA-LQO">
-                                <rect key="frame" x="16" y="102" width="110" height="110"/>
+                                <rect key="frame" x="16" y="102.5" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="7Q9-L4-hAs"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="7Tl-2J-txC"/>
@@ -1375,7 +1375,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2L-lS-bZ2">
-                                <rect key="frame" x="131" y="102" width="110" height="110"/>
+                                <rect key="frame" x="131" y="102.5" width="110.5" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Cft-b4-fe1"/>
                                     <constraint firstAttribute="width" constant="64" id="jnL-Yl-9Yj"/>
@@ -1393,8 +1393,8 @@
                                     <action selector="takePhotoButtonTouchUpInside:" destination="Guo-Ac-9uo" eventType="touchUpInside" id="bDl-f9-HyZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaD-zi-GLv">
-                                <rect key="frame" x="244" y="102" width="111" height="110"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaD-zi-GLv">
+                                <rect key="frame" x="244.5" y="102.5" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="iDs-OY-Y1O"/>
                                     <constraint firstAttribute="height" constant="64" id="sWE-p1-uzu"/>
@@ -1413,7 +1413,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3q-gV-KLF">
-                                <rect key="frame" x="357" y="102" width="110" height="110"/>
+                                <rect key="frame" x="356.5" y="102.5" width="110.5" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="R7F-rq-gLL"/>
                                     <constraint firstAttribute="height" constant="64" id="lwt-EP-0b4"/>
@@ -1432,7 +1432,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9HC-Lj-foM">
-                                <rect key="frame" x="473" y="102" width="110" height="110"/>
+                                <rect key="frame" x="473" y="102.5" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="1KH-6l-RKy"/>
                                     <constraint firstAttribute="height" constant="64" id="X9t-1p-uOU"/>
@@ -1451,7 +1451,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPm-B2-Hw1">
-                                <rect key="frame" x="229" y="94" width="20" height="20"/>
+                                <rect key="frame" x="229.5" y="94.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="8re-W5-fpM"/>
                                     <constraint firstAttribute="height" constant="20" id="uRN-7D-UEQ"/>
@@ -1464,7 +1464,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8B-3x-Tki">
-                                <rect key="frame" x="342" y="94" width="20" height="20"/>
+                                <rect key="frame" x="342.5" y="94.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="1Vw-3q-Ipg"/>
                                     <constraint firstAttribute="height" constant="20" id="lKD-hR-s6o"/>
@@ -1477,7 +1477,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNa-yc-lCi">
-                                <rect key="frame" x="455" y="94" width="20" height="20"/>
+                                <rect key="frame" x="455" y="94.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="AYT-bt-0OB"/>
                                     <constraint firstAttribute="width" constant="20" id="rEg-1i-JyU"/>
@@ -1490,7 +1490,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n90-fY-xHF">
-                                <rect key="frame" x="571" y="94" width="20" height="20"/>
+                                <rect key="frame" x="571" y="94.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ECS-wt-1d3"/>
                                     <constraint firstAttribute="width" constant="20" id="KQG-1u-6BW"/>
@@ -1503,7 +1503,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDP-Ll-k72">
-                                <rect key="frame" x="114" y="94" width="20" height="20"/>
+                                <rect key="frame" x="114" y="94.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Gfe-9r-bqk"/>
                                     <constraint firstAttribute="width" constant="20" id="rfG-Ef-1t7"/>
