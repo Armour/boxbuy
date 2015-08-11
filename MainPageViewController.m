@@ -16,6 +16,7 @@
 
 
 #define WATERFALL_CELL @"WaterfallCell"
+#define HEADER_CELL @"ReusableHeaderCell"
 #define ITEMS_PER_PAGE 30
 
 @interface MainPageViewController ()
@@ -68,17 +69,21 @@
     self.cellModels = nil;
 }
 
+- (void)dealloc {
+    self.waterfallView = nil;
+}
+
 #pragma mark - Inner Helper
 
 - (void)initWaterfallView {
     [self.waterfallView registerClass:[WaterfallCellView class] forCellWithReuseIdentifier:WATERFALL_CELL];
+    [self.waterfallView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL];
 
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     layout.columnCount = 2;
     layout.footerHeight = 0;
-    layout.headerHeight = 0;
+    layout.headerHeight = 90;
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
-    
     self.waterfallView.collectionViewLayout = layout;
 
     isFetching = NO;
@@ -214,6 +219,16 @@
     }];
     [model setTitleHeight:cell.titleButtonHeightConstraint.constant];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusableview = nil;
+    if (kind == CHTCollectionElementKindSectionHeader) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL forIndexPath:indexPath];
+        // add ueariamge here
+        reusableview = headerView;
+    }
+    return reusableview;
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
