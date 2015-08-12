@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSString *refresh_token;
 @property (strong, nonatomic) NSString *expire_time;
 @property (strong, nonatomic) NSTimer *timer;
-@property (strong, nonatomic) UIView *mask;
+@property (strong, nonatomic) UIView *loadingMask;
 @property (nonatomic) NSInteger timerCountInRegister;
 @property (nonatomic) NSInteger timerCountInChangePassword;
 
@@ -48,7 +48,7 @@ enum {
     [self prepareMyTextField];
     [self prepareMyIndicator];
     [self prepareMyNotification];
-    [self prepareMyMask];
+    [self prepareLoadingMask];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -152,18 +152,18 @@ enum {
 
 #pragma mark - Mask When Loading
 
-- (void)prepareMyMask {
-    self.mask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    [self.mask setBackgroundColor:[UIColor grayColor]];
-    self.mask.alpha = 0.6;
+- (void)prepareLoadingMask {
+    self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.loadingMask setBackgroundColor:[UIColor grayColor]];
+    self.loadingMask.alpha = 0.6;
 }
 
-- (void)addMask {
-    [self.view addSubview:self.mask];
+- (void)addLoadingMask {
+    [self.view addSubview:self.loadingMask];
 }
 
-- (void)removeMask {
-    [self.mask removeFromSuperview];
+- (void)removeLoadingMask {
+    [self.loadingMask removeFromSuperview];
 }
 
 #pragma mark - LoginButton Clicked
@@ -172,7 +172,7 @@ enum {
     [self.view endEditing:YES];
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
-    [self addMask];
+    [self addLoadingMask];
     [self.view bringSubviewToFront:self.activityIndicator];
     dispatch_queue_t requestQueue = dispatch_queue_create("webRequestInLogin", NULL);
     dispatch_async(requestQueue, ^{
@@ -213,7 +213,7 @@ enum {
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
             [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
-            [self removeMask];
+            [self removeLoadingMask];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.activityIndicator stopAnimating];
@@ -225,7 +225,7 @@ enum {
             } else if (status == 10002) {
                 [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在╮(╯_╰)╭"];
             }
-            [self removeMask];
+            [self removeLoadingMask];
         });
     });
 }
