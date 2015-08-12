@@ -30,9 +30,8 @@
     return self;
 }
 
-/////////////////////////////////////////////////////////////////////////
 #pragma mark - ActionSheetCustomPickerDelegate Optional's
-/////////////////////////////////////////////////////////////////////////
+
 - (void)configurePickerView:(UIPickerView *)pickerView {
     // Override default and hide selection indicator
     pickerView.showsSelectionIndicator = NO;
@@ -47,9 +46,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CategorySelectFinished" object:self userInfo:dict];
 }
 
-/////////////////////////////////////////////////////////////////////////
+
 #pragma mark - UIPickerViewDataSource Implementation
-/////////////////////////////////////////////////////////////////////////
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 2;
@@ -65,9 +63,7 @@
     return 0;
 }
 
-/////////////////////////////////////////////////////////////////////////
 #pragma mark UIPickerViewDelegate Implementation
-/////////////////////////////////////////////////////////////////////////
 
 // returns width of column and height of row for each component.
 /*- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
@@ -91,8 +87,6 @@
     }
     return nil;
 }
-
-/////////////////////////////////////////////////////////////////////////
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSLog(@"Row %li selected in component %li", (long)row, (long)component);

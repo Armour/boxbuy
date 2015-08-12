@@ -410,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wm-Td-eas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1256.5" y="1371.5"/>
+            <point key="canvasLocation" x="-609.5" y="1117.5"/>
         </scene>
         <!--修改昵称-->
         <scene sceneID="JeS-lh-d1N">
@@ -446,7 +446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0QK-ld-WTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-44.5" y="2172.5"/>
+            <point key="canvasLocation" x="-609.5" y="1909.5"/>
         </scene>
         <!--我的店铺-->
         <scene sceneID="5Mc-12-NBE">
@@ -484,7 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPi-qS-pNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414.5" y="2172.5"/>
+            <point key="canvasLocation" x="-148.5" y="1909.5"/>
         </scene>
         <!--我的商品-->
         <scene sceneID="hDI-rJ-FjP">
@@ -520,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCW-qt-syy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879.5" y="2172.5"/>
+            <point key="canvasLocation" x="315.5" y="1909.5"/>
         </scene>
         <!--我的订单-->
         <scene sceneID="vde-a0-ZK4">
@@ -540,7 +540,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rb-qf-8hY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716.5" y="1371.5"/>
+            <point key="canvasLocation" x="-148.5" y="1117.5"/>
         </scene>
         <!--我的-->
         <scene sceneID="BQB-xY-XGS">
@@ -557,7 +557,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbl-6V-Df5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="794.5" y="1371.5"/>
+            <point key="canvasLocation" x="-1066.5" y="1117.5"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="cvj-Cd-D9p">
@@ -588,137 +588,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-1066.5" y="-615.5"/>
-        </scene>
-        <!--分类:-->
-        <scene sceneID="JbC-QQ-qqX">
-            <objects>
-                <viewController id="WbG-eI-Bj8" customClass="CategoryDetailViewController" sceneMemberID="viewController">
-                    <webView key="view" contentMode="scaleToFill" id="r3W-yj-cCo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </webView>
-                    <navigationItem key="navigationItem" title="分类:" id="CSv-7r-O3W">
-                        <barButtonItem key="backBarButtonItem" title=" " id="PNc-bg-d0i"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="categoryDetailWebView" destination="r3W-yj-cCo" id="Dqx-iy-t6o"/>
-                        <segue destination="GkO-yn-bOb" kind="show" identifier="detailFromCategory" id="Zf1-Q5-YCv"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g8E-Eb-edd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-44.5" y="-192.5"/>
-        </scene>
-        <!--商品详情-->
-        <scene sceneID="5N6-Y9-NOq">
-            <objects>
-                <viewController id="GkO-yn-bOb" customClass="ObjectDetailInCategoryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eRK-yd-r3w"/>
-                        <viewControllerLayoutGuide type="bottom" id="qKw-FR-3qp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="izV-v0-nXr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eN5-gR-jIu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="eN5-gR-jIu" firstAttribute="top" secondItem="izV-v0-nXr" secondAttribute="top" id="5VA-9Q-U6d"/>
-                            <constraint firstItem="eN5-gR-jIu" firstAttribute="leading" secondItem="izV-v0-nXr" secondAttribute="leading" id="I9i-No-BIb"/>
-                            <constraint firstAttribute="trailing" secondItem="eN5-gR-jIu" secondAttribute="trailing" id="n9I-cN-fj4"/>
-                            <constraint firstItem="eN5-gR-jIu" firstAttribute="bottom" secondItem="qKw-FR-3qp" secondAttribute="top" id="sDo-i7-Uqp"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="商品详情" id="2kA-xb-Zko">
-                        <barButtonItem key="backBarButtonItem" title=" " id="thn-m1-loN"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectDetailWebView" destination="eN5-gR-jIu" id="dZM-ik-RXR"/>
-                        <segue destination="w5W-pU-oyb" kind="show" identifier="buyItemInCategory" id="Ydy-sx-UUP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qZA-Pq-FoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="402.5" y="-192.5"/>
-        </scene>
-        <!--购买商品-->
-        <scene sceneID="6Wt-aQ-yjp">
-            <objects>
-                <viewController id="w5W-pU-oyb" customClass="ObjectBuyInCategoryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="E6W-CE-UTf"/>
-                        <viewControllerLayoutGuide type="bottom" id="YJW-hw-Q1K"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="W0I-Pz-KEd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Id9-EJ-9Xb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Id9-EJ-9Xb" firstAttribute="leading" secondItem="W0I-Pz-KEd" secondAttribute="leading" id="5yo-Ux-eEX"/>
-                            <constraint firstItem="Id9-EJ-9Xb" firstAttribute="bottom" secondItem="YJW-hw-Q1K" secondAttribute="top" id="eoe-7e-4IN"/>
-                            <constraint firstItem="Id9-EJ-9Xb" firstAttribute="top" secondItem="W0I-Pz-KEd" secondAttribute="top" id="hO0-Ng-qBZ"/>
-                            <constraint firstAttribute="trailing" secondItem="Id9-EJ-9Xb" secondAttribute="trailing" id="k5R-17-7p3"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="购买商品" id="76t-y2-qHN">
-                        <barButtonItem key="backBarButtonItem" title=" " id="L74-wQ-mPT"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectBuyWebView" destination="Id9-EJ-9Xb" id="R9O-Yt-Ixr"/>
-                        <segue destination="i9Q-b6-k2I" kind="show" identifier="obejectBuyResultInCategory" id="oJN-Fl-bWW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="arx-dY-2tR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="851.5" y="-192.5"/>
-        </scene>
-        <!--确认订单-->
-        <scene sceneID="8zf-xX-PdG">
-            <objects>
-                <viewController id="i9Q-b6-k2I" customClass="ObjectBuyResultInCategoryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="asW-QD-cjz"/>
-                        <viewControllerLayoutGuide type="bottom" id="cch-Dx-74M"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1Wu-aD-WAX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIx-Up-8ue">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="qIx-Up-8ue" secondAttribute="trailing" id="i0N-r6-EJt"/>
-                            <constraint firstItem="qIx-Up-8ue" firstAttribute="bottom" secondItem="cch-Dx-74M" secondAttribute="top" id="i3S-NP-iaR"/>
-                            <constraint firstItem="qIx-Up-8ue" firstAttribute="top" secondItem="1Wu-aD-WAX" secondAttribute="top" id="pFq-T7-vbe"/>
-                            <constraint firstItem="qIx-Up-8ue" firstAttribute="leading" secondItem="1Wu-aD-WAX" secondAttribute="leading" id="pkS-Hu-dFB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="确认订单" id="8PQ-IK-Dm6">
-                        <barButtonItem key="backBarButtonItem" title=" " id="7tq-zO-azM"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectBuyResultWebview" destination="qIx-Up-8ue" id="hGb-yc-mhR"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YW8-hV-txn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1303.5" y="-192.5"/>
         </scene>
         <!--搜索结果-->
         <scene sceneID="hqA-rs-ii0">
@@ -957,8 +826,7 @@
                         <segue destination="el8-x4-WrI" kind="show" identifier="showVerification" id="94F-h8-wDZ"/>
                         <segue destination="tpd-04-8WW" kind="show" identifier="showSearchPage" id="5O1-pX-cvE"/>
                         <segue destination="HuI-HL-8TD" kind="show" identifier="selling" id="IIQ-ik-STw"/>
-                        <segue destination="3T2-bN-Jg2" kind="show" id="nbc-Rb-MPB"/>
-                        <segue destination="WbG-eI-Bj8" kind="show" id="Z7d-Is-dzc"/>
+                        <segue destination="3T2-bN-Jg2" kind="show" identifier="myInformation" id="nbc-Rb-MPB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMf-hl-PaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1378,7 +1246,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1256.5" y="585.5"/>
+            <point key="canvasLocation" x="-609.5" y="201.5"/>
         </scene>
         <!--Selling Ensure View Controller-->
         <scene sceneID="3W2-cN-vyD">
@@ -1401,7 +1269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8f-if-8YM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716.5" y="585.5"/>
+            <point key="canvasLocation" x="-148.5" y="201.5"/>
         </scene>
         <!--我要卖-->
         <scene sceneID="GmM-t8-GgC">
@@ -1420,7 +1288,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0S-dH-mzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="794.5" y="585.5"/>
+            <point key="canvasLocation" x="-1066.5" y="201.5"/>
         </scene>
         <!--My Navigation Controller-->
         <scene sceneID="bbf-6K-eXp">
@@ -1636,6 +1504,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="IRI-1L-pUC"/>
         <segue reference="JHU-KT-8bK"/>
-        <segue reference="94F-h8-wDZ"/>
+        <segue reference="Lwo-LW-fPN"/>
     </inferredMetricsTieBreakers>
 </document>

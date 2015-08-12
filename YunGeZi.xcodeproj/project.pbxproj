@@ -211,6 +211,24 @@
 			name = "Login and Register";
 			sourceTree = "<group>";
 		};
+		76AD1BCF1B7B30E000BA8512 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				47110B251B77A181001C9B5A /* RootViewController.h */,
+				47110B261B77A181001C9B5A /* RootViewController.m */,
+				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
+				76F426AA1AEF271B00A5849A /* MainPageViewController.m */,
+				47110B281B77A2DD001C9B5A /* LeftMenuViewController.h */,
+				47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */,
+				474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */,
+				474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */,
+				7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */,
+				474C5F001B73553300CDE2AF /* WaterfallCellModel.h */,
+				474C5F011B73553300CDE2AF /* WaterfallCellModel.m */,
+			);
+			name = MainPage;
+			sourceTree = "<group>";
+		};
 		76E333231AEDF8C30077BACF = {
 			isa = PBXGroup;
 			children = (
@@ -236,10 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
-				76AD1BCB1B7B22D500BA8512 /* DeviceDetect.h */,
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
-				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
-				76F426AA1AEF271B00A5849A /* MainPageViewController.m */,
+				76AD1BCF1B7B30E000BA8512 /* MainPage */,
 				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
 				7651D2C01AF07434003184A8 /* SearchViewController.m */,
 				76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */,
@@ -282,15 +298,6 @@
 				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
 				76E3332F1AEDF8C40077BACF /* Supporting Files */,
-				474C5EFB1B732E7F00CDE2AF /* WaterfallCellView.h */,
-				474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */,
-				7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */,
-				474C5F001B73553300CDE2AF /* WaterfallCellModel.h */,
-				474C5F011B73553300CDE2AF /* WaterfallCellModel.m */,
-				47110B251B77A181001C9B5A /* RootViewController.h */,
-				47110B261B77A181001C9B5A /* RootViewController.m */,
-				47110B281B77A2DD001C9B5A /* LeftMenuViewController.h */,
-				47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */,
 			);
 			path = YunGeZi;
 			sourceTree = "<group>";
@@ -300,6 +307,7 @@
 			children = (
 				76E333331AEDF8C40077BACF /* AppDelegate.h */,
 				76E333341AEDF8C40077BACF /* AppDelegate.m */,
+				76AD1BCB1B7B22D500BA8512 /* DeviceDetect.h */,
 				76E333411AEDF8C40077BACF /* LaunchScreen.xib */,
 				76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */,
 				76E333301AEDF8C40077BACF /* Info.plist */,
