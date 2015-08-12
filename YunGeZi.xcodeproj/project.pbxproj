@@ -11,6 +11,8 @@
 		47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */; };
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
+		47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */; };
+		47F4BBBF1B7B485200FA8524 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBE1B7B485200FA8524 /* UserSettings.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
 		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
 		7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */; };
@@ -70,6 +72,10 @@
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
 		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
+		47F4BBBA1B7B47F300FA8524 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		47F4BBBD1B7B485200FA8524 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
+		47F4BBBE1B7B485200FA8524 /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
 		7603A8271AFC58F6007E4B78 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		7603A8281AFC58F6007E4B78 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		7603A82A1AFC682A007E4B78 /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
@@ -179,6 +185,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		47F4BBB91B7B47CB00FA8524 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				47F4BBBA1B7B47F300FA8524 /* SettingTableViewController.h */,
+				47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */,
+				47F4BBBD1B7B485200FA8524 /* UserSettings.h */,
+				47F4BBBE1B7B485200FA8524 /* UserSettings.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +270,7 @@
 		76E3332E1AEDF8C40077BACF /* YunGeZi */ = {
 			isa = PBXGroup;
 			children = (
+				47F4BBB91B7B47CB00FA8524 /* Setting */,
 				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
 				76AD1BCF1B7B30E000BA8512 /* MainPage */,
@@ -487,6 +505,7 @@
 				7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */,
 				7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */,
 				47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */,
+				47F4BBBF1B7B485200FA8524 /* UserSettings.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
 				7613EB6A1B777D0700C4FB9A /* ChooseSchoolTableViewController.m in Sources */,
 				7609A1091AFF58F800B134C9 /* ObjectBuyingViewController.m in Sources */,
@@ -500,6 +519,7 @@
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
+				47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */,
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,
