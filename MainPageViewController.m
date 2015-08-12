@@ -186,8 +186,6 @@
     return rotationAnimation;
 }
 
-#pragma mark - Action
-
 #pragma mark - Prepare Indicator
 
 - (void)prepareMyIndicator {
@@ -242,11 +240,11 @@
     UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:nil
                                                                             action:nil];
-    UIBarButtonItem *moreMenuButton = [self createUIBarButtonItemWithImageName:@"config"
-                                                                        target:nil
-                                                                        action:nil];
+    UIBarButtonItem *configButton = [self createUIBarButtonItemWithImageName:@"config"
+                                                                      target:self
+                                                                      action:@selector(configButtonTouchUpInside:)];
     NSArray *leftButtons = [NSArray arrayWithObjects:leftNavButton, leftSpaceButton, nil];
-    NSArray *rightButtons = [NSArray arrayWithObjects:moreMenuButton, notificationButton, searchButton, nil];
+    NSArray *rightButtons = [NSArray arrayWithObjects:configButton, notificationButton, searchButton, nil];
     self.navigationItem.leftBarButtonItems = leftButtons;
     self.navigationItem.rightBarButtonItems = rightButtons;
 
@@ -402,6 +400,10 @@
     }
 }
 
+- (void)configButtonTouchUpInside:(UIBarButtonItem *)sender {
+    [self performSegueToUserSettingsPage];
+}
+
 #pragma mark - DWBubbleMenuView
 
 - (void)bubbleMenuButtonWillExpand:(DWBubbleMenuButton *)expandableView {
@@ -486,6 +488,11 @@
 
 - (void)performSegueToSearchPage {
     [self performSegueWithIdentifier:@"showSearchPage" sender:self];
+}
+
+- (void)performSegueToUserSettingsPage {
+    NSLog(@"SEGUE TO SETTINGSPAGE");
+    [self performSegueWithIdentifier:@"showUserSettings" sender:self];
 }
 
 @end

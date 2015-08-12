@@ -11,7 +11,7 @@
 
 @interface SettingTableViewController ()
 
-@property (strong, readonly, nonatomic) UserSettings *userSettings;
+@property (strong, nonatomic) UserSettings *userSettings;
 @property (weak, nonatomic) IBOutlet UISwitch *notificationEnabledSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *soundNotificationEnabledSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *vibrationNotificationEnabledSwitch;
@@ -26,7 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareSwitchs];
-    [self prepareView];
+    [self prepareTableView];
+    self.userSettings = [[UserSettings alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,12 +38,14 @@
 #pragma mark - Preparation
 
 - (void)prepareSwitchs {
-    self.notificationEnabledSwitch.on = [self.userSettings isNotificationEnabled];
-    self.soundNotificationEnabledSwitch.on = [self.userSettings isSoundNotificationEnabled];
-    self.vibrationNotificationEnabledSwitch.on = [self.userSettings isVibrationNotificationEnabled];
+    self.notificationEnabledSwitch.on = [UserSettings isNotificationEnabled];
+    self.soundNotificationEnabledSwitch.on = [UserSettings isSoundNotificationEnabled];
+    self.vibrationNotificationEnabledSwitch.on = [UserSettings isVibrationNotificationEnabled];
+    
+    [self notificationEnabledChanged:self.notificationEnabledSwitch];
 }
 
-- (void)prepareView {
+- (void)prepareTableView {
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [UIView new]; // Remove reductant separator line
     self.title = @"设置";
@@ -53,15 +56,26 @@
 #pragma mark - Action
 
 - (IBAction)notificationEnabledChanged:(UISwitch *)sender {
-    [self.userSettings setNotificationEnabled:sender.on];
+    [UserSettings setNotificationEnabled:sender.on];
+    if (!sender.on) {   // Dirty Code Waiting to be Refactored :)
+        self.soundNotificationEnabledSwitch.on = NO;
+        self.soundNotificationEnabledSwitch.enabled = NO;
+        [self soundNotificationEnabledChanged:self.soundNotificationEnabledSwitch];
+        self.vibrationNotificationEnabledSwitch.on = NO;
+        self.vibrationNotificationEnabledSwitch.enabled = NO;
+        [self vibrationNotificationEnabledChanged:self.vibrationNotificationEnabledSwitch];
+    } else {
+        self.soundNotificationEnabledSwitch.enabled = YES;
+        self.vibrationNotificationEnabledSwitch.enabled = YES;
+    }
 }
 
 - (IBAction)soundNotificationEnabledChanged:(UISwitch *)sender {
-    [self.userSettings setSoundNotificationEnabled:sender.on];
+    [UserSettings setSoundNotificationEnabled:sender.on];
 }
 
 - (IBAction)vibrationNotificationEnabledChanged:(UISwitch *)sender {
-    [self.userSettings setVibrationNotificationEnabled:sender.on];
+    [UserSettings setVibrationNotificationEnabled:sender.on];
 }
 
 - (IBAction)logOutButtonTouchUpInside:(UIButton *)sender {

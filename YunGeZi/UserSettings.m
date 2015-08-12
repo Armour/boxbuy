@@ -21,31 +21,31 @@
 
 @implementation UserSettings
 
-- (NSUserDefaults *)userDefaults {
++ (NSUserDefaults *)userDefaults {
     return [NSUserDefaults standardUserDefaults];
 }
 
-- (void)setNotificationEnabled:(BOOL)value {
++ (void)setNotificationEnabled:(BOOL)value {
     [self.userDefaults setBool:value forKey:NOTIFICATION_KEY];
 }
 
-- (void)setSoundNotificationEnabled:(BOOL)value {
++ (void)setSoundNotificationEnabled:(BOOL)value {
     [self.userDefaults setBool:value forKey:SOUND_NOTIFICATION_KEY];
 }
 
-- (void)setVibrationNotificationEnabled:(BOOL)value {
++ (void)setVibrationNotificationEnabled:(BOOL)value {
     [self.userDefaults setBool:value forKey:VIBRATION_NOTIFICATION_KEY];
 }
 
-- (BOOL)isIsNotificationEnabled {
++ (BOOL)isNotificationEnabled {
     return [self.userDefaults boolForKey:NOTIFICATION_KEY];
 }
 
-- (BOOL)isSoundNotificationEnabled {
++ (BOOL)isSoundNotificationEnabled {
     return [self.userDefaults boolForKey:SOUND_NOTIFICATION_KEY];
 }
 
-- (BOOL)isVibrationNotificationEnabled {
++ (BOOL)isVibrationNotificationEnabled {
     return [self.userDefaults boolForKey:VIBRATION_NOTIFICATION_KEY];
 }
 
