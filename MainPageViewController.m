@@ -8,6 +8,7 @@
 
 #import "MyNavigationController.h"
 #import "MainPageViewController.h"
+#import "ObjectDetailViewInMainController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
@@ -15,6 +16,7 @@
 #import "MobClick.h"
 
 #define WATERFALL_CELL @"WaterfallCell"
+#define HEADER_CELL @"ReusableHeaderCell"
 #define ITEMS_PER_PAGE 30
 #define BUBBLE_ROTATION_ANIMATION_KEY @"BubbleRotationAnimation"
 #define BUBBLE_MASK_ANIMATION_KEY @"BubbleMaskAnimation"
@@ -28,6 +30,10 @@
 @property (nonatomic) NSUInteger pageCount;
 @property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
+@property (strong, nonatomic) NSMutableArray *itemId;
+@property (strong, nonatomic) NSMutableArray *sellerId;
+@property (strong, nonatomic) NSString *choosedItemId;
+@property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
 
@@ -39,6 +45,10 @@
 @synthesize pageCount;
 @synthesize isFetching;
 @synthesize cellModels;
+@synthesize itemId;
+@synthesize sellerId;
+@synthesize choosedItemId;
+@synthesize choosedSellerId;
 
 #pragma mark - Life Circle
 
@@ -76,17 +86,21 @@
     self.cellModels = nil;
 }
 
+- (void)dealloc {
+    self.waterfallView = nil;
+}
+
 #pragma mark - Inner Helper
 
 - (void)initWaterfallView {
     [self.waterfallView registerClass:[WaterfallCellView class] forCellWithReuseIdentifier:WATERFALL_CELL];
+    [self.waterfallView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL];
 
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     layout.columnCount = 2;
     layout.footerHeight = 0;
-    layout.headerHeight = 0;
+    layout.headerHeight = 90;
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
-    
     self.waterfallView.collectionViewLayout = layout;
 
     isFetching = NO;
@@ -114,8 +128,9 @@
               //NSLog(@"JSON => %@", response);
               if (page == 1) {
                   self.pageCount = [[response valueForKeyPath:@"totalpage"] integerValue];
-                  //self.itemCount = [[response valueForKeyPath:@"total"] integerValue];
                   cellModels = [[NSMutableArray alloc] init];
+                  itemId = [[NSMutableArray alloc] init];
+                  sellerId = [[NSMutableArray alloc] init];
               }
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
@@ -131,6 +146,8 @@
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
                   [model setSellerState:@"这是毛？"];
                   [cellModels addObject:model];
+                  [itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
+                  [sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
                   NSLog(@" 新商品!!!! %@ ", model.itemTitle);
               }
               NSLog(@"Fetch successed!");
@@ -338,8 +355,26 @@
             }];
         }
     }];
+    [cell.itemImageButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.sellerPhotoImageButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [model setTitleHeight:cell.titleButtonHeightConstraint.constant];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusableview = nil;
+    if (kind == CHTCollectionElementKindSectionHeader) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL forIndexPath:indexPath];
+        // add ueariamge here
+        reusableview = headerView;
+    }
+    return reusableview;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@", indexPath);
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
@@ -351,6 +386,28 @@
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
     return itemsize;
+}
+
+#pragma mark - Button Touch Event Handle
+
+- (void)itemButtonTouchUpInside:(UIButton *)sender {
+    WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
+    NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
+    if (indexPath != nil) {
+        choosedItemId = [itemId objectAtIndex:indexPath.item];
+        choosedSellerId = @"";
+        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+    }
+}
+
+- (void)sellerButtonTouchUpInside:(UIButton *)sender {
+    WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
+    NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
+    if (indexPath != nil) {
+        choosedSellerId = [sellerId objectAtIndex:indexPath.row];
+        choosedItemId = @"";
+        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+    }
 }
 
 #pragma mark - DWBubbleMenuView
@@ -408,8 +465,9 @@
 
 - (void)pullToRefreshTriggered:(id)sender {
     NSLog(@"Refresh~!");
-    [self.waterfallView reloadData];
+    [self fillCellModelsForPage:1];
     [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:2.5 inModes:@[NSRunLoopCommonModes]];
+    [self.waterfallView reloadData];
 }
 
 - (void)finishRefreshControl {
@@ -419,6 +477,19 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - Segue Detail
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"detailFromMain"]) {
+        if ([choosedItemId isEqualToString:@""]) {
+            NSLog(@"%@!!!", choosedSellerId);
+        } else if ([choosedSellerId isEqualToString:@""]) {
+            ObjectDetailInMainViewController *destViewController = segue.destinationViewController;
+            destViewController.objectNumber = choosedItemId;
+        }
+    }
 }
 
 @end
