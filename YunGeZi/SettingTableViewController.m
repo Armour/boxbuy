@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareSwitchs];
+    [self prepareView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,30 +37,31 @@
 #pragma mark - Preparation
 
 - (void)prepareSwitchs {
-    self.notificationEnabledSwitch.enabled = [self.userSettings isNotificationEnabled];
-    self.soundNotificationEnabledSwitch.enabled = [self.userSettings isSoundNotificationEnabled];
-    self.vibrationNotificationEnabledSwitch.enabled = [self.userSettings isVibrationNotificationEnabled];
+    self.notificationEnabledSwitch.on = [self.userSettings isNotificationEnabled];
+    self.soundNotificationEnabledSwitch.on = [self.userSettings isSoundNotificationEnabled];
+    self.vibrationNotificationEnabledSwitch.on = [self.userSettings isVibrationNotificationEnabled];
 }
 
 - (void)prepareView {
     self.tableView.delegate = self;
+    self.tableView.tableFooterView = [UIView new]; // Remove reductant separator line
     self.title = @"设置";
     // TODO
-    [self.imageCachedSizeLabel setText:@"0.0MB"];
+    [self.imageCachedSizeLabel setText:@"1.7MB"];
 }
 
 #pragma mark - Action
 
 - (IBAction)notificationEnabledChanged:(UISwitch *)sender {
-    [self.userSettings setNotificationEnabled:sender.enabled];
+    [self.userSettings setNotificationEnabled:sender.on];
 }
 
 - (IBAction)soundNotificationEnabledChanged:(UISwitch *)sender {
-    [self.userSettings setSoundNotificationEnabled:sender.enabled];
+    [self.userSettings setSoundNotificationEnabled:sender.on];
 }
 
 - (IBAction)vibrationNotificationEnabledChanged:(UISwitch *)sender {
-    [self.userSettings setVibrationNotificationEnabled:sender.enabled];
+    [self.userSettings setVibrationNotificationEnabled:sender.on];
 }
 
 - (IBAction)logOutButtonTouchUpInside:(UIButton *)sender {
