@@ -10,14 +10,16 @@
 
 @interface UserSettings : NSObject
 
-@property (readonly, nonatomic) BOOL isNotificationEnabled;
-@property (readonly, nonatomic) BOOL isSoundNotificationEnabled;
-@property (readonly, nonatomic) BOOL isVibrationNotificationEnabled;
++ (BOOL)isNotificationEnabled;
 
-- (void)setNotificationEnabled:(BOOL)value;
++ (BOOL)isSoundNotificationEnabled;
 
-- (void)setSoundNotificationEnabled:(BOOL)value;
++ (BOOL)isVibrationNotificationEnabled;
 
-- (void)setVibrationNotificationEnabled:(BOOL)value;
++ (void)setNotificationEnabled:(BOOL)value;
+
++ (void)setSoundNotificationEnabled:(BOOL)value;
+
++ (void)setVibrationNotificationEnabled:(BOOL)value;
 
 @end
