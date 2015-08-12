@@ -11,6 +11,7 @@
 		47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */; };
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
+		47F4BBB81B7B17B400FA8524 /* LeftMenuTreeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */; };
 		7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */; };
 		7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
@@ -80,6 +81,8 @@
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
 		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
+		47F4BBB61B7B17B400FA8524 /* LeftMenuTreeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTreeViewModel.h; sourceTree = "<group>"; };
+		47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTreeViewModel.m; sourceTree = "<group>"; };
 		7603A8211AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategorySearchViewController.h; sourceTree = "<group>"; };
 		7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategorySearchViewController.m; sourceTree = "<group>"; };
 		7603A8241AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategoryViewController.h; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 				47110B261B77A181001C9B5A /* RootViewController.m */,
 				47110B281B77A2DD001C9B5A /* LeftMenuViewController.h */,
 				47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */,
+				47F4BBB61B7B17B400FA8524 /* LeftMenuTreeViewModel.h */,
+				47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */,
 			);
 			path = YunGeZi;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */,
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
+				47F4BBB81B7B17B400FA8524 /* LeftMenuTreeViewModel.m in Sources */,
 				474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */,

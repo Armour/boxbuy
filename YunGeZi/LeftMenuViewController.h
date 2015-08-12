@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
+#import "RATreeView.h"
 
-@interface LeftMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, RESideMenuDelegate>
+@interface LeftMenuViewController : UIViewController <RESideMenuDelegate, RATreeViewDataSource, RATreeViewDelegate>
 
 @end

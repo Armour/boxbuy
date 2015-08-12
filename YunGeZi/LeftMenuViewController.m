@@ -7,12 +7,15 @@
 //
 
 #import "LeftMenuViewController.h"
+#import "LeftMenuTreeViewModel.h"
 #import "RootViewController.h"
 #import "UIViewController+RESideMenu.h"
+#import "RATreeView.h"
 
 @interface LeftMenuViewController ()
 
-@property (strong, readwrite, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray *models;
+@property (strong, nonatomic) RATreeView *treeView;
 
 @end
 
@@ -23,21 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
-        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        tableView.opaque = NO;
-        tableView.backgroundColor = [UIColor clearColor];
-        tableView.backgroundView = nil;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        tableView.bounces = NO;
-        tableView.scrollsToTop = NO;
-        tableView;
-    });
-    [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor clearColor];
+    
+    [self prepareTreeView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,44 +36,82 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark UITableView Datasource
+#pragma mark - Init Tree View
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 54;
+- (void)prepareTreeViewModels {
+    LeftMenuTreeViewModel *electronicProduct = [LeftMenuTreeViewModel modelWithMainClass:@"电子"
+                                                                              subClasses:[NSArray arrayWithObjects:@"手机",
+                                                                                          @"电脑", @"相机", @"移动存储", @"游戏机",
+                                                                                          @"平板", @"手环", @"配件", nil]];
+    LeftMenuTreeViewModel *cloth = [LeftMenuTreeViewModel modelWithMainClass:@"衣服"
+                                                                  subClasses:[NSArray arrayWithObjects:@"T恤", @"卫衣", @"衬衫",
+                                                                              @"夹克", @"正装", @"情侣装", @"针织衫", @"羽绒服",
+                                                                              @"毛衣", @"棉衣", nil]];
+    LeftMenuTreeViewModel *sport = [LeftMenuTreeViewModel modelWithMainClass:@"运动"
+                                                                  subClasses:[NSArray arrayWithObjects:@"球", @"球拍",
+                                                                              @"健身器材", @"配件", nil]];
+    self.models = [NSArray arrayWithObjects:electronicProduct, cloth, sport, nil];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
-{
-    return 5;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"Cell";
+- (void)prepareTreeView {
+    [self prepareTreeViewModels];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
+    CGFloat leftPadding = 20;
+    CGFloat topPadding = 100;
+    CGSize viewSize = self.view.bounds.size;
+    self.treeView = [[RATreeView alloc] initWithFrame:CGRectMake(leftPadding, topPadding, viewSize.width - leftPadding, viewSize.height - topPadding)];
+    self.treeView.delegate = self;
+    self.treeView.dataSource = self;
+    self.treeView.separatorStyle = RATreeViewCellSeparatorStyleNone;
+    self.treeView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.treeView];
+}
+
+#pragma mark - RATreeView
+
+#pragma mark - RATreeViewDataSource
+
+- (NSInteger)treeView:(RATreeView *)treeView numberOfChildrenOfItem:(id)item {
+    if (item == nil) {
+        return [self.models count];
     }
-    
-    NSArray *titles = @[@"Home", @"Calendar", @"Profile", @"Settings", @"Log Out"];
-    NSArray *images = @[@"IconHome", @"IconCalendar", @"IconProfile", @"IconSettings", @"IconEmpty"];
-    cell.textLabel.text = titles[indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
-    
+    if ([item isKindOfClass:[NSString class]]) {
+        return 0;
+    }
+    LeftMenuTreeViewModel *model = item;
+    return [model.subClasses count];
+}
+
+- (id)treeView:(RATreeView *)treeView child:(NSInteger)index ofItem:(id)item {
+    if (item == nil) {
+        return [self.models objectAtIndex:index];
+    }
+    if ([item isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    LeftMenuTreeViewModel *model = item;
+    return [model.subClasses objectAtIndex:index];
+}
+
+- (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item {
+    //NSInteger level = [treeView levelForCellForItem:item];
+    UITableViewCell *cell = nil;
+    if ([item isKindOfClass:[LeftMenuTreeViewModel class]]) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"First Level Cell"];
+        cell.textLabel.text = [(LeftMenuTreeViewModel *)item mainClass];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.text = [(LeftMenuTreeViewModel *)item subClassString];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+    } else if ([item isKindOfClass:[NSString class]]) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Second Level Cell"];
+        cell.textLabel.text = (NSString *)item;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        
+    }
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.indentationLevel = 100;
     return cell;
 }
+
 @end
