@@ -570,10 +570,17 @@
                     <view key="view" contentMode="scaleToFill" id="Kfu-uz-glm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ixc-7D-iKf">
+                                <rect key="frame" x="16" y="72" width="343" height="587"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90530303030000003" green="0.90530303030000003" blue="0.90530303030000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="searchDisplayController" destination="bFg-Rm-vp1" id="kgV-ZS-jpq"/>
+                        <outlet property="searchHistoryTableView" destination="Ixc-7D-iKf" id="bEq-ip-N7e"/>
                         <segue destination="K87-1c-mC9" kind="show" identifier="showSearchResult" id="f71-qP-dVH"/>
                     </connections>
                 </viewController>
@@ -1502,8 +1509,8 @@
         <image name="takePhoto" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0p7-WM-ggn"/>
+        <segue reference="94F-h8-wDZ"/>
         <segue reference="IRI-1L-pUC"/>
-        <segue reference="JHU-KT-8bK"/>
-        <segue reference="Lwo-LW-fPN"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -143,7 +143,7 @@
                   NSLog(@" 新商品!!!! %@ ", model.itemTitle);
               }
               NSLog(@"Fetch successed!");
-              [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+              [self.waterfallView reloadData];
               [self.activityIndicator stopAnimating];
               [self.activityIndicator setHidden:TRUE];
               [self removeLoadingMask];
@@ -152,7 +152,7 @@
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Fetch failed...");
               self.isFetching = NO;
-              [self fillCellModelsForPage:page];
+              [self popAlert:@"加载失败" withMessage:@"貌似网络不太好哦"];
           }];
 }
 
@@ -312,7 +312,7 @@
     self.bubbleMask.alpha = BUBBLE_MASK_OPACITY;
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.cellModels.count;
@@ -334,8 +334,8 @@
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
     [cell setSellerState:model.sellerState];
-    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_ORIGIANL]];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_ORIGIANL] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_LARGE]];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_LARGE] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
         if (succeeded) {
             [model setImageWidth:width];
             [model setImageHeight:height];
@@ -457,12 +457,11 @@
 
 - (void)pullToRefreshTriggered:(id)sender {
     NSLog(@"Refresh~!");
-    [self fillCellModelsForPage:1];
-    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:2.5 inModes:@[NSRunLoopCommonModes]];
-    [self.waterfallView reloadData];
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:2.0 inModes:@[NSRunLoopCommonModes]];
 }
 
 - (void)finishRefreshControl {
+    [self fillCellModelsForPage:1];
     [self.storeHouseRefreshControl finishingLoading];
     NSLog(@"Refresh Done!");
 }
@@ -487,5 +486,17 @@
 - (void)performSegueToSearchPage {
     [self performSegueWithIdentifier:@"showSearchPage" sender:self];
 }
+
+#pragma mark - Alert
+
+- (void)popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+}
+
 
 @end
