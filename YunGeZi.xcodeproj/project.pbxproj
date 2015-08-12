@@ -11,25 +11,17 @@
 		47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */; };
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
-		7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */; };
-		7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
 		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
 		7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */; };
-		7609A1091AFF58F800B134C9 /* ObjectBuyInMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1081AFF58F800B134C9 /* ObjectBuyInMainViewController.m */; };
-		7609A10C1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A10B1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m */; };
-		7609A10F1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A10E1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m */; };
-		7609A1121AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1111AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m */; };
-		7609A1151AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1141AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m */; };
-		7609A1181AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1171AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m */; };
-		7609A11B1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */; };
-		7609A11E1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */; };
+		7609A1091AFF58F800B134C9 /* ObjectBuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */; };
+		7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */; };
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
 		7613EB6A1B777D0700C4FB9A /* ChooseSchoolTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */; };
 		761F4E971B763795009E527A /* boxbuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761F4E961B763795009E527A /* boxbuy.plist */; };
 		76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */; };
 		764826DE1B195106008D1D7D /* MyPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764826DD1B195106008D1D7D /* MyPickerView.m */; };
-		7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* CategoryViewController.m */; };
+		7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* SearchViewController.m */; };
 		7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* SellingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
 		769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F99491B0B77FF00161818 /* libMobClickLibrary.a */; };
@@ -39,15 +31,13 @@
 		76A2515E1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76A2515C1AFB7CF80017F285 /* WebViewJavascriptBridge.js.txt */; };
 		76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */; };
 		76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A251611AFB866A0017F285 /* CategoryDetailViewController.m */; };
-		76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */; };
-		76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF71AFA27D200A987C2 /* registerViewController.m */; };
-		76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */; };
+		76B6ACF51AFA273C00A987C2 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF41AFA273C00A987C2 /* ChangePasswordViewController.m */; };
+		76B6ACF81AFA27D200A987C2 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACF71AFA27D200A987C2 /* RegisterViewController.m */; };
 		76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */; };
 		76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */; };
-		76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */; };
+		76B6AD051AFA78C500A987C2 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */; };
 		76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */; };
-		76C3F9B41AFBB0B400821B9B /* ObjectDetailViewInMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B31AFBB0B400821B9B /* ObjectDetailViewInMainController.m */; };
-		76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */; };
+		76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */; };
 		76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C522F81AF0622E00476769 /* MyTabBarController.m */; };
 		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
 		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
@@ -80,32 +70,16 @@
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
 		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
-		7603A8211AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategorySearchViewController.h; sourceTree = "<group>"; };
-		7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategorySearchViewController.m; sourceTree = "<group>"; };
-		7603A8241AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInCategoryViewController.h; sourceTree = "<group>"; };
-		7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInCategoryViewController.m; sourceTree = "<group>"; };
 		7603A8271AFC58F6007E4B78 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		7603A8281AFC58F6007E4B78 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		7603A82A1AFC682A007E4B78 /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
 		7603A82B1AFC682A007E4B78 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
 		7603A82D1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInShopViewController.h; sourceTree = "<group>"; };
 		7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInShopViewController.m; sourceTree = "<group>"; };
-		7609A1071AFF58F800B134C9 /* ObjectBuyInMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyInMainViewController.h; sourceTree = "<group>"; };
-		7609A1081AFF58F800B134C9 /* ObjectBuyInMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInMainViewController.m; sourceTree = "<group>"; };
-		7609A10A1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyResultInMainViewController.h; sourceTree = "<group>"; };
-		7609A10B1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyResultInMainViewController.m; sourceTree = "<group>"; };
-		7609A10D1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyInMainSearchViewController.h; sourceTree = "<group>"; };
-		7609A10E1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInMainSearchViewController.m; sourceTree = "<group>"; };
-		7609A1101AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyResultInMainSearchViewController.h; sourceTree = "<group>"; };
-		7609A1111AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyResultInMainSearchViewController.m; sourceTree = "<group>"; };
-		7609A1131AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyInCategoryViewController.h; sourceTree = "<group>"; };
-		7609A1141AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInCategoryViewController.m; sourceTree = "<group>"; };
-		7609A1161AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyResultInCategoryViewController.h; sourceTree = "<group>"; };
-		7609A1171AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyResultInCategoryViewController.m; sourceTree = "<group>"; };
-		7609A1191AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyResultInCategorySearchViewController.h; sourceTree = "<group>"; };
-		7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyResultInCategorySearchViewController.m; sourceTree = "<group>"; };
-		7609A11C1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyInCategorySearchViewController.h; sourceTree = "<group>"; };
-		7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyInCategorySearchViewController.m; sourceTree = "<group>"; };
+		7609A1071AFF58F800B134C9 /* ObjectBuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingViewController.h; sourceTree = "<group>"; };
+		7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyingViewController.m; sourceTree = "<group>"; };
+		7609A10A1AFF681D00B134C9 /* ObjectBuyingResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingResultViewController.h; sourceTree = "<group>"; };
+		7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyingResultViewController.m; sourceTree = "<group>"; };
 		7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaterfallCellView.xib; sourceTree = "<group>"; };
 		7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewController.h; sourceTree = "<group>"; };
 		7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewController.m; sourceTree = "<group>"; };
@@ -114,8 +88,8 @@
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
 		764826DC1B195106008D1D7D /* MyPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPickerView.h; path = ../MyPickerView.h; sourceTree = "<group>"; };
 		764826DD1B195106008D1D7D /* MyPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyPickerView.m; path = ../MyPickerView.m; sourceTree = "<group>"; };
-		7651D2BF1AF07434003184A8 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
-		7651D2C01AF07434003184A8 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
+		7651D2BF1AF07434003184A8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		7651D2C01AF07434003184A8 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		7651D2C21AF0771B003184A8 /* SellingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingViewController.h; sourceTree = "<group>"; };
 		7651D2C31AF0771B003184A8 /* SellingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellingViewController.m; sourceTree = "<group>"; };
 		7651D2C51AF079BD003184A8 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
@@ -132,23 +106,20 @@
 		76A2515D1AFB7CF80017F285 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		76A251601AFB866A0017F285 /* CategoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryDetailViewController.h; sourceTree = "<group>"; };
 		76A251611AFB866A0017F285 /* CategoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryDetailViewController.m; sourceTree = "<group>"; };
-		76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgetPasswordViewController.h; sourceTree = "<group>"; };
-		76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgetPasswordViewController.m; sourceTree = "<group>"; };
-		76B6ACF61AFA27D200A987C2 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
-		76B6ACF71AFA27D200A987C2 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
-		76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInMainViewController.m; sourceTree = "<group>"; };
+		76AD1BCB1B7B22D500BA8512 /* DeviceDetect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceDetect.h; sourceTree = "<group>"; };
+		76B6ACF31AFA273C00A987C2 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		76B6ACF41AFA273C00A987C2 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		76B6ACF61AFA27D200A987C2 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		76B6ACF71AFA27D200A987C2 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		76B6ACFC1AFA49AC00A987C2 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
 		76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
 		76B6AD001AFA6B4800A987C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInMainViewController.h; sourceTree = "<group>"; };
-		76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInCategoryViewController.h; sourceTree = "<group>"; };
-		76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInCategoryViewController.m; sourceTree = "<group>"; };
+		76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingEnsureViewController.h; sourceTree = "<group>"; };
 		76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellingEnsureViewController.m; sourceTree = "<group>"; };
-		76C3F9B21AFBB0B400821B9B /* ObjectDetailViewInMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailViewInMainController.h; sourceTree = "<group>"; };
-		76C3F9B31AFBB0B400821B9B /* ObjectDetailViewInMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailViewInMainController.m; sourceTree = "<group>"; };
-		76C3F9B51AFBB83600821B9B /* ObjectDetailInMainSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInMainSearchViewController.h; sourceTree = "<group>"; };
-		76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInMainSearchViewController.m; sourceTree = "<group>"; };
+		76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailViewController.h; sourceTree = "<group>"; };
+		76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailViewController.m; sourceTree = "<group>"; };
 		76C522F71AF0622E00476769 /* MyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBarController.h; sourceTree = "<group>"; };
 		76C522F81AF0622E00476769 /* MyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBarController.m; sourceTree = "<group>"; };
 		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +198,19 @@
 			path = WebViewJavascriptBridge;
 			sourceTree = "<group>";
 		};
+		76AD1BCA1B7AFFA300BA8512 /* Login and Register */ = {
+			isa = PBXGroup;
+			children = (
+				76E333391AEDF8C40077BACF /* ViewController.h */,
+				76E3333A1AEDF8C40077BACF /* ViewController.m */,
+				76B6ACF31AFA273C00A987C2 /* ChangePasswordViewController.h */,
+				76B6ACF41AFA273C00A987C2 /* ChangePasswordViewController.m */,
+				76B6ACF61AFA27D200A987C2 /* RegisterViewController.h */,
+				76B6ACF71AFA27D200A987C2 /* RegisterViewController.m */,
+			);
+			name = "Login and Register";
+			sourceTree = "<group>";
+		};
 		76E333231AEDF8C30077BACF = {
 			isa = PBXGroup;
 			children = (
@@ -252,68 +236,44 @@
 			isa = PBXGroup;
 			children = (
 				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
-				76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */,
-				76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */,
-				764826DC1B195106008D1D7D /* MyPickerView.h */,
-				764826DD1B195106008D1D7D /* MyPickerView.m */,
-				76E333391AEDF8C40077BACF /* ViewController.h */,
-				76E3333A1AEDF8C40077BACF /* ViewController.m */,
+				76AD1BCB1B7B22D500BA8512 /* DeviceDetect.h */,
+				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
 				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
 				76F426AA1AEF271B00A5849A /* MainPageViewController.m */,
-				7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */,
-				7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */,
-				7651D2BF1AF07434003184A8 /* CategoryViewController.h */,
-				7651D2C01AF07434003184A8 /* CategoryViewController.m */,
+				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
+				7651D2C01AF07434003184A8 /* SearchViewController.m */,
+				76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */,
+				76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */,
+				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
+				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */,
+				7609A1071AFF58F800B134C9 /* ObjectBuyingViewController.h */,
+				7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */,
+				7609A10A1AFF681D00B134C9 /* ObjectBuyingResultViewController.h */,
+				7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */,
 				7651D2C51AF079BD003184A8 /* AccountViewController.h */,
 				7651D2C61AF079BD003184A8 /* AccountViewController.m */,
+				7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */,
+				7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */,
 				7651D2C21AF0771B003184A8 /* SellingViewController.h */,
 				7651D2C31AF0771B003184A8 /* SellingViewController.m */,
 				76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */,
 				76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */,
-				76B6AD021AFA6B7200A987C2 /* SearchInMainViewController.h */,
-				76B6ACFA1AFA34E800A987C2 /* SearchInMainViewController.m */,
-				76B6AD031AFA78C500A987C2 /* SearchInCategoryViewController.h */,
-				76B6AD041AFA78C500A987C2 /* SearchInCategoryViewController.m */,
 				7603A8271AFC58F6007E4B78 /* OrderViewController.h */,
 				7603A8281AFC58F6007E4B78 /* OrderViewController.m */,
 				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
 				7603A82B1AFC682A007E4B78 /* ShopViewController.m */,
 				76A251601AFB866A0017F285 /* CategoryDetailViewController.h */,
 				76A251611AFB866A0017F285 /* CategoryDetailViewController.m */,
-				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewInMainController.h */,
-				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewInMainController.m */,
-				76C3F9B51AFBB83600821B9B /* ObjectDetailInMainSearchViewController.h */,
-				76C3F9B61AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m */,
-				7603A8241AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.h */,
-				7603A8251AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m */,
-				7603A8211AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.h */,
-				7603A8221AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m */,
 				7603A82D1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.h */,
 				7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */,
-				7609A1071AFF58F800B134C9 /* ObjectBuyInMainViewController.h */,
-				7609A1081AFF58F800B134C9 /* ObjectBuyInMainViewController.m */,
-				7609A10D1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.h */,
-				7609A10E1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m */,
-				7609A1131AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.h */,
-				7609A1141AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m */,
-				7609A11C1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.h */,
-				7609A11D1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m */,
-				7609A10A1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.h */,
-				7609A10B1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m */,
-				7609A1101AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.h */,
-				7609A1111AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m */,
-				7609A1161AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.h */,
-				7609A1171AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m */,
-				7609A1191AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.h */,
-				7609A11A1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m */,
 				769F994F1B0C2A0200161818 /* ChangeNickNameViewController.h */,
 				769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */,
 				769F99521B0CADED00161818 /* VerificationViewController.h */,
 				769F99531B0CADED00161818 /* VerificationViewController.m */,
-				76B6ACF31AFA273C00A987C2 /* forgetPasswordViewController.h */,
-				76B6ACF41AFA273C00A987C2 /* forgetPasswordViewController.m */,
-				76B6ACF61AFA27D200A987C2 /* registerViewController.h */,
-				76B6ACF71AFA27D200A987C2 /* registerViewController.m */,
+				76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */,
+				76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */,
+				764826DC1B195106008D1D7D /* MyPickerView.h */,
+				764826DD1B195106008D1D7D /* MyPickerView.m */,
 				76B6ACFC1AFA49AC00A987C2 /* MyNavigationController.h */,
 				76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */,
 				76C522F71AF0622E00476769 /* MyTabBarController.h */,
@@ -504,47 +464,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewInMainController.m in Sources */,
-				7609A1121AFF76AF00B134C9 /* ObjectBuyResultInMainSearchViewController.m in Sources */,
+				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */,
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */,
-				76B6ACF81AFA27D200A987C2 /* registerViewController.m in Sources */,
+				76B6ACF81AFA27D200A987C2 /* RegisterViewController.m in Sources */,
 				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
-				7603A8261AFBD19C007E4B78 /* ObjectDetailInCategoryViewController.m in Sources */,
 				764826DE1B195106008D1D7D /* MyPickerView.m in Sources */,
-				7609A1151AFF7CBA00B134C9 /* ObjectBuyInCategoryViewController.m in Sources */,
-				7609A10F1AFF768C00B134C9 /* ObjectBuyInMainSearchViewController.m in Sources */,
 				7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */,
-				76B6AD051AFA78C500A987C2 /* SearchInCategoryViewController.m in Sources */,
+				76B6AD051AFA78C500A987C2 /* SearchResultViewController.m in Sources */,
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
 				474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
 				7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */,
-				7609A10C1AFF681D00B134C9 /* ObjectBuyResultInMainViewController.m in Sources */,
+				7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */,
 				47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */,
 				76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */,
-				7603A8231AFBD082007E4B78 /* ObjectDetailInCategorySearchViewController.m in Sources */,
 				7613EB6A1B777D0700C4FB9A /* ChooseSchoolTableViewController.m in Sources */,
-				7609A1091AFF58F800B134C9 /* ObjectBuyInMainViewController.m in Sources */,
+				7609A1091AFF58F800B134C9 /* ObjectBuyingViewController.m in Sources */,
 				769F99541B0CADED00161818 /* VerificationViewController.m in Sources */,
 				76E3333B1AEDF8C40077BACF /* ViewController.m in Sources */,
 				47110B271B77A181001C9B5A /* RootViewController.m in Sources */,
-				76B6ACF51AFA273C00A987C2 /* forgetPasswordViewController.m in Sources */,
+				76B6ACF51AFA273C00A987C2 /* ChangePasswordViewController.m in Sources */,
 				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
-				7609A11B1AFF80F300B134C9 /* ObjectBuyResultInCategorySearchViewController.m in Sources */,
 				76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */,
 				7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */,
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
-				7651D2C11AF07434003184A8 /* CategoryViewController.m in Sources */,
-				76B6ACFB1AFA34E800A987C2 /* SearchInMainViewController.m in Sources */,
+				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
-				7609A1181AFF7CF000B134C9 /* ObjectBuyResultInCategoryViewController.m in Sources */,
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
-				76C3F9B71AFBB83600821B9B /* ObjectDetailInMainSearchViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,
-				7609A11E1AFF815A00B134C9 /* ObjectBuyInCategorySearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

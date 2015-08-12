@@ -12,7 +12,7 @@
         <!--快速注册-->
         <scene sceneID="J8D-y2-6Sg">
             <objects>
-                <viewController id="obV-JF-Xzg" customClass="registerViewController" sceneMemberID="viewController">
+                <viewController id="obV-JF-Xzg" customClass="RegisterViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PFx-55-OUY"/>
                         <viewControllerLayoutGuide type="bottom" id="HOp-O2-0hZ"/>
@@ -381,11 +381,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ZQ0-7Y-ayr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FRS-Xv-mjq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrZ-5z-NYR">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -421,11 +421,11 @@
                         <viewControllerLayoutGuide type="bottom" id="toM-KR-7vF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GMb-pQ-Yeh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66n-5e-9S4">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -457,11 +457,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FKc-rr-Wjk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fdk-Ho-ckO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaS-sB-Xfo">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -495,11 +495,11 @@
                         <viewControllerLayoutGuide type="bottom" id="fTK-6n-gxA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0f1-WK-LMR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4nm-i1-YUy">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -527,7 +527,7 @@
             <objects>
                 <viewController id="AYO-so-LKW" customClass="OrderViewController" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" id="hTw-Qu-sAB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
@@ -559,52 +559,42 @@
             </objects>
             <point key="canvasLocation" x="794.5" y="1371.5"/>
         </scene>
-        <!--分类-->
-        <scene sceneID="Mjw-pt-FrH">
+        <!--Search View Controller-->
+        <scene sceneID="cvj-Cd-D9p">
             <objects>
-                <viewController id="SyP-Fb-Twr" customClass="CategoryViewController" sceneMemberID="viewController">
+                <viewController id="tpd-04-8WW" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2ch-Bt-517"/>
-                        <viewControllerLayoutGuide type="bottom" id="6ZS-0o-Y7Y"/>
+                        <viewControllerLayoutGuide type="top" id="onH-Yt-I5u"/>
+                        <viewControllerLayoutGuide type="bottom" id="uQ0-1B-MTX"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uwZ-Zm-708">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="Kfu-uz-glm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jU-mD-Vv0">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="top" secondItem="uwZ-Zm-708" secondAttribute="top" id="B3Q-Dg-k36"/>
-                            <constraint firstAttribute="trailing" secondItem="2jU-mD-Vv0" secondAttribute="trailing" id="KBy-80-vfO"/>
-                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="bottom" secondItem="6ZS-0o-Y7Y" secondAttribute="top" id="WWg-QU-4eL"/>
-                            <constraint firstItem="2jU-mD-Vv0" firstAttribute="leading" secondItem="uwZ-Zm-708" secondAttribute="leading" id="gC5-1H-RGi"/>
-                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="分类" id="P7c-dl-NSG"/>
-                    <navigationItem key="navigationItem" id="x0C-LD-jbD">
-                        <barButtonItem key="backBarButtonItem" title=" " id="gHF-NB-51W"/>
-                    </navigationItem>
                     <connections>
-                        <outlet property="CategoryWebView" destination="2jU-mD-Vv0" id="ul9-dY-5zD"/>
-                        <segue destination="K87-1c-mC9" kind="show" identifier="showSearchResultInCategory" id="Idv-Fp-Y3O"/>
-                        <segue destination="WbG-eI-Bj8" kind="show" identifier="showCategoryResult" id="BVl-PR-0f1"/>
+                        <outlet property="searchDisplayController" destination="bFg-Rm-vp1" id="kgV-ZS-jpq"/>
+                        <segue destination="K87-1c-mC9" kind="show" identifier="showSearchResult" id="f71-qP-dVH"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Jy-Oc-HXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KTK-2n-tZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="bFg-Rm-vp1">
+                    <connections>
+                        <outlet property="delegate" destination="tpd-04-8WW" id="MFg-Hk-Tec"/>
+                        <outlet property="searchContentsController" destination="tpd-04-8WW" id="jjI-Wn-nEV"/>
+                        <outlet property="searchResultsDataSource" destination="tpd-04-8WW" id="NTz-oQ-9wV"/>
+                        <outlet property="searchResultsDelegate" destination="tpd-04-8WW" id="y3q-oM-aOr"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-504.5" y="-687.5"/>
+            <point key="canvasLocation" x="-1066.5" y="-615.5"/>
         </scene>
         <!--分类:-->
         <scene sceneID="JbC-QQ-qqX">
             <objects>
                 <viewController id="WbG-eI-Bj8" customClass="CategoryDetailViewController" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" id="r3W-yj-cCo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
@@ -629,11 +619,11 @@
                         <viewControllerLayoutGuide type="bottom" id="qKw-FR-3qp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="izV-v0-nXr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eN5-gR-jIu">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -666,11 +656,11 @@
                         <viewControllerLayoutGuide type="bottom" id="YJW-hw-Q1K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W0I-Pz-KEd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Id9-EJ-9Xb">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -703,11 +693,11 @@
                         <viewControllerLayoutGuide type="bottom" id="cch-Dx-74M"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1Wu-aD-WAX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIx-Up-8ue">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -733,9 +723,9 @@
         <!--搜索结果-->
         <scene sceneID="hqA-rs-ii0">
             <objects>
-                <viewController id="K87-1c-mC9" customClass="SearchInCategoryViewController" sceneMemberID="viewController">
+                <viewController id="K87-1c-mC9" customClass="SearchResultViewController" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" id="IOe-ia-o5Q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
@@ -744,106 +734,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchResultWebView" destination="IOe-ia-o5Q" id="Cp1-Gq-ctc"/>
-                        <segue destination="4cR-ZP-cC0" kind="show" identifier="detailFromCategorySearch" id="oWd-a4-taD"/>
+                        <segue destination="mum-fe-LV2" kind="show" identifier="showObjectDetailFromSearch" id="JHU-KT-8bK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pOA-cM-Z02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-44.5" y="-967.5"/>
-        </scene>
-        <!--商品详情-->
-        <scene sceneID="gtF-QN-Itk">
-            <objects>
-                <viewController id="4cR-ZP-cC0" customClass="ObjectDetailInCategorySearchViewController" sceneMemberID="viewController">
-                    <webView key="view" contentMode="scaleToFill" id="rc0-TO-UTx">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </webView>
-                    <navigationItem key="navigationItem" title="商品详情" id="aJF-ow-38l">
-                        <barButtonItem key="backBarButtonItem" title=" " id="eie-HX-nLN"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectDetailWebView" destination="rc0-TO-UTx" id="U3l-d4-tGp"/>
-                        <segue destination="R1Q-sY-NGT" kind="show" identifier="buyItemInCategorySearch" id="kAz-K5-LVO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nAt-ph-Xpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="402.5" y="-967.5"/>
-        </scene>
-        <!--购买商品-->
-        <scene sceneID="nYf-HZ-2aB">
-            <objects>
-                <viewController id="R1Q-sY-NGT" customClass="ObjectBuyInCategorySearchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1dv-c5-ofg"/>
-                        <viewControllerLayoutGuide type="bottom" id="KjK-XP-gYW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3I7-r7-vWo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGM-mh-6X4">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="sGM-mh-6X4" firstAttribute="leading" secondItem="3I7-r7-vWo" secondAttribute="leading" id="K7P-b7-b6j"/>
-                            <constraint firstAttribute="trailing" secondItem="sGM-mh-6X4" secondAttribute="trailing" id="PZE-8n-boN"/>
-                            <constraint firstItem="sGM-mh-6X4" firstAttribute="bottom" secondItem="KjK-XP-gYW" secondAttribute="top" id="iYu-Iv-Q5o"/>
-                            <constraint firstItem="sGM-mh-6X4" firstAttribute="top" secondItem="3I7-r7-vWo" secondAttribute="top" id="kzg-iC-wrn"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="购买商品" id="8yo-HT-MSV">
-                        <barButtonItem key="backBarButtonItem" title=" " id="oMm-YZ-c0b"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectBuyWebView" destination="sGM-mh-6X4" id="OZG-C8-g1w"/>
-                        <segue destination="hf6-4w-8R2" kind="show" identifier="obejectBuyResultInCategorySearch" id="0Cc-EG-IpJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d7v-Wb-jPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="851.5" y="-967.5"/>
-        </scene>
-        <!--确认订单-->
-        <scene sceneID="eTO-6B-pOP">
-            <objects>
-                <viewController id="hf6-4w-8R2" customClass="ObjectBuyResultInCategorySearchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="SF1-y3-luB"/>
-                        <viewControllerLayoutGuide type="bottom" id="CDB-CW-GNP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ckq-pV-AHl">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0EC-0R-nHM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="0EC-0R-nHM" firstAttribute="leading" secondItem="Ckq-pV-AHl" secondAttribute="leading" id="KB5-O9-fa2"/>
-                            <constraint firstItem="0EC-0R-nHM" firstAttribute="bottom" secondItem="CDB-CW-GNP" secondAttribute="top" id="Lnm-CD-k02"/>
-                            <constraint firstAttribute="trailing" secondItem="0EC-0R-nHM" secondAttribute="trailing" id="XR0-dO-jsw"/>
-                            <constraint firstItem="0EC-0R-nHM" firstAttribute="top" secondItem="Ckq-pV-AHl" secondAttribute="top" id="gGI-fe-Blr"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="确认订单" id="RYv-jg-Ckg">
-                        <barButtonItem key="backBarButtonItem" title=" " id="MJd-oT-UA4"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectBuyResultWebview" destination="0EC-0R-nHM" id="suA-9J-7Mw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kvw-k2-B54" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1303.5" y="-980.5"/>
+            <point key="canvasLocation" x="-609.5" y="-615.5"/>
         </scene>
         <!--认证身份-->
         <scene sceneID="Hq5-Pe-OGw">
@@ -879,12 +775,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wmc-Ot-MMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-44.5" y="-2514.5"/>
+            <point key="canvasLocation" x="-1066.5" y="-1378.5"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="Mxn-YC-1ge">
             <objects>
-                <viewController id="mum-fe-LV2" customClass="ObjectDetailInMainViewController" sceneMemberID="viewController">
+                <viewController id="mum-fe-LV2" customClass="ObjectDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TyQ-db-lVr"/>
                         <viewControllerLayoutGuide type="bottom" id="zjp-td-KjU"/>
@@ -911,17 +807,17 @@
                     </navigationItem>
                     <connections>
                         <outlet property="objectDetailWebView" destination="Ztw-Di-gS4" id="NFt-rd-sfC"/>
-                        <segue destination="Del-wP-S8A" kind="show" identifier="buyItemInMain" id="Y3E-mh-XML"/>
+                        <segue destination="Del-wP-S8A" kind="show" identifier="showBuyingPage" id="Y3E-mh-XML"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhs-xQ-qdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402.5" y="-2514.5"/>
+            <point key="canvasLocation" x="-609.5" y="-1378.5"/>
         </scene>
         <!--购买商品-->
         <scene sceneID="q3o-fh-mfx">
             <objects>
-                <viewController id="Del-wP-S8A" customClass="ObjectBuyInMainViewController" sceneMemberID="viewController">
+                <viewController id="Del-wP-S8A" customClass="ObjectBuyingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dK4-LN-Drs"/>
                         <viewControllerLayoutGuide type="bottom" id="fvR-sH-FU5"/>
@@ -948,17 +844,17 @@
                     </navigationItem>
                     <connections>
                         <outlet property="objectBuyWebView" destination="Z0J-zl-fhn" id="w1u-lc-7OU"/>
-                        <segue destination="0Z2-hu-Wd3" kind="show" identifier="obejectBuyResultInMain" id="r6P-HC-qr7"/>
+                        <segue destination="0Z2-hu-Wd3" kind="show" identifier="showBuyingResult" id="r6P-HC-qr7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eEB-uJ-bqR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851.5" y="-2514.5"/>
+            <point key="canvasLocation" x="-148.5" y="-1378.5"/>
         </scene>
         <!--确认订单-->
         <scene sceneID="vdV-64-gRI">
             <objects>
-                <viewController id="0Z2-hu-Wd3" customClass="ObjectBuyResultInMainViewController" sceneMemberID="viewController">
+                <viewController id="0Z2-hu-Wd3" customClass="ObjectBuyingResultViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XX2-g5-BY0"/>
                         <viewControllerLayoutGuide type="bottom" id="WW4-Ra-Ba6"/>
@@ -989,7 +885,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sBs-Da-GHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303.5" y="-2514.5"/>
+            <point key="canvasLocation" x="315.5" y="-1378.5"/>
         </scene>
         <!--首页-->
         <scene sceneID="Lee-FU-l6Z">
@@ -1057,178 +953,17 @@
                     </navigationItem>
                     <connections>
                         <outlet property="waterfallView" destination="0x0-Cx-x4O" id="qBO-lS-HHr"/>
-                        <segue destination="CFI-zY-bc0" kind="show" identifier="showSearchResultInMain" id="wTo-zk-26Y"/>
-                        <segue destination="mum-fe-LV2" kind="show" identifier="detailFromMain" id="0p7-WM-ggn"/>
+                        <segue destination="mum-fe-LV2" kind="show" identifier="showObjectDetailFromMain" id="0p7-WM-ggn"/>
                         <segue destination="el8-x4-WrI" kind="show" identifier="showVerification" id="94F-h8-wDZ"/>
+                        <segue destination="tpd-04-8WW" kind="show" identifier="showSearchPage" id="5O1-pX-cvE"/>
+                        <segue destination="HuI-HL-8TD" kind="show" identifier="selling" id="IIQ-ik-STw"/>
+                        <segue destination="3T2-bN-Jg2" kind="show" id="nbc-Rb-MPB"/>
+                        <segue destination="WbG-eI-Bj8" kind="show" id="Z7d-Is-dzc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMf-hl-PaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1994.5" y="-1454.5"/>
-        </scene>
-        <!-- 搜索结果-->
-        <scene sceneID="iCh-YQ-ETw">
-            <objects>
-                <viewController id="CFI-zY-bc0" customClass="SearchInMainViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="khO-qW-2IC"/>
-                        <viewControllerLayoutGuide type="bottom" id="rEb-ST-ivx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oDK-y8-645">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nl-tl-Kpt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="1nl-tl-Kpt" secondAttribute="trailing" id="DW6-7A-5A8"/>
-                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="top" secondItem="oDK-y8-645" secondAttribute="top" id="MNF-KP-sB0"/>
-                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="leading" secondItem="oDK-y8-645" secondAttribute="leading" id="pYc-vK-6Oc"/>
-                            <constraint firstItem="1nl-tl-Kpt" firstAttribute="bottom" secondItem="rEb-ST-ivx" secondAttribute="top" id="rwB-QW-DLz"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title=" 搜索结果" id="pgu-yx-6ZP">
-                        <barButtonItem key="backBarButtonItem" title=" " id="GJd-Lb-yBh"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="searchResultWebView" destination="1nl-tl-Kpt" id="2fV-Mw-hMk"/>
-                        <segue destination="KUM-xb-dJc" kind="show" identifier="detailFromMainSearch" id="fTl-SR-xJc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bDo-TI-H1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-44.5" y="-1758.5"/>
-        </scene>
-        <!--商品详情-->
-        <scene sceneID="HfK-no-8HN">
-            <objects>
-                <viewController id="KUM-xb-dJc" customClass="ObjectDetailInMainSearchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="udI-wm-RhA"/>
-                        <viewControllerLayoutGuide type="bottom" id="2h5-fY-6Rp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4jF-IL-vG9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9RI-Zh-mdM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="9RI-Zh-mdM" secondAttribute="trailing" id="27L-eZ-8C8"/>
-                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="leading" secondItem="4jF-IL-vG9" secondAttribute="leading" id="6JK-nc-kwk"/>
-                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="bottom" secondItem="2h5-fY-6Rp" secondAttribute="top" id="9jL-US-26W"/>
-                            <constraint firstItem="9RI-Zh-mdM" firstAttribute="top" secondItem="4jF-IL-vG9" secondAttribute="top" id="yyz-6i-f4L"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="商品详情" id="zLe-Cv-MHp">
-                        <barButtonItem key="backBarButtonItem" title=" " id="nfy-c9-gnl"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectDetailWebView" destination="9RI-Zh-mdM" id="xGt-Uw-eSo"/>
-                        <segue destination="8uQ-sQ-s03" kind="show" identifier="buyItemInMainSearch" id="KJx-fQ-Otf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AyR-r0-ka9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="402.5" y="-1758.5"/>
-        </scene>
-        <!--购买商品-->
-        <scene sceneID="Gom-Wt-cBj">
-            <objects>
-                <viewController id="8uQ-sQ-s03" customClass="ObjectBuyInMainSearchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="i6u-ae-bcX"/>
-                        <viewControllerLayoutGuide type="bottom" id="a34-Fr-yGu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nLy-lY-Mid">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9CP-1p-8n5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="9CP-1p-8n5" firstAttribute="top" secondItem="nLy-lY-Mid" secondAttribute="top" id="UMO-qL-oeQ"/>
-                            <constraint firstItem="9CP-1p-8n5" firstAttribute="bottom" secondItem="a34-Fr-yGu" secondAttribute="top" id="XZf-hl-NHi"/>
-                            <constraint firstItem="9CP-1p-8n5" firstAttribute="leading" secondItem="nLy-lY-Mid" secondAttribute="leading" id="lbQ-Dd-8ly"/>
-                            <constraint firstAttribute="trailing" secondItem="9CP-1p-8n5" secondAttribute="trailing" id="ufh-hP-fxf"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="购买商品" id="oyz-pd-yzX">
-                        <barButtonItem key="backBarButtonItem" title=" " id="9EE-eV-H4V"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectBuyWebView" destination="9CP-1p-8n5" id="vOv-X0-wOC"/>
-                        <segue destination="KXB-fd-736" kind="show" identifier="obejectBuyResultInMainSearch" id="SGJ-Mr-ETZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kEB-vD-Cq1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="851.5" y="-1758.5"/>
-        </scene>
-        <!--确认订单-->
-        <scene sceneID="oEh-wn-Btl">
-            <objects>
-                <viewController id="KXB-fd-736" customClass="ObjectBuyResultInMainSearchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nDa-1H-zAP"/>
-                        <viewControllerLayoutGuide type="bottom" id="OXA-wL-5rF"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3Cr-nI-y0L">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1w-qf-g7p">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="I1w-qf-g7p" firstAttribute="leading" secondItem="3Cr-nI-y0L" secondAttribute="leading" id="Sbv-pw-v65"/>
-                            <constraint firstItem="I1w-qf-g7p" firstAttribute="bottom" secondItem="OXA-wL-5rF" secondAttribute="top" id="hRJ-hn-LGb"/>
-                            <constraint firstItem="I1w-qf-g7p" firstAttribute="top" secondItem="3Cr-nI-y0L" secondAttribute="top" id="j06-Dk-XwA"/>
-                            <constraint firstAttribute="trailing" secondItem="I1w-qf-g7p" secondAttribute="trailing" id="qwV-HE-4w3"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="确认订单" id="mDY-WO-ItF">
-                        <barButtonItem key="backBarButtonItem" title=" " id="cFH-OL-5fw"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="objectBuyResultWebview" destination="I1w-qf-g7p" id="dJn-g5-nRV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ds1-O0-pWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1303.5" y="-1758.5"/>
-        </scene>
-        <!--分类-->
-        <scene sceneID="iLa-vI-gYS">
-            <objects>
-                <navigationController id="56K-0e-EBg" customClass="MyNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="分类" id="er6-va-feA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T1o-SN-XIP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="SyP-Fb-Twr" kind="relationship" relationship="rootViewController" id="Xhk-ws-4Ye"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HbW-Cy-ZOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-966.5" y="-192.5"/>
+            <point key="canvasLocation" x="-1534.5" y="-615.5"/>
         </scene>
         <!--发布商品-->
         <scene sceneID="6Zr-dh-Rmo">
@@ -1239,11 +974,11 @@
                         <viewControllerLayoutGuide type="bottom" id="kUG-4v-tdn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bcX-XM-bde">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" text="123" translatesAutoresizingMaskIntoConstraints="NO" id="1g7-Yb-ZGb">
-                                <rect key="frame" x="16" y="268.5" width="568" height="164.5"/>
+                                <rect key="frame" x="16" y="222" width="343" height="277.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1266,7 +1001,7 @@
                                 </variation>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" text="给宝贝起个名字吧~" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-cR-cs0">
-                                <rect key="frame" x="16" y="220.5" width="568" height="40"/>
+                                <rect key="frame" x="16" y="174" width="343" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2Qv-dH-x9t"/>
@@ -1275,7 +1010,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKN-5A-Kbf">
-                                <rect key="frame" x="16" y="441" width="568" height="45"/>
+                                <rect key="frame" x="16" y="508" width="343" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="5zh-Ar-BZD"/>
@@ -1290,7 +1025,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWr-DH-kf2">
-                                <rect key="frame" x="16" y="494" width="280.5" height="45"/>
+                                <rect key="frame" x="16" y="561" width="168" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TDJ-88-olK"/>
@@ -1305,7 +1040,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-9H-hHu">
-                                <rect key="frame" x="303.5" y="494" width="280.5" height="45"/>
+                                <rect key="frame" x="191" y="561" width="168" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="    成色：请选择">
@@ -1317,7 +1052,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3f9-gV-rCQ">
-                                <rect key="frame" x="16" y="547" width="280.5" height="45"/>
+                                <rect key="frame" x="16" y="614" width="168" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="QRb-rF-JcS"/>
@@ -1332,7 +1067,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brz-TS-kwL">
-                                <rect key="frame" x="303.5" y="547" width="280.5" height="45"/>
+                                <rect key="frame" x="191" y="614" width="168" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="    数量：请选择">
@@ -1344,7 +1079,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zsL-oH-Uyh">
-                                <rect key="frame" x="86" y="560" width="88" height="19"/>
+                                <rect key="frame" x="86" y="627" width="88" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="88" id="Ai0-cl-pKI"/>
                                     <constraint firstAttribute="height" constant="19" id="sCb-Uk-rn2"/>
@@ -1353,7 +1088,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lc9-PA-LQO">
-                                <rect key="frame" x="16" y="102.5" width="110" height="110"/>
+                                <rect key="frame" x="16" y="102" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="7Q9-L4-hAs"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="7Tl-2J-txC"/>
@@ -1375,7 +1110,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2L-lS-bZ2">
-                                <rect key="frame" x="131" y="102.5" width="110.5" height="110"/>
+                                <rect key="frame" x="86" y="102" width="64.5" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Cft-b4-fe1"/>
                                     <constraint firstAttribute="width" constant="64" id="jnL-Yl-9Yj"/>
@@ -1394,7 +1129,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaD-zi-GLv">
-                                <rect key="frame" x="244.5" y="102.5" width="110" height="110"/>
+                                <rect key="frame" x="155" y="102" width="63.5" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="iDs-OY-Y1O"/>
                                     <constraint firstAttribute="height" constant="64" id="sWE-p1-uzu"/>
@@ -1413,7 +1148,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3q-gV-KLF">
-                                <rect key="frame" x="356.5" y="102.5" width="110.5" height="110"/>
+                                <rect key="frame" x="223" y="102" width="64.5" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="R7F-rq-gLL"/>
                                     <constraint firstAttribute="height" constant="64" id="lwt-EP-0b4"/>
@@ -1432,7 +1167,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9HC-Lj-foM">
-                                <rect key="frame" x="473" y="102.5" width="110" height="110"/>
+                                <rect key="frame" x="294" y="102" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="1KH-6l-RKy"/>
                                     <constraint firstAttribute="height" constant="64" id="X9t-1p-uOU"/>
@@ -1451,7 +1186,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPm-B2-Hw1">
-                                <rect key="frame" x="229.5" y="94.5" width="20" height="20"/>
+                                <rect key="frame" x="138" y="94" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="8re-W5-fpM"/>
                                     <constraint firstAttribute="height" constant="20" id="uRN-7D-UEQ"/>
@@ -1464,7 +1199,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8B-3x-Tki">
-                                <rect key="frame" x="342.5" y="94.5" width="20" height="20"/>
+                                <rect key="frame" x="207" y="94" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="1Vw-3q-Ipg"/>
                                     <constraint firstAttribute="height" constant="20" id="lKD-hR-s6o"/>
@@ -1477,7 +1212,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNa-yc-lCi">
-                                <rect key="frame" x="455" y="94.5" width="20" height="20"/>
+                                <rect key="frame" x="275" y="94" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="AYT-bt-0OB"/>
                                     <constraint firstAttribute="width" constant="20" id="rEg-1i-JyU"/>
@@ -1490,7 +1225,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n90-fY-xHF">
-                                <rect key="frame" x="571" y="94.5" width="20" height="20"/>
+                                <rect key="frame" x="346" y="94" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ECS-wt-1d3"/>
                                     <constraint firstAttribute="width" constant="20" id="KQG-1u-6BW"/>
@@ -1503,7 +1238,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDP-Ll-k72">
-                                <rect key="frame" x="114" y="94.5" width="20" height="20"/>
+                                <rect key="frame" x="68" y="94" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Gfe-9r-bqk"/>
                                     <constraint firstAttribute="width" constant="20" id="rfG-Ef-1t7"/>
@@ -1654,7 +1389,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lN7-Et-DMt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rbp-ev-IO1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PEh-uX-1Vr">
@@ -1726,7 +1461,7 @@
         <!--忘记密码-->
         <scene sceneID="LBt-we-0dt">
             <objects>
-                <viewController id="QMi-wm-GZU" customClass="forgetPasswordViewController" sceneMemberID="viewController">
+                <viewController id="QMi-wm-GZU" customClass="ChangePasswordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tIj-fI-w84"/>
                         <viewControllerLayoutGuide type="bottom" id="bRC-6T-ga6"/>
@@ -1900,6 +1635,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IRI-1L-pUC"/>
+        <segue reference="JHU-KT-8bK"/>
         <segue reference="94F-h8-wDZ"/>
     </inferredMetricsTieBreakers>
 </document>

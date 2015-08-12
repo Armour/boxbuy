@@ -1,25 +1,25 @@
 //
-//  ObjectBuyInCategorySearchViewController.m
+//  ObjectBuyResultInMainViewController.m
 //  YunGeZi
 //
 //  Created by Armour on 5/10/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "ObjectBuyInCategorySearchViewController.h"
+#import "ObjectBuyingResultViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
 
-@interface ObjectBuyInCategorySearchViewController ()
+@interface ObjectBuyingResultViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *objectBuyWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *objectBuyResultWebview;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property WebViewJavascriptBridge* bridge;
 
 @end
 
 
-@implementation ObjectBuyInCategorySearchViewController
+@implementation ObjectBuyingResultViewController
 
 - (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -31,24 +31,24 @@
 }
 
 - (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_objectBuyWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_objectBuyResultWebview webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"success"]) {
-            [self performSegueWithIdentifier:@"obejectBuyResultInCategorySearch" sender:self];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
-        responseCallback(self.objectNumber);
+        responseCallback(@"0.0");
     }];
 }
 
 - (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/trades/confirm.html?item_id=%@", self.objectNumber];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/trades/confirmResult.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_objectBuyWebView loadRequest:request];
+    [_objectBuyResultWebview loadRequest:request];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addWebViewBridge];
     [self prepareMyIndicator];
+    [self addWebViewBridge];
     [self loadWebViewRequest];
 }
 

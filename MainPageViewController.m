@@ -8,7 +8,7 @@
 
 #import "MyNavigationController.h"
 #import "MainPageViewController.h"
-#import "ObjectDetailViewInMainController.h"
+#import "ObjectDetailViewController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
@@ -41,14 +41,6 @@
 
 
 @implementation MainPageViewController
-
-@synthesize pageCount;
-@synthesize isFetching;
-@synthesize cellModels;
-@synthesize itemId;
-@synthesize sellerId;
-@synthesize choosedItemId;
-@synthesize choosedSellerId;
 
 #pragma mark - Life Circle
 
@@ -103,7 +95,7 @@
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
     self.waterfallView.collectionViewLayout = layout;
 
-    isFetching = NO;
+    self.isFetching = NO;
 
     [self addLoadingMask];
     [self.view bringSubviewToFront:self.activityIndicator];
@@ -114,10 +106,10 @@
 }
 
 - (void)fillCellModelsForPage:(NSUInteger)page {    // page start from 1
-    if (isFetching || ((page > 1) && (page > self.pageCount))) {
+    if (self.isFetching || ((page > 1) && (page > self.pageCount))) {
         return;
     }
-    isFetching = YES;
+    self.isFetching = YES;
     NSLog(@"Start Fetching!!! Page: %ld", page);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
@@ -128,9 +120,9 @@
               //NSLog(@"JSON => %@", response);
               if (page == 1) {
                   self.pageCount = [[response valueForKeyPath:@"totalpage"] integerValue];
-                  cellModels = [[NSMutableArray alloc] init];
-                  itemId = [[NSMutableArray alloc] init];
-                  sellerId = [[NSMutableArray alloc] init];
+                  self.cellModels = [[NSMutableArray alloc] init];
+                  self.itemId = [[NSMutableArray alloc] init];
+                  self.sellerId = [[NSMutableArray alloc] init];
               }
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
@@ -145,9 +137,9 @@
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
                   [model setSellerState:@"这是毛？"];
-                  [cellModels addObject:model];
-                  [itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
-                  [sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
+                  [self.cellModels addObject:model];
+                  [self.itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
+                  [self.sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
                   NSLog(@" 新商品!!!! %@ ", model.itemTitle);
               }
               NSLog(@"Fetch successed!");
@@ -155,11 +147,11 @@
               [self.activityIndicator stopAnimating];
               [self.activityIndicator setHidden:TRUE];
               [self removeLoadingMask];
-              isFetching = NO;
+              self.isFetching = NO;
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Fetch failed...");
-              isFetching = NO;
+              self.isFetching = NO;
               [self fillCellModelsForPage:page];
           }];
 }
@@ -245,8 +237,8 @@
                                                                           target:self
                                                                           action:@selector(presentLeftMenuViewController:)];
     UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"search"
-                                                                      target:nil
-                                                                      action:nil];
+                                                                      target:self
+                                                                      action:@selector(performSegueToSearchPage)];
     UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:nil
                                                                             action:nil];
@@ -331,13 +323,13 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
-        [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
+    if (self.cellModels.count - indexPath.item < 5 && self.cellModels.count % ITEMS_PER_PAGE == 0) {
+        [self fillCellModelsForPage:(self.cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
     cell.layer.masksToBounds = YES;
     cell.layer.cornerRadius = 6.0f;
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
@@ -380,7 +372,7 @@
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
     CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : 150;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
@@ -394,9 +386,9 @@
     WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
-        choosedItemId = [itemId objectAtIndex:indexPath.item];
-        choosedSellerId = @"";
-        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
+        self.choosedSellerId = @"";
+        [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
 }
 
@@ -404,9 +396,9 @@
     WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
-        choosedSellerId = [sellerId objectAtIndex:indexPath.row];
-        choosedItemId = @"";
-        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.row];
+        self.choosedItemId = @"";
+        [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
 }
 
@@ -482,14 +474,18 @@
 #pragma mark - Segue Detail
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"detailFromMain"]) {
-        if ([choosedItemId isEqualToString:@""]) {
-            NSLog(@"%@!!!", choosedSellerId);
-        } else if ([choosedSellerId isEqualToString:@""]) {
-            ObjectDetailInMainViewController *destViewController = segue.destinationViewController;
-            destViewController.objectNumber = choosedItemId;
+    if ([segue.identifier isEqualToString:@"showObjectDetailFromMain"]) {
+        if ([self.choosedItemId isEqualToString:@""]) {
+            NSLog(@"%@!!!", self.choosedSellerId);
+        } else if ([self.choosedSellerId isEqualToString:@""]) {
+            ObjectDetailViewController *destViewController = segue.destinationViewController;
+            destViewController.objectNumber = self.choosedItemId;
         }
     }
+}
+
+- (void)performSegueToSearchPage {
+    [self performSegueWithIdentifier:@"showSearchPage" sender:self];
 }
 
 @end
