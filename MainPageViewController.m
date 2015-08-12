@@ -24,10 +24,12 @@
 @interface MainPageViewController ()
 
 @property (strong, nonatomic) IBOutlet UICollectionView *waterfallView;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) NSUInteger pageCount;
 @property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
 @property (strong, nonatomic) UIView *bubbleMask;
+@property (strong, nonatomic) UIView *loadingMask;
 
 @end
 
@@ -51,10 +53,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initWaterfallView];
+    [self prepareMyIndicator];
+    [self prepareLoadingMask];
     [self prepareBubbleMenu];
     [self preparePullToRefresh];
     [self prepareNavigationBar];
+    [self initWaterfallView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -86,6 +90,12 @@
     self.waterfallView.collectionViewLayout = layout;
 
     isFetching = NO;
+
+    [self addLoadingMask];
+    [self.view bringSubviewToFront:self.activityIndicator];
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+
     [self fillCellModelsForPage:1];
 }
 
@@ -125,6 +135,9 @@
               }
               NSLog(@"Fetch successed!");
               [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+              [self.activityIndicator stopAnimating];
+              [self.activityIndicator setHidden:TRUE];
+              [self removeLoadingMask];
               isFetching = NO;
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -166,6 +179,30 @@
 
 #pragma mark - Action
 
+#pragma mark - Prepare Indicator
+
+- (void)prepareMyIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+}
+
+#pragma mark - Mask When Loading
+
+- (void)prepareLoadingMask {
+    self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.loadingMask setBackgroundColor:[UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:1.00]];
+}
+
+- (void)addLoadingMask {
+    [self.view addSubview:self.loadingMask];
+}
+
+- (void)removeLoadingMask {
+    [self.loadingMask removeFromSuperview];
+}
 
 #pragma mark - Init Navigation Bar
 
