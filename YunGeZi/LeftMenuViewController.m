@@ -12,6 +12,8 @@
 #import "UIViewController+RESideMenu.h"
 #import "RATreeView.h"
 
+#define DegreesToRadians(x) (M_PI * x / 180.0)
+
 @interface LeftMenuViewController ()
 
 @property (strong, nonatomic) NSArray *models;
@@ -55,14 +57,16 @@
 
 - (void)prepareTreeView {
     [self prepareTreeViewModels];
-    
+    // TODO
     CGFloat leftPadding = 20;
-    CGFloat topPadding = 100;
+    CGFloat topPadding = 300;
+    CGFloat rightPadding = 100;
+    CGFloat bottomPadding = 100;
     CGSize viewSize = self.view.bounds.size;
-    self.treeView = [[RATreeView alloc] initWithFrame:CGRectMake(leftPadding, topPadding, viewSize.width - leftPadding, viewSize.height - topPadding)];
+    self.treeView = [[RATreeView alloc] initWithFrame:CGRectMake(leftPadding, topPadding, viewSize.width - leftPadding - rightPadding, viewSize.height - topPadding - bottomPadding)];
     self.treeView.delegate = self;
     self.treeView.dataSource = self;
-    self.treeView.separatorStyle = RATreeViewCellSeparatorStyleNone;
+    self.treeView.separatorStyle = RATreeViewCellSeparatorStyleSingleLine;
     self.treeView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.treeView];
 }
@@ -93,25 +97,43 @@
     return [model.subClasses objectAtIndex:index];
 }
 
+- (CGFloat)treeView:(RATreeView *)treeView heightForRowForItem:(id)item {
+    if ([item isKindOfClass:[NSString class]])
+        return 25;
+    return 40;
+}
+
+- (NSInteger)treeView:(RATreeView *)treeView indentationLevelForRowForItem:(id)item {
+    if ([item isKindOfClass:[NSString class]])
+        return 2;
+    return 0;
+}
+
 - (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item {
-    //NSInteger level = [treeView levelForCellForItem:item];
     UITableViewCell *cell = nil;
     if ([item isKindOfClass:[LeftMenuTreeViewModel class]]) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"First Level Cell"];
         cell.textLabel.text = [(LeftMenuTreeViewModel *)item mainClass];
+        cell.textLabel.font = [UIFont systemFontOfSize:20];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.detailTextLabel.text = [(LeftMenuTreeViewModel *)item subClassString];
         cell.detailTextLabel.textColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if ([item isKindOfClass:[NSString class]]) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Second Level Cell"];
-        cell.textLabel.text = (NSString *)item;
+        cell.textLabel.text = [[NSString alloc] initWithFormat:@"%@", item];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.textLabel.textColor = [UIColor whiteColor];
-        
     }
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.indentationLevel = 100;
     return cell;
+}
+
+- (void)treeView:(RATreeView *)treeView didSelectRowForItem:(id)item {
+    if ([item isKindOfClass:[LeftMenuTreeViewModel class]]) {
+    } else if ([item isKindOfClass:[NSString class]]) {
+    }
 }
 
 @end
