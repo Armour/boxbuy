@@ -15,86 +15,170 @@
 
 @interface AccountViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *AccountWebView;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property WebViewJavascriptBridge* bridge;
-@property (strong, nonatomic) NSString *userid;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIImageView *headerBackgroundImage;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userResumeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userMarkImage;
+@property (weak, nonatomic) IBOutlet UIView *userNameAndMarkView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userNameAndMarkViewLengthConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *goodsButton;
+@property (weak, nonatomic) IBOutlet UIButton *focusButton;
+@property (weak, nonatomic) IBOutlet UIButton *fansButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 
 @end
 
 
 @implementation AccountViewController
 
-- (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setCenter:self.view.center];
-    [self.activityIndicator setHidesWhenStopped:TRUE];
-    [self.activityIndicator setHidden:YES];
-    [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
-}
+#pragma mark - Preparation
 
-- (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_AccountWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"%@",data);
-        self.userid = data;
-        if ([data isEqualToString:@"order"]) {
-            [self performSegueWithIdentifier:@"showMyOrder" sender:self];
-        } else if ([data isEqualToString:@"nickname"]){
-            [self performSegueWithIdentifier:@"showChangeNickName" sender:self];
-        } else {
-            [self performSegueWithIdentifier:@"showMyShop" sender:self];
+- (void)initUserInfo {
+    UIImage *userPhoto = [UIImage imageNamed:@"DefaultUserImage"];
+    [self.headerBackgroundImage setImage:userPhoto];
+    [self.userImage setImage:userPhoto];
+    self.userImage.layer.cornerRadius = self.userImage.bounds.size.height / 2;
+    self.userImage.clipsToBounds = YES;
+    self.userNameLabel.text = @"用户名balabalalalal";
+    self.userMarkImage.image = [UIImage imageNamed:@"close"];
+    {
+        CGSize _labelSize = [self.userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+        CGRect _labelFrame = self.userNameLabel.frame;
+        _labelFrame.size.width = _labelSize.width;
+        self.userNameLabel.frame = _labelFrame;
+        CGFloat _viewLength = _labelSize.width;
+        if (YES) {  // HAS USER ID IMAGE
+            _viewLength += 8 + self.userMarkImage.frame.size.width;
         }
-    }];
+        self.userNameAndMarkViewLengthConstraint.constant = _viewLength;
+        CGRect _viewFrame = self.userNameAndMarkView.frame;
+        _viewFrame.size.width = _viewLength;
+        self.userNameAndMarkView.frame = _viewFrame;
+    }
+    [self setUserResume:@"Hello World!"];
+    
+    {
+        UIVisualEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        effectView.frame = self.headerBackgroundImage.bounds;
+        [self.headerBackgroundImage addSubview:effectView];
+    }
+    
 }
 
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/index_1_3.html"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_AccountWebView loadRequest:request];
+- (void)prepareNavigation {
+    [self initUserInfo];
+    
+    self.navigationController.navigationBarHidden = YES;
+
+    {
+        CGRect _frame = self.headerView.frame;
+        _frame.size.height = self.view.bounds.size.height - 44 * 5 - 50;
+        self.headerView.frame = _frame;
+    }
+    self.goodsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self setGoodsCount:0];
+    self.focusButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self setFocusCount:0];
+    self.fansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self setFansCount:0];
+    [self setCommentsCount:0];
 }
+
+#pragma mark - Button Action
+
+- (IBAction)backButtonTouchUpInside:(id)sender {
+    self.navigationController.navigationBar.hidden = NO;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)goToMyInfoButtonTouchUpInside:(id)sender {
+    NSLog(@"MyInfo");
+}
+
+- (IBAction)goodsButtonTouchUpInside:(id)sender {
+    NSLog(@"GOODS");
+}
+
+- (IBAction)focusButtonTouchUpInside:(id)sender {
+    NSLog(@"FOUCUS");
+}
+
+- (IBAction)fansButtonTouchUpInside:(id)sender {
+    NSLog(@"FANS");
+}
+
+- (IBAction)commentsButtonTouchUpInside:(id)sender {
+    NSLog(@"COMMENT");
+}
+
+#pragma mark - TableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.item) {
+        case 0: // 我的店铺
+            NSLog(@"我的店铺");
+            break;
+        case 1: // 全部订单
+            NSLog(@"全部订单");
+            break;
+        case 2: // 我的回收
+            NSLog(@"我的回收");
+            break;
+        case 3: // 我的钱包
+            NSLog(@"我的钱包");
+            break;
+        case 4: // 我的收藏
+            NSLog(@"我的收藏");
+            break;
+        default:
+            break;
+    }
+    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
+}
+
+#pragma mark - Inner Helper
+
+- (void)setGoodsCount:(NSInteger)count {
+    [self.goodsButton setTitle:[NSString stringWithFormat:@"%ld\r\n商品", count]
+                      forState:UIControlStateNormal];
+}
+
+- (void)setFocusCount:(NSInteger)count {
+    [self.focusButton setTitle:[NSString stringWithFormat:@"%ld\r\n关注", count]
+                      forState:UIControlStateNormal];
+}
+
+- (void)setFansCount:(NSInteger)count {
+    [self.fansButton setTitle:[NSString stringWithFormat:@"%ld\r\n粉丝", count]
+                     forState:UIControlStateNormal];
+}
+
+- (void)setCommentsCount:(NSInteger)count {
+    [self.commentsButton setTitle:[NSString stringWithFormat:@"  已收到%ld条评价", count]
+                         forState:UIControlStateNormal];
+}
+
+- (void)setUserResume:(NSString *)resume {
+    self.userResumeLabel.text = resume;
+}
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self prepareMyIndicator];
-    [self addWebViewBridge];
-    [self loadWebViewRequest];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+//    [self prepareNavigation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    MyNavigationController * nav = (MyNavigationController *)self.navigationController;
-    if (nav.shouldUpdateWebView) {
-        [_AccountWebView reload];
-        nav.shouldUpdateWebView = FALSE;
-    }
     [super viewDidAppear:animated];
+    [self prepareNavigation];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showMyShop"]) {
-        ShopViewController *controller = (ShopViewController *)segue.destinationViewController;
-        [controller setUserid:self.userid];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
