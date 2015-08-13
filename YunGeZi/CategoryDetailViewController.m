@@ -7,7 +7,7 @@
 //
 
 #import "CategoryDetailViewController.h"
-#import "ObjectDetailInCategoryViewController.h"
+#import "ObjectDetailViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
 
@@ -96,7 +96,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"detailFromCategory"]) {
-        ObjectDetailInCategoryViewController *controller = (ObjectDetailInCategoryViewController *)segue.destinationViewController;
+        ObjectDetailViewController *controller = (ObjectDetailViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
 }

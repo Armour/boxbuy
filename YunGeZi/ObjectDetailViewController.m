@@ -1,17 +1,17 @@
 //
-//  ObjectDetailInCategorySearchViewController.m
+//  ObjectDetailViewController.m
 //  YunGeZi
 //
-//  Created by Armour on 5/8/15.
+//  Created by Armour on 5/7/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "ObjectDetailInCategorySearchViewController.h"
-#import "ObjectBuyInCategorySearchViewController.h"
+#import "ObjectDetailViewController.h"
+#import "ObjectBuyingViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
 
-@interface ObjectDetailInCategorySearchViewController ()
+@interface ObjectDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *objectDetailWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
@@ -20,7 +20,32 @@
 @end
 
 
-@implementation ObjectDetailInCategorySearchViewController
+@implementation ObjectDetailViewController
+
+#pragma mark - Life Circle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"商品详情"];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyIndicator];
+    [self addWebViewBridge];
+    [self loadWebViewRequest];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"商品详情"];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark -Indicator
 
 - (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -31,29 +56,18 @@
     [self.view bringSubviewToFront:self.activityIndicator];
 }
 
+#pragma mark - Webview Bridge
+
 - (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_objectDetailWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.objectDetailWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isEqualToString:@"buy"]) {
-            [self performSegueWithIdentifier:@"buyItemInCategorySearch" sender:self];
+            [self performSegueWithIdentifier:@"showBuyingPage" sender:self];
         } else if ([data isEqualToString:@"deleted"]) {
             [self popAlert:@"删除商品" withMessage:@"删除成功~\(≧▽≦)/~"];
             [self.navigationController popToRootViewControllerAnimated:NO];
         }
         responseCallback(self.objectNumber);
     }];
-}
-
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/show.html?item_id=%@", self.objectNumber];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_objectDetailWebView loadRequest:request];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareMyIndicator];
-    [self addWebViewBridge];
-    [self loadWebViewRequest];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -72,16 +86,24 @@
     [self.activityIndicator setHidden:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+#pragma mark - Web Request
+
+- (void)loadWebViewRequest {
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/show.html?item_id=%@", self.objectNumber];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
+    [self.objectDetailWebView loadRequest:request];
 }
 
+#pragma mark - Seque Detail
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"buyItemInCategorySearch"]) {
-        ObjectBuyInCategorySearchViewController *controller = (ObjectBuyInCategorySearchViewController *)segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"showBuyingPage"]) {
+        ObjectBuyingViewController *controller = (ObjectBuyingViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
     }
 }
+
+#pragma mark - Alert
 
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
@@ -90,16 +112,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"商品详情"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"商品详情"];
 }
 
 @end

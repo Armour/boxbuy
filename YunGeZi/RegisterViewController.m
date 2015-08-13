@@ -1,5 +1,5 @@
 //
-//  forgetPasswordViewController.m
+//  registerViewController.m
 //  YunGeZi
 //
 //  Created by Armour on 5/6/15.
@@ -7,13 +7,13 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "forgetPasswordViewController.h"
+#import "registerViewController.h"
 #import "MobClick.h"
 #import "AFNetworking.h"
 
-@interface forgetPasswordViewController ()
+@interface RegisterViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *changePasswordButton;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *captchaButton;
 @property (weak, nonatomic) IBOutlet UIButton *pcodeButton;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -30,16 +30,13 @@
 @end
 
 
-@implementation forgetPasswordViewController
-
-@synthesize isShowPasswd;
-@synthesize firstTimeRefreshCaptcha;
+@implementation RegisterViewController
 
 #pragma mark - Life Cycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"修改密码"];
+    [MobClick beginLogPageView:@"注册新账号"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -55,7 +52,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"修改密码"];
+    [MobClick endLogPageView:@"注册新账号"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -94,10 +91,10 @@
 #pragma mark - Prepare My Item
 
 - (void)prepareMyButton {
-    [self.changePasswordButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
+    [self.registerButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
     [self.captchaButton setBackgroundColor:[UIColor colorWithRed:0.99 green:0.66 blue:0.15 alpha:1.00]];
     [self.pcodeButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
-    self.changePasswordButton.layer.cornerRadius = 10.0f;
+    self.registerButton.layer.cornerRadius = 10.0f;
     self.captchaButton.layer.cornerRadius = 3.0f;
     self.pcodeButton.layer.cornerRadius = 3.0f;
     self.isShowPasswd = NO;
@@ -121,7 +118,7 @@
 }
 
 - (void)prepareMyNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInChangePassword" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInRegister" object:nil];
 }
 
 #pragma mark - Captcha
@@ -133,7 +130,7 @@
 - (void)refreshCaptcha {
     [self.activityIndicatorCaptcha setHidden:NO];
     [self.activityIndicatorCaptcha startAnimating];
-    dispatch_queue_t requestQueue = dispatch_queue_create("refreshCaptcha2", NULL);
+    dispatch_queue_t requestQueue = dispatch_queue_create("refreshCaptcha", NULL);
     dispatch_async(requestQueue, ^{
         NSString *requestUrl = [[NSString alloc] initWithFormat:@"https://secure.boxbuy.cc/vcode?_rnd=%@", [self timeStamp]];
         NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:requestUrl]];
@@ -186,10 +183,10 @@
                                                                      error:&jsonError];
               if ([data[@"err"] integerValue] == 0) {
                   [self popAlert:@"" withMessage:[NSString stringWithFormat:@"短信已发送至%@，请注意查收", self.phoneTextField.text]];
-                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInChangePasswordSuccessful" object:self userInfo:nil];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInRegisterSuccessful" object:self userInfo:nil];
               } else {
                   [self popAlert:@"错误" withMessage:[NSString stringWithFormat:@"%@", data[@"msg"]]];
-                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInChangePasswordSuccessful" object:self userInfo:nil];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"GetPcodeInRegisterSuccessful" object:self userInfo:nil];
               }
               [self.activityIndicator stopAnimating];
           }
@@ -211,9 +208,9 @@
         [self getPcode];
 }
 
-#pragma mark - Change Password
+#pragma mark - Register
 
-- (void)tryChangePassword {
+- (void)tryRegister {
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -230,8 +227,10 @@
                                                                      error:&jsonError];
               if ([data[@"err"] integerValue] == 0) {
                   [self popAlert:@"" withMessage:@"注册成功"];
+                  [self performSegueWithIdentifier:@"chooseSchool" sender:self];
               } else {
                   [self popAlert:@"错误" withMessage:@"注册失败"];
+                  [self performSegueWithIdentifier:@"chooseSchool" sender:self];    // delete this line when debug finished!
               }
               [self.activityIndicator stopAnimating];
               self.pcodeTextField.text = nil;
@@ -244,15 +243,15 @@
           }];
 }
 
-- (IBAction)changePasswordButtonTouchUpInside:(UIButton *)sender {
-    if (![self checkPhoneNumber])
+- (IBAction)registerButtonTouchUpInside:(UIButton *)sender {
+    /*if (![self checkPhoneNumber])
         [self popAlert:@"格式错误" withMessage:@"手机号格式错误"];
     else if (![self checkPassword])
         [self popAlert:@"格式错误" withMessage:@"密码格式错误"];
     else if (![self checkPCode])
         [self popAlert:@"格式错误" withMessage:@"验证码格式错误"];
-    else
-        [self tryChangePassword];
+    else*/
+        [self tryRegister];
 }
 
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {

@@ -1,5 +1,5 @@
 //
-//  ObjectDetailViewController.h
+//  SearchInCategoryViewController.h
 //  YunGeZi
 //
 //  Created by Armour on 5/7/15.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectDetailInMainViewController : UIViewController <UIWebViewDelegate>
+@interface SearchResultViewController : UIViewController <UIWebViewDelegate>
 
+@property (strong, nonatomic) NSString *searchQuery;
 @property (strong, nonatomic) NSString *objectNumber;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "MyNavigationController.h"
 #import "MainPageViewController.h"
-#import "ObjectDetailViewInMainController.h"
+#import "ObjectDetailViewController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
@@ -41,14 +41,6 @@
 
 
 @implementation MainPageViewController
-
-@synthesize pageCount;
-@synthesize isFetching;
-@synthesize cellModels;
-@synthesize itemId;
-@synthesize sellerId;
-@synthesize choosedItemId;
-@synthesize choosedSellerId;
 
 #pragma mark - Life Circle
 
@@ -103,7 +95,7 @@
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
     self.waterfallView.collectionViewLayout = layout;
 
-    isFetching = NO;
+    self.isFetching = NO;
 
     [self addLoadingMask];
     [self.view bringSubviewToFront:self.activityIndicator];
@@ -114,10 +106,10 @@
 }
 
 - (void)fillCellModelsForPage:(NSUInteger)page {    // page start from 1
-    if (isFetching || ((page > 1) && (page > self.pageCount))) {
+    if (self.isFetching || ((page > 1) && (page > self.pageCount))) {
         return;
     }
-    isFetching = YES;
+    self.isFetching = YES;
     NSLog(@"Start Fetching!!! Page: %ld", page);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
@@ -128,9 +120,9 @@
               //NSLog(@"JSON => %@", response);
               if (page == 1) {
                   self.pageCount = [[response valueForKeyPath:@"totalpage"] integerValue];
-                  cellModels = [[NSMutableArray alloc] init];
-                  itemId = [[NSMutableArray alloc] init];
-                  sellerId = [[NSMutableArray alloc] init];
+                  self.cellModels = [[NSMutableArray alloc] init];
+                  self.itemId = [[NSMutableArray alloc] init];
+                  self.sellerId = [[NSMutableArray alloc] init];
               }
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
@@ -145,22 +137,22 @@
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
                   [model setSellerState:@"这是毛？"];
-                  [cellModels addObject:model];
-                  [itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
-                  [sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
+                  [self.cellModels addObject:model];
+                  [self.itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
+                  [self.sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
                   NSLog(@" 新商品!!!! %@ ", model.itemTitle);
               }
               NSLog(@"Fetch successed!");
-              [self.waterfallView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+              [self.waterfallView reloadData];
               [self.activityIndicator stopAnimating];
               [self.activityIndicator setHidden:TRUE];
               [self removeLoadingMask];
-              isFetching = NO;
+              self.isFetching = NO;
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Fetch failed...");
-              isFetching = NO;
-              [self fillCellModelsForPage:page];
+              self.isFetching = NO;
+              [self popAlert:@"加载失败" withMessage:@"貌似网络不太好哦"];
           }];
 }
 
@@ -193,8 +185,6 @@
     [rotationAnimation setValue:@"BubbleMask" forKey:BUBBLE_MASK_ANIMATION_KEY];
     return rotationAnimation;
 }
-
-#pragma mark - Action
 
 #pragma mark - Prepare Indicator
 
@@ -245,16 +235,16 @@
                                                                           target:self
                                                                           action:@selector(presentLeftMenuViewController:)];
     UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"search"
-                                                                      target:nil
-                                                                      action:nil];
+                                                                      target:self
+                                                                      action:@selector(performSegueToSearchPage)];
     UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:nil
                                                                             action:nil];
-    UIBarButtonItem *moreMenuButton = [self createUIBarButtonItemWithImageName:@"config"
-                                                                        target:nil
-                                                                        action:nil];
+    UIBarButtonItem *configButton = [self createUIBarButtonItemWithImageName:@"config"
+                                                                      target:self
+                                                                      action:@selector(configButtonTouchUpInside:)];
     NSArray *leftButtons = [NSArray arrayWithObjects:leftNavButton, leftSpaceButton, nil];
-    NSArray *rightButtons = [NSArray arrayWithObjects:moreMenuButton, notificationButton, searchButton, nil];
+    NSArray *rightButtons = [NSArray arrayWithObjects:configButton, notificationButton, searchButton, nil];
     self.navigationItem.leftBarButtonItems = leftButtons;
     self.navigationItem.rightBarButtonItems = rightButtons;
 
@@ -320,7 +310,7 @@
     self.bubbleMask.alpha = BUBBLE_MASK_OPACITY;
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.cellModels.count;
@@ -331,19 +321,19 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (cellModels.count - indexPath.item < 5 && cellModels.count % ITEMS_PER_PAGE == 0) {
-        [self fillCellModelsForPage:(cellModels.count / ITEMS_PER_PAGE) + 1];
+    if (self.cellModels.count - indexPath.item < 5 && self.cellModels.count % ITEMS_PER_PAGE == 0) {
+        [self fillCellModelsForPage:(self.cellModels.count / ITEMS_PER_PAGE) + 1];
     }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
     cell.layer.masksToBounds = YES;
     cell.layer.cornerRadius = 6.0f;
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
     [cell setSellerState:model.sellerState];
-    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_ORIGIANL]];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_ORIGIANL] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_LARGE]];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_LARGE] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
         if (succeeded) {
             [model setImageWidth:width];
             [model setImageHeight:height];
@@ -380,7 +370,7 @@
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    WaterfallCellModel *model = [cellModels objectAtIndex:indexPath.item];
+    WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
     CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : 150;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
@@ -394,9 +384,9 @@
     WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
-        choosedItemId = [itemId objectAtIndex:indexPath.item];
-        choosedSellerId = @"";
-        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
+        self.choosedSellerId = @"";
+        [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
 }
 
@@ -404,10 +394,14 @@
     WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
-        choosedSellerId = [sellerId objectAtIndex:indexPath.row];
-        choosedItemId = @"";
-        [self performSegueWithIdentifier:@"detailFromMain" sender:self];
+        self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.row];
+        self.choosedItemId = @"";
+        [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
+}
+
+- (void)configButtonTouchUpInside:(UIBarButtonItem *)sender {
+    [self performSegueToUserSettingsPage];
 }
 
 #pragma mark - DWBubbleMenuView
@@ -465,12 +459,11 @@
 
 - (void)pullToRefreshTriggered:(id)sender {
     NSLog(@"Refresh~!");
-    [self fillCellModelsForPage:1];
-    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:2.5 inModes:@[NSRunLoopCommonModes]];
-    [self.waterfallView reloadData];
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:2.0 inModes:@[NSRunLoopCommonModes]];
 }
 
 - (void)finishRefreshControl {
+    [self fillCellModelsForPage:1];
     [self.storeHouseRefreshControl finishingLoading];
     NSLog(@"Refresh Done!");
 }
@@ -482,14 +475,36 @@
 #pragma mark - Segue Detail
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"detailFromMain"]) {
-        if ([choosedItemId isEqualToString:@""]) {
-            NSLog(@"%@!!!", choosedSellerId);
-        } else if ([choosedSellerId isEqualToString:@""]) {
-            ObjectDetailInMainViewController *destViewController = segue.destinationViewController;
-            destViewController.objectNumber = choosedItemId;
+    if ([segue.identifier isEqualToString:@"showObjectDetailFromMain"]) {
+        if ([self.choosedItemId isEqualToString:@""]) {
+            NSLog(@"%@!!!", self.choosedSellerId);
+        } else if ([self.choosedSellerId isEqualToString:@""]) {
+            ObjectDetailViewController *destViewController = segue.destinationViewController;
+            destViewController.objectNumber = self.choosedItemId;
         }
     }
 }
+
+- (void)performSegueToSearchPage {
+    NSLog(@"SEGUE TO SEARCHPAGE");
+    [self performSegueWithIdentifier:@"showSearchPage" sender:self];
+}
+
+- (void)performSegueToUserSettingsPage {
+    NSLog(@"SEGUE TO SETTINGSPAGE");
+    [self performSegueWithIdentifier:@"showUserSettings" sender:self];
+}
+
+#pragma mark - Alert
+
+- (void)popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+}
+
 
 @end
