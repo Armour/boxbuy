@@ -11,4 +11,8 @@
 
 @interface RootViewController : RESideMenu <RESideMenuDelegate>
 
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
+@property (strong, nonatomic) NSString *expireTime;
+
 @end

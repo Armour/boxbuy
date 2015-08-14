@@ -8,14 +8,15 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
+#import "RootViewController.h"
 #import "MobClick.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (strong, nonatomic) NSString *access_token;
-@property (strong, nonatomic) NSString *refresh_token;
-@property (strong, nonatomic) NSString *expire_time;
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
+@property (strong, nonatomic) NSString *expireTime;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) UIView *loadingMask;
 @property (nonatomic) NSInteger timerCountInRegister;
@@ -203,9 +204,9 @@ enum {
                                       error:&jsonError];
             NSLog(@"Response with json ==> %@", jsonData);
 
-            self.access_token = [[NSString alloc] initWithFormat:@"%@", jsonData[@"access_token"]];
-            self.refresh_token = [[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]];
-            self.expire_time = [[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]];
+            self.accessToken = [[NSString alloc] initWithFormat:@"%@", jsonData[@"access_token"]];
+            self.refreshToken = [[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]];
+            self.expireTime = [[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]];
 
             status = [jsonData[@"err"] integerValue];
         }
@@ -305,6 +306,17 @@ enum {
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
+}
+
+#pragma mark - Segue Detail
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToMainPage"]) {
+        RootViewController *destViewController = segue.destinationViewController;
+        [destViewController setAccessToken:self.accessToken];
+        [destViewController setRefreshToken:self.accessToken];
+        [destViewController setExpireTime:self.expireTime];
+    }
 }
 
 #pragma mark - Alert

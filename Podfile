@@ -10,6 +10,7 @@ pod 'DWBubbleMenuButton', '~> 1.0.1'
 pod 'REFrostedViewController', '~> 2.4'
 pod 'RESideMenu', '~> 4.0.7'
 pod 'SDWebImage', '~>3.7'
+pod 'RATreeView', '~> 1.0.3'
 end
 
 target 'YunGeZiTests' do

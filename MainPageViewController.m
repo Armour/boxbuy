@@ -140,7 +140,7 @@
                   [self.cellModels addObject:model];
                   [self.itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
                   [self.sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
-                  NSLog(@" 新商品!!!! %@ ", model.itemTitle);
+                  //NSLog(@" 新商品!!!! %@ ", model.itemTitle);
               }
               NSLog(@"Fetch successed!");
               [self.waterfallView reloadData];
@@ -216,12 +216,12 @@
 - (UIBarButtonItem *)createUIBarButtonItemWithImageName:(NSString *)imageName
                                                  target:(id)target
                                                  action:(SEL)action {
-    UIButton *_button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [_button setImage:[UIImage imageNamed:imageName]
+    UIButton *uiBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [uiBarButton setImage:[UIImage imageNamed:imageName]
              forState:UIControlStateNormal];
-    _button.tintColor = [UIColor whiteColor];
-    [_button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:_button];
+    uiBarButton.tintColor = [UIColor whiteColor];
+    [uiBarButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:uiBarButton];
     item.tintColor = [UIColor whiteColor];
     return item;
 }
@@ -261,41 +261,41 @@
                                          size:(CGSize)size
                                        target:(id)target
                                        action:(SEL)action {
-    UIButton *_button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    [_button setImage:[UIImage imageNamed:imageName]
+    UIButton *bubbleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    [bubbleButton setImage:[UIImage imageNamed:imageName]
              forState:UIControlStateNormal];
-    [_button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    _button.layer.cornerRadius = _button.frame.size.height / 2.f;
-    _button.clipsToBounds = YES;
-    return _button;
+    [bubbleButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    bubbleButton.layer.cornerRadius = bubbleButton.frame.size.height / 2.f;
+    bubbleButton.clipsToBounds = YES;
+    return bubbleButton;
 }
 
 - (void)prepareBubbleMenu {
-    CGSize _frameViewSize = self.view.frame.size;
-    CGSize _buttonSize = CGSizeMake(55.f, 55.f);
+    CGSize frameViewSize = self.view.frame.size;
+    CGSize buttonSize = CGSizeMake(55.f, 55.f);
     
     UIImageView *bubbleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f,
-                                                                             _buttonSize.width,
-                                                                             _buttonSize.height)];
+                                                                             buttonSize.width,
+                                                                             buttonSize.height)];
     [bubbleImage setImage:[UIImage imageNamed:@"close"]];
-    bubbleImage.layer.cornerRadius = _buttonSize.height / 2.f;
+    bubbleImage.layer.cornerRadius = buttonSize.height / 2.f;
     bubbleImage.clipsToBounds = YES;
     
     DWBubbleMenuButton *bubbleMenu = [[DWBubbleMenuButton alloc]
-                                      initWithFrame:CGRectMake(_frameViewSize.width - _buttonSize.width - 40,
-                                                               _frameViewSize.height - _buttonSize.height - 60,
-                                                               _buttonSize.width,
-                                                               _buttonSize.height)
+                                      initWithFrame:CGRectMake(frameViewSize.width - buttonSize.width - 40,
+                                                               frameViewSize.height - buttonSize.height - 60,
+                                                               buttonSize.width,
+                                                               buttonSize.height)
                                       expansionDirection:DirectionUp];
     bubbleMenu.homeButtonView = bubbleImage;
     bubbleMenu.animationDuration = BUBBLE_ANIMATION_DURATION;
     
     UIButton *recycleButton = [self createBubbleButtonWithImageName:@"DefaultUserImage"
-                                                               size:_buttonSize
+                                                               size:buttonSize
                                                              target:nil
                                                              action:nil];
     UIButton *sellButton = [self createBubbleButtonWithImageName:@"DefaultItemImage"
-                                                            size:_buttonSize
+                                                            size:buttonSize
                                                           target:nil
                                                           action:nil];
     NSArray *buttons = [NSArray arrayWithObjects:recycleButton, sellButton, nil];
@@ -321,9 +321,8 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.cellModels.count - indexPath.item < 5 && self.cellModels.count % ITEMS_PER_PAGE == 0) {
+    if (self.cellModels.count - indexPath.item < 5 && self.cellModels.count % ITEMS_PER_PAGE == 0)
         [self fillCellModelsForPage:(self.cellModels.count / ITEMS_PER_PAGE) + 1];
-    }
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
     cell.layer.masksToBounds = YES;
     cell.layer.cornerRadius = 6.0f;
@@ -510,6 +509,5 @@
                                           otherButtonTitles: nil];
     [alert show];
 }
-
 
 @end
