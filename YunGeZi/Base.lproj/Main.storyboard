@@ -203,7 +203,7 @@
                                             <constraint firstAttribute="height" constant="20" id="Hwd-Hh-e8M"/>
                                             <constraint firstAttribute="width" constant="20" id="t5U-ol-AWL"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="close">
+                                        <state key="normal" backgroundImage="Settings">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -212,25 +212,19 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="162" id="XjD-vF-SJN"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfz-ts-b3m">
-                                        <rect key="frame" x="28" y="62" width="61.5" height="62"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="gfz-ts-b3m" secondAttribute="height" multiplier="1:1" id="iol-Jz-kAg"/>
-                                        </constraints>
-                                        <state key="normal" title="Button">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcA-gS-IMP">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZcA-gS-IMP">
                                         <rect key="frame" x="160.5" y="62" width="41" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ZcA-gS-IMP" secondAttribute="height" multiplier="1:1" id="XoY-uz-UBt"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="关注">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="default">
@@ -239,12 +233,14 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-wu-LxL">
-                                        <rect key="frame" x="209.5" y="62" width="41" height="62"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-wu-LxL">
+                                        <rect key="frame" x="209.5" y="62" width="41.5" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="FE8-wu-LxL" secondAttribute="height" multiplier="1:1" id="TPO-5N-gPz"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="粉丝">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="default">
@@ -254,33 +250,34 @@
                                         </variation>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2k-fB-uFN">
-                                        <rect key="frame" x="28" y="132" width="223" height="45"/>
+                                        <rect key="frame" x="8" y="132" width="263" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b04-GM-peU">
-                                                <rect key="frame" x="8" y="8" width="169" height="29"/>
+                                                <rect key="frame" x="0.0" y="8" width="209" height="29"/>
                                                 <state key="normal" title="Username">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbC-3Q-CdW">
-                                                <rect key="frame" x="185" y="8" width="29" height="29"/>
+                                                <rect key="frame" x="217" y="8" width="25" height="29"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="sbC-3Q-CdW" secondAttribute="height" multiplier="1:1" id="ssP-bF-q3U"/>
+                                                    <constraint firstAttribute="width" secondItem="sbC-3Q-CdW" secondAttribute="height" multiplier="1:1" constant="-4" id="ssP-bF-q3U"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="close">
+                                                <state key="normal" backgroundImage="ArrowDropdown">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="sbC-3Q-CdW" firstAttribute="trailing" secondItem="P2k-fB-uFN" secondAttribute="trailingMargin" constant="-1" id="1S6-mw-6Ct"/>
+                                            <constraint firstItem="sbC-3Q-CdW" firstAttribute="trailing" secondItem="P2k-fB-uFN" secondAttribute="trailingMargin" constant="-13" id="1S6-mw-6Ct"/>
                                             <constraint firstItem="b04-GM-peU" firstAttribute="bottom" secondItem="P2k-fB-uFN" secondAttribute="bottomMargin" id="2V9-f8-Uxk"/>
-                                            <constraint firstItem="b04-GM-peU" firstAttribute="leading" secondItem="P2k-fB-uFN" secondAttribute="leadingMargin" id="A0l-sk-1TE"/>
+                                            <constraint firstItem="b04-GM-peU" firstAttribute="leading" secondItem="P2k-fB-uFN" secondAttribute="leadingMargin" constant="-8" id="A0l-sk-1TE"/>
                                             <constraint firstItem="sbC-3Q-CdW" firstAttribute="top" secondItem="b04-GM-peU" secondAttribute="top" id="M4m-Y7-2tx"/>
                                             <constraint firstItem="sbC-3Q-CdW" firstAttribute="bottom" secondItem="b04-GM-peU" secondAttribute="bottom" id="cfK-hq-j45"/>
                                             <constraint firstAttribute="trailing" secondItem="b04-GM-peU" secondAttribute="trailing" constant="46" id="hFK-gt-JBz"/>
-                                            <constraint firstItem="sbC-3Q-CdW" firstAttribute="leading" secondItem="b04-GM-peU" secondAttribute="trailing" constant="8" symbolic="YES" id="mS5-Jq-dDp"/>
+                                            <constraint firstItem="sbC-3Q-CdW" firstAttribute="leading" secondItem="b04-GM-peU" secondAttribute="trailing" constant="8" id="mS5-Jq-dDp"/>
                                             <constraint firstItem="b04-GM-peU" firstAttribute="top" secondItem="P2k-fB-uFN" secondAttribute="topMargin" id="xZY-B1-LE6"/>
                                         </constraints>
                                         <variation key="default">
@@ -289,12 +286,14 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMm-Ns-axr">
-                                        <rect key="frame" x="110.5" y="62" width="42" height="62"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="KMm-Ns-axr">
+                                        <rect key="frame" x="111.5" y="62" width="41" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="KMm-Ns-axr" secondAttribute="height" multiplier="1:1" id="Ex9-NM-xIQ"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="商品">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="default">
@@ -302,6 +301,15 @@
                                                 <exclude reference="Ex9-NM-xIQ"/>
                                             </mask>
                                         </variation>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfz-ts-b3m">
+                                        <rect key="frame" x="8" y="62" width="61.5" height="62"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="gfz-ts-b3m" secondAttribute="height" multiplier="1:1" id="iol-Jz-kAg"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94049873740000001" green="0.94049873740000001" blue="0.94049873740000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -312,7 +320,7 @@
                                     <constraint firstAttribute="trailing" secondItem="FE8-wu-LxL" secondAttribute="trailing" constant="28" id="5Ty-xR-yYH"/>
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="leading" secondItem="KMm-Ns-axr" secondAttribute="trailing" constant="8" symbolic="YES" id="646-UI-lI8"/>
                                     <constraint firstItem="P2k-fB-uFN" firstAttribute="leading" secondItem="gfz-ts-b3m" secondAttribute="leading" id="6Au-2L-Xmy"/>
-                                    <constraint firstItem="gfz-ts-b3m" firstAttribute="leading" secondItem="WHU-is-K01" secondAttribute="leading" constant="28" id="6SX-qM-R2T"/>
+                                    <constraint firstItem="gfz-ts-b3m" firstAttribute="leading" secondItem="WHU-is-K01" secondAttribute="leading" constant="8" id="6SX-qM-R2T"/>
                                     <constraint firstItem="gfz-ts-b3m" firstAttribute="width" secondItem="FE8-wu-LxL" secondAttribute="width" multiplier="1.5" id="8Tg-wJ-891"/>
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="bottom" secondItem="FE8-wu-LxL" secondAttribute="bottom" id="8q0-sX-S7r"/>
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="bottom" secondItem="FE8-wu-LxL" secondAttribute="bottom" id="AEn-Xb-qPd"/>
@@ -321,7 +329,7 @@
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="centerY" secondItem="FE8-wu-LxL" secondAttribute="centerY" id="Ffv-ZR-EqG"/>
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="height" secondItem="FE8-wu-LxL" secondAttribute="height" id="IEW-U1-V9v"/>
                                     <constraint firstItem="gfz-ts-b3m" firstAttribute="top" secondItem="t9H-VN-Kcg" secondAttribute="bottom" constant="38" id="Iif-vV-w6A"/>
-                                    <constraint firstItem="P2k-fB-uFN" firstAttribute="trailing" secondItem="FE8-wu-LxL" secondAttribute="trailing" id="Iil-oB-9sZ"/>
+                                    <constraint firstItem="P2k-fB-uFN" firstAttribute="trailing" secondItem="FE8-wu-LxL" secondAttribute="trailing" constant="20" id="Iil-oB-9sZ"/>
                                     <constraint firstItem="gfz-ts-b3m" firstAttribute="height" secondItem="FE8-wu-LxL" secondAttribute="height" id="JGg-qr-j2g"/>
                                     <constraint firstItem="gfz-ts-b3m" firstAttribute="centerY" secondItem="FE8-wu-LxL" secondAttribute="centerY" id="JOW-WI-aQH"/>
                                     <constraint firstItem="KMm-Ns-axr" firstAttribute="width" secondItem="KMm-Ns-axr" secondAttribute="height" multiplier="1:1" id="JpZ-l6-ynI"/>
@@ -349,7 +357,7 @@
                                     <constraint firstItem="KMm-Ns-axr" firstAttribute="baseline" secondItem="ZcA-gS-IMP" secondAttribute="baseline" id="sM8-KZ-wAm"/>
                                     <constraint firstItem="KMm-Ns-axr" firstAttribute="width" secondItem="gfz-ts-b3m" secondAttribute="width" multiplier="0.666667" id="sPh-Yq-Euj"/>
                                     <constraint firstItem="9Ah-c3-8Kl" firstAttribute="top" secondItem="WHU-is-K01" secondAttribute="topMargin" id="uw0-JP-rMz"/>
-                                    <constraint firstAttribute="height" secondItem="gfz-ts-b3m" secondAttribute="height" multiplier="3" id="vxM-51-1vt"/>
+                                    <constraint firstAttribute="height" secondItem="gfz-ts-b3m" secondAttribute="height" multiplier="3" constant="-1" id="vxM-51-1vt"/>
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="centerY" secondItem="FE8-wu-LxL" secondAttribute="centerY" id="xYS-0f-o2t"/>
                                     <constraint firstItem="ZcA-gS-IMP" firstAttribute="width" secondItem="FE8-wu-LxL" secondAttribute="width" id="zPa-xf-QpF"/>
                                     <constraint firstItem="FE8-wu-LxL" firstAttribute="firstBaseline" secondItem="ZcA-gS-IMP" secondAttribute="baseline" id="zTL-qu-y8G"/>
@@ -1990,6 +1998,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ArrowDropdown" width="50" height="102"/>
+        <image name="Settings" width="82" height="102"/>
         <image name="arrow-forward" width="128" height="128"/>
         <image name="close" width="128" height="128"/>
         <image name="eye_close" width="400" height="400"/>

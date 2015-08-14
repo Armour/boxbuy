@@ -11,14 +11,22 @@
 #import "RootViewController.h"
 #import "UIViewController+RESideMenu.h"
 #import "RATreeView.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "SDWebImage/UIButton+WebCache.h"
 
 #define DegreesToRadians(x) (M_PI * x / 180.0)
 #define ARROW_ROTATION_ANIMATION @"ArrowRotationAnimation"
 
 @interface LeftMenuViewController ()
 
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
+@property (strong, nonatomic) NSString *expireTime;
 @property (strong, nonatomic) NSArray *models;
 @property (strong, nonatomic) NSString *selectedItem;
+@property (strong, nonatomic) NSString *userImageId;
+@property (strong, nonatomic) NSString *userImageHash;
+@property (strong, nonatomic) NSString *schoolId;
 @property (strong, nonatomic) RATreeView *treeView;
 @property (weak, nonatomic) IBOutlet UIButton *schoolNameButton;
 @property (weak, nonatomic) IBOutlet UIButton *schoolConfigButton;
@@ -41,11 +49,11 @@
 
 #pragma mark - Life Circle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
     [self prepareTreeView];
+    [self prepareMyNotification];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,7 +103,8 @@
 }
 
 - (void)prepareTreeView {
-    [self prepareTreeViewModels];    self.categoryView.clipsToBounds = TRUE;
+    [self prepareTreeViewModels];
+    self.categoryView.clipsToBounds = TRUE;
     [self.userInfoView setBackgroundColor:[UIColor clearColor]];
     [self.categoryView setBackgroundColor:[UIColor clearColor]];
     CGFloat screenWidth = self.view.bounds.size.width;
@@ -113,6 +122,60 @@
     self.treeView.rowsExpandingAnimation = RATreeViewRowAnimationFade;
     self.treeView.backgroundColor = [UIColor clearColor];
     [self.categoryView addSubview:self.treeView];
+}
+
+#pragma mark - Notification
+
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(getLoginToken:)
+                                                 name:@"PostLoingTokenFromRootToLeftMenu"
+                                               object:nil];
+}
+
+- (void)getLoginToken:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    self.accessToken = [dict objectForKey:@"accessToken"];
+    self.refreshToken = [dict objectForKey:@"refreshToken"];
+    self.expireTime = [dict objectForKey:@"expireTime"];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://v2.api.boxbuy.cc/getUserData"
+       parameters:@{@"userid" : @"me",
+                    @"access_token" : self.accessToken}
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%@\n商品", [response valueForKeyPath:@"Account.value_item"]]
+                                       forState:UIControlStateNormal];
+              [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%@\n关注", [response valueForKeyPath:@"Account.value_follow"]]
+                                     forState:UIControlStateNormal];
+              [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%@\n粉丝", [response valueForKeyPath:@"Account.value_fan"]]
+                                   forState:UIControlStateNormal];
+              [self.userNameButton setTitle:[response valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
+              self.userImageId = [response valueForKeyPath:@"Account.headiconid"];
+              self.userImageHash = [response valueForKeyPath:@"HeadIcon.hash"];
+              self.schoolId = [response valueForKeyPath:@"Account.schoolid"];
+              [self setUserSchoolName];
+              NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", self.userImageId, self.userImageHash, @"ori"];
+              NSURL *url = [NSURL URLWithString:imagePath];
+              [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
+              self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
+              self.userImageButton.clipsToBounds = YES;
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Load user info failed...");
+              [self popAlert:@"加载个人信息失败" withMessage:@"貌似网络不太好哦"];
+          }];
+}
+
+- (void)setUserSchoolName {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.boxbuy.cc/getSchools"
+      parameters:@{@"json":@1}
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             NSString *path = [[NSString alloc] initWithFormat:@"%@.nameCh", self.schoolId];
+             [self.schoolNameButton setTitle:[response valueForKeyPath:path] forState:UIControlStateNormal];
+             NSLog(@"Set School Success!!");
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Set School Fail!!");
+         }];
 }
 
 #pragma mark - RATreeView
@@ -235,6 +298,17 @@
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     [rotationAnimation setValue:@"ArrowRotation" forKey:ARROW_ROTATION_ANIMATION];
     return rotationAnimation;
+}
+
+#pragma mark - Alert
+
+- (void)popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
 }
 
 @end
