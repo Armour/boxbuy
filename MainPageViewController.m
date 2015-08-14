@@ -239,7 +239,7 @@
                                                                       action:@selector(performSegueToSearchPage)];
     UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:self
-                                                                            action:@selector(performSegueToAccountPage)];
+                                                                            action:@selector(performSegueToAccountPage)]; // JUST FOR TEST
     UIBarButtonItem *configButton = [self createUIBarButtonItemWithImageName:@"config"
                                                                       target:self
                                                                       action:@selector(performSegueToUserSettingsPage)];
