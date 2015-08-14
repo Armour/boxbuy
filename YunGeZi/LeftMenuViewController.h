@@ -12,4 +12,6 @@
 
 @interface LeftMenuViewController : UIViewController <RESideMenuDelegate, RATreeViewDataSource, RATreeViewDelegate>
 
+@property (strong, nonatomic) NSString *schoolName;
+
 @end

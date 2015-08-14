@@ -20,6 +20,20 @@
 @property (strong, nonatomic) NSArray *models;
 @property (strong, nonatomic) NSString *selectedItem;
 @property (strong, nonatomic) RATreeView *treeView;
+@property (weak, nonatomic) IBOutlet UIButton *schoolNameButton;
+@property (weak, nonatomic) IBOutlet UIButton *schoolConfigButton;
+@property (weak, nonatomic) IBOutlet UIButton *userImageButton;
+@property (weak, nonatomic) IBOutlet UIButton *userProductsButton;
+@property (weak, nonatomic) IBOutlet UIButton *userFollowButton;
+@property (weak, nonatomic) IBOutlet UIButton *userFansButton;
+@property (weak, nonatomic) IBOutlet UIButton *userNameButton;
+@property (weak, nonatomic) IBOutlet UIButton *userActionButton;
+@property (weak, nonatomic) IBOutlet UIView *categoryView;
+@property (weak, nonatomic) IBOutlet UIView *userInfoView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightPaddingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topPaddingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomPaddingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftPaddingConstraint;
 
 @end
 
@@ -81,19 +95,24 @@
 }
 
 - (void)prepareTreeView {
-    [self prepareTreeViewModels];
-    // TODO
-    CGFloat leftPadding = 20;
-    CGFloat topPadding = 250;
-    CGFloat rightPadding = 100;
-    CGFloat bottomPadding = 100;
-    CGSize viewSize = self.view.bounds.size;
-    self.treeView = [[RATreeView alloc] initWithFrame:CGRectMake(leftPadding, topPadding, viewSize.width - leftPadding - rightPadding, viewSize.height - topPadding - bottomPadding)];
+    [self prepareTreeViewModels];    self.categoryView.clipsToBounds = TRUE;
+    [self.userInfoView setBackgroundColor:[UIColor clearColor]];
+    [self.categoryView setBackgroundColor:[UIColor clearColor]];
+    CGFloat screenWidth = self.view.bounds.size.width;
+    CGFloat screenHeight = self.view.bounds.size.height;
+    self.topPaddingConstraint.constant = screenHeight * 0.12;
+    self.rightPaddingConstraint.constant = - screenWidth * 0.24;
+    self.bottomPaddingConstraint.constant = screenHeight * 0.15;
+    self.leftPaddingConstraint.constant = screenWidth * 0.03;
+    [self.categoryView layoutIfNeeded];
+    self.treeView = [[RATreeView alloc] initWithFrame:CGRectMake(-5, 0, self.categoryView.bounds.size.width, self.categoryView.bounds.size.height)];
     self.treeView.delegate = self;
     self.treeView.dataSource = self;
     self.treeView.separatorStyle = RATreeViewCellSeparatorStyleSingleLine;
+    self.treeView.rowsCollapsingAnimation = RATreeViewRowAnimationFade;
+    self.treeView.rowsExpandingAnimation = RATreeViewRowAnimationFade;
     self.treeView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.treeView];
+    [self.categoryView addSubview:self.treeView];
 }
 
 #pragma mark - RATreeView
