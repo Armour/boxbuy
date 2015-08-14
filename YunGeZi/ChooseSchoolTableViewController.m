@@ -8,6 +8,8 @@
 
 #import "ChooseSchoolTableViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "SDWebImage/UIImageView+WebCache.h"
+#import "ChooseSchoolTableViewCell.h"
 
 @interface ChooseSchoolTableViewController ()
 
@@ -16,6 +18,7 @@
 @property (strong, nonatomic) NSArray *schoolSectionTitles;
 @property (strong, nonatomic) NSArray *schoolIndexTitles;
 @property (strong, nonatomic) NSArray *schoolImage;
+@property (strong, nonatomic) NSMutableSet *indexPathFetchedImageSet;
 
 @end
 
@@ -43,6 +46,8 @@
                   @"Z" : @[@"5", @"6", @"1", @"7", @"8", @"9", @"12", @"13", @"14", @"15", @"17", @"18"]};
     schoolIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     schoolSectionTitles = [[schools allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    self.indexPathFetchedImageSet = [NSMutableSet set];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,16 +71,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SchoolCell" forIndexPath:indexPath];
+    ChooseSchoolTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SchoolCell" forIndexPath:indexPath];
     NSString *sectionTitle = [schoolSectionTitles objectAtIndex:indexPath.section];
     NSArray *sectionSchools = [schools objectForKey:sectionTitle];
     NSArray *sectionSchoolsId = [schoolsId objectForKey:sectionTitle];
     NSString *school = [sectionSchools objectAtIndex:indexPath.row];
     NSString *schoolId = [sectionSchoolsId objectAtIndex:indexPath.row];
-    NSString *url = [[NSString alloc] initWithFormat:@"http://static.boxbuy.cc/image/schools/%@/icon.gif", schoolId];
-    NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    cell.textLabel.text = school;
-    cell.imageView.image = [UIImage imageWithData:data];
+    NSString *urlString = [[NSString alloc] initWithFormat:@"http://static.boxbuy.cc/image/schools/%@/icon.gif", schoolId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    cell.schoolNameLabel.text = school;
+    //cell.textLabel.text = school;
+    [cell.logoImage sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error || [self.indexPathFetchedImageSet containsObject:indexPath]) {
+                return;
+            }
+            [self.indexPathFetchedImageSet addObject:indexPath];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            });
+        }];
     return cell;
 }
 
@@ -87,8 +101,14 @@
     return [schoolSectionTitles indexOfObject:title];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // ...
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ChooseSchoolTableViewCell *cell = (ChooseSchoolTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.choosenMarkImage.image = [UIImage imageNamed:@"checkmark"];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ChooseSchoolTableViewCell *cell = (ChooseSchoolTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.choosenMarkImage.image = nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
