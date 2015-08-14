@@ -90,7 +90,7 @@
 #pragma mark - Button Action
 
 - (IBAction)backButtonTouchUpInside:(id)sender {
-    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBarHidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
