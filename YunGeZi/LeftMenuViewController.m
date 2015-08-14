@@ -143,11 +143,11 @@
        parameters:@{@"userid" : @"me",
                     @"access_token" : self.accessToken}
           success:^(AFHTTPRequestOperation *operation, id response) {
-              [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%@\n商品", [response valueForKeyPath:@"Account.value_item"]]
+              [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n商品", [response valueForKeyPath:@"Account.value_item"]]
                                        forState:UIControlStateNormal];
-              [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%@\n关注", [response valueForKeyPath:@"Account.value_follow"]]
+              [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n关注", [response valueForKeyPath:@"Account.value_follow"]]
                                      forState:UIControlStateNormal];
-              [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%@\n粉丝", [response valueForKeyPath:@"Account.value_fan"]]
+              [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n粉丝", [response valueForKeyPath:@"Account.value_fan"]]
                                    forState:UIControlStateNormal];
               [self.userNameButton setTitle:[response valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
               self.userImageId = [response valueForKeyPath:@"Account.headiconid"];
@@ -159,6 +159,9 @@
               [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
               self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
               self.userImageButton.clipsToBounds = YES;
+              self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+              self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+              self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Load user info failed...");
               [self popAlert:@"加载个人信息失败" withMessage:@"貌似网络不太好哦"];
