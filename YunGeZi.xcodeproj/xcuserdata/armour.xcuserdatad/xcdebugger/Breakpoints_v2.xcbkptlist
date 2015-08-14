@@ -10,11 +10,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MainPageViewController.m"
+<<<<<<< HEAD
+            timestampString = "460804177.823459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+=======
             timestampString = "460779532.566752"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "237"
             endingLineNumber = "237"
+>>>>>>> master
             landmarkName = "@implementation MainPageViewController"
             landmarkType = "3">
          </BreakpointContent>
