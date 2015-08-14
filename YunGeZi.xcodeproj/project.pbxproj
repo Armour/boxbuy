@@ -11,6 +11,7 @@
 		47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */; };
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
+		4785744E1B7DE05100D99685 /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4785744D1B7DE05100D99685 /* ChooseSchoolTableViewCell.m */; };
 		47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */; };
 		47F4BBBF1B7B485200FA8524 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBE1B7B485200FA8524 /* UserSettings.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
@@ -72,6 +73,8 @@
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
 		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
+		4785744C1B7DE05100D99685 /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
+		4785744D1B7DE05100D99685 /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
 		47F4BBBA1B7B47F300FA8524 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		47F4BBBD1B7B485200FA8524 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
@@ -185,6 +188,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		478574471B7DDF5600D99685 /* AccountPage */ = {
+			isa = PBXGroup;
+			children = (
+				7651D2C51AF079BD003184A8 /* AccountViewController.h */,
+				7651D2C61AF079BD003184A8 /* AccountViewController.m */,
+			);
+			name = AccountPage;
+			sourceTree = "<group>";
+		};
+		4785744B1B7DE02200D99685 /* ChooseSchoolPage */ = {
+			isa = PBXGroup;
+			children = (
+				7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */,
+				7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */,
+				4785744C1B7DE05100D99685 /* ChooseSchoolTableViewCell.h */,
+				4785744D1B7DE05100D99685 /* ChooseSchoolTableViewCell.m */,
+			);
+			name = ChooseSchoolPage;
+			sourceTree = "<group>";
+		};
 		47F4BBB91B7B47CB00FA8524 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,10 +307,8 @@
 				7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */,
 				7609A10A1AFF681D00B134C9 /* ObjectBuyingResultViewController.h */,
 				7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */,
-				7651D2C51AF079BD003184A8 /* AccountViewController.h */,
-				7651D2C61AF079BD003184A8 /* AccountViewController.m */,
-				7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */,
-				7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */,
+				4785744B1B7DE02200D99685 /* ChooseSchoolPage */,
+				478574471B7DDF5600D99685 /* AccountPage */,
 				7651D2C21AF0771B003184A8 /* SellingViewController.h */,
 				7651D2C31AF0771B003184A8 /* SellingViewController.m */,
 				76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */,
@@ -520,6 +541,7 @@
 				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
 				47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */,
+				4785744E1B7DE05100D99685 /* ChooseSchoolTableViewCell.m in Sources */,
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,
