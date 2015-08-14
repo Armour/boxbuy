@@ -238,11 +238,11 @@
                                                                       target:self
                                                                       action:@selector(performSegueToSearchPage)];
     UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
-                                                                            target:nil
-                                                                            action:nil];
+                                                                            target:self
+                                                                            action:@selector(performSegueToAccountPage)]; // JUST FOR TEST
     UIBarButtonItem *configButton = [self createUIBarButtonItemWithImageName:@"config"
                                                                       target:self
-                                                                      action:@selector(configButtonTouchUpInside:)];
+                                                                      action:@selector(performSegueToUserSettingsPage)];
     NSArray *leftButtons = [NSArray arrayWithObjects:leftNavButton, leftSpaceButton, nil];
     NSArray *rightButtons = [NSArray arrayWithObjects:configButton, notificationButton, searchButton, nil];
     self.navigationItem.leftBarButtonItems = leftButtons;
@@ -493,6 +493,11 @@
 - (void)performSegueToUserSettingsPage {
     NSLog(@"SEGUE TO SETTINGSPAGE");
     [self performSegueWithIdentifier:@"showUserSettings" sender:self];
+}
+
+- (void)performSegueToAccountPage {
+    NSLog(@"SEGUE TO ACCOUNTPAGE");
+    [self performSegueWithIdentifier:@"showAccount" sender:self];
 }
 
 #pragma mark - Alert
