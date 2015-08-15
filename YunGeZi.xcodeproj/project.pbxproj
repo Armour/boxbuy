@@ -23,6 +23,7 @@
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
 		7613EB6A1B777D0700C4FB9A /* ChooseSchoolTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */; };
 		761F4E971B763795009E527A /* boxbuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761F4E961B763795009E527A /* boxbuy.plist */; };
+		76391DFB1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */; };
 		76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */; };
 		764826DE1B195106008D1D7D /* MyPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764826DD1B195106008D1D7D /* MyPickerView.m */; };
 		7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* SearchViewController.m */; };
@@ -96,6 +97,8 @@
 		7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewController.h; sourceTree = "<group>"; };
 		7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewController.m; sourceTree = "<group>"; };
 		761F4E961B763795009E527A /* boxbuy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = boxbuy.plist; sourceTree = "<group>"; };
+		76391DF91B7F2CCF00D1911E /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
+		76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
 		76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPickerCustomPickerDelegate.h; sourceTree = "<group>"; };
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
 		764826DC1B195106008D1D7D /* MyPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPickerView.h; path = ../MyPickerView.h; sourceTree = "<group>"; };

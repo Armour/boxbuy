@@ -110,7 +110,7 @@
         return;
     }
     self.isFetching = YES;
-    NSLog(@"Start Fetching!!! Page: %ld", page);
+    NSLog(@"Start Fetching!!! Page: %ld", (unsigned long)page);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
        parameters:@{@"schoolid" : @"0",
