@@ -126,8 +126,8 @@
               }
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
-                  [model setImageWidth:0];
-                  [model setImageHeight:0];
+                  [model setImageWidth:200];
+                  [model setImageHeight:200];
                   [model setImageHash:[obj valueForKeyPath:@"Cover.hash"]];
                   [model setImageId:[obj valueForKeyPath:@"Item.cover"]];
                   [model setItemTitle:[obj valueForKeyPath:@"Item.title"]];
@@ -371,7 +371,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
-    CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : 150;
+    CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : itemWidth;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
     return itemsize;

@@ -156,7 +156,7 @@
               [self setUserSchoolName];
               NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", self.userImageId, self.userImageHash, @"ori"];
               NSURL *url = [NSURL URLWithString:imagePath];
-              [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
+              [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
               self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
               self.userImageButton.clipsToBounds = YES;
               self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;

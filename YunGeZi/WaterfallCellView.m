@@ -34,7 +34,7 @@
     NSURL *url = [NSURL URLWithString:imageString];
     [self.itemImageButton sd_setBackgroundImageWithURL:url
                                               forState:UIControlStateNormal
-                                      placeholderImage:[UIImage imageNamed:@"DefaultItemImage"]
+                                      placeholderImage:[UIImage imageNamed:@"default_cover"]
                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                                                  if (error) {
                                                      callback(NO, 0, 0);
@@ -90,7 +90,7 @@
                                                   endAngle:M_PI * 2.0
                                                  clockwise:YES].CGPath;
     self.sellerPhotoImageButton.layer.mask = maskLayer;
-    [self.sellerPhotoImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
+    [self.sellerPhotoImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
 }
 
 @end

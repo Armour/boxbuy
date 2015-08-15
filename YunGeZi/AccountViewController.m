@@ -36,7 +36,7 @@
 #pragma mark - Preparation
 
 - (void)initUserInfo {
-    UIImage *userPhoto = [UIImage imageNamed:@"DefaultUserImage"];
+    UIImage *userPhoto = [UIImage imageNamed:@"default_headicon"];
     [self.headerBackgroundImage setImage:userPhoto];
     [self.userImage setImage:userPhoto];
     self.userImage.layer.cornerRadius = self.userImage.bounds.size.height / 2;
