@@ -142,22 +142,22 @@
 #pragma mark - Inner Helper
 
 - (void)setGoodsCount:(NSInteger)count {
-    [self.goodsButton setTitle:[NSString stringWithFormat:@"%ld\r\n商品", count]
+    [self.goodsButton setTitle:[NSString stringWithFormat:@"%ld\r\n商品", (long)count]
                       forState:UIControlStateNormal];
 }
 
 - (void)setFocusCount:(NSInteger)count {
-    [self.focusButton setTitle:[NSString stringWithFormat:@"%ld\r\n关注", count]
+    [self.focusButton setTitle:[NSString stringWithFormat:@"%ld\r\n关注", (long)count]
                       forState:UIControlStateNormal];
 }
 
 - (void)setFansCount:(NSInteger)count {
-    [self.fansButton setTitle:[NSString stringWithFormat:@"%ld\r\n粉丝", count]
+    [self.fansButton setTitle:[NSString stringWithFormat:@"%ld\r\n粉丝", (long)count]
                      forState:UIControlStateNormal];
 }
 
 - (void)setCommentsCount:(NSInteger)count {
-    [self.commentsButton setTitle:[NSString stringWithFormat:@"  已收到%ld条评价", count]
+    [self.commentsButton setTitle:[NSString stringWithFormat:@"  已收到%ld条评价", (long)count]
                          forState:UIControlStateNormal];
 }
 

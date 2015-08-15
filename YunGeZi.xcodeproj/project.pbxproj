@@ -22,6 +22,7 @@
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
 		7613EB6A1B777D0700C4FB9A /* ChooseSchoolTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */; };
 		761F4E971B763795009E527A /* boxbuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761F4E961B763795009E527A /* boxbuy.plist */; };
+		76391DFB1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */; };
 		76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */; };
 		764826DE1B195106008D1D7D /* MyPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764826DD1B195106008D1D7D /* MyPickerView.m */; };
 		7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* SearchViewController.m */; };
@@ -93,6 +94,8 @@
 		7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewController.h; sourceTree = "<group>"; };
 		7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewController.m; sourceTree = "<group>"; };
 		761F4E961B763795009E527A /* boxbuy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = boxbuy.plist; sourceTree = "<group>"; };
+		76391DF91B7F2CCF00D1911E /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
+		76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
 		76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPickerCustomPickerDelegate.h; sourceTree = "<group>"; };
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
 		764826DC1B195106008D1D7D /* MyPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPickerView.h; path = ../MyPickerView.h; sourceTree = "<group>"; };
@@ -200,10 +203,10 @@
 		4785744B1B7DE02200D99685 /* ChooseSchoolPage */ = {
 			isa = PBXGroup;
 			children = (
+				76391DF91B7F2CCF00D1911E /* ChooseSchoolTableViewCell.h */,
+				76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */,
 				7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */,
 				7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */,
-				4785744C1B7DE05100D99685 /* ChooseSchoolTableViewCell.h */,
-				4785744D1B7DE05100D99685 /* ChooseSchoolTableViewCell.m */,
 			);
 			name = ChooseSchoolPage;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				764826DE1B195106008D1D7D /* MyPickerView.m in Sources */,
 				7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */,
 				76B6AD051AFA78C500A987C2 /* SearchResultViewController.m in Sources */,
+				76391DFB1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m in Sources */,
 				76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */,
 				76A2515F1AFB7CF80017F285 /* WebViewJavascriptBridge.m in Sources */,
 				47F4BBB81B7B17B400FA8524 /* LeftMenuTreeViewModel.m in Sources */,
@@ -544,7 +548,6 @@
 				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
 				47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */,
-				4785744E1B7DE05100D99685 /* ChooseSchoolTableViewCell.m in Sources */,
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
 				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,

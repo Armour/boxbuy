@@ -10,9 +10,11 @@
 #import "registerViewController.h"
 #import "MobClick.h"
 #import "AFNetworking.h"
+#import "DeviceDetect.h"
 
 @interface RegisterViewController ()
 
+@property (nonatomic) NSUInteger preferredFontSize;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *captchaButton;
 @property (weak, nonatomic) IBOutlet UIButton *pcodeButton;
@@ -48,6 +50,7 @@
     [self prepareMyButton];
     [self prepareMyIndicator];
     [self prepareMyNotification];
+    [self prepareMyFont];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -119,6 +122,24 @@
 
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInRegister" object:nil];
+}
+
+- (void)prepareMyFont {
+    if (IS_IPHONE_4_OR_LESS)
+        self.preferredFontSize = 14;
+    else if (IS_IPHONE_5)
+        self.preferredFontSize = 15;
+    else if (IS_IPAD)
+        self.preferredFontSize = 18;
+    else
+        self.preferredFontSize = 17;
+    self.phoneTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.passwordTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.captchaTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.pcodeTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.captchaButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 3];
+    self.pcodeButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 3];
+    self.registerButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize + 3];
 }
 
 #pragma mark - Captcha
