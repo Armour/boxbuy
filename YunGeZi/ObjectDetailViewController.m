@@ -8,21 +8,46 @@
 
 #import "ObjectDetailViewController.h"
 #import "ObjectBuyingViewController.h"
-#import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
 
 @interface ObjectDetailViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *objectDetailWebView;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property WebViewJavascriptBridge* bridge;
+@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *imageScrollViewPageControl;
+@property (strong, nonatomic) NSTimer *imageScrollTimer;
+@property (nonatomic) NSInteger imageCount;
 
 @end
 
-
 @implementation ObjectDetailViewController
 
-#pragma mark - Life Circle
+#pragma mark - Preparation
+
+- (void)prepareImageScrollView {
+    CGFloat imageWidth = self.imageScrollView.frame.size.width;
+    CGFloat imageHeight = self.imageScrollView.frame.size.height;
+    CGRect imageFrame = CGRectMake(0, 0, imageWidth, imageHeight);
+    
+    self.imageCount = 4;
+    NSArray *imageNames = @[@"close", @"Stars", @"arrow-forward", @"checkmark"];
+    for (NSInteger idx = 0; idx < self.imageCount; idx++) {
+        imageFrame.origin.x = idx * imageWidth;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
+        imageView.image = [UIImage imageNamed:imageNames[idx]];
+        [self.imageScrollView addSubview:imageView];
+    }
+    self.imageScrollView.showsHorizontalScrollIndicator = NO;
+    self.imageScrollView.showsVerticalScrollIndicator = NO;
+    self.imageScrollView.contentSize = CGSizeMake(self.imageCount * imageWidth, 0);
+    self.imageScrollView.pagingEnabled = YES;
+    self.imageScrollView.delegate = self;
+    self.imageScrollViewPageControl.currentPage = 0;
+    self.imageScrollViewPageControl.numberOfPages = self.imageCount;
+    
+    [self addImageScrollTimer];
+}
+
+#pragma mark - Life Cycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -31,9 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self prepareMyIndicator];
-    [self addWebViewBridge];
-    [self loadWebViewRequest];
+    [self prepareImageScrollView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -45,55 +68,6 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -Indicator
-
-- (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setCenter:self.view.center];
-    [self.activityIndicator setHidesWhenStopped:TRUE];
-    [self.activityIndicator setHidden:YES];
-    [self.view addSubview:self.activityIndicator];
-    [self.view bringSubviewToFront:self.activityIndicator];
-}
-
-#pragma mark - Webview Bridge
-
-- (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.objectDetailWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        if ([data isEqualToString:@"buy"]) {
-            [self performSegueWithIdentifier:@"showBuyingPage" sender:self];
-        } else if ([data isEqualToString:@"deleted"]) {
-            [self popAlert:@"删除商品" withMessage:@"删除成功~\(≧▽≦)/~"];
-            [self.navigationController popToRootViewControllerAnimated:NO];
-        }
-        responseCallback(self.objectNumber);
-    }];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-#pragma mark - Web Request
-
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/items/show.html?item_id=%@", self.objectNumber];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [self.objectDetailWebView loadRequest:request];
-}
-
 #pragma mark - Seque Detail
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -103,7 +77,7 @@
     }
 }
 
-#pragma mark - Alert
+#pragma mark - Inner Helper
 
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
@@ -114,4 +88,45 @@
     [alert show];
 }
 
+- (void)imageScrollToNextImage {
+    NSInteger pageNow = self.imageScrollViewPageControl.currentPage;
+    NSInteger pageNext = (pageNow + 1) % self.imageCount;
+    CGSize imageSize = self.imageScrollView.frame.size;
+    [self.imageScrollView setContentOffset:CGPointMake(pageNext * imageSize.width, 0)
+                                  animated:YES];
+}
+
+- (void)addImageScrollTimer {
+    self.imageScrollTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                             target:self
+                                                           selector:@selector(imageScrollToNextImage)
+                                                           userInfo:nil
+                                                            repeats:YES];
+}
+
+- (void)removeImageScrollTimer {
+    [self.imageScrollTimer invalidate];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.imageScrollView) {
+        CGFloat imageWidth = scrollView.frame.size.width;
+        NSInteger page = scrollView.contentOffset.x / imageWidth + 0.5;
+        self.imageScrollViewPageControl.currentPage = page;
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.imageScrollView) {
+        [self removeImageScrollTimer];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView == self.imageScrollView) {
+        [self addImageScrollTimer];
+    }
+}
 @end
