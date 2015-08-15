@@ -134,7 +134,7 @@ enum {
 }
 
 - (void)startCountDownInRegister {
-    self.timerCountInRegister = 60;
+    self.timerCountInRegister = 120;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(onCountDownInRegister)
@@ -143,7 +143,7 @@ enum {
 }
 
 - (void)startCountDownInChangePassword {
-    self.timerCountInChangePassword = 60;
+    self.timerCountInChangePassword = 120;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(onCountDownInChangePassword)
@@ -213,7 +213,7 @@ enum {
         @catch (NSException *exception) {
             [self.activityIndicator stopAnimating];
             [self.activityIndicator setHidden:TRUE];
-            [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
+            [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦😥"];
             [self removeLoadingMask];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -222,9 +222,9 @@ enum {
             if (status == 0) {
                 [self performSegueWithIdentifier:@"goToMainPage" sender:self];
             } else if (status == 10004) {
-                [self popAlert:@"登录失败" withMessage:@"您输入的密码有误╮(╯_╰)╭"];
+                [self popAlert:@"登录失败" withMessage:@"您输入的密码有误😣"];
             } else if (status == 10002) {
-                [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在╮(╯_╰)╭"];
+                [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在😨"];
             }
             [self removeLoadingMask];
         });

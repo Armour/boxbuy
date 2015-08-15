@@ -42,7 +42,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置6~16位密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8gf-1A-Yuv">
-                                <rect key="frame" x="79" y="163" width="214" height="28.5"/>
+                                <rect key="frame" x="79" y="163" width="171.5" height="28.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -71,18 +71,6 @@
                                 </state>
                                 <connections>
                                     <action selector="captchaButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="6ZX-Yo-m8p"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-Vg-0z3">
-                                <rect key="frame" x="271" y="163" width="28.5" height="28.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="jnh-Vg-0z3" secondAttribute="height" multiplier="1:1" id="UHK-QP-W0y"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="eye_close">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showPasswdButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="MK6-U0-Cf1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-Mv-anj">
@@ -114,6 +102,18 @@
                                     <action selector="pcodeButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="0Fd-1j-32m"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-Vg-0z3">
+                                <rect key="frame" x="277" y="163" width="28.5" height="28.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jnh-Vg-0z3" secondAttribute="height" multiplier="1:1" id="UHK-QP-W0y"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="eye_close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPasswdButtonTouchUpInside:" destination="obV-JF-Xzg" eventType="touchUpInside" id="MK6-U0-Cf1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -122,6 +122,7 @@
                             <constraint firstItem="NrD-GU-FfL" firstAttribute="height" secondItem="3Zc-We-1di" secondAttribute="height" multiplier="1.4" id="2Dd-eG-xpz"/>
                             <constraint firstItem="OVP-Mv-anj" firstAttribute="centerX" secondItem="NrD-GU-FfL" secondAttribute="centerX" id="2lT-lZ-oKU"/>
                             <constraint firstItem="fGC-9B-qoL" firstAttribute="leading" secondItem="NrD-GU-FfL" secondAttribute="leading" id="39w-vE-8k4"/>
+                            <constraint firstItem="fGC-9B-qoL" firstAttribute="width" secondItem="8gf-1A-Yuv" secondAttribute="width" multiplier="2" id="3uk-jw-wyT"/>
                             <constraint firstItem="RXg-ip-aEX" firstAttribute="width" secondItem="3Zc-We-1di" secondAttribute="width" id="5pz-4z-wx6"/>
                             <constraint firstItem="fGC-9B-qoL" firstAttribute="leading" secondItem="CKR-lm-rkO" secondAttribute="leading" id="7TP-Yx-zkn"/>
                             <constraint firstItem="jnh-Vg-0z3" firstAttribute="height" secondItem="8gf-1A-Yuv" secondAttribute="height" id="7Zx-JD-9tP"/>
@@ -163,6 +164,7 @@
                             <constraint firstItem="fGC-9B-qoL" firstAttribute="top" secondItem="PFx-55-OUY" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="jPO-5n-bbm"/>
                             <constraint firstItem="NrD-GU-FfL" firstAttribute="trailing" secondItem="u4e-Sd-x4y" secondAttribute="trailing" multiplier="1.075" id="kEp-2O-KKZ"/>
                             <constraint firstItem="gba-Sn-yH7" firstAttribute="width" secondItem="8gf-1A-Yuv" secondAttribute="width" id="lBb-vB-HcD"/>
+                            <constraint firstItem="jnh-Vg-0z3" firstAttribute="centerX" secondItem="u4e-Sd-x4y" secondAttribute="centerX" constant="-0.25" id="lZK-u0-WBC"/>
                             <constraint firstItem="NrD-GU-FfL" firstAttribute="top" secondItem="3Zc-We-1di" secondAttribute="top" multiplier="0.918" id="mFk-f2-2gN"/>
                             <constraint firstItem="fGC-9B-qoL" firstAttribute="centerX" secondItem="OVP-Mv-anj" secondAttribute="centerX" id="mGe-V6-W4n"/>
                             <constraint firstItem="fGC-9B-qoL" firstAttribute="trailing" secondItem="CKR-lm-rkO" secondAttribute="trailing" id="mHq-Ff-beh"/>
@@ -182,9 +184,11 @@
                                 <exclude reference="mGe-V6-W4n"/>
                                 <exclude reference="zfR-kj-UT1"/>
                                 <exclude reference="Jch-IP-VLB"/>
+                                <exclude reference="lBb-vB-HcD"/>
                                 <exclude reference="2Dd-eG-xpz"/>
                                 <exclude reference="Qw6-3W-Uas"/>
                                 <exclude reference="Ty8-dX-20r"/>
+                                <exclude reference="PIj-bZ-az0"/>
                                 <exclude reference="Gh9-32-CNV"/>
                                 <exclude reference="MEc-aA-dsV"/>
                                 <exclude reference="N23-XD-QKi"/>
@@ -2267,20 +2271,8 @@
                                     <constraint firstAttribute="width" secondItem="mv4-Ob-fHV" secondAttribute="height" multiplier="343:131" id="HQU-Pf-6DJ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWl-NG-DXL">
-                                <rect key="frame" x="272" y="165" width="29" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="rWl-NG-DXL" secondAttribute="height" multiplier="1:1" id="unI-H0-H0a"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="eye_close">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showPasswdButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="yMf-ET-z3Y"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置6~16位密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJM-5K-HB0">
-                                <rect key="frame" x="80" y="165" width="214" height="29"/>
+                                <rect key="frame" x="80" y="165" width="171.5" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="afv-f3-SZQ"/>
                                 </constraints>
@@ -2312,7 +2304,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGd-0y-fAr">
-                                <rect key="frame" x="247" y="244.5" width="86.5" height="40.5"/>
+                                <rect key="frame" x="247" y="244" width="86.5" height="40.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="03v-bF-vbz"/>
                                     <constraint firstAttribute="height" constant="41" id="L1C-Or-J7d"/>
@@ -2347,7 +2339,7 @@
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入图片验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2gh-DI-beO">
-                                <rect key="frame" x="80" y="250.5" width="154.5" height="29"/>
+                                <rect key="frame" x="80" y="250" width="154.5" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="VRu-X7-Blc"/>
                                 </constraints>
@@ -2360,7 +2352,7 @@
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zj2-jG-oxa">
-                                <rect key="frame" x="44.5" y="380" width="286" height="40.5"/>
+                                <rect key="frame" x="44" y="380" width="286" height="40.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="i8j-mu-IKU"/>
                                 </constraints>
@@ -2389,6 +2381,18 @@
                                 </state>
                                 <connections>
                                     <action selector="pcodeButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="br5-ET-oKw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWl-NG-DXL">
+                                <rect key="frame" x="276" y="165" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rWl-NG-DXL" secondAttribute="height" multiplier="1:1" id="unI-H0-H0a"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="eye_close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPasswdButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="yMf-ET-z3Y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2427,6 +2431,7 @@
                             <constraint firstItem="NGd-0y-fAr" firstAttribute="bottom" secondItem="2gh-DI-beO" secondAttribute="bottom" id="J0I-uO-io1"/>
                             <constraint firstItem="2gh-DI-beO" firstAttribute="height" secondItem="3Ql-Uc-CCj" secondAttribute="height" id="K6v-PA-ePo"/>
                             <constraint firstItem="2gh-DI-beO" firstAttribute="trailing" secondItem="MsM-WU-ff8" secondAttribute="trailing" id="MVs-8o-kRx"/>
+                            <constraint firstItem="lJM-5K-HB0" firstAttribute="width" secondItem="mv4-Ob-fHV" secondAttribute="width" multiplier="0.5" id="N7b-iq-2HW"/>
                             <constraint firstItem="mv4-Ob-fHV" firstAttribute="leading" secondItem="zAm-fK-pog" secondAttribute="leading" id="NVo-kB-Mkm"/>
                             <constraint firstItem="mv4-Ob-fHV" firstAttribute="top" secondItem="3Ql-Uc-CCj" secondAttribute="top" constant="-21" id="OqO-Hf-jX7"/>
                             <constraint firstItem="rWl-NG-DXL" firstAttribute="leading" secondItem="lJM-5K-HB0" secondAttribute="trailing" multiplier="0.9" constant="8" symbolic="YES" id="P8h-eb-O9v"/>
@@ -2476,6 +2481,7 @@
                             <constraint firstItem="rWl-NG-DXL" firstAttribute="top" secondItem="tIj-fI-w84" secondAttribute="bottom" constant="96" id="vMu-3o-5nv"/>
                             <constraint firstItem="lJM-5K-HB0" firstAttribute="width" secondItem="3Ql-Uc-CCj" secondAttribute="width" constant="1.5" id="vP1-vW-hEg"/>
                             <constraint firstItem="NGd-0y-fAr" firstAttribute="leading" secondItem="vLO-D5-VXX" secondAttribute="leading" id="wHX-Dc-OsC"/>
+                            <constraint firstItem="NGd-0y-fAr" firstAttribute="centerX" secondItem="rWl-NG-DXL" secondAttribute="centerX" constant="-0.25" id="wYE-eB-eJG"/>
                             <constraint firstItem="lJM-5K-HB0" firstAttribute="top" secondItem="3Ql-Uc-CCj" secondAttribute="bottom" constant="8" symbolic="YES" id="xNA-7o-Bwe"/>
                         </constraints>
                         <variation key="default">
@@ -2494,6 +2500,7 @@
                                 <exclude reference="G0K-3X-6fU"/>
                                 <exclude reference="HtV-sG-9JO"/>
                                 <exclude reference="Wi3-Sk-HaY"/>
+                                <exclude reference="bhh-gC-qYY"/>
                                 <exclude reference="pQD-vD-HZ6"/>
                                 <exclude reference="vP1-vW-hEg"/>
                                 <exclude reference="xNA-7o-Bwe"/>
@@ -2504,6 +2511,7 @@
                                 <exclude reference="gKb-pP-ov6"/>
                                 <exclude reference="ibe-dU-Ti7"/>
                                 <exclude reference="Emc-rK-5io"/>
+                                <exclude reference="P8h-eb-O9v"/>
                                 <exclude reference="aCe-yK-Ndi"/>
                                 <exclude reference="apg-g6-ssv"/>
                                 <exclude reference="vMu-3o-5nv"/>
@@ -2562,8 +2570,8 @@
         <image name="takePhoto" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lwo-LW-fPN"/>
         <segue reference="0p7-WM-ggn"/>
         <segue reference="IRI-1L-pUC"/>
+        <segue reference="Lwo-LW-fPN"/>
     </inferredMetricsTieBreakers>
 </document>

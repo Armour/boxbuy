@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/ChangePasswordViewController.m"
-            timestampString = "461318631.064279"
+            timestampString = "461328888.349473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "-checkPassword"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/RegisterViewController.m"
-            timestampString = "461318955.799383"
+            timestampString = "461328113.747287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-checkRegex:withPattern:"
             landmarkType = "5">
          </BreakpointContent>
