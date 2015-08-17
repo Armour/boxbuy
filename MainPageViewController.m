@@ -13,11 +13,15 @@
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
 #import "DWBubbleMenuButton.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 #import "MobClick.h"
 
 #define WATERFALL_CELL @"WaterfallCell"
 #define HEADER_CELL @"ReusableHeaderCell"
 #define ITEMS_PER_PAGE 30
+#define GALLERY_HEIGHT self.view.bounds.size.height * 0.25
+#define HOTUSER_HEIGHT self.view.bounds.size.height * 0.15
+#define HEADER_HEIGHT self.view.bounds.size.height * 0.40
 #define BUBBLE_ROTATION_ANIMATION_KEY @"BubbleRotationAnimation"
 #define BUBBLE_MASK_ANIMATION_KEY @"BubbleMaskAnimation"
 #define BUBBLE_ANIMATION_DURATION 0.5f
@@ -36,6 +40,10 @@
 @property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
+@property (strong, nonatomic) UIScrollView *imageScrollView;
+@property (strong, nonatomic) UIPageControl *imageScrollViewPageControl;
+@property (strong, nonatomic) NSTimer *imageScrollTimer;
+@property (nonatomic) NSInteger imageCount;
 
 @end
 
@@ -60,6 +68,7 @@
     [self prepareBubbleMenu];
     [self preparePullToRefresh];
     [self prepareNavigationBar];
+    [self prepareImageScrollView];
     [self initWaterfallView];
 }
 
@@ -91,7 +100,7 @@
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     layout.columnCount = 2;
     layout.footerHeight = 0;
-    layout.headerHeight = 90;
+    layout.headerHeight = HEADER_HEIGHT;
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
     self.waterfallView.collectionViewLayout = layout;
 
@@ -194,6 +203,89 @@
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
+}
+
+#pragma mark - Prepare ImageScrollView
+
+- (void)prepareImageScrollView {
+    CGFloat imageWidth = self.waterfallView.frame.size.width;
+    CGFloat imageHeight = GALLERY_HEIGHT;
+    CGRect imageFrame = CGRectMake(0, 0, imageWidth, imageHeight);
+    self.imageScrollView = [[UIScrollView alloc] initWithFrame:imageFrame];
+    self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - 50, imageHeight - 10, 100, 10)];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.boxbuy.cc/getExhibitions"
+      parameters:@{@"exhibition_group_id":@"index_school_header_1",
+                   @"school_id"          :@1,
+                   @"json"               :@"true"}
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             int count = 0;
+             CGRect imageFrame = CGRectMake(0, 0, imageWidth, imageHeight);
+             for (id obj in response) {
+                 imageFrame.origin.x = count++ * imageWidth;
+                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
+                 [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"close"]];
+                 [self.imageScrollView addSubview:imageView];
+             }
+             self.imageCount = count;
+             self.imageScrollView.showsHorizontalScrollIndicator = NO;
+             self.imageScrollView.showsVerticalScrollIndicator = NO;
+             self.imageScrollView.contentSize = CGSizeMake(self.imageCount * imageWidth, 0);
+             self.imageScrollView.pagingEnabled = YES;
+             self.imageScrollView.delegate = self;
+             self.imageScrollViewPageControl.numberOfPages = self.imageCount;
+             self.imageScrollViewPageControl.currentPage = 0;
+             [self addImageScrollTimer];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [self prepareImageScrollView];
+             NSLog(@"Gallary Fail!!! Retry!!");
+         }];
+}
+
+- (void)imageScrollToNextImage {
+    NSInteger pageNow = self.imageScrollViewPageControl.currentPage;
+    NSInteger pageNext = (pageNow + 1) % self.imageCount;
+    CGSize imageSize = self.imageScrollView.frame.size;
+    [self.imageScrollView setContentOffset:CGPointMake(pageNext * imageSize.width, 0) animated:YES];
+}
+
+- (void)addImageScrollTimer {
+    self.imageScrollTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                             target:self
+                                                           selector:@selector(imageScrollToNextImage)
+                                                           userInfo:nil
+                                                            repeats:YES];
+}
+
+- (void)removeImageScrollTimer {
+    [self.imageScrollTimer invalidate];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.imageScrollView) {
+        CGFloat imageWidth = scrollView.frame.size.width;
+        NSInteger page = scrollView.contentOffset.x / imageWidth + 0.5;
+        self.imageScrollViewPageControl.currentPage = page;
+    } else {
+        [self.storeHouseRefreshControl scrollViewDidScroll];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.imageScrollView) {
+        [self removeImageScrollTimer];
+    } else {
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView == self.imageScrollView) {
+        [self addImageScrollTimer];
+    } else {
+        [self.storeHouseRefreshControl scrollViewDidEndDragging];
+    }
 }
 
 #pragma mark - Mask When Loading
@@ -356,7 +448,9 @@
     UICollectionReusableView *reusableview = nil;
     if (kind == CHTCollectionElementKindSectionHeader) {
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL forIndexPath:indexPath];
-        // add ueariamge here
+        [headerView addSubview:self.imageScrollView];
+        [headerView addSubview:self.imageScrollViewPageControl];
+        [headerView bringSubviewToFront:self.imageScrollViewPageControl];
         reusableview = headerView;
     }
     return reusableview;
@@ -442,16 +536,6 @@
                                                               horizontalRandomness:300
                                                            reverseLoadingAnimation:NO
                                                            internalAnimationFactor:0.5];
-}
-
-#pragma mark - Notifying refresh control of scrolling
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.storeHouseRefreshControl scrollViewDidScroll];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self.storeHouseRefreshControl scrollViewDidEndDragging];
 }
 
 #pragma mark - Listening for the user to trigger a refresh
