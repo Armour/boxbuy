@@ -191,6 +191,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		475691C11B8205CD00D7F78E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
+				7651D2C01AF07434003184A8 /* SearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		478574471B7DDF5600D99685 /* AccountPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,8 +311,7 @@
 				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
 				76AD1BCF1B7B30E000BA8512 /* MainPage */,
-				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
-				7651D2C01AF07434003184A8 /* SearchViewController.m */,
+				475691C11B8205CD00D7F78E /* Search */,
 				76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */,
 				76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */,
 				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
