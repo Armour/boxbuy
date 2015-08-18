@@ -96,6 +96,11 @@
     self.userNameAndMarkView.frame = _viewFrame;
 }
 
+- (void)prepareTableView {
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.tableFooterView = [UIView new];
+}
+
 #pragma mark - Button Action
 
 - (IBAction)backButtonTouchUpInside:(id)sender {
@@ -179,6 +184,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareNavigation];
+    [self prepareTableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
