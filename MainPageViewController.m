@@ -85,6 +85,8 @@
 #pragma mark - Inner Helper
 
 - (void)initWaterfallView {
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self.waterfallView registerClass:[WaterfallCellView class] forCellWithReuseIdentifier:WATERFALL_CELL];
     [self.waterfallView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL];
 
