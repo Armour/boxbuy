@@ -50,20 +50,6 @@
     self.userImage.clipsToBounds = YES;
     self.userNameLabel.text = [LoginInfo sharedInfo].nickname;
     self.userMarkImage.image = [UIImage imageNamed:@"close"];
-    {
-        CGSize _labelSize = [self.userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
-        CGRect _labelFrame = self.userNameLabel.frame;
-        _labelFrame.size.width = _labelSize.width;
-        self.userNameLabel.frame = _labelFrame;
-        CGFloat _viewLength = _labelSize.width;
-        if (YES) {  // HAS USER ID IMAGE
-            _viewLength += 8 + self.userMarkImage.frame.size.width;
-        }
-        self.userNameAndMarkViewLengthConstraint.constant = _viewLength;
-        CGRect _viewFrame = self.userNameAndMarkView.frame;
-        _viewFrame.size.width = _viewLength;
-        self.userNameAndMarkView.frame = _viewFrame;
-    }
     [self setUserResume:[LoginInfo sharedInfo].intro];
     
     {
@@ -93,6 +79,21 @@
     [self setFansCount:[LoginInfo sharedInfo].numOfFan];
     
     [self setCommentsCount:0];
+}
+
+- (void)resizeUserNameAndMarkView {
+    CGSize _labelSize = [self.userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+    CGRect _labelFrame = self.userNameLabel.frame;
+    _labelFrame.size.width = _labelSize.width;
+    self.userNameLabel.frame = _labelFrame;
+    CGFloat _viewLength = _labelSize.width;
+    if (YES) {  // HAS USER ID IMAGE
+        _viewLength += 8 + self.userMarkImage.frame.size.width;
+    }
+    self.userNameAndMarkViewLengthConstraint.constant = _viewLength;
+    CGRect _viewFrame = self.userNameAndMarkView.frame;
+    _viewFrame.size.width = _viewLength;
+    self.userNameAndMarkView.frame = _viewFrame;
 }
 
 #pragma mark - Button Action
@@ -177,12 +178,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self prepareNavigation];
+    [self prepareNavigation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self prepareNavigation];
+    [self resizeUserNameAndMarkView];
 }
 
 - (void)didReceiveMemoryWarning {
