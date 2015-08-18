@@ -51,6 +51,9 @@ enum {
     [self prepareMyIndicator];
     [self prepareMyNotification];
     [self prepareLoadingMask];
+    
+    self.textUsername.text = @"15603272878";
+    self.textPassword.text = @"222222";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
