@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "RootViewController.h"
 #import "MobClick.h"
+#import "LoginInfo.h"
 
 @interface ViewController ()
 
@@ -208,6 +209,10 @@ enum {
             self.refreshToken = [[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]];
             self.expireTime = [[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]];
 
+            [[LoginInfo sharedInfo] updateWithAccessToken:self.accessToken
+                                             refreshToken:self.refreshToken
+                                               expireTime:self.expireTime];
+            
             status = [jsonData[@"err"] integerValue];
         }
         @catch (NSException *exception) {
