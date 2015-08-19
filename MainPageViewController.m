@@ -14,14 +14,20 @@
 #import "AFNetworking.h"
 #import "DWBubbleMenuButton.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "SDWebImage/UIButton+WebCache.h"
 #import "MobClick.h"
 
 #define WATERFALL_CELL @"WaterfallCell"
 #define HEADER_CELL @"ReusableHeaderCell"
 #define ITEMS_PER_PAGE 30
-#define GALLERY_HEIGHT self.view.bounds.size.height * 0.25
-#define HOTUSER_HEIGHT self.view.bounds.size.height * 0.15
-#define HEADER_HEIGHT self.view.bounds.size.height * 0.40
+#define PAGE_CONTROL_WIDTH 100
+#define USER_NAME_FONT_SIZE 10
+#define ROW_PADDING (self.view.bounds.size.width / 60)
+#define HEADER_HEIGHT (GALLERY_HEIGHT + HOTUSER_HEIGHT + ROW_PADDING)
+#define GALLERY_HEIGHT (self.view.bounds.size.height * 0.25)
+#define HOTUSER_WIDTH ((self.view.bounds.size.width - 5 * ROW_PADDING) * 0.2)
+#define HOTUSER_PADDING HOTUSER_WIDTH * 0.1
+#define HOTUSER_HEIGHT (HOTUSER_WIDTH + HOTUSER_PADDING * 3)
 #define BUBBLE_ROTATION_ANIMATION_KEY @"BubbleRotationAnimation"
 #define BUBBLE_MASK_ANIMATION_KEY @"BubbleMaskAnimation"
 #define BUBBLE_ANIMATION_DURATION 0.5f
@@ -40,6 +46,7 @@
 @property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
+@property (strong, nonatomic) UIView *hottestUserView;
 @property (strong, nonatomic) UIScrollView *imageScrollView;
 @property (strong, nonatomic) UIPageControl *imageScrollViewPageControl;
 @property (strong, nonatomic) NSTimer *imageScrollTimer;
@@ -69,6 +76,7 @@
     [self preparePullToRefresh];
     [self prepareNavigationBar];
     [self prepareImageScrollView];
+    [self prepareHottestUserView];
     [self initWaterfallView];
 }
 
@@ -101,7 +109,9 @@
     layout.columnCount = 2;
     layout.footerHeight = 0;
     layout.headerHeight = HEADER_HEIGHT;
-    layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
+    layout.minimumColumnSpacing = ROW_PADDING;
+    layout.minimumInteritemSpacing = ROW_PADDING;
+    layout.sectionInset = UIEdgeInsetsMake(ROW_PADDING, ROW_PADDING, ROW_PADDING/2, ROW_PADDING);
     self.waterfallView.collectionViewLayout = layout;
 
     self.isFetching = NO;
@@ -208,11 +218,10 @@
 #pragma mark - Prepare ImageScrollView
 
 - (void)prepareImageScrollView {
-    CGFloat imageWidth = self.waterfallView.frame.size.width;
-    CGFloat imageHeight = GALLERY_HEIGHT;
-    CGRect imageFrame = CGRectMake(0, 0, imageWidth, imageHeight);
+    CGFloat imageWidth = self.view.frame.size.width;
+    CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
     self.imageScrollView = [[UIScrollView alloc] initWithFrame:imageFrame];
-    self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - 50, imageHeight - 10, 100, 10)];
+    self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - PAGE_CONTROL_WIDTH/2, GALLERY_HEIGHT * 0.9 - ROW_PADDING, PAGE_CONTROL_WIDTH, ROW_PADDING)];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://v2.api.boxbuy.cc/getExhibitions"
       parameters:@{@"exhibition_group_id":@"index_school_header_1",
@@ -220,7 +229,7 @@
                    @"json"               :@"true"}
          success:^(AFHTTPRequestOperation *operation, id response) {
              int count = 0;
-             CGRect imageFrame = CGRectMake(0, 0, imageWidth, imageHeight);
+             CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
              for (id obj in response) {
                  imageFrame.origin.x = count++ * imageWidth;
                  UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
@@ -259,6 +268,46 @@
 
 - (void)removeImageScrollTimer {
     [self.imageScrollTimer invalidate];
+}
+
+#pragma mark - Prepare HottestUserView
+
+- (void)prepareHottestUserView {
+    CGRect imageFrame = CGRectMake(ROW_PADDING, GALLERY_HEIGHT + ROW_PADDING, self.view.frame.size.width - ROW_PADDING * 2, HOTUSER_HEIGHT);
+    self.hottestUserView = [[UIView alloc] initWithFrame:imageFrame];
+    self.hottestUserView.backgroundColor = [UIColor whiteColor];
+    self.hottestUserView.layer.borderWidth = 1;
+    self.hottestUserView.layer.borderColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.00].CGColor;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.boxbuy.cc/getAccountsHottest"
+      parameters:@{@"schoolid" : @1,
+                   @"json"     : @"true"}
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             int count = 0;
+             for (id obj in response) {
+                 if (count >= 5)
+                     break;
+                 //[obj valueForKeyPath:@"Account.userid"];
+                 NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", [obj valueForKeyPath:@"Account.headiconid"], [obj valueForKeyPath:@"HeadIcon.hash"], @"ori"];
+                 NSURL *imageUrl = [NSURL URLWithString:imagePath];
+                 // Image Button
+                 UIButton *hottestUserImageButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH + HOTUSER_PADDING, HOTUSER_PADDING, HOTUSER_WIDTH - HOTUSER_PADDING * 2, HOTUSER_WIDTH - HOTUSER_PADDING * 2)];
+                 [hottestUserImageButton sd_setBackgroundImageWithURL:imageUrl forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+                 hottestUserImageButton.layer.cornerRadius = hottestUserImageButton.bounds.size.height / 2.f;
+                 hottestUserImageButton.clipsToBounds = YES;
+                 [self.hottestUserView addSubview:hottestUserImageButton];
+                 // Name Button
+                 UIButton *hottestUserNameButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
+                 [hottestUserNameButton.titleLabel setFont:[UIFont systemFontOfSize:USER_NAME_FONT_SIZE]];
+                 [hottestUserNameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                 [hottestUserNameButton setTitle:[obj valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
+                 [self.hottestUserView addSubview:hottestUserNameButton];
+                 count++;
+             }
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [self prepareHottestUserView];
+             NSLog(@"Hottest User Fail!!! Retry!!");
+         }];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -451,6 +500,7 @@
         [headerView addSubview:self.imageScrollView];
         [headerView addSubview:self.imageScrollViewPageControl];
         [headerView bringSubviewToFront:self.imageScrollViewPageControl];
+        [headerView addSubview:self.hottestUserView];
         reusableview = headerView;
     }
     return reusableview;
@@ -464,7 +514,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
-    CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
+    CGFloat itemWidth = (collectionView.frame.size.width - ROW_PADDING * 3) / 2;
     CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : itemWidth;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
