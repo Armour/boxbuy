@@ -516,6 +516,8 @@
     WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - ROW_PADDING * 3) / 2;
     CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : itemWidth;
+    if (imageHight < itemWidth * 0.7)
+        imageHight = itemWidth * 0.7;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
     return itemsize;

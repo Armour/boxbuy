@@ -45,7 +45,7 @@
 }
 
 - (void)setItemTitle:(NSString *)title {
-    self.itemTitleButton.titleLabel.numberOfLines = 0;
+    self.itemTitleButton.titleLabel.numberOfLines = 3;
     self.itemTitleButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     [self.itemTitleButton setTitle:title forState:UIControlStateNormal];
     [self.itemTitleButton layoutIfNeeded];
