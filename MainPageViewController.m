@@ -13,11 +13,22 @@
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
 #import "DWBubbleMenuButton.h"
+#import "SDWebImage/UIImageView+WebCache.h"
+#import "SDWebImage/UIButton+WebCache.h"
 #import "MobClick.h"
 
 #define WATERFALL_CELL @"WaterfallCell"
 #define HEADER_CELL @"ReusableHeaderCell"
 #define ITEMS_PER_PAGE 30
+#define PAGE_CONTROL_WIDTH 100
+#define LABEL_FONT_SIZE 12
+#define USER_NAME_FONT_SIZE 10
+#define ROW_PADDING (self.view.bounds.size.width / 60)
+#define HEADER_HEIGHT (GALLERY_HEIGHT + HOTUSER_HEIGHT + ROW_PADDING)
+#define GALLERY_HEIGHT (self.view.bounds.size.height * 0.25)
+#define HOTUSER_WIDTH ((self.view.bounds.size.width - 5 * ROW_PADDING) * 0.2)
+#define HOTUSER_PADDING HOTUSER_WIDTH * 0.1
+#define HOTUSER_HEIGHT (HOTUSER_WIDTH + HOTUSER_PADDING * 3)
 #define BUBBLE_ROTATION_ANIMATION_KEY @"BubbleRotationAnimation"
 #define BUBBLE_MASK_ANIMATION_KEY @"BubbleMaskAnimation"
 #define BUBBLE_ANIMATION_DURATION 0.5f
@@ -36,6 +47,11 @@
 @property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
+@property (strong, nonatomic) UIView *hottestUserView;
+@property (strong, nonatomic) UIScrollView *imageScrollView;
+@property (strong, nonatomic) UIPageControl *imageScrollViewPageControl;
+@property (strong, nonatomic) NSTimer *imageScrollTimer;
+@property (nonatomic) NSInteger imageCount;
 
 @end
 
@@ -60,6 +76,8 @@
     [self prepareBubbleMenu];
     [self preparePullToRefresh];
     [self prepareNavigationBar];
+    [self prepareImageScrollView];
+    [self prepareHottestUserView];
     [self initWaterfallView];
 }
 
@@ -93,8 +111,10 @@
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     layout.columnCount = 2;
     layout.footerHeight = 0;
-    layout.headerHeight = 90;
-    layout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
+    layout.headerHeight = HEADER_HEIGHT;
+    layout.minimumColumnSpacing = ROW_PADDING;
+    layout.minimumInteritemSpacing = ROW_PADDING;
+    layout.sectionInset = UIEdgeInsetsMake(ROW_PADDING, ROW_PADDING, ROW_PADDING/2, ROW_PADDING);
     self.waterfallView.collectionViewLayout = layout;
 
     self.isFetching = NO;
@@ -196,6 +216,135 @@
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
+}
+
+#pragma mark - Prepare ImageScrollView
+
+- (void)prepareImageScrollView {
+    CGFloat imageWidth = self.view.frame.size.width;
+    CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
+    self.imageScrollView = [[UIScrollView alloc] initWithFrame:imageFrame];
+    self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - PAGE_CONTROL_WIDTH/2, GALLERY_HEIGHT * 0.9 - ROW_PADDING, PAGE_CONTROL_WIDTH, ROW_PADDING)];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.boxbuy.cc/getExhibitions"
+      parameters:@{@"exhibition_group_id":@"index_school_header_1",
+                   @"school_id"          :@1,
+                   @"json"               :@"true"}
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             int count = 0;
+             CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
+             for (id obj in response) {
+                 imageFrame.origin.x = count++ * imageWidth;
+                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
+                 [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"default_cover"]];
+                 [self.imageScrollView addSubview:imageView];
+             }
+             self.imageCount = count;
+             self.imageScrollView.showsHorizontalScrollIndicator = NO;
+             self.imageScrollView.showsVerticalScrollIndicator = NO;
+             self.imageScrollView.contentSize = CGSizeMake(self.imageCount * imageWidth, 0);
+             self.imageScrollView.pagingEnabled = YES;
+             self.imageScrollView.delegate = self;
+             self.imageScrollViewPageControl.numberOfPages = self.imageCount;
+             self.imageScrollViewPageControl.currentPage = 0;
+             [self addImageScrollTimer];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [self prepareImageScrollView];
+             NSLog(@"Gallary Fail!!! Retry!!");
+         }];
+}
+
+- (void)imageScrollToNextImage {
+    NSInteger pageNow = self.imageScrollViewPageControl.currentPage;
+    NSInteger pageNext = (pageNow + 1) % self.imageCount;
+    CGSize imageSize = self.imageScrollView.frame.size;
+    [self.imageScrollView setContentOffset:CGPointMake(pageNext * imageSize.width, 0) animated:YES];
+}
+
+- (void)addImageScrollTimer {
+    self.imageScrollTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                             target:self
+                                                           selector:@selector(imageScrollToNextImage)
+                                                           userInfo:nil
+                                                            repeats:YES];
+}
+
+- (void)removeImageScrollTimer {
+    [self.imageScrollTimer invalidate];
+}
+
+#pragma mark - Prepare HottestUserView
+
+- (void)prepareHottestUserView {
+    CGRect imageFrame = CGRectMake(ROW_PADDING, GALLERY_HEIGHT + ROW_PADDING, self.view.frame.size.width - ROW_PADDING * 2, HOTUSER_HEIGHT);
+    self.hottestUserView = [[UIView alloc] initWithFrame:imageFrame];
+    self.hottestUserView.backgroundColor = [UIColor whiteColor];
+    self.hottestUserView.layer.borderWidth = 1;
+    self.hottestUserView.layer.borderColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.00].CGColor;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.boxbuy.cc/getAccountsHottest"
+      parameters:@{@"schoolid" : @1,
+                   @"json"     : @"true"}
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             int count = 0;
+             for (id obj in response) {
+                 if (count >= 5)
+                     break;
+                 //[obj valueForKeyPath:@"Account.userid"];
+                 NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", [obj valueForKeyPath:@"Account.headiconid"], [obj valueForKeyPath:@"HeadIcon.hash"], @"ori"];
+                 NSURL *imageUrl = [NSURL URLWithString:imagePath];
+                 // Image Button
+                 UIButton *hottestUserImageButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH + HOTUSER_PADDING, HOTUSER_PADDING, HOTUSER_WIDTH - HOTUSER_PADDING * 2, HOTUSER_WIDTH - HOTUSER_PADDING * 2)];
+                 [hottestUserImageButton sd_setBackgroundImageWithURL:imageUrl forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+                 hottestUserImageButton.layer.cornerRadius = hottestUserImageButton.bounds.size.height / 2.f;
+                 hottestUserImageButton.clipsToBounds = YES;
+                 [self.hottestUserView addSubview:hottestUserImageButton];
+                 // Name Button
+                 UIButton *hottestUserNameButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
+                 [hottestUserNameButton.titleLabel setFont:[UIFont systemFontOfSize:USER_NAME_FONT_SIZE]];
+                 [hottestUserNameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                 [hottestUserNameButton setTitle:[obj valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
+                 [self.hottestUserView addSubview:hottestUserNameButton];
+                 count++;
+             }
+             UILabel *hottestUserLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - ROW_PADDING * 5, 0, ROW_PADDING * 2, HOTUSER_HEIGHT)];
+             hottestUserLabel.textColor = [UIColor blackColor];
+             hottestUserLabel.font = [UIFont fontWithName:@"ChalkboardSE-Bold" size:LABEL_FONT_SIZE];
+             hottestUserLabel.text = @"热门格主";
+             hottestUserLabel.lineBreakMode = NSLineBreakByCharWrapping;
+             hottestUserLabel.numberOfLines = 0;
+             [self.hottestUserView addSubview:hottestUserLabel];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [self prepareHottestUserView];
+             NSLog(@"Hottest User Fail!!! Retry!!");
+         }];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.imageScrollView) {
+        CGFloat imageWidth = scrollView.frame.size.width;
+        NSInteger page = scrollView.contentOffset.x / imageWidth + 0.5;
+        self.imageScrollViewPageControl.currentPage = page;
+    } else {
+        [self.storeHouseRefreshControl scrollViewDidScroll];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.imageScrollView) {
+        [self removeImageScrollTimer];
+    } else {
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView == self.imageScrollView) {
+        [self addImageScrollTimer];
+    } else {
+        [self.storeHouseRefreshControl scrollViewDidEndDragging];
+    }
 }
 
 #pragma mark - Mask When Loading
@@ -358,7 +507,10 @@
     UICollectionReusableView *reusableview = nil;
     if (kind == CHTCollectionElementKindSectionHeader) {
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL forIndexPath:indexPath];
-        // add ueariamge here
+        [headerView addSubview:self.imageScrollView];
+        [headerView addSubview:self.imageScrollViewPageControl];
+        [headerView bringSubviewToFront:self.imageScrollViewPageControl];
+        [headerView addSubview:self.hottestUserView];
         reusableview = headerView;
     }
     return reusableview;
@@ -372,8 +524,10 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
-    CGFloat itemWidth = (collectionView.frame.size.width - 30) / 2;
+    CGFloat itemWidth = (collectionView.frame.size.width - ROW_PADDING * 3) / 2;
     CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : itemWidth;
+    if (imageHight < itemWidth * 0.7)
+        imageHight = itemWidth * 0.7;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
     return itemsize;
@@ -444,16 +598,6 @@
                                                               horizontalRandomness:300
                                                            reverseLoadingAnimation:NO
                                                            internalAnimationFactor:0.5];
-}
-
-#pragma mark - Notifying refresh control of scrolling
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.storeHouseRefreshControl scrollViewDidScroll];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self.storeHouseRefreshControl scrollViewDidEndDragging];
 }
 
 #pragma mark - Listening for the user to trigger a refresh

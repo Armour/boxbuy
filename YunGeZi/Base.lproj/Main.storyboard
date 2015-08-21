@@ -1311,11 +1311,11 @@
                         <viewControllerLayoutGuide type="bottom" id="zz5-1O-AMl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bA0-0a-vgh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-Oe-JtA">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -2605,7 +2605,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0p7-WM-ggn"/>
+        <segue reference="94F-h8-wDZ"/>
         <segue reference="IRI-1L-pUC"/>
-        <segue reference="Lwo-LW-fPN"/>
     </inferredMetricsTieBreakers>
 </document>
