@@ -21,6 +21,7 @@
 #define HEADER_CELL @"ReusableHeaderCell"
 #define ITEMS_PER_PAGE 30
 #define PAGE_CONTROL_WIDTH 100
+#define LABEL_FONT_SIZE 12
 #define USER_NAME_FONT_SIZE 10
 #define ROW_PADDING (self.view.bounds.size.width / 60)
 #define HEADER_HEIGHT (GALLERY_HEIGHT + HOTUSER_HEIGHT + ROW_PADDING)
@@ -233,7 +234,7 @@
              for (id obj in response) {
                  imageFrame.origin.x = count++ * imageWidth;
                  UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
-                 [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"close"]];
+                 [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"default_cover"]];
                  [self.imageScrollView addSubview:imageView];
              }
              self.imageCount = count;
@@ -304,6 +305,13 @@
                  [self.hottestUserView addSubview:hottestUserNameButton];
                  count++;
              }
+             UILabel *hottestUserLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - ROW_PADDING * 5, 0, ROW_PADDING * 2, HOTUSER_HEIGHT)];
+             hottestUserLabel.textColor = [UIColor blackColor];
+             hottestUserLabel.font = [UIFont fontWithName:@"ChalkboardSE-Bold" size:LABEL_FONT_SIZE];
+             hottestUserLabel.text = @"热门格主";
+             hottestUserLabel.lineBreakMode = NSLineBreakByCharWrapping;
+             hottestUserLabel.numberOfLines = 0;
+             [self.hottestUserView addSubview:hottestUserLabel];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              [self prepareHottestUserView];
              NSLog(@"Hottest User Fail!!! Retry!!");
