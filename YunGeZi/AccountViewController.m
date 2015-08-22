@@ -63,9 +63,6 @@
 
 - (void)prepareNavigation {
     [self initUserInfo];
-    
-    self.navigationController.navigationBarHidden = YES;
-
     {
         CGRect _frame = self.headerView.frame;
         _frame.size.height = self.view.bounds.size.height - 44 * 5 - 50;
@@ -104,54 +101,10 @@
 #pragma mark - Button Action
 
 - (IBAction)backButtonTouchUpInside:(id)sender {
-    self.navigationController.navigationBarHidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)goToMyInfoButtonTouchUpInside:(id)sender {
-    NSLog(@"MyInfo");
-}
-
-- (IBAction)goodsButtonTouchUpInside:(id)sender {
-    NSLog(@"GOODS");
-}
-
-- (IBAction)focusButtonTouchUpInside:(id)sender {
-    NSLog(@"FOUCUS");
-}
-
-- (IBAction)fansButtonTouchUpInside:(id)sender {
-    NSLog(@"FANS");
-}
-
-- (IBAction)commentsButtonTouchUpInside:(id)sender {
-    NSLog(@"COMMENT");
-}
-
 #pragma mark - TableView Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.item) {
-        case 0: // 我的店铺
-            NSLog(@"我的店铺");
-            break;
-        case 1: // 全部订单
-            NSLog(@"全部订单");
-            break;
-        case 2: // 我的回收
-            NSLog(@"我的回收");
-            break;
-        case 3: // 我的钱包
-            NSLog(@"我的钱包");
-            break;
-        case 4: // 我的收藏
-            NSLog(@"我的收藏");
-            break;
-        default:
-            break;
-    }
-    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
-}
 
 #pragma mark - Inner Helper
 
@@ -179,6 +132,11 @@
     self.userResumeLabel.text = resume;
 }
 
+#pragma mark - Segue Detail
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
@@ -199,11 +157,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"我的"];
+    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我的"];
+    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 @end
