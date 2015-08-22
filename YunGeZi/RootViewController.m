@@ -32,8 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareMyNotification];
     [self PostLoginTokenToLeftMenu];
-    // Do any additional setup after loading the view.
 }
 
 - (void)PostLoginTokenToLeftMenu {
@@ -42,9 +42,19 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostLoingTokenFromRootToLeftMenu" object:self userInfo:dict];
 }
 
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLeftMenuView)
+                                                 name:@"SideMenuToAccountInfo"
+                                               object:nil];
+}
+
+- (void)hideLeftMenuView {
+    [self hideMenuViewController];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -153,6 +153,10 @@
               self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
               self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
               self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+              [self.userImageButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+              [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+              [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+              [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Load user info failed...");
               [self popAlert:@"加载个人信息失败" withMessage:@"貌似网络不太好哦"];
@@ -297,6 +301,12 @@
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     [rotationAnimation setValue:@"ArrowRotation" forKey:ARROW_ROTATION_ANIMATION];
     return rotationAnimation;
+}
+
+#pragma mark - Segue Detail
+
+- (void)segueToUserInfo {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToAccountInfo" object:self userInfo:nil];
 }
 
 #pragma mark - Alert

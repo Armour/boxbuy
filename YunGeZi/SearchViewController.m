@@ -42,46 +42,6 @@
     [self initHotSearchsView];
     [self prepareMySearchBar];
     [self refreshSearchHistory];
-
-    /*NSManagedObjectContext * context = [self managedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"SearchHistory" inManagedObjectContext:context];
-    NSManagedObject *searchHistory = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
-    [searchHistory setValue:@"哈哈哈" forKey:@"title"];
-    [searchHistory setValue:[NSDate date] forKey:@"time"];
-    NSError *error = nil;
-    if (![searchHistory.managedObjectContext save:&error]) {
-        NSLog(@"Unable to save managed object context.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    } else {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO];
-        [fetchRequest setSortDescriptors:@[sortDescriptor]];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"SearchHistory" inManagedObjectContext:context];
-        [fetchRequest setEntity:entity];
-        NSError *error = nil;
-        NSArray *result = [context executeFetchRequest:fetchRequest error:&error];
-        if (error) {
-            NSLog(@"Unable to execute fetch request.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        } else {
-            NSLog(@"%@", result);
-            if (result.count > 0) {
-                for (int i = 0; i < result.count; i++) {
-                    NSManagedObject *history = (NSManagedObject *)[result objectAtIndex:i];
-                    NSLog(@"1 - %@", history);
-                    NSLog(@"%@ %@", [history valueForKey:@"title"], [history valueForKey:@"time"]);
-                    NSLog(@"2 - %@", history);
-                }
-            }
-        }
-        NSManagedObject *searchHistory = (NSManagedObject *)[result objectAtIndex:0];
-        [searchHistory setValue:@30 forKey:@"age"];
-        NSError *saveError = nil;
-        if (![searchHistory.managedObjectContext save:&saveError]) {
-            NSLog(@"Unable to save managed object context.");
-            NSLog(@"%@, %@", saveError, saveError.localizedDescription);
-        }
-    }*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

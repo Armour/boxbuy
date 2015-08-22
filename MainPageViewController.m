@@ -72,13 +72,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyIndicator];
-    [self prepareLoadingMask];
-    [self prepareBubbleMenu];
-    [self preparePullToRefresh];
     [self prepareNavigationBar];
+    [self prepareLoadingMask];
+    [self preparePullToRefresh];
     [self prepareImageScrollView];
     [self prepareHottestUserView];
     [self initWaterfallView];
+    [self prepareBubbleMenu];
+    [self prepareMyNotification];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -204,6 +205,15 @@
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [rotationAnimation setValue:@"BubbleMask" forKey:BUBBLE_MASK_ANIMATION_KEY];
     return rotationAnimation;
+}
+
+#pragma mark - Prepare Notification 
+
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(performSegueToAccountPage)
+                                                 name:@"SideMenuToAccountInfo"
+                                               object:nil];
 }
 
 #pragma mark - Prepare Indicator
