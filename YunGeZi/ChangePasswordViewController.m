@@ -160,7 +160,6 @@
 }
 
 - (void)refreshCaptcha {
-    [self.activityIndicatorCaptcha setHidden:NO];
     [self.activityIndicatorCaptcha startAnimating];
     [manager GET:@"https://secure.boxbuy.cc/vcode"
       parameters:@{@"_rnd" : [self timeStamp]}
@@ -171,12 +170,10 @@
                  [self setFirstTimeRefreshCaptcha:NO];
              }
              [self.activityIndicatorCaptcha stopAnimating];
-             [self.activityIndicatorCaptcha setHidden:TRUE];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              [self.captchaButton setTitle:@"点击刷新" forState:UIControlStateNormal];
              [self setFirstTimeRefreshCaptcha:YES];
              [self.activityIndicatorCaptcha stopAnimating];
-             [self.activityIndicatorCaptcha setHidden:TRUE];
          }];
 }
 

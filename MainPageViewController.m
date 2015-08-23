@@ -431,29 +431,29 @@
 
 - (void)prepareBubbleMenu {
     CGSize frameViewSize = self.view.frame.size;
-    CGSize buttonSize = CGSizeMake(55.f, 55.f);
+    CGSize buttonSize = CGSizeMake(frameViewSize.width / 6, frameViewSize.width / 6);
     
     UIImageView *bubbleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f,
                                                                              buttonSize.width,
                                                                              buttonSize.height)];
-    [bubbleImage setImage:[UIImage imageNamed:@"close"]];
+    [bubbleImage setImage:[UIImage imageNamed:@"guide_entry"]];
     bubbleImage.layer.cornerRadius = buttonSize.height / 2.f;
     bubbleImage.clipsToBounds = YES;
     
     DWBubbleMenuButton *bubbleMenu = [[DWBubbleMenuButton alloc]
-                                      initWithFrame:CGRectMake(frameViewSize.width - buttonSize.width - 40,
-                                                               frameViewSize.height - buttonSize.height - 60,
+                                      initWithFrame:CGRectMake(frameViewSize.width * 0.9 - buttonSize.width,
+                                                               frameViewSize.height * 0.89 - buttonSize.height,
                                                                buttonSize.width,
                                                                buttonSize.height)
                                       expansionDirection:DirectionUp];
     bubbleMenu.homeButtonView = bubbleImage;
     bubbleMenu.animationDuration = BUBBLE_ANIMATION_DURATION;
     
-    UIButton *recycleButton = [self createBubbleButtonWithImageName:@"DefaultUserImage"
+    UIButton *recycleButton = [self createBubbleButtonWithImageName:@"guide_entry_recycle"
                                                                size:buttonSize
                                                              target:nil
                                                              action:nil];
-    UIButton *sellButton = [self createBubbleButtonWithImageName:@"DefaultItemImage"
+    UIButton *sellButton = [self createBubbleButtonWithImageName:@"guide_entry_upload"
                                                             size:buttonSize
                                                           target:nil
                                                           action:nil];

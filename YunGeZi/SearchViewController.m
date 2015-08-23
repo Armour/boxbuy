@@ -11,6 +11,7 @@
 #import "SearchResultViewController.h"
 #import "DeviceDetect.h"
 #import "MobClick.h"
+#import "AFHTTPRequestOperationManager.h"
 
 #define SEARCHHISTORY_CELL @"searchHistoryCell"
 
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) UISearchBar *categorySearchBar;
 @property (strong, nonatomic) NSString *searchQuery;
 @property (strong, nonatomic) NSMutableArray *searchHistory;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITableView *searchHistoryTableView;
 @property (weak, nonatomic) IBOutlet UIView *hotSearchsView;
 
@@ -39,8 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
-    [self initHotSearchsView];
+    [self prepareMyIndicator];
     [self prepareMySearchBar];
+    [self initHotSearchsView];
     [self refreshSearchHistory];
 }
 
@@ -56,68 +59,72 @@
 #pragma mark - Init HotSearchsView
 
 - (void)initHotSearchsView {
-    NSURL *url = [NSURL URLWithString:@"http://v2.api.uboxs.com/getHottestSearch"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if (error) {
-        return;
-    }
-    error = nil;
-    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-    if (error) {
-        return;
-    }
-    NSMutableArray *hotSearchs = [NSMutableArray array];
-    for (NSString *text in jsonData) {
-        [hotSearchs addObject:text];
-    }
-    
-    CGFloat viewWidth = self.hotSearchsView.frame.size.width;
-    CGFloat viewHeight = self.hotSearchsView.frame.size.height;
-    CGFloat labelPadding = 4;
-    UIFont *font = [UIFont systemFontOfSize:15];
-    
-    // http://v2.api.uboxs.com/getHottestSearch
-    NSInteger count = [hotSearchs count];
-    NSInteger number = count < 5 ? count : 5;   // Number of Labels will be added into view
-                                                // Will be counted after
-    NSMutableArray *hotSearchsTextWidth = [NSMutableArray arrayWithCapacity:number];
-    CGFloat sumOfWidth = 0;
-    for (NSInteger idx = 0; idx < number; idx++) {
-        NSString *text = hotSearchs[idx];
-        CGSize textSize = [text sizeWithAttributes:@{NSFontAttributeName : font}];
-        sumOfWidth += textSize.width + labelPadding;
-        if (sumOfWidth > viewWidth) {
-            number = idx;
-        }
-        hotSearchsTextWidth[idx] = @(textSize.width);
-    }
-    
-    CGFloat x = 0;
-    CGFloat extraWidth = (viewWidth - sumOfWidth + labelPadding) / number;
-    for (NSInteger idx = 0; idx < number; idx++) {
-        CGRect frame = CGRectMake(x,
-                                  0,
-                                  [hotSearchsTextWidth[idx] floatValue] + extraWidth,
-                                  viewHeight);
-        UIButton *_button = [[UIButton alloc] initWithFrame:frame];
-        _button.backgroundColor = [UIColor whiteColor];
-        _button.layer.borderColor = [UIColor grayColor].CGColor;
-        _button.layer.borderWidth = 0.5;
-        [_button setTitle:(NSString *)hotSearchs[idx]
-                 forState:UIControlStateNormal];
-        [_button setTitleColor:[UIColor blackColor]
-                      forState:UIControlStateNormal];
-        _button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        _button.titleLabel.font = font;
-        [_button addTarget:self
-                    action:@selector(hotSearchButtonTouchUpInside:)
-          forControlEvents:UIControlEventTouchUpInside];
-        [self.hotSearchsView addSubview:_button];
-        x += frame.size.width + labelPadding;
-    }
+    [self.activityIndicator startAnimating];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.uboxs.com/getHottestSearch"
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             NSMutableArray *hotSearchs = [NSMutableArray array];
+             for (id obj in response)
+                 [hotSearchs addObject:obj];
+             CGFloat viewWidth = self.hotSearchsView.frame.size.width;
+             CGFloat viewHeight = self.hotSearchsView.frame.size.height;
+             CGFloat labelPadding = 4;
+             UIFont *font = [UIFont systemFontOfSize:15];
+
+             NSInteger count = [hotSearchs count];
+             NSInteger number = count < 5 ? count : 5;   // Number of Labels will be added into view
+             // Will be counted after
+             NSMutableArray *hotSearchsTextWidth = [NSMutableArray arrayWithCapacity:number];
+             CGFloat sumOfWidth = 0;
+             for (NSInteger idx = 0; idx < number; idx++) {
+                 NSString *text = hotSearchs[idx];
+                 CGSize textSize = [text sizeWithAttributes:@{NSFontAttributeName : font}];
+                 sumOfWidth += textSize.width + labelPadding;
+                 if (sumOfWidth > viewWidth) {
+                     number = idx;
+                 }
+                 hotSearchsTextWidth[idx] = @(textSize.width);
+             }
+
+             CGFloat x = 0;
+             CGFloat extraWidth = (viewWidth - sumOfWidth + labelPadding) / number;
+             for (NSInteger idx = 0; idx < number; idx++) {
+                 CGRect frame = CGRectMake(x,
+                                           0,
+                                           [hotSearchsTextWidth[idx] floatValue] + extraWidth,
+                                           viewHeight);
+                 UIButton *_button = [[UIButton alloc] initWithFrame:frame];
+                 _button.backgroundColor = [UIColor whiteColor];
+                 _button.layer.borderColor = [UIColor grayColor].CGColor;
+                 _button.layer.borderWidth = 0.5;
+                 [_button setTitle:(NSString *)hotSearchs[idx]
+                          forState:UIControlStateNormal];
+                 [_button setTitleColor:[UIColor blackColor]
+                               forState:UIControlStateNormal];
+                 _button.titleLabel.textAlignment = NSTextAlignmentCenter;
+                 _button.titleLabel.font = font;
+                 [_button addTarget:self
+                             action:@selector(hotSearchButtonTouchUpInside:)
+                   forControlEvents:UIControlEventTouchUpInside];
+                 [self.hotSearchsView addSubview:_button];
+                 x += frame.size.width + labelPadding;
+             }
+             [self.activityIndicator stopAnimating];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Fail in Init Hot Search!!!");
+             [self initHotSearchsView];
+         }];
+}
+
+#pragma mark - Prepare Indicator
+
+- (void)prepareMyIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.activityIndicator setCenter:self.hotSearchsView.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
 }
 
 #pragma mark - Init SearchHistoryTableView

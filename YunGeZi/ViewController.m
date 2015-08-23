@@ -172,7 +172,6 @@ enum {
 
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
     [self.view endEditing:YES];
-    [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
     [self addLoadingMask];
     [self.view bringSubviewToFront:self.activityIndicator];
@@ -217,13 +216,11 @@ enum {
         }
         @catch (NSException *exception) {
             [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:TRUE];
             [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦😥"];
             [self removeLoadingMask];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:TRUE];
             if (status == 0) {
                 [self performSegueWithIdentifier:@"goToMainPage" sender:self];
             } else if (status == 10004) {
