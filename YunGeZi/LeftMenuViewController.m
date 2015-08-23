@@ -51,7 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor clearColor];
+    [self initUserInfo];
     [self prepareTreeView];
     [self prepareMyNotification];
 }
@@ -59,6 +59,27 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Init User Info
+
+- (void)initUserInfo {
+    self.view.backgroundColor = [UIColor clearColor];
+    self.schoolId = nil;
+    [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"0\r\n商品"]
+                             forState:UIControlStateNormal];
+    [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"0\r\n关注"]
+                           forState:UIControlStateNormal];
+    [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"0\r\n粉丝"]
+                         forState:UIControlStateNormal];
+    [self.userNameButton setTitle:@"未登录" forState:UIControlStateNormal];
+    [self.schoolNameButton setTitle:@"未登录" forState:UIControlStateNormal];
+    [self.userImageButton setBackgroundImage:[UIImage imageNamed:@"DefaultUserImage"] forState:UIControlStateNormal];
+    self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
+    self.userImageButton.clipsToBounds = YES;
+    self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 #pragma mark - Init Tree View
@@ -148,11 +169,6 @@
               NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", self.userImageId, self.userImageHash, @"ori"];
               NSURL *url = [NSURL URLWithString:imagePath];
               [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
-              self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
-              self.userImageButton.clipsToBounds = YES;
-              self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Load user info failed...");
               [self popAlert:@"加载个人信息失败" withMessage:@"貌似网络不太好哦"];
