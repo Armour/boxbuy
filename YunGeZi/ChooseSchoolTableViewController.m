@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSArray *schoolIndexTitles;
 @property (strong, nonatomic) NSArray *schoolImage;
 @property (strong, nonatomic) NSMutableSet *indexPathFetchedImageSet;
+@property (strong, nonatomic) NSString *choosedSchool;
+@property (strong, nonatomic) NSString *choosedSchoolId;
 
 @end
 
@@ -104,6 +106,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ChooseSchoolTableViewCell *cell = (ChooseSchoolTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.choosenMarkImage.image = [UIImage imageNamed:@"checkmark"];
+    NSString *sectionTitle = [schoolSectionTitles objectAtIndex:indexPath.section];
+    NSArray *sectionSchools = [schools objectForKey:sectionTitle];
+    NSArray *sectionSchoolsId = [schoolsId objectForKey:sectionTitle];
+    self.choosedSchool = [sectionSchools objectAtIndex:indexPath.row];
+    self.choosedSchoolId = [sectionSchoolsId objectAtIndex:indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
