@@ -259,7 +259,8 @@
               [self.activityIndicator stopAnimating];
               self.pcodeTextField.text = nil;
           }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {              [self popAlert:@"错误" withMessage:@"收到了异次元波动的影响\r\n请稍候重试😱"];
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [self popAlert:@"错误" withMessage:@"收到了异次元波动的影响\r\n请稍候重试😱"];
               [self.activityIndicator stopAnimating];
               [self refreshCaptcha];
           }];
@@ -279,7 +280,7 @@
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
     self.isShowPasswd ^= 1;
     self.passwordTextField.secureTextEntry = !self.isShowPasswd;
-    NSString* imageName = self.isShowPasswd ? @"login_password_show1" : @"login_password_show2";
+    NSString* imageName = self.isShowPasswd ? @"eye_close" : @"eye_open";
     [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
                            forState:UIControlStateNormal];
     [self.passwordTextField becomeFirstResponder];

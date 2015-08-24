@@ -13,19 +13,15 @@
 #import "RATreeView.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "SDWebImage/UIButton+WebCache.h"
+#import "LoginInfo.h"
 
 #define DegreesToRadians(x) (M_PI * x / 180.0)
 #define ARROW_ROTATION_ANIMATION @"ArrowRotationAnimation"
 
 @interface LeftMenuViewController ()
 
-@property (strong, nonatomic) NSString *accessToken;
-@property (strong, nonatomic) NSString *refreshToken;
-@property (strong, nonatomic) NSString *expireTime;
 @property (strong, nonatomic) NSArray *models;
 @property (strong, nonatomic) NSString *selectedItem;
-@property (strong, nonatomic) NSString *userImageId;
-@property (strong, nonatomic) NSString *userImageHash;
 @property (strong, nonatomic) NSString *schoolId;
 @property (strong, nonatomic) RATreeView *treeView;
 @property (weak, nonatomic) IBOutlet UIButton *schoolNameButton;
@@ -58,7 +54,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Init Tree View
@@ -119,48 +114,32 @@
 
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(getLoginToken:)
+                                             selector:@selector(updateUserInfo)
                                                  name:@"PostLoingTokenFromRootToLeftMenu"
                                                object:nil];
 }
 
-- (void)getLoginToken:(NSNotification *)notification {
-    NSDictionary *dict = [notification userInfo];
-    self.accessToken = [dict objectForKey:@"accessToken"];
-    self.refreshToken = [dict objectForKey:@"refreshToken"];
-    self.expireTime = [dict objectForKey:@"expireTime"];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://v2.api.boxbuy.cc/getUserData"
-       parameters:@{@"userid" : @"me",
-                    @"access_token" : self.accessToken}
-          success:^(AFHTTPRequestOperation *operation, id response) {
-              [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n商品", [response valueForKeyPath:@"Account.value_item"]]
-                                       forState:UIControlStateNormal];
-              [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n关注", [response valueForKeyPath:@"Account.value_follow"]]
-                                     forState:UIControlStateNormal];
-              [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n粉丝", [response valueForKeyPath:@"Account.value_fan"]]
-                                   forState:UIControlStateNormal];
-              [self.userNameButton setTitle:[response valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
-              self.userImageId = [response valueForKeyPath:@"Account.headiconid"];
-              self.userImageHash = [response valueForKeyPath:@"HeadIcon.hash"];
-              self.schoolId = [response valueForKeyPath:@"Account.schoolid"];
-              [self setUserSchoolName];
-              NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", self.userImageId, self.userImageHash, @"ori"];
-              NSURL *url = [NSURL URLWithString:imagePath];
-              [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
-              self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
-              self.userImageButton.clipsToBounds = YES;
-              self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              [self.userImageButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-              [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-              [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-              [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Load user info failed...");
-              [self popAlert:@"加载个人信息失败" withMessage:@"貌似网络不太好哦"];
-          }];
+- (void)updateUserInfo {
+    [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n商品", (long)[LoginInfo sharedInfo].numOfItem]
+                             forState:UIControlStateNormal];
+    [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n关注", (long)[LoginInfo sharedInfo].numOfFollow]
+                           forState:UIControlStateNormal];
+    [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n粉丝",(long)[LoginInfo sharedInfo].numOfFan]
+                         forState:UIControlStateNormal];
+    [self.userNameButton setTitle:[LoginInfo sharedInfo].nickname forState:UIControlStateNormal];
+    self.schoolId = [LoginInfo sharedInfo].schoolId;
+    [self setUserSchoolName];
+    [self.userImageButton sd_setBackgroundImageWithURL:[[NSURL alloc] initWithString:[LoginInfo sharedInfo].photoUrlString]
+                                              forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+    self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
+    self.userImageButton.clipsToBounds = YES;
+    self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.userImageButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setUserSchoolName {
@@ -221,11 +200,7 @@
         cell.textLabel.text = [(LeftMenuTreeViewModel *)item mainClass];
         cell.textLabel.font = [UIFont systemFontOfSize:20];
         cell.textLabel.textColor = [UIColor whiteColor];
-        NSString *tmpStr = [(LeftMenuTreeViewModel *)item subClassString];
-        NSRange firstSlashRange = [tmpStr rangeOfString:@"/" options:NSLiteralSearch];
-        if (firstSlashRange.location != NSNotFound)
-            tmpStr = [tmpStr substringFromIndex:firstSlashRange.location + 1];
-        cell.detailTextLabel.text = tmpStr;
+        cell.detailTextLabel.text = [(LeftMenuTreeViewModel *)item subClassString];
         cell.detailTextLabel.textColor = [UIColor whiteColor];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
         [btn setFrame:CGRectMake(0, 0, 32, 32)];

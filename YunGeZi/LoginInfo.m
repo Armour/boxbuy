@@ -39,27 +39,18 @@ NSDictionary *_cachedInfo;
 
 - (NSDictionary *)cachedInfo {
     if (!_cachedInfo) {
-        
         NSString *urlString = @"http://v2.api.boxbuy.cc/getUserData";
-//        NSDictionary *postData = @{
-//                                   @"access_token" : self.accessToken,
-//                                   @"userid" : @"me"
-//                                   };
         NSString *postData = [NSString stringWithFormat:@"access_token=%@&userid=me", self.accessToken];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
         NSURLResponse *response = nil;
         NSError *error = nil;
-        NSData *data = [NSURLConnection sendSynchronousRequest:request
-                              returningResponse:&response
-                                          error:&error];
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         if (error) {
             return nil;
         }
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
-                                                             options:NSJSONReadingMutableLeaves
-                                                               error:&error];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
         if (error) {
             return nil;
         }

@@ -24,7 +24,6 @@
 @synthesize itemOldPrice;
 @synthesize itemNewPrice;
 @synthesize sellerName;
-@synthesize sellerState;
 @synthesize sellerPhotoId;
 @synthesize sellerPhotoHash;
 

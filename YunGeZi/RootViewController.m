@@ -37,9 +37,7 @@
 }
 
 - (void)PostLoginTokenToLeftMenu {
-    NSDictionary *dict;
-    dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accessToken, @"accessToken", self.refreshToken, @"refreshToken", self.expireTime, @"expireTime", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostLoingTokenFromRootToLeftMenu" object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostLoingTokenFromRootToLeftMenu" object:self userInfo:nil];
 }
 
 - (void)prepareMyNotification {

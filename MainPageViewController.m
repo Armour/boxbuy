@@ -16,6 +16,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
 #import "MobClick.h"
+#import "LoginInfo.h"
 
 #define WATERFALL_CELL @"WaterfallCell"
 #define HEADER_CELL @"ReusableHeaderCell"
@@ -33,16 +34,17 @@
 #define BUBBLE_MASK_ANIMATION_KEY @"BubbleMaskAnimation"
 #define BUBBLE_ANIMATION_DURATION 0.5f
 #define BUBBLE_MASK_OPACITY 0.6f
+#define SELLER_INTRO_DEFAULT @"加载中..."
+#define SELLER_INTRO_FAIL @"加载失败..请刷新重试"
 
 @interface MainPageViewController ()
 
 @property (strong, nonatomic) IBOutlet UICollectionView *waterfallView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic) NSUInteger pageCount;
-@property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
 @property (strong, nonatomic) NSMutableArray *itemId;
 @property (strong, nonatomic) NSMutableArray *sellerId;
+@property (strong, nonatomic) NSMutableArray *sellerIntro;
 @property (strong, nonatomic) NSString *choosedItemId;
 @property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) UIView *bubbleMask;
@@ -52,6 +54,8 @@
 @property (strong, nonatomic) UIPageControl *imageScrollViewPageControl;
 @property (strong, nonatomic) NSTimer *imageScrollTimer;
 @property (nonatomic) NSInteger imageCount;
+@property (nonatomic) NSUInteger pageCount;
+@property (nonatomic) BOOL isFetching;
 
 @end
 
@@ -113,7 +117,7 @@
     layout.headerHeight = HEADER_HEIGHT;
     layout.minimumColumnSpacing = ROW_PADDING;
     layout.minimumInteritemSpacing = ROW_PADDING;
-    layout.sectionInset = UIEdgeInsetsMake(ROW_PADDING, ROW_PADDING, ROW_PADDING/2, ROW_PADDING);
+    layout.sectionInset = UIEdgeInsetsMake(ROW_PADDING, ROW_PADDING, ROW_PADDING, ROW_PADDING);
     self.waterfallView.collectionViewLayout = layout;
 
     self.isFetching = NO;
@@ -138,13 +142,16 @@
                     @"p" : @(page),
                     @"pp" : @ITEMS_PER_PAGE}
           success:^(AFHTTPRequestOperation *operation, id response){
-              //NSLog(@"JSON => %@", response);
               if (page == 1) {
                   self.pageCount = [[response valueForKeyPath:@"totalpage"] integerValue];
                   self.cellModels = [[NSMutableArray alloc] init];
                   self.itemId = [[NSMutableArray alloc] init];
                   self.sellerId = [[NSMutableArray alloc] init];
+                  self.sellerIntro = [[NSMutableArray alloc] init];
               }
+              for (int i = 0; i < [[response valueForKeyPath:@"result"] count]; i++)
+                  [self.sellerIntro addObject:SELLER_INTRO_DEFAULT];
+              int indexPath = 0;
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
                   [model setImageWidth:200];
@@ -157,16 +164,28 @@
                   [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
-                  [model setSellerState:@"这是毛？"];
+
+                  [manager POST:@"http://v2.api.boxbuy.cc/getUserData"
+                     parameters:@{@"access_token" : [LoginInfo sharedInfo].accessToken,
+                                  @"userid" : [obj valueForKeyPath:@"Seller.userid"]}
+                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            [self.sellerIntro setObject:[responseObject valueForKeyPath:@"Account.intro"] atIndexedSubscript:(page - 1) * ITEMS_PER_PAGE + indexPath];
+                            NSIndexPath *indexPaths = [NSIndexPath indexPathForItem:(page - 1) * ITEMS_PER_PAGE + indexPath inSection:0];
+                            [self.waterfallView reloadItemsAtIndexPaths:@[indexPaths]];
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            [self.sellerIntro setObject:SELLER_INTRO_FAIL atIndexedSubscript:(page - 1) * ITEMS_PER_PAGE + indexPath];
+                            NSIndexPath *indexPaths = [NSIndexPath indexPathForItem:(page - 1) * ITEMS_PER_PAGE + indexPath inSection:0];
+                            [self.waterfallView reloadItemsAtIndexPaths:@[indexPaths]];
+                        }];
+
                   [self.cellModels addObject:model];
                   [self.itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
                   [self.sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
-                  //NSLog(@" 新商品!!!! %@ ", model.itemTitle);
+                  indexPath++;
               }
               NSLog(@"Fetch successed!");
               [self.waterfallView reloadData];
               [self.activityIndicator stopAnimating];
-              [self.activityIndicator setHidden:TRUE];
               [self removeLoadingMask];
               self.isFetching = NO;
           }
@@ -245,6 +264,7 @@
                  imageFrame.origin.x = count++ * imageWidth;
                  UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
                  [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"default_cover"]];
+                 //gesture here
                  [self.imageScrollView addSubview:imageView];
              }
              self.imageCount = count;
@@ -306,12 +326,14 @@
                  [hottestUserImageButton sd_setBackgroundImageWithURL:imageUrl forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
                  hottestUserImageButton.layer.cornerRadius = hottestUserImageButton.bounds.size.height / 2.f;
                  hottestUserImageButton.clipsToBounds = YES;
+                 //[hottestUserImageButton addTarget:self action:@selector(chooseHotUser:) forControlEvents:UIControlEventTouchUpInside];
                  [self.hottestUserView addSubview:hottestUserImageButton];
                  // Name Button
                  UIButton *hottestUserNameButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
                  [hottestUserNameButton.titleLabel setFont:[UIFont systemFontOfSize:USER_NAME_FONT_SIZE]];
                  [hottestUserNameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                  [hottestUserNameButton setTitle:[obj valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
+                 //[hottestUserNameButton addTarget:self action:@selector(chooseHotUser:) forControlEvents:UIControlEventTouchUpInside];
                  [self.hottestUserView addSubview:hottestUserNameButton];
                  count++;
              }
@@ -480,6 +502,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"LOAD!!!!!!!!!!%@", indexPath);
     if (self.cellModels.count - indexPath.item < 5 && self.cellModels.count % ITEMS_PER_PAGE == 0)
         [self fillCellModelsForPage:(self.cellModels.count / ITEMS_PER_PAGE) + 1];
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
@@ -489,17 +512,18 @@
     [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
-    [cell setSellerState:model.sellerState];
-    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_LARGE]];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_LARGE] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
+    [cell setSellerIntro:[self.sellerIntro objectAtIndex:indexPath.item]];
+    [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_MEDIUM]];
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
         if (succeeded) {
-            [model setImageWidth:width];
-            [model setImageHeight:height];
             [UIView setAnimationsEnabled:NO];
             [collectionView performBatchUpdates:^{
-                 [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                NSLog(@"RELOAD!!!!!!!!!!%@", indexPath);
+                [model setImageWidth:width];
+                [model setImageHeight:height];
+                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
             } completion:^(BOOL finished) {
-                 [UIView setAnimationsEnabled:YES];
+                [UIView setAnimationsEnabled:YES];
             }];
         }
     }];
@@ -517,8 +541,8 @@
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL forIndexPath:indexPath];
         [headerView addSubview:self.imageScrollView];
         [headerView addSubview:self.imageScrollViewPageControl];
-        [headerView bringSubviewToFront:self.imageScrollViewPageControl];
         [headerView addSubview:self.hottestUserView];
+        [headerView bringSubviewToFront:self.imageScrollViewPageControl];
         reusableview = headerView;
     }
     return reusableview;
@@ -534,8 +558,8 @@
     WaterfallCellModel *model = [self.cellModels objectAtIndex:indexPath.item];
     CGFloat itemWidth = (collectionView.frame.size.width - ROW_PADDING * 3) / 2;
     CGFloat imageHight = model.imageWidth ? model.imageHeight * itemWidth / model.imageWidth : itemWidth;
-    if (imageHight < itemWidth * 0.7)
-        imageHight = itemWidth * 0.7;
+    if (imageHight < itemWidth * 0.8)
+        imageHight = itemWidth * 0.8;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
     CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
     return itemsize;

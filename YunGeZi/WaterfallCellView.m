@@ -10,6 +10,8 @@
 #import "WaterfallCellModel.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "LoginInfo.h"
 
 @interface WaterfallCellView ()
 
@@ -76,8 +78,8 @@
     [self.sellerNameButton setTitleColor:[UIColor colorWithRed:0.34 green:0.77 blue:0.97 alpha:1.00] forState:UIControlStateNormal];
 }
 
-- (void)setSellerState:(NSString *)state {
-    self.sellerStatsLabel.text = state;
+- (void)setSellerIntro:(NSString *)intro {
+    self.sellerIntroLabel.text = intro;
 }
 
 - (void)setSellerPhotoWithStringAsync:(NSString *)photoString {
