@@ -41,10 +41,12 @@
 @property (nonatomic) NSUInteger pageCount;
 @property (nonatomic) BOOL isFetching;
 @property (strong, nonatomic) NSMutableArray *cellModels;
+@property (strong, nonatomic) NSMutableArray *hotItemUrl;
 @property (strong, nonatomic) NSMutableArray *itemId;
 @property (strong, nonatomic) NSMutableArray *sellerId;
 @property (strong, nonatomic) NSString *choosedItemId;
 @property (strong, nonatomic) NSString *choosedSellerId;
+@property (strong, nonatomic) NSString *choosedHotItemUrl;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
 @property (strong, nonatomic) UIView *hottestUserView;
@@ -219,10 +221,14 @@
 #pragma mark - Prepare ImageScrollView
 
 - (void)prepareImageScrollView {
+    self.hotItemUrl = [[NSMutableArray alloc] init];
+    self.choosedHotItemUrl = @"";
     CGFloat imageWidth = self.view.frame.size.width;
     CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
     self.imageScrollView = [[UIScrollView alloc] initWithFrame:imageFrame];
     self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - PAGE_CONTROL_WIDTH/2, GALLERY_HEIGHT * 0.9 - ROW_PADDING, PAGE_CONTROL_WIDTH, ROW_PADDING)];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotItemTap)];
+    [self.imageScrollView addGestureRecognizer:tapGesture];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://v2.api.boxbuy.cc/getExhibitions"
       parameters:@{@"exhibition_group_id":@"index_school_header_1",
@@ -236,6 +242,7 @@
                  UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
                  [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"default_cover"]];
                  [self.imageScrollView addSubview:imageView];
+                 [self.hotItemUrl addObject:[obj valueForKeyPath:@"url"]];
              }
              self.imageCount = count;
              self.imageScrollView.showsHorizontalScrollIndicator = NO;
@@ -269,6 +276,10 @@
 
 - (void)removeImageScrollTimer {
     [self.imageScrollTimer invalidate];
+}
+
+- (void)handleHotItemTap {
+    NSLog(@"%@", [self.hotItemUrl objectAtIndex:self.imageScrollViewPageControl.currentPage]);
 }
 
 #pragma mark - Prepare HottestUserView
