@@ -18,6 +18,7 @@
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
 		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
 		7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */; };
+		7606DCB81B8CB5A100F489BA /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7606DCB71B8CB5A100F489BA /* MyButton.m */; };
 		7609A1091AFF58F800B134C9 /* ObjectBuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */; };
 		7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */; };
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
@@ -89,6 +90,8 @@
 		7603A82B1AFC682A007E4B78 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
 		7603A82D1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInShopViewController.h; sourceTree = "<group>"; };
 		7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInShopViewController.m; sourceTree = "<group>"; };
+		7606DCB61B8CB5A100F489BA /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
+		7606DCB71B8CB5A100F489BA /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
 		7609A1071AFF58F800B134C9 /* ObjectBuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingViewController.h; sourceTree = "<group>"; };
 		7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyingViewController.m; sourceTree = "<group>"; };
 		7609A10A1AFF681D00B134C9 /* ObjectBuyingResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingResultViewController.h; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 				76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */,
 				76C522F71AF0622E00476769 /* MyTabBarController.h */,
 				76C522F81AF0622E00476769 /* MyTabBarController.m */,
+				7606DCB61B8CB5A100F489BA /* MyButton.h */,
+				7606DCB71B8CB5A100F489BA /* MyButton.m */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
 				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
@@ -565,6 +570,7 @@
 				76B6ACF51AFA273C00A987C2 /* ChangePasswordViewController.m in Sources */,
 				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
 				76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */,
+				7606DCB81B8CB5A100F489BA /* MyButton.m in Sources */,
 				7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */,
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,

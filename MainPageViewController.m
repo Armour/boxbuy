@@ -15,6 +15,7 @@
 #import "DWBubbleMenuButton.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
+#import "MyButton.h"
 #import "MobClick.h"
 #import "LoginInfo.h"
 
@@ -42,11 +43,13 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *waterfallView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSMutableArray *cellModels;
+@property (strong, nonatomic) NSMutableArray *hotItemUrl;
 @property (strong, nonatomic) NSMutableArray *itemId;
 @property (strong, nonatomic) NSMutableArray *sellerId;
 @property (strong, nonatomic) NSMutableArray *sellerIntro;
 @property (strong, nonatomic) NSString *choosedItemId;
 @property (strong, nonatomic) NSString *choosedSellerId;
+@property (strong, nonatomic) NSString *choosedHotItemUrl;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
 @property (strong, nonatomic) UIView *hottestUserView;
@@ -248,10 +251,14 @@
 #pragma mark - Prepare ImageScrollView
 
 - (void)prepareImageScrollView {
+    self.hotItemUrl = [[NSMutableArray alloc] init];
+    self.choosedHotItemUrl = @"";
     CGFloat imageWidth = self.view.frame.size.width;
     CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
     self.imageScrollView = [[UIScrollView alloc] initWithFrame:imageFrame];
     self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - PAGE_CONTROL_WIDTH/2, GALLERY_HEIGHT * 0.9 - ROW_PADDING, PAGE_CONTROL_WIDTH, ROW_PADDING)];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotItemTap)];
+    [self.imageScrollView addGestureRecognizer:tapGesture];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://v2.api.boxbuy.cc/getExhibitions"
       parameters:@{@"exhibition_group_id":@"index_school_header_1",
@@ -264,8 +271,8 @@
                  imageFrame.origin.x = count++ * imageWidth;
                  UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
                  [imageView sd_setImageWithURL:[obj valueForKeyPath:@"image_url"] placeholderImage:[UIImage imageNamed:@"default_cover"]];
-                 //gesture here
                  [self.imageScrollView addSubview:imageView];
+                 [self.hotItemUrl addObject:[obj valueForKeyPath:@"url"]];
              }
              self.imageCount = count;
              self.imageScrollView.showsHorizontalScrollIndicator = NO;
@@ -301,6 +308,10 @@
     [self.imageScrollTimer invalidate];
 }
 
+- (void)handleHotItemTap {
+    NSLog(@"%@", [self.hotItemUrl objectAtIndex:self.imageScrollViewPageControl.currentPage]);
+}
+
 #pragma mark - Prepare HottestUserView
 
 - (void)prepareHottestUserView {
@@ -318,22 +329,26 @@
              for (id obj in response) {
                  if (count >= 5)
                      break;
-                 //[obj valueForKeyPath:@"Account.userid"];
                  NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", [obj valueForKeyPath:@"Account.headiconid"], [obj valueForKeyPath:@"HeadIcon.hash"], @"ori"];
                  NSURL *imageUrl = [NSURL URLWithString:imagePath];
                  // Image Button
-                 UIButton *hottestUserImageButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH + HOTUSER_PADDING, HOTUSER_PADDING, HOTUSER_WIDTH - HOTUSER_PADDING * 2, HOTUSER_WIDTH - HOTUSER_PADDING * 2)];
+                 MyButton *hottestUserImageButton = [[MyButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH + HOTUSER_PADDING, HOTUSER_PADDING, HOTUSER_WIDTH - HOTUSER_PADDING * 2, HOTUSER_WIDTH - HOTUSER_PADDING * 2)];
                  [hottestUserImageButton sd_setBackgroundImageWithURL:imageUrl forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
                  hottestUserImageButton.layer.cornerRadius = hottestUserImageButton.bounds.size.height / 2.f;
                  hottestUserImageButton.clipsToBounds = YES;
-                 //[hottestUserImageButton addTarget:self action:@selector(chooseHotUser:) forControlEvents:UIControlEventTouchUpInside];
+                 hottestUserImageButton.userData = [obj valueForKeyPath:@"Account.userid"];
+                 NSLog(@"%@", hottestUserImageButton.userData);
+                 UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotUserTap:)];
+                 [hottestUserImageButton addGestureRecognizer:tapGesture];
                  [self.hottestUserView addSubview:hottestUserImageButton];
                  // Name Button
-                 UIButton *hottestUserNameButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
+                 MyButton *hottestUserNameButton = [[MyButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
                  [hottestUserNameButton.titleLabel setFont:[UIFont systemFontOfSize:USER_NAME_FONT_SIZE]];
                  [hottestUserNameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                  [hottestUserNameButton setTitle:[obj valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
-                 //[hottestUserNameButton addTarget:self action:@selector(chooseHotUser:) forControlEvents:UIControlEventTouchUpInside];
+                 hottestUserNameButton.userData = [obj valueForKeyPath:@"Account.userid"];
+                 UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotUserTap:)];
+                 [hottestUserNameButton addGestureRecognizer:tapGesture2];
                  [self.hottestUserView addSubview:hottestUserNameButton];
                  count++;
              }
@@ -348,6 +363,11 @@
              [self prepareHottestUserView];
              NSLog(@"Hottest User Fail!!! Retry!!");
          }];
+}
+
+- (void)handleHotUserTap:(UITapGestureRecognizer *)sender {
+    MyButton *hotUserBtn = (MyButton *)sender.view;
+    NSLog(@"%@", hotUserBtn.userData);
 }
 
 #pragma mark - UIScrollViewDelegate
