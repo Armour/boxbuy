@@ -15,6 +15,7 @@
 #import "DWBubbleMenuButton.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
+#import "MyButton.h"
 #import "MobClick.h"
 
 #define WATERFALL_CELL @"WaterfallCell"
@@ -299,20 +300,26 @@
              for (id obj in response) {
                  if (count >= 5)
                      break;
-                 //[obj valueForKeyPath:@"Account.userid"];
                  NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", [obj valueForKeyPath:@"Account.headiconid"], [obj valueForKeyPath:@"HeadIcon.hash"], @"ori"];
                  NSURL *imageUrl = [NSURL URLWithString:imagePath];
                  // Image Button
-                 UIButton *hottestUserImageButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH + HOTUSER_PADDING, HOTUSER_PADDING, HOTUSER_WIDTH - HOTUSER_PADDING * 2, HOTUSER_WIDTH - HOTUSER_PADDING * 2)];
+                 MyButton *hottestUserImageButton = [[MyButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH + HOTUSER_PADDING, HOTUSER_PADDING, HOTUSER_WIDTH - HOTUSER_PADDING * 2, HOTUSER_WIDTH - HOTUSER_PADDING * 2)];
                  [hottestUserImageButton sd_setBackgroundImageWithURL:imageUrl forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
                  hottestUserImageButton.layer.cornerRadius = hottestUserImageButton.bounds.size.height / 2.f;
                  hottestUserImageButton.clipsToBounds = YES;
+                 hottestUserImageButton.userData = [obj valueForKeyPath:@"Account.userid"];
+                 NSLog(@"%@", hottestUserImageButton.userData);
+                 UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotUserTap:)];
+                 [hottestUserImageButton addGestureRecognizer:tapGesture];
                  [self.hottestUserView addSubview:hottestUserImageButton];
                  // Name Button
-                 UIButton *hottestUserNameButton = [[UIButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
+                 MyButton *hottestUserNameButton = [[MyButton alloc] initWithFrame:CGRectMake(count * HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_WIDTH, HOTUSER_PADDING * 2)];
                  [hottestUserNameButton.titleLabel setFont:[UIFont systemFontOfSize:USER_NAME_FONT_SIZE]];
                  [hottestUserNameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                  [hottestUserNameButton setTitle:[obj valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
+                 hottestUserNameButton.userData = [obj valueForKeyPath:@"Account.userid"];
+                 UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotUserTap:)];
+                 [hottestUserNameButton addGestureRecognizer:tapGesture2];
                  [self.hottestUserView addSubview:hottestUserNameButton];
                  count++;
              }
@@ -327,6 +334,11 @@
              [self prepareHottestUserView];
              NSLog(@"Hottest User Fail!!! Retry!!");
          }];
+}
+
+- (void)handleHotUserTap:(UITapGestureRecognizer *)sender {
+    MyButton *hotUserBtn = (MyButton *)sender.view;
+    NSLog(@"%@", hotUserBtn.userData);
 }
 
 #pragma mark - UIScrollViewDelegate
