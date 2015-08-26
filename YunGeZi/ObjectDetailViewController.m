@@ -17,6 +17,13 @@
 @property (strong, nonatomic) NSTimer *imageScrollTimer;
 @property (nonatomic) NSInteger imageCount;
 
+@property (weak, nonatomic) IBOutlet UILabel *itemNewPriceLabel; // Without ¥
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemNewPriceLabelWidthConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *itemOldPriceLabel; // With ¥
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemOldPriceLabelWidthConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
+
+
 @end
 
 @implementation ObjectDetailViewController
@@ -47,6 +54,34 @@
     [self addImageScrollTimer];
 }
 
+- (void)preparePriceAndTitleView {
+    // Set New Price Label
+    self.itemNewPriceLabel.text = @"19999";
+    // Set Old Price Label
+    {
+        NSAttributedString *oldPriceStr = [[NSAttributedString alloc] initWithString:@"¥29999"
+                                                                          attributes:@{                                                                                                           NSStrikethroughStyleAttributeName : @(NSUnderlinePatternSolid | NSUnderlineStyleSingle)}];
+        self.itemOldPriceLabel.attributedText = oldPriceStr;
+    }
+    // Set Item Title
+    self.itemTitleLabel.text = @"Title Title Title Title Title Title Title Title Title Title Title Title Title Title";
+}
+
+#pragma mark - Resize View
+
+- (void)resizeViewInPriceAndTitleView {
+    // Reset width of ItemNewPriceLabel
+    {
+        CGSize size = [self.itemNewPriceLabel.text sizeWithAttributes:@{NSFontAttributeName : self.itemNewPriceLabel.font}];
+        self.itemNewPriceLabelWidthConstraint.constant = size.width + 2;
+    }
+    // Reset width of ItemOldPriceLabel
+    {
+        CGSize size = [self.itemNewPriceLabel.attributedText size];
+        self.itemOldPriceLabelWidthConstraint.constant = size.width;
+    }
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,9 +89,17 @@
     [MobClick beginLogPageView:@"商品详情"];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self resizeViewInPriceAndTitleView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareImageScrollView];
+    [self preparePriceAndTitleView];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
