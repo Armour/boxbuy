@@ -8,10 +8,12 @@
 
 #import "AccountViewController.h"
 #import "MyTabBarController.h"
+#import "LoginInfo.h"
 #import "WebViewJavascriptBridge.h"
 #import "ShopViewController.h"
 #import "MyNavigationController.h"
 #import "MobClick.h"
+#import "UIImageView+WebCache.h"
 
 @interface AccountViewController ()
 
@@ -36,28 +38,19 @@
 #pragma mark - Preparation
 
 - (void)initUserInfo {
-    UIImage *userPhoto = [UIImage imageNamed:@"DefaultUserImage"];
-    [self.headerBackgroundImage setImage:userPhoto];
-    [self.userImage setImage:userPhoto];
+    {
+        void (^_setImage)(UIImageView *) = ^(UIImageView *imageView) {
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[LoginInfo sharedInfo].photoUrlString]
+                         placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+        };
+        _setImage(self.headerBackgroundImage);
+        _setImage(self.userImage);
+    }
     self.userImage.layer.cornerRadius = self.userImage.bounds.size.height / 2;
     self.userImage.clipsToBounds = YES;
-    self.userNameLabel.text = @"用户名balabalalalal";
+    self.userNameLabel.text = [LoginInfo sharedInfo].nickname;
     self.userMarkImage.image = [UIImage imageNamed:@"close"];
-    {
-        CGSize _labelSize = [self.userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
-        CGRect _labelFrame = self.userNameLabel.frame;
-        _labelFrame.size.width = _labelSize.width;
-        self.userNameLabel.frame = _labelFrame;
-        CGFloat _viewLength = _labelSize.width;
-        if (YES) {  // HAS USER ID IMAGE
-            _viewLength += 8 + self.userMarkImage.frame.size.width;
-        }
-        self.userNameAndMarkViewLengthConstraint.constant = _viewLength;
-        CGRect _viewFrame = self.userNameAndMarkView.frame;
-        _viewFrame.size.width = _viewLength;
-        self.userNameAndMarkView.frame = _viewFrame;
-    }
-    [self setUserResume:@"Hello World!"];
+    [self setUserResume:[LoginInfo sharedInfo].intro];
     
     {
         UIVisualEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -70,74 +63,48 @@
 
 - (void)prepareNavigation {
     [self initUserInfo];
-    
-    self.navigationController.navigationBarHidden = YES;
-
     {
         CGRect _frame = self.headerView.frame;
         _frame.size.height = self.view.bounds.size.height - 44 * 5 - 50;
         self.headerView.frame = _frame;
     }
     self.goodsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self setGoodsCount:0];
+    [self setGoodsCount:[LoginInfo sharedInfo].numOfItem];
     self.focusButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self setFocusCount:0];
+    [self setFocusCount:[LoginInfo sharedInfo].numOfFollow];
     self.fansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self setFansCount:0];
+    [self setFansCount:[LoginInfo sharedInfo].numOfFan];
+    
     [self setCommentsCount:0];
+}
+
+- (void)resizeUserNameAndMarkView {
+    CGSize _labelSize = [self.userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+    CGRect _labelFrame = self.userNameLabel.frame;
+    _labelFrame.size.width = _labelSize.width;
+    self.userNameLabel.frame = _labelFrame;
+    CGFloat _viewLength = _labelSize.width;
+    if (YES) {  // HAS USER ID IMAGE
+        _viewLength += 8 + self.userMarkImage.frame.size.width;
+    }
+    self.userNameAndMarkViewLengthConstraint.constant = _viewLength;
+    CGRect _viewFrame = self.userNameAndMarkView.frame;
+    _viewFrame.size.width = _viewLength;
+    self.userNameAndMarkView.frame = _viewFrame;
+}
+
+- (void)prepareTableView {
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.tableFooterView = [UIView new];
 }
 
 #pragma mark - Button Action
 
 - (IBAction)backButtonTouchUpInside:(id)sender {
-    self.navigationController.navigationBarHidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)goToMyInfoButtonTouchUpInside:(id)sender {
-    NSLog(@"MyInfo");
-}
-
-- (IBAction)goodsButtonTouchUpInside:(id)sender {
-    NSLog(@"GOODS");
-}
-
-- (IBAction)focusButtonTouchUpInside:(id)sender {
-    NSLog(@"FOUCUS");
-}
-
-- (IBAction)fansButtonTouchUpInside:(id)sender {
-    NSLog(@"FANS");
-}
-
-- (IBAction)commentsButtonTouchUpInside:(id)sender {
-    NSLog(@"COMMENT");
-}
-
 #pragma mark - TableView Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.item) {
-        case 0: // 我的店铺
-            NSLog(@"我的店铺");
-            break;
-        case 1: // 全部订单
-            NSLog(@"全部订单");
-            break;
-        case 2: // 我的回收
-            NSLog(@"我的回收");
-            break;
-        case 3: // 我的钱包
-            NSLog(@"我的钱包");
-            break;
-        case 4: // 我的收藏
-            NSLog(@"我的收藏");
-            break;
-        default:
-            break;
-    }
-    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
-}
 
 #pragma mark - Inner Helper
 
@@ -165,16 +132,22 @@
     self.userResumeLabel.text = resume;
 }
 
+#pragma mark - Segue Detail
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self prepareNavigation];
+    [self prepareNavigation];
+    [self prepareTableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self prepareNavigation];
+    [self resizeUserNameAndMarkView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -184,11 +157,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"我的"];
+    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我的"];
+    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 @end

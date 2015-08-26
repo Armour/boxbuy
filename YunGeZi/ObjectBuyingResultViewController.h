@@ -10,6 +10,6 @@
 
 @interface ObjectBuyingResultViewController : UIViewController <UIWebViewDelegate>
 
-@property (strong,nonatomic) NSString *objectNumber;
+@property (strong, nonatomic) NSString *objectNumber;
 
 @end

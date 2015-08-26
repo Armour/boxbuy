@@ -10,6 +10,8 @@
 #import "WaterfallCellModel.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "LoginInfo.h"
 
 @interface WaterfallCellView ()
 
@@ -34,7 +36,7 @@
     NSURL *url = [NSURL URLWithString:imageString];
     [self.itemImageButton sd_setBackgroundImageWithURL:url
                                               forState:UIControlStateNormal
-                                      placeholderImage:[UIImage imageNamed:@"DefaultItemImage"]
+                                      placeholderImage:[UIImage imageNamed:@"default_cover"]
                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
                                                  if (error) {
                                                      callback(NO, 0, 0);
@@ -45,7 +47,7 @@
 }
 
 - (void)setItemTitle:(NSString *)title {
-    self.itemTitleButton.titleLabel.numberOfLines = 0;
+    self.itemTitleButton.titleLabel.numberOfLines = 3;
     self.itemTitleButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     [self.itemTitleButton setTitle:title forState:UIControlStateNormal];
     [self.itemTitleButton layoutIfNeeded];
@@ -76,8 +78,8 @@
     [self.sellerNameButton setTitleColor:[UIColor colorWithRed:0.34 green:0.77 blue:0.97 alpha:1.00] forState:UIControlStateNormal];
 }
 
-- (void)setSellerState:(NSString *)state {
-    self.sellerStatsLabel.text = state;
+- (void)setSellerIntro:(NSString *)intro {
+    self.sellerIntroLabel.text = intro;
 }
 
 - (void)setSellerPhotoWithStringAsync:(NSString *)photoString {
@@ -90,7 +92,7 @@
                                                   endAngle:M_PI * 2.0
                                                  clockwise:YES].CGPath;
     self.sellerPhotoImageButton.layer.mask = maskLayer;
-    [self.sellerPhotoImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
+    [self.sellerPhotoImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
 }
 
 @end

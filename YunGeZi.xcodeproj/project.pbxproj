@@ -12,12 +12,14 @@
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
 		478574511B7F55F900D99685 /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 478574501B7F55F900D99685 /* ChooseSchoolTableViewCell.m */; };
+		475691C91B8304FC00D7F78E /* LoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 475691C81B8304FC00D7F78E /* LoginInfo.m */; };
 		47F4BBB81B7B17B400FA8524 /* LeftMenuTreeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */; };
 		47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */; };
 		47F4BBBF1B7B485200FA8524 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBE1B7B485200FA8524 /* UserSettings.m */; };
 		7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A8281AFC58F6007E4B78 /* OrderViewController.m */; };
 		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
 		7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */; };
+		7606DCB81B8CB5A100F489BA /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7606DCB71B8CB5A100F489BA /* MyButton.m */; };
 		7609A1091AFF58F800B134C9 /* ObjectBuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */; };
 		7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */; };
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
@@ -77,6 +79,8 @@
 		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
 		4785744F1B7F55F900D99685 /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
 		478574501B7F55F900D99685 /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
+		475691C71B8304FC00D7F78E /* LoginInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInfo.h; sourceTree = "<group>"; };
+		475691C81B8304FC00D7F78E /* LoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfo.m; sourceTree = "<group>"; };
 		47F4BBB61B7B17B400FA8524 /* LeftMenuTreeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTreeViewModel.h; sourceTree = "<group>"; };
 		47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTreeViewModel.m; sourceTree = "<group>"; };
 		47F4BBBA1B7B47F300FA8524 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 		7603A82B1AFC682A007E4B78 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
 		7603A82D1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailInShopViewController.h; sourceTree = "<group>"; };
 		7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInShopViewController.m; sourceTree = "<group>"; };
+		7606DCB61B8CB5A100F489BA /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
+		7606DCB71B8CB5A100F489BA /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
 		7609A1071AFF58F800B134C9 /* ObjectBuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingViewController.h; sourceTree = "<group>"; };
 		7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyingViewController.m; sourceTree = "<group>"; };
 		7609A10A1AFF681D00B134C9 /* ObjectBuyingResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingResultViewController.h; sourceTree = "<group>"; };
@@ -192,6 +198,24 @@
 				1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		475691C11B8205CD00D7F78E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
+				7651D2C01AF07434003184A8 /* SearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		475691C61B8304E500D7F78E /* Shared Login Info */ = {
+			isa = PBXGroup;
+			children = (
+				475691C71B8304FC00D7F78E /* LoginInfo.h */,
+				475691C81B8304FC00D7F78E /* LoginInfo.m */,
+			);
+			name = "Shared Login Info";
 			sourceTree = "<group>";
 		};
 		478574471B7DDF5600D99685 /* AccountPage */ = {
@@ -301,12 +325,12 @@
 		76E3332E1AEDF8C40077BACF /* YunGeZi */ = {
 			isa = PBXGroup;
 			children = (
+				475691C61B8304E500D7F78E /* Shared Login Info */,
 				47F4BBB91B7B47CB00FA8524 /* Setting */,
 				76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */,
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
 				76AD1BCF1B7B30E000BA8512 /* MainPage */,
-				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
-				7651D2C01AF07434003184A8 /* SearchViewController.m */,
+				475691C11B8205CD00D7F78E /* Search */,
 				76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */,
 				76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */,
 				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
@@ -341,6 +365,8 @@
 				76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */,
 				76C522F71AF0622E00476769 /* MyTabBarController.h */,
 				76C522F81AF0622E00476769 /* MyTabBarController.m */,
+				7606DCB61B8CB5A100F489BA /* MyButton.h */,
+				7606DCB71B8CB5A100F489BA /* MyButton.m */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
 				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
@@ -522,6 +548,7 @@
 				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */,
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */,
+				475691C91B8304FC00D7F78E /* LoginInfo.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* RegisterViewController.m in Sources */,
 				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
 				764826DE1B195106008D1D7D /* MyPickerView.m in Sources */,
@@ -546,6 +573,7 @@
 				76B6ACF51AFA273C00A987C2 /* ChangePasswordViewController.m in Sources */,
 				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
 				76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */,
+				7606DCB81B8CB5A100F489BA /* MyButton.m in Sources */,
 				7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */,
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,

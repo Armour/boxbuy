@@ -27,7 +27,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *itemOldPrice;
 @property (strong, nonatomic) NSString *itemNewPrice;
 @property (strong, nonatomic) NSString *sellerName;
-@property (strong, nonatomic) NSString *sellerState;
 @property (strong, nonatomic) NSString *sellerPhotoId;
 @property (strong, nonatomic) NSString *sellerPhotoHash;
 

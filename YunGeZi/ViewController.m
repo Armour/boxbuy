@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
 #import "RootViewController.h"
 #import "MobClick.h"
+#import "LoginInfo.h"
 
 @interface ViewController ()
 
@@ -50,6 +52,7 @@ enum {
     [self prepareMyIndicator];
     [self prepareMyNotification];
     [self prepareLoadingMask];
+    [self prepareUserDefault];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -134,7 +137,7 @@ enum {
 }
 
 - (void)startCountDownInRegister {
-    self.timerCountInRegister = 60;
+    self.timerCountInRegister = 120;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(onCountDownInRegister)
@@ -143,7 +146,7 @@ enum {
 }
 
 - (void)startCountDownInChangePassword {
-    self.timerCountInChangePassword = 60;
+    self.timerCountInChangePassword = 120;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(onCountDownInChangePassword)
@@ -171,7 +174,6 @@ enum {
 
 - (IBAction)loginButtonTouchUpInside:(UIButton *)sender {
     [self.view endEditing:YES];
-    [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
     [self addLoadingMask];
     [self.view bringSubviewToFront:self.activityIndicator];
@@ -208,27 +210,47 @@ enum {
             self.refreshToken = [[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]];
             self.expireTime = [[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]];
 
+            [[LoginInfo sharedInfo] updateWithAccessToken:self.accessToken
+                                             refreshToken:self.refreshToken
+                                               expireTime:self.expireTime];
+            
             status = [jsonData[@"err"] integerValue];
         }
         @catch (NSException *exception) {
             [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:TRUE];
-            [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
+            [self popAlert:@"登录失败" withMessage:@"您好像网络不太好哦😥"];
             [self removeLoadingMask];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:TRUE];
             if (status == 0) {
                 [self performSegueWithIdentifier:@"goToMainPage" sender:self];
             } else if (status == 10004) {
-                [self popAlert:@"登录失败" withMessage:@"您输入的密码有误╮(╯_╰)╭"];
+                [self popAlert:@"登录失败" withMessage:@"您输入的密码有误😣"];
             } else if (status == 10002) {
-                [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在╮(╯_╰)╭"];
+                [self popAlert:@"登录失败" withMessage:@"您输入的用户名并不存在😨"];
             }
             [self removeLoadingMask];
         });
     });
+}
+
+#pragma mark - User Defaults
+
+- (void)prepareUserDefault {
+    if ([self getLocalSchoolId] == nil) {
+        NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"schoolId", @"未设置学校", @"schoolName", nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (NSString *)getLocalSchoolId {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"];
+}
+
+- (NSString *)getLocalSchoolName {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolName"];
 }
 
 #pragma mark - TextFieldDelegate
@@ -306,17 +328,6 @@ enum {
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
-}
-
-#pragma mark - Segue Detail
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"goToMainPage"]) {
-        RootViewController *destViewController = segue.destinationViewController;
-        [destViewController setAccessToken:self.accessToken];
-        [destViewController setRefreshToken:self.accessToken];
-        [destViewController setExpireTime:self.expireTime];
-    }
 }
 
 #pragma mark - Alert

@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "LeftMenuTreeViewModel.h"
+#import "LoginInfo.h"
 
 @interface RootViewController ()
 
@@ -32,19 +33,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareMyNotification];
     [self PostLoginTokenToLeftMenu];
-    // Do any additional setup after loading the view.
 }
 
 - (void)PostLoginTokenToLeftMenu {
-    NSDictionary *dict;
-    dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accessToken, @"accessToken", self.refreshToken, @"refreshToken", self.expireTime, @"expireTime", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostLoingTokenFromRootToLeftMenu" object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostLoingTokenFromRootToLeftMenu" object:self userInfo:nil];
+}
+
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLeftMenuView)
+                                                 name:@"SideMenuToAccountInfo"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLeftMenuView)
+                                                 name:@"SideMenuToChangeSchool"
+                                               object:nil];
+}
+
+- (void)hideLeftMenuView {
+    [self hideMenuViewController];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

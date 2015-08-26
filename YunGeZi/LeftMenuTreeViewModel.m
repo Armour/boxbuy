@@ -14,7 +14,7 @@
 
 - (NSString *)subClassString {
     NSMutableString *string = [NSMutableString string];
-    for (NSInteger idx = 0; idx < [self.subClasses count] - 1 ; idx++) {
+    for (NSInteger idx = 1; idx < [self.subClasses count] - 1 ; idx++) {
         [string appendFormat:@"%@/", [self.subClasses objectAtIndex:idx]];
     }
     [string appendString:[self.subClasses lastObject]];

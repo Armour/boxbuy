@@ -13,19 +13,15 @@
 #import "RATreeView.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "SDWebImage/UIButton+WebCache.h"
+#import "LoginInfo.h"
 
 #define DegreesToRadians(x) (M_PI * x / 180.0)
 #define ARROW_ROTATION_ANIMATION @"ArrowRotationAnimation"
 
 @interface LeftMenuViewController ()
 
-@property (strong, nonatomic) NSString *accessToken;
-@property (strong, nonatomic) NSString *refreshToken;
-@property (strong, nonatomic) NSString *expireTime;
 @property (strong, nonatomic) NSArray *models;
 @property (strong, nonatomic) NSString *selectedItem;
-@property (strong, nonatomic) NSString *userImageId;
-@property (strong, nonatomic) NSString *userImageHash;
 @property (strong, nonatomic) NSString *schoolId;
 @property (strong, nonatomic) RATreeView *treeView;
 @property (weak, nonatomic) IBOutlet UIButton *schoolNameButton;
@@ -58,45 +54,35 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Init Tree View
 
 - (void)prepareTreeViewModels {
     LeftMenuTreeViewModel *electron = [LeftMenuTreeViewModel modelWithMainClass:@"电子"
-                                                                              subClasses:[NSArray arrayWithObjects:@"手机", @"电脑", @"相机",
-                                                                                          @"移动存储", @"游戏机", @"平板", @"手环", @"配件", nil]];
+                                                                     subClasses:[NSArray arrayWithObjects:@"所有电子", @"手机", @"电脑", @"相机", @"移动存储", @"游戏机", @"平板", @"手环", @"配件", nil]];
     LeftMenuTreeViewModel *cloth = [LeftMenuTreeViewModel modelWithMainClass:@"衣服"
-                                                                  subClasses:[NSArray arrayWithObjects:@"T恤", @"卫衣", @"衬衫", @"夹克", @"正装",
-                                                                              @"情侣装", @"针织衫", @"羽绒服", @"毛衣", @"棉衣", nil]];
+                                                                  subClasses:[NSArray arrayWithObjects:@"所有衣服", @"T恤", @"卫衣", @"衬衫", @"夹克", @"正装",        @"情侣装", @"针织衫", @"羽绒服", @"毛衣", @"棉衣", nil]];
     LeftMenuTreeViewModel *sport = [LeftMenuTreeViewModel modelWithMainClass:@"运动"
-                                                                  subClasses:[NSArray arrayWithObjects:@"球", @"球拍", @"健身器材", @"配件", nil]];
+                                                                  subClasses:[NSArray arrayWithObjects:@"所有运动", @"球", @"球拍", @"健身器材", @"配件", nil]];
     LeftMenuTreeViewModel *study = [LeftMenuTreeViewModel modelWithMainClass:@"学习"
-                                                                  subClasses:[NSArray arrayWithObjects:@"教材/教辅", @"历年考题",
-                                                                              @"考级专用", @"考试用具", @"学霸笔记", @"课外书籍", nil]];
+                                                                  subClasses:[NSArray arrayWithObjects:@"所有学习", @"教材/教辅", @"历年考题", @"考级专用", @"考试用具", @"学霸笔记", @"课外书籍", nil]];
     LeftMenuTreeViewModel *paramedic = [LeftMenuTreeViewModel modelWithMainClass:@"美护"
-                                                                      subClasses:[NSArray arrayWithObjects:@"化妆品", @"美发用品", @"饰品", @"洗浴用品",
-                                                                                  @"保暖品", @"保健品", nil]];
+                                                                      subClasses:[NSArray arrayWithObjects:@"所有美护", @"化妆品", @"美发用品", @"饰品", @"洗浴用品", @"保暖品", @"保健品", nil]];
     LeftMenuTreeViewModel *play = [LeftMenuTreeViewModel modelWithMainClass:@"玩乐"
-                                                                 subClasses:[NSArray arrayWithObjects:@"游戏机", @"桌游牌", @"装饰品", @"玩偶", @"玩具",
-                                                                             @"游戏配件", @"乐器", @"乐器配件", nil]];
+                                                                 subClasses:[NSArray arrayWithObjects:@"所有玩乐", @"游戏机", @"桌游牌", @"装饰品", @"玩偶", @"玩具", @"游戏配件", @"乐器", @"乐器配件", nil]];
     LeftMenuTreeViewModel *bag = [LeftMenuTreeViewModel modelWithMainClass:@"箱包"
-                                                                subClasses:[NSArray arrayWithObjects:@"双肩包", @"单肩包", @"钱包", @"托运箱", @"拉杆箱",
-                                                                            @"情侣包", @"箱包配件", nil]];
+                                                                subClasses:[NSArray arrayWithObjects:@"所有箱包", @"双肩包", @"单肩包", @"钱包", @"托运箱", @"拉杆箱", @"情侣包", @"箱包配件", nil]];
     LeftMenuTreeViewModel *shoes = [LeftMenuTreeViewModel modelWithMainClass:@"鞋子"
-                                                                  subClasses:[NSArray arrayWithObjects:@"休闲鞋", @"高跟鞋", @"正装鞋", @"板鞋", @"帆布鞋",
-                                                                              @"凉鞋", @"靴子", @"拖鞋", @"棉鞋", @"情侣鞋", nil]];
+                                                                  subClasses:[NSArray arrayWithObjects:@"所有鞋子", @"休闲鞋", @"高跟鞋", @"正装鞋", @"板鞋", @"帆布鞋", @"凉鞋", @"靴子", @"拖鞋", @"棉鞋", @"情侣鞋", nil]];
     LeftMenuTreeViewModel *furniture = [LeftMenuTreeViewModel modelWithMainClass:@"家居"
-                                                                      subClasses:[NSArray arrayWithObjects:@"电器", @"办公用品", @"床上用品", @"餐具", @"清洁用品",
-                                                                                  @"挂饰/壁饰", @"收纳", @"装修用品", @"装饰摆件", @"浴室用品", nil]];
+                                                                      subClasses:[NSArray arrayWithObjects:@"所有家居", @"电器", @"办公用品", @"床上用品", @"餐具", @"清洁用品", @"挂饰/壁饰", @"收纳", @"装修用品", @"装饰摆件", @"浴室用品", nil]];
     LeftMenuTreeViewModel *food = [LeftMenuTreeViewModel modelWithMainClass:@"食饮"
-                                                                 subClasses:[NSArray arrayWithObjects:@"酒品", @"特产", @"方便速食", @"药剂", @"饮料",
-                                                                             @"糕点", @"糖果/巧克力", @"坚果/蜜饯", @"营养品", @"保健品", @"其他", nil]];
+                                                                 subClasses:[NSArray arrayWithObjects:@"所有食饮", @"酒品", @"特产", @"方便速食", @"药剂", @"饮料", @"糕点", @"糖果/巧克力", @"坚果/蜜饯", @"营养品", @"保健品", @"其他", nil]];
     LeftMenuTreeViewModel *virtual = [LeftMenuTreeViewModel modelWithMainClass:@"非实物"
-                                                                    subClasses:[NSArray arrayWithObjects:@"租赁", @"账号", @"劳力", @"其他", nil]];
+                                                                    subClasses:[NSArray arrayWithObjects:@"所有非实物", @"租赁", @"账号", @"劳力", @"其他", nil]];
     LeftMenuTreeViewModel *vehicle = [LeftMenuTreeViewModel modelWithMainClass:@"交通工具"
-                                                                      subClasses:[NSArray arrayWithObjects:@"自行车", @"电动车", @"滑板/轮滑", @"汽车", nil]];
+                                                                      subClasses:[NSArray arrayWithObjects:@"所有交通工具", @"自行车", @"电动车", @"滑板/轮滑", @"汽车", nil]];
 
     self.models = [NSArray arrayWithObjects:electron, cloth, sport, study, paramedic, play, bag, shoes, furniture, food, virtual, vehicle, nil];
     self.selectedItem = @"";
@@ -128,57 +114,38 @@
 
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(getLoginToken:)
+                                             selector:@selector(updateUserInfo)
                                                  name:@"PostLoingTokenFromRootToLeftMenu"
                                                object:nil];
 }
 
-- (void)getLoginToken:(NSNotification *)notification {
-    NSDictionary *dict = [notification userInfo];
-    self.accessToken = [dict objectForKey:@"accessToken"];
-    self.refreshToken = [dict objectForKey:@"refreshToken"];
-    self.expireTime = [dict objectForKey:@"expireTime"];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://v2.api.boxbuy.cc/getUserData"
-       parameters:@{@"userid" : @"me",
-                    @"access_token" : self.accessToken}
-          success:^(AFHTTPRequestOperation *operation, id response) {
-              [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n商品", [response valueForKeyPath:@"Account.value_item"]]
-                                       forState:UIControlStateNormal];
-              [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n关注", [response valueForKeyPath:@"Account.value_follow"]]
-                                     forState:UIControlStateNormal];
-              [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%@\r\n粉丝", [response valueForKeyPath:@"Account.value_fan"]]
-                                   forState:UIControlStateNormal];
-              [self.userNameButton setTitle:[response valueForKeyPath:@"Account.nickname"] forState:UIControlStateNormal];
-              self.userImageId = [response valueForKeyPath:@"Account.headiconid"];
-              self.userImageHash = [response valueForKeyPath:@"HeadIcon.hash"];
-              self.schoolId = [response valueForKeyPath:@"Account.schoolid"];
-              [self setUserSchoolName];
-              NSString *imagePath = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-%@.jpg", self.userImageId, self.userImageHash, @"ori"];
-              NSURL *url = [NSURL URLWithString:imagePath];
-              [self.userImageButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"DefaultUserImage"]];
-              self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
-              self.userImageButton.clipsToBounds = YES;
-              self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-              self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Load user info failed...");
-              [self popAlert:@"加载个人信息失败" withMessage:@"貌似网络不太好哦"];
-          }];
+- (void)updateUserInfo {
+    [self.userProductsButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n商品", (long)[LoginInfo sharedInfo].numOfItem]
+                             forState:UIControlStateNormal];
+    [self.userFollowButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n关注", (long)[LoginInfo sharedInfo].numOfFollow]
+                           forState:UIControlStateNormal];
+    [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n粉丝",(long)[LoginInfo sharedInfo].numOfFan]
+                         forState:UIControlStateNormal];
+    [self.userNameButton setTitle:[LoginInfo sharedInfo].nickname forState:UIControlStateNormal];
+    self.schoolId = [LoginInfo sharedInfo].schoolId;
+    [self setUserSchoolName];
+    [self.userImageButton sd_setBackgroundImageWithURL:[[NSURL alloc] initWithString:[LoginInfo sharedInfo].photoUrlString]
+                                              forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+    self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
+    self.userImageButton.clipsToBounds = YES;
+    self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.userImageButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setUserSchoolName {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://v2.api.boxbuy.cc/getSchools"
-      parameters:@{@"json":@1}
-         success:^(AFHTTPRequestOperation *operation, id response) {
-             NSString *path = [[NSString alloc] initWithFormat:@"%@.nameCh", self.schoolId];
-             [self.schoolNameButton setTitle:[response valueForKeyPath:path] forState:UIControlStateNormal];
-             NSLog(@"Set School Success!!");
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"Set School Fail!!");
-         }];
+    [self.schoolNameButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"schoolName"] forState:UIControlStateNormal];
+    [self.schoolNameButton addTarget:self action:@selector(segueToChangeSchool) forControlEvents:UIControlEventTouchUpInside];
+    [self.schoolConfigButton addTarget:self action:@selector(segueToChangeSchool) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - RATreeView
@@ -269,6 +236,7 @@
             }
         }
     } else if ([item isKindOfClass:[NSString class]]) {
+        // TODO ...
     }
 }
 
@@ -301,6 +269,16 @@
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     [rotationAnimation setValue:@"ArrowRotation" forKey:ARROW_ROTATION_ANIMATION];
     return rotationAnimation;
+}
+
+#pragma mark - Segue Detail
+
+- (void)segueToUserInfo {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToAccountInfo" object:self userInfo:nil];
+}
+
+- (void)segueToChangeSchool {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToChangeSchool" object:self userInfo:nil];
 }
 
 #pragma mark - Alert

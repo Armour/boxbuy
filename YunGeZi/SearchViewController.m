@@ -11,6 +11,7 @@
 #import "SearchResultViewController.h"
 #import "DeviceDetect.h"
 #import "MobClick.h"
+#import "AFHTTPRequestOperationManager.h"
 
 #define SEARCHHISTORY_CELL @"searchHistoryCell"
 
@@ -19,9 +20,9 @@
 @property (strong, nonatomic) UISearchBar *categorySearchBar;
 @property (strong, nonatomic) NSString *searchQuery;
 @property (strong, nonatomic) NSMutableArray *searchHistory;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITableView *searchHistoryTableView;
-
-- (NSManagedObjectContext *)managedObjectContext;
+@property (weak, nonatomic) IBOutlet UIView *hotSearchsView;
 
 @end
 
@@ -38,48 +39,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
+    [self prepareMyIndicator];
     [self prepareMySearchBar];
+    [self initHotSearchsView];
     [self refreshSearchHistory];
-
-    /*NSManagedObjectContext * context = [self managedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"SearchHistory" inManagedObjectContext:context];
-    NSManagedObject *searchHistory = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
-    [searchHistory setValue:@"哈哈哈" forKey:@"title"];
-    [searchHistory setValue:[NSDate date] forKey:@"time"];
-    NSError *error = nil;
-    if (![searchHistory.managedObjectContext save:&error]) {
-        NSLog(@"Unable to save managed object context.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    } else {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO];
-        [fetchRequest setSortDescriptors:@[sortDescriptor]];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"SearchHistory" inManagedObjectContext:context];
-        [fetchRequest setEntity:entity];
-        NSError *error = nil;
-        NSArray *result = [context executeFetchRequest:fetchRequest error:&error];
-        if (error) {
-            NSLog(@"Unable to execute fetch request.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        } else {
-            NSLog(@"%@", result);
-            if (result.count > 0) {
-                for (int i = 0; i < result.count; i++) {
-                    NSManagedObject *history = (NSManagedObject *)[result objectAtIndex:i];
-                    NSLog(@"1 - %@", history);
-                    NSLog(@"%@ %@", [history valueForKey:@"title"], [history valueForKey:@"time"]);
-                    NSLog(@"2 - %@", history);
-                }
-            }
-        }
-        NSManagedObject *searchHistory = (NSManagedObject *)[result objectAtIndex:0];
-        [searchHistory setValue:@30 forKey:@"age"];
-        NSError *saveError = nil;
-        if (![searchHistory.managedObjectContext save:&saveError]) {
-            NSLog(@"Unable to save managed object context.");
-            NSLog(@"%@, %@", saveError, saveError.localizedDescription);
-        }
-    }*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -91,12 +54,84 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Init HotSearchsView
+
+- (void)initHotSearchsView {
+    [self.activityIndicator startAnimating];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://v2.api.uboxs.com/getHottestSearch"
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id response) {
+             NSMutableArray *hotSearchs = [NSMutableArray array];
+             for (id obj in response)
+                 [hotSearchs addObject:obj];
+             CGFloat viewWidth = self.hotSearchsView.frame.size.width;
+             CGFloat viewHeight = self.hotSearchsView.frame.size.height;
+             CGFloat labelPadding = 4;
+             UIFont *font = [UIFont systemFontOfSize:15];
+
+             NSInteger count = [hotSearchs count];
+             NSInteger number = count < 5 ? count : 5;   // Number of Labels will be added into view
+             // Will be counted after
+             NSMutableArray *hotSearchsTextWidth = [NSMutableArray arrayWithCapacity:number];
+             CGFloat sumOfWidth = 0;
+             for (NSInteger idx = 0; idx < number; idx++) {
+                 NSString *text = hotSearchs[idx];
+                 CGSize textSize = [text sizeWithAttributes:@{NSFontAttributeName : font}];
+                 sumOfWidth += textSize.width + labelPadding;
+                 if (sumOfWidth > viewWidth) {
+                     number = idx;
+                 }
+                 hotSearchsTextWidth[idx] = @(textSize.width);
+             }
+
+             CGFloat x = 0;
+             CGFloat extraWidth = (viewWidth - sumOfWidth + labelPadding) / number;
+             for (NSInteger idx = 0; idx < number; idx++) {
+                 CGRect frame = CGRectMake(x,
+                                           0,
+                                           [hotSearchsTextWidth[idx] floatValue] + extraWidth,
+                                           viewHeight);
+                 UIButton *_button = [[UIButton alloc] initWithFrame:frame];
+                 _button.backgroundColor = [UIColor whiteColor];
+                 _button.layer.borderColor = [UIColor grayColor].CGColor;
+                 _button.layer.borderWidth = 0.5;
+                 [_button setTitle:(NSString *)hotSearchs[idx]
+                          forState:UIControlStateNormal];
+                 [_button setTitleColor:[UIColor blackColor]
+                               forState:UIControlStateNormal];
+                 _button.titleLabel.textAlignment = NSTextAlignmentCenter;
+                 _button.titleLabel.font = font;
+                 [_button addTarget:self
+                             action:@selector(hotSearchButtonTouchUpInside:)
+                   forControlEvents:UIControlEventTouchUpInside];
+                 [self.hotSearchsView addSubview:_button];
+                 x += frame.size.width + labelPadding;
+             }
+             [self.activityIndicator stopAnimating];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Fail in Init Hot Search!!!");
+             [self initHotSearchsView];
+         }];
+}
+
+#pragma mark - Prepare Indicator
+
+- (void)prepareMyIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.activityIndicator setCenter:self.hotSearchsView.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+}
+
 #pragma mark - Init SearchHistoryTableView
 
 - (void)initTableView {
     [self.searchHistoryTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SEARCHHISTORY_CELL];
     self.searchHistoryTableView.delegate = self;
     self.searchHistoryTableView.dataSource = self;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 #pragma mark - Core Data
@@ -188,8 +223,7 @@
     self.searchQuery = searchBar.text;
     [self.categorySearchBar resignFirstResponder];
     if (![self.searchQuery isEqual: @""]) {
-        [self performSegueWithIdentifier:@"showSearchResult" sender:self];
-        [self insertSearchQueryToCoreData];
+        [self performSearchForSearchQuery];
     } else
         [self popAlert:@"搜索失败" withMessage:@"请输入搜索关键字"];
 }
@@ -228,10 +262,21 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.searchQuery = [self.searchHistory objectAtIndex:indexPath.item];
+    [self performSearchForSearchQuery];
+}
+
+#pragma mark - Inner Helper
+
+- (void)performSearchForSearchQuery {
     [self performSegueWithIdentifier:@"showSearchResult" sender:self];
     [self insertSearchQueryToCoreData];
+}
+
+- (void)hotSearchButtonTouchUpInside:(UIButton *)sender {
+    self.searchQuery = sender.titleLabel.text;
+    [self performSearchForSearchQuery];
 }
 
 #pragma mark - ManagedObjectContext

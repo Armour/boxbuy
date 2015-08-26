@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *itemTitleButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sellerNameButton;
-@property (weak, nonatomic) IBOutlet UILabel *sellerStatsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sellerIntroLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sellerPhotoImageButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleButtonHeightConstraint;
 
@@ -24,7 +24,7 @@
 - (void)setItemTitle:(NSString *)title;
 - (void)setItemOldPrice:(NSString *)oldPrice NewPrice:(NSString *)newPrice;
 - (void)setSellerName:(NSString *)name;
-- (void)setSellerState:(NSString *)state;
+- (void)setSellerIntro:(NSString *)state;
 - (void)setSellerPhotoWithStringAsync:(NSString *)photoString;
 
 @end
