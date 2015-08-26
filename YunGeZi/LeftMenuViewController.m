@@ -143,16 +143,9 @@
 }
 
 - (void)setUserSchoolName {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://v2.api.boxbuy.cc/getSchools"
-      parameters:@{@"json":@1}
-         success:^(AFHTTPRequestOperation *operation, id response) {
-             NSString *path = [[NSString alloc] initWithFormat:@"%@.nameCh", self.schoolId];
-             [self.schoolNameButton setTitle:[response valueForKeyPath:path] forState:UIControlStateNormal];
-             NSLog(@"Set School Success!!");
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"Set School Fail!!");
-         }];
+    [self.schoolNameButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"schoolName"] forState:UIControlStateNormal];
+    [self.schoolNameButton addTarget:self action:@selector(segueToChangeSchool) forControlEvents:UIControlEventTouchUpInside];
+    [self.schoolConfigButton addTarget:self action:@selector(segueToChangeSchool) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - RATreeView
@@ -282,6 +275,10 @@
 
 - (void)segueToUserInfo {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToAccountInfo" object:self userInfo:nil];
+}
+
+- (void)segueToChangeSchool {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToChangeSchool" object:self userInfo:nil];
 }
 
 #pragma mark - Alert

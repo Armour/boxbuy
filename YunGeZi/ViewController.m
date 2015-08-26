@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
 #import "RootViewController.h"
@@ -51,6 +52,7 @@ enum {
     [self prepareMyIndicator];
     [self prepareMyNotification];
     [self prepareLoadingMask];
+    [self prepareUserDefault];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -233,6 +235,24 @@ enum {
     });
 }
 
+#pragma mark - User Defaults
+
+- (void)prepareUserDefault {
+    if ([self getLocalSchoolId] == nil) {
+        NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"schoolId", @"未设置学校", @"schoolName", nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (NSString *)getLocalSchoolId {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"];
+}
+
+- (NSString *)getLocalSchoolName {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolName"];
+}
+
 #pragma mark - TextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -308,17 +328,6 @@ enum {
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
-}
-
-#pragma mark - Segue Detail
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"goToMainPage"]) {
-        RootViewController *destViewController = segue.destinationViewController;
-        [destViewController setAccessToken:self.accessToken];
-        [destViewController setRefreshToken:self.accessToken];
-        [destViewController setExpireTime:self.expireTime];
-    }
 }
 
 #pragma mark - Alert

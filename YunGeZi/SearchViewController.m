@@ -24,8 +24,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *searchHistoryTableView;
 @property (weak, nonatomic) IBOutlet UIView *hotSearchsView;
 
-- (NSManagedObjectContext *)managedObjectContext;
-
 @end
 
 

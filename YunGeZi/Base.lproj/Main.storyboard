@@ -505,25 +505,35 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O4V-b6-aOX">
-                                            <rect key="frame" x="8" y="7" width="45" height="45"/>
+                                            <rect key="frame" x="8" y="8" width="45" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="O4V-b6-aOX" secondAttribute="height" multiplier="1:1" id="qtk-1W-JqO"/>
                                                 <constraint firstAttribute="width" constant="45" id="rti-U7-fYO"/>
                                             </constraints>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPs-Th-ufc">
-                                            <rect key="frame" x="322" y="7" width="45" height="45"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="aPs-Th-ufc" secondAttribute="height" multiplier="1:1" id="Nxg-If-gTS"/>
-                                                <constraint firstAttribute="width" constant="45" id="g75-18-SGR"/>
-                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="rti-U7-fYO"/>
+                                                </mask>
+                                            </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ei5-UY-Hy1">
-                                            <rect key="frame" x="61" y="19" width="253" height="21"/>
+                                            <rect key="frame" x="61" y="20.5" width="253" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPs-Th-ufc">
+                                            <rect key="frame" x="322" y="8" width="45" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="aPs-Th-ufc" secondAttribute="height" multiplier="1:1" id="Nxg-If-gTS"/>
+                                                <constraint firstAttribute="width" constant="45" id="g75-18-SGR"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="g75-18-SGR"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ei5-UY-Hy1" firstAttribute="centerY" secondItem="O4V-b6-aOX" secondAttribute="centerY" id="26b-Sj-nU0"/>
@@ -532,7 +542,7 @@
                                         <constraint firstItem="O4V-b6-aOX" firstAttribute="leading" secondItem="T4f-F4-YOw" secondAttribute="leadingMargin" id="G2K-CU-bDd"/>
                                         <constraint firstItem="O4V-b6-aOX" firstAttribute="centerY" secondItem="T4f-F4-YOw" secondAttribute="centerY" id="KlQ-Zc-Vkn"/>
                                         <constraint firstItem="aPs-Th-ufc" firstAttribute="bottom" secondItem="O4V-b6-aOX" secondAttribute="bottom" id="VNt-O7-Zkc"/>
-                                        <constraint firstItem="O4V-b6-aOX" firstAttribute="top" secondItem="T4f-F4-YOw" secondAttribute="topMargin" constant="-1" id="YcN-rQ-hJp"/>
+                                        <constraint firstItem="O4V-b6-aOX" firstAttribute="top" secondItem="T4f-F4-YOw" secondAttribute="topMargin" id="YcN-rQ-hJp"/>
                                         <constraint firstItem="aPs-Th-ufc" firstAttribute="leading" secondItem="ei5-UY-Hy1" secondAttribute="trailing" constant="8" symbolic="YES" id="fE1-sS-Duo"/>
                                         <constraint firstItem="ei5-UY-Hy1" firstAttribute="leading" secondItem="O4V-b6-aOX" secondAttribute="trailing" constant="8" symbolic="YES" id="mEk-Hx-VBd"/>
                                     </constraints>
@@ -550,7 +560,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="选择学校" id="uOC-3M-7jX">
-                        <barButtonItem key="rightBarButtonItem" title="继续" id="Efe-RU-bwL"/>
+                        <barButtonItem key="rightBarButtonItem" title="继续" id="Efe-RU-bwL">
+                            <connections>
+                                <segue destination="g99-Ha-WnK" kind="popoverPresentation" identifier="chooseSchoolDone" popoverAnchorBarButtonItem="Efe-RU-bwL" id="4fQ-nd-9oA">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feg-y5-ZlM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1703,6 +1719,7 @@
                         <segue destination="HuI-HL-8TD" kind="show" identifier="selling" id="IIQ-ik-STw"/>
                         <segue destination="bqU-v9-xbB" kind="show" identifier="showUserSettings" id="Xu7-0G-WNz"/>
                         <segue destination="pDo-Xn-o6p" kind="show" identifier="showAccount" id="ksY-HY-Ykx"/>
+                        <segue destination="xiw-Lt-6B4" kind="show" identifier="changeSchool" id="GCd-gI-drE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMf-hl-PaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2788,9 +2805,11 @@
         <image name="user_setting" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IRI-1L-pUC"/>
         <segue reference="0p7-WM-ggn"/>
+        <segue reference="GCd-gI-drE"/>
+        <segue reference="94F-h8-wDZ"/>
+        <segue reference="4fQ-nd-9oA"/>
         <segue reference="hPn-SL-c0M"/>
-        <segue reference="Lwo-LW-fPN"/>
+        <segue reference="IRI-1L-pUC"/>
     </inferredMetricsTieBreakers>
 </document>

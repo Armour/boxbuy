@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "LeftMenuTreeViewModel.h"
+#import "LoginInfo.h"
 
 @interface RootViewController ()
 
@@ -44,6 +45,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(hideLeftMenuView)
                                                  name:@"SideMenuToAccountInfo"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLeftMenuView)
+                                                 name:@"SideMenuToChangeSchool"
                                                object:nil];
 }
 

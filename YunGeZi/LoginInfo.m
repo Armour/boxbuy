@@ -14,7 +14,10 @@
 
 @end
 
+
 @implementation LoginInfo
+
+#pragma mark - Shared Info and Update
 
 + (LoginInfo *)sharedInfo {
     static LoginInfo *_sharedInfo;
@@ -34,6 +37,8 @@
     self.expireTime = expireTime;
     _cachedInfo = nil;
 }
+
+#pragma mark - Get Info from Cache
 
 NSDictionary *_cachedInfo;
 
@@ -101,4 +106,5 @@ NSDictionary *_cachedInfo;
 - (NSInteger)numOfMsgRecv {
     return [[[self cachedInfo] valueForKeyPath:@"Account.value_msg_recv"] integerValue];
 }
+
 @end

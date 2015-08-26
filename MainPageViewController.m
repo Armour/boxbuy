@@ -141,7 +141,7 @@
     NSLog(@"Start Fetching!!! Page: %ld", (unsigned long)page);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
-       parameters:@{@"schoolid" : @"0",
+       parameters:@{@"schoolid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"],
                     @"p" : @(page),
                     @"pp" : @ITEMS_PER_PAGE}
           success:^(AFHTTPRequestOperation *operation, id response){
@@ -236,6 +236,10 @@
                                              selector:@selector(performSegueToAccountPage)
                                                  name:@"SideMenuToAccountInfo"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(performSegueToChangeSchool)
+                                                 name:@"SideMenuToChangeSchool"
+                                               object:nil];
 }
 
 #pragma mark - Prepare Indicator
@@ -262,7 +266,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://v2.api.boxbuy.cc/getExhibitions"
       parameters:@{@"exhibition_group_id":@"index_school_header_1",
-                   @"school_id"          :@1,
+                   @"school_id"          :[[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"],
                    @"json"               :@"true"}
          success:^(AFHTTPRequestOperation *operation, id response) {
              int count = 0;
@@ -322,7 +326,7 @@
     self.hottestUserView.layer.borderColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.00].CGColor;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://v2.api.boxbuy.cc/getAccountsHottest"
-      parameters:@{@"schoolid" : @1,
+      parameters:@{@"schoolid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"],
                    @"json"     : @"true"}
          success:^(AFHTTPRequestOperation *operation, id response) {
              int count = 0;
@@ -695,6 +699,11 @@
 - (void)performSegueToAccountPage {
     NSLog(@"SEGUE TO ACCOUNTPAGE");
     [self performSegueWithIdentifier:@"showAccount" sender:self];
+}
+
+- (void)performSegueToChangeSchool {
+    NSLog(@"SEGUE TO CHANGESCHOOL");
+    [self performSegueWithIdentifier:@"changeSchool" sender:self];
 }
 
 #pragma mark - Alert

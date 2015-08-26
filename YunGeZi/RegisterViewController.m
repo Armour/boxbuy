@@ -11,6 +11,7 @@
 #import "MobClick.h"
 #import "AFNetworking.h"
 #import "DeviceDetect.h"
+#import "LoginInfo.h"
 
 @interface RegisterViewController ()
 
@@ -251,6 +252,7 @@
                                                                      error:&jsonError];
               if ([data[@"err"] integerValue] == 0) {
                   [self popAlert:@"" withMessage:@"注册成功~😝"];
+                  [self updateSharedToken];
                   [self performSegueWithIdentifier:@"chooseSchool" sender:self];
               } else {
                   [self popAlert:@"错误" withMessage:data[@"msg"]];
@@ -267,6 +269,9 @@
 }
 
 - (IBAction)registerButtonTouchUpInside:(UIButton *)sender {
+    [self updateSharedToken];
+    [self performSegueWithIdentifier:@"chooseSchool" sender:self];
+    /*
     if (![self checkPhoneNumber])
         [self popAlert:@"格式错误" withMessage:@"手机号格式错误😣"];
     else if (![self checkPassword])
@@ -274,7 +279,7 @@
     else if (![self checkPCode])
         [self popAlert:@"格式错误" withMessage:@"验证码格式错误😣"];
     else
-        [self tryRegister];
+        [self tryRegister];*/
 }
 
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
@@ -284,6 +289,32 @@
     [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
                            forState:UIControlStateNormal];
     [self.passwordTextField becomeFirstResponder];
+}
+
+#pragma mark - Update Login Shared Token
+
+- (void)updateSharedToken {
+    NSDictionary *postData = @{@"username" : @"18868101893",//self.phoneTextField.text,
+                               @"password" : @"222222",//self.passwordTextField.text,
+                               @"app_key"  : @"X6K1Hfzr12EERq3ea0SZJC0XAWk4ojOy",
+                               @"mobile"   : @"1",
+                               @"return_url" : @"null"};
+    [manager POST:@"https://secure.boxbuy.cc/oauth/authorize"
+       parameters:postData
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSError *jsonError = nil;
+              NSDictionary *jsonData = [NSJSONSerialization
+                                        JSONObjectWithData:responseObject
+                                        options:NSJSONReadingMutableContainers
+                                        error:&jsonError];
+              [[LoginInfo sharedInfo] updateWithAccessToken:[[NSString alloc] initWithFormat:@"%@", jsonData[@"access_token"]]
+                                               refreshToken:[[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]]
+                                                 expireTime:[[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]]];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [self popAlert:@"网络不好" withMessage:@"点击后将自动重试, 如持续出现此窗口就说明你网断啦。。"];
+              [self updateSharedToken];
+          }];
 }
 
 #pragma mark - Alert
