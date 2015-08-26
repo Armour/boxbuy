@@ -24,6 +24,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 
 
+@property (weak, nonatomic) IBOutlet UILabel *itemStoryLabel;
+@property (weak, nonatomic) IBOutlet UIButton *showAllStoryButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemStoryViewHeightConstraint;
+
 @end
 
 @implementation ObjectDetailViewController
@@ -67,6 +71,11 @@
     self.itemTitleLabel.text = @"Title Title Title Title Title Title Title Title Title Title Title Title Title Title";
 }
 
+- (void)prepareItemStroyView {
+    // Set Item Story
+    self.itemStoryLabel.text = @"故事 故事 故事 故事 故事 故事 故事 故事 故事 故事 故事";
+}
+
 #pragma mark - Resize View
 
 - (void)resizeViewInPriceAndTitleView {
@@ -82,7 +91,25 @@
     }
 }
 
+- (void)resizeItemStoryView:(BOOL)expend {
+    // Reset height of ItemStroyView
+    if (expend) {
+        
+    } else {
+        
+    }
+}
+
 #pragma mark - Life Cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareImageScrollView];
+    [self preparePriceAndTitleView];
+    [self prepareItemStroyView];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -92,14 +119,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self resizeViewInPriceAndTitleView];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareImageScrollView];
-    [self preparePriceAndTitleView];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
