@@ -9,6 +9,7 @@
 #import "MyNavigationController.h"
 #import "MainPageViewController.h"
 #import "ObjectDetailViewController.h"
+#import "ChooseSchoolTableViewController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
 #import "AFNetworking.h"
@@ -683,6 +684,9 @@
             ObjectDetailViewController *destViewController = segue.destinationViewController;
             destViewController.objectNumber = self.choosedItemId;
         }
+    } else if ([segue.identifier isEqualToString:@"changeSchool"]) {
+        ChooseSchoolTableViewController *controller = (ChooseSchoolTableViewController *)segue.destinationViewController;
+        [controller setTitle:@"修改查看学校"];
     }
 }
 

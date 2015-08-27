@@ -26,9 +26,10 @@
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorCaptcha;
 @property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
-
 @property (nonatomic) BOOL isShowPasswd;
 @property (nonatomic) BOOL firstTimeRefreshCaptcha;
+@property (nonatomic) CGFloat activityCenterXOffSet;
+@property (nonatomic) CGFloat activityCenterYOffSet;
 
 @end
 
@@ -51,9 +52,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
-    [self prepareMyIndicator];
+    [self prepareMyTextField];
     [self prepareMyNotification];
     [self prepareMyFont];
+    [self prepareMyIndicator];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -106,6 +108,11 @@
     self.isShowPasswd = NO;
 }
 
+- (void)prepareMyTextField {
+    self.phoneTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passwordTextField.clearButtonMode = UITextFieldViewModeNever;
+}
+
 - (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityIndicator setCenter:self.view.center];
@@ -116,7 +123,8 @@
 
     self.firstTimeRefreshCaptcha = YES;
     self.activityIndicatorCaptcha = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.activityIndicatorCaptcha setCenter:self.captchaButton.center];
+    [self.activityIndicatorCaptcha setCenter:CGPointMake(self.captchaButton.center.x + self.activityCenterXOffSet,
+                                                         self.captchaButton.center.y + self.activityCenterYOffSet)];
     [self.activityIndicatorCaptcha setHidesWhenStopped:TRUE];
     [self.activityIndicatorCaptcha setHidden:YES];
     [self.view addSubview:self.activityIndicatorCaptcha];
@@ -131,14 +139,27 @@
 }
 
 - (void)prepareMyFont {
-    if (IS_IPHONE_4_OR_LESS)
+    if (IS_IPHONE_4_OR_LESS) {
         self.preferredFontSize = 14;
-    else if (IS_IPHONE_5)
+        self.activityCenterXOffSet = -45;
+        self.activityCenterYOffSet = -25;
+    } else if (IS_IPHONE_5) {
         self.preferredFontSize = 15;
-    else if (IS_IPAD)
+        self.activityCenterXOffSet = -45;
+        self.activityCenterYOffSet = -25;
+    } else if (IS_IPAD) {
         self.preferredFontSize = 18;
-    else
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    } else if (IS_IPHONE_6P) {
         self.preferredFontSize = 17;
+        self.activityCenterXOffSet = 25;
+        self.activityCenterYOffSet = 15;
+    } else {
+        self.preferredFontSize = 17;
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    }
     self.phoneTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
     self.passwordTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
     self.captchaTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
@@ -280,10 +301,16 @@
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
     self.isShowPasswd ^= 1;
     self.passwordTextField.secureTextEntry = !self.isShowPasswd;
-    NSString* imageName = self.isShowPasswd ? @"eye_close" : @"eye_open";
+    NSString* imageName = self.isShowPasswd ? @"eye_open" : @"eye_close";
     [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
                            forState:UIControlStateNormal];
     [self.passwordTextField becomeFirstResponder];
+}
+
+#pragma mark - Gesture
+
+- (IBAction)backgroundTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Alert

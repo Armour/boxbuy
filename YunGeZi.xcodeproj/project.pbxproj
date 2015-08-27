@@ -249,6 +249,15 @@
 			name = Setting;
 			sourceTree = "<group>";
 		};
+		7606DCBC1B8EA55200F489BA /* Verification */ = {
+			isa = PBXGroup;
+			children = (
+				769F99521B0CADED00161818 /* VerificationViewController.h */,
+				769F99531B0CADED00161818 /* VerificationViewController.m */,
+			);
+			name = Verification;
+			sourceTree = "<group>";
+		};
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,8 +364,7 @@
 				7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */,
 				769F994F1B0C2A0200161818 /* ChangeNickNameViewController.h */,
 				769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */,
-				769F99521B0CADED00161818 /* VerificationViewController.h */,
-				769F99531B0CADED00161818 /* VerificationViewController.m */,
+				7606DCBC1B8EA55200F489BA /* Verification */,
 				76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */,
 				76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */,
 				764826DC1B195106008D1D7D /* MyPickerView.h */,
