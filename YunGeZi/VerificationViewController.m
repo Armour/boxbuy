@@ -8,18 +8,38 @@
 
 #import "VerificationViewController.h"
 #import "MyNavigationController.h"
-#import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
+#import "DeviceDetect.h"
 
 @interface VerificationViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *verificationWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property WebViewJavascriptBridge* bridge;
+@property (weak, nonatomic) IBOutlet UITextField *uesrnameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *showPasswdButton;
+@property (weak, nonatomic) IBOutlet UIButton *startVerificationButton;
+@property (weak, nonatomic) IBOutlet UILabel *alertInforLabel;
+@property (weak, nonatomic) IBOutlet UILabel *upInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *downInfoLabel;
+@property (nonatomic) NSUInteger preferredFontSize;
+@property (nonatomic) BOOL isShowPasswd;
 
 @end
 
 @implementation VerificationViewController
+
+#pragma mark - Prepare My Item
+
+- (void)prepareMyButton {
+    [self.startVerificationButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
+    self.startVerificationButton.layer.cornerRadius = 10.0f;
+    self.isShowPasswd = NO;
+}
+
+- (void)prepareMyTextField {
+    self.uesrnameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passwordTextField.clearButtonMode = UITextFieldViewModeNever;
+}
 
 - (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -30,58 +50,74 @@
     [self.view bringSubviewToFront:self.activityIndicator];
 }
 
-- (void)addWebViewBridge {
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:_verificationWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-        if ([data isEqualToString:@"success"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"VerifySchoolSuccessful" object:self userInfo:nil];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            MyNavigationController * nav = (MyNavigationController *)self.navigationController;
-            nav.shouldUpdateWebView = TRUE;
-        }
-        responseCallback(@"0.0");
-    }];
+- (void)prepareMyFont {
+    if (IS_IPHONE_4_OR_LESS)
+        self.preferredFontSize = 14;
+    else if (IS_IPHONE_5)
+        self.preferredFontSize = 15;
+    else if (IS_IPAD)
+        self.preferredFontSize = 18;
+    else
+        self.preferredFontSize = 17;
+    self.uesrnameTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.passwordTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.upInfoLabel.font = [UIFont systemFontOfSize:self.preferredFontSize + 1];
+    self.downInfoLabel.font = [UIFont systemFontOfSize:self.preferredFontSize - 3];
+    self.startVerificationButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize + 3];
 }
 
-- (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/account/auth.html"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
-    [_verificationWebView loadRequest:request];
+#pragma mark - Button Touch Event
+
+- (IBAction)verificationButtonTouchUpInside:(UIButton *)sender {
+
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareMyIndicator];
-    [self addWebViewBridge];
-    [self loadWebViewRequest];
+- (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
+    NSLog(@"!!");
+    self.isShowPasswd ^= 1;
+    self.passwordTextField.secureTextEntry = !self.isShowPasswd;
+    NSString* imageName = self.isShowPasswd ? @"eye_open" : @"eye_close";
+    [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
+                           forState:UIControlStateNormal];
+    [self.passwordTextField becomeFirstResponder];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    return YES;
+#pragma mark - Gesture
+
+- (IBAction)backgroundTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];}
+#pragma mark - Life Cycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"身份认证"];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareMyButton];
+    [self prepareMyTextField];
+    [self prepareMyIndicator];
+    [self prepareMyFont];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"身份认证"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 @end

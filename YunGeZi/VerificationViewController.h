@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VerificationViewController : UIViewController <UIWebViewDelegate>
+@interface VerificationViewController : UIViewController
 
 @end
