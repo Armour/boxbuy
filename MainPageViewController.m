@@ -128,7 +128,6 @@
 
     [self addLoadingMask];
     [self.view bringSubviewToFront:self.activityIndicator];
-    [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
 
     [self fillCellModelsForPage:1];
@@ -503,7 +502,7 @@
     UIButton *sellButton = [self createBubbleButtonWithImageName:@"guide_entry_upload"
                                                             size:buttonSize
                                                           target:nil
-                                                          action:nil];
+                                                          action:@selector(performSegueToSellingPage)];
     NSArray *buttons = [NSArray arrayWithObjects:recycleButton, sellButton, nil];
     [bubbleMenu addButtons:buttons];
     
@@ -693,6 +692,11 @@
 - (void)performSegueToSearchPage {
     NSLog(@"SEGUE TO SEARCHPAGE");
     [self performSegueWithIdentifier:@"showSearchPage" sender:self];
+}
+
+- (void)performSegueToSellingPage {
+    NSLog(@"SEGUE TO SELLINGPAGE");
+    [self performSegueWithIdentifier:@"showSellingPage" sender:self];
 }
 
 - (void)performSegueToUserSettingsPage {

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString *objectLocation;
 @property (strong, nonatomic) NSString *objectQuality;
 @property (strong, nonatomic) NSString *objectPrice;
+@property (strong, nonatomic) NSString *objectOldPrice;
 @property (strong, nonatomic) NSString *objectNumber;
 @property (strong, nonatomic) NSString *school;
 
