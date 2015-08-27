@@ -11,8 +11,8 @@
 		47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */; };
 		474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */; };
 		474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474C5F011B73553300CDE2AF /* WaterfallCellModel.m */; };
-		478574511B7F55F900D99685 /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 478574501B7F55F900D99685 /* ChooseSchoolTableViewCell.m */; };
 		475691C91B8304FC00D7F78E /* LoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 475691C81B8304FC00D7F78E /* LoginInfo.m */; };
+		478574511B7F55F900D99685 /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 478574501B7F55F900D99685 /* ChooseSchoolTableViewCell.m */; };
 		47F4BBB81B7B17B400FA8524 /* LeftMenuTreeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */; };
 		47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */; };
 		47F4BBBF1B7B485200FA8524 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F4BBBE1B7B485200FA8524 /* UserSettings.m */; };
@@ -25,9 +25,7 @@
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
 		7613EB6A1B777D0700C4FB9A /* ChooseSchoolTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */; };
 		761F4E971B763795009E527A /* boxbuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761F4E961B763795009E527A /* boxbuy.plist */; };
-		76391DFB1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */; };
 		76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */; };
-		764826DE1B195106008D1D7D /* MyPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764826DD1B195106008D1D7D /* MyPickerView.m */; };
 		7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* SearchViewController.m */; };
 		7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* SellingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
@@ -43,9 +41,7 @@
 		76B6ACFE1AFA49AC00A987C2 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */; };
 		76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */; };
 		76B6AD051AFA78C500A987C2 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */; };
-		76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */; };
 		76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */; };
-		76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C522F81AF0622E00476769 /* MyTabBarController.m */; };
 		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
 		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
 		76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */; };
@@ -77,10 +73,10 @@
 		474C5EFC1B732E7F00CDE2AF /* WaterfallCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellView.m; sourceTree = "<group>"; };
 		474C5F001B73553300CDE2AF /* WaterfallCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCellModel.h; sourceTree = "<group>"; };
 		474C5F011B73553300CDE2AF /* WaterfallCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCellModel.m; sourceTree = "<group>"; };
-		4785744F1B7F55F900D99685 /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
-		478574501B7F55F900D99685 /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
 		475691C71B8304FC00D7F78E /* LoginInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInfo.h; sourceTree = "<group>"; };
 		475691C81B8304FC00D7F78E /* LoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfo.m; sourceTree = "<group>"; };
+		4785744F1B7F55F900D99685 /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
+		478574501B7F55F900D99685 /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
 		47F4BBB61B7B17B400FA8524 /* LeftMenuTreeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTreeViewModel.h; sourceTree = "<group>"; };
 		47F4BBB71B7B17B400FA8524 /* LeftMenuTreeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTreeViewModel.m; sourceTree = "<group>"; };
 		47F4BBBA1B7B47F300FA8524 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
@@ -103,12 +99,8 @@
 		7613EB681B777D0700C4FB9A /* ChooseSchoolTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewController.h; sourceTree = "<group>"; };
 		7613EB691B777D0700C4FB9A /* ChooseSchoolTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewController.m; sourceTree = "<group>"; };
 		761F4E961B763795009E527A /* boxbuy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = boxbuy.plist; sourceTree = "<group>"; };
-		76391DF91B7F2CCF00D1911E /* ChooseSchoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSchoolTableViewCell.h; sourceTree = "<group>"; };
-		76391DFA1B7F2CCF00D1911E /* ChooseSchoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSchoolTableViewCell.m; sourceTree = "<group>"; };
 		76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPickerCustomPickerDelegate.h; sourceTree = "<group>"; };
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
-		764826DC1B195106008D1D7D /* MyPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPickerView.h; path = ../MyPickerView.h; sourceTree = "<group>"; };
-		764826DD1B195106008D1D7D /* MyPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyPickerView.m; path = ../MyPickerView.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		7651D2C01AF07434003184A8 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		7651D2C21AF0771B003184A8 /* SellingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingViewController.h; sourceTree = "<group>"; };
@@ -137,12 +129,8 @@
 		76B6AD001AFA6B4800A987C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
 		76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
-		76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellingEnsureViewController.h; sourceTree = "<group>"; };
-		76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellingEnsureViewController.m; sourceTree = "<group>"; };
 		76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailViewController.h; sourceTree = "<group>"; };
 		76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailViewController.m; sourceTree = "<group>"; };
-		76C522F71AF0622E00476769 /* MyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBarController.h; sourceTree = "<group>"; };
-		76C522F81AF0622E00476769 /* MyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBarController.m; sourceTree = "<group>"; };
 		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E333301AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E333311AEDF8C40077BACF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -205,6 +193,8 @@
 			children = (
 				7651D2BF1AF07434003184A8 /* SearchViewController.h */,
 				7651D2C01AF07434003184A8 /* SearchViewController.m */,
+				76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */,
+				76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -256,6 +246,28 @@
 				769F99531B0CADED00161818 /* VerificationViewController.m */,
 			);
 			name = Verification;
+			sourceTree = "<group>";
+		};
+		7606DCBD1B8F996A00F489BA /* SellingPage */ = {
+			isa = PBXGroup;
+			children = (
+				76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */,
+				76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */,
+				7651D2C21AF0771B003184A8 /* SellingViewController.h */,
+				7651D2C31AF0771B003184A8 /* SellingViewController.m */,
+			);
+			name = SellingPage;
+			sourceTree = "<group>";
+		};
+		7606DCBE1B8F9AD600F489BA /* MyCustomize */ = {
+			isa = PBXGroup;
+			children = (
+				76B6ACFC1AFA49AC00A987C2 /* MyNavigationController.h */,
+				76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */,
+				7606DCB61B8CB5A100F489BA /* MyButton.h */,
+				7606DCB71B8CB5A100F489BA /* MyButton.m */,
+			);
+			name = MyCustomize;
 			sourceTree = "<group>";
 		};
 		769F994C1B0B782300161818 /* Analyze */ = {
@@ -340,8 +352,6 @@
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
 				76AD1BCF1B7B30E000BA8512 /* MainPage */,
 				475691C11B8205CD00D7F78E /* Search */,
-				76B6AD031AFA78C500A987C2 /* SearchResultViewController.h */,
-				76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */,
 				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
 				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */,
 				7609A1071AFF58F800B134C9 /* ObjectBuyingViewController.h */,
@@ -350,10 +360,7 @@
 				7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */,
 				4785744B1B7DE02200D99685 /* ChooseSchoolPage */,
 				478574471B7DDF5600D99685 /* AccountPage */,
-				7651D2C21AF0771B003184A8 /* SellingViewController.h */,
-				7651D2C31AF0771B003184A8 /* SellingViewController.m */,
-				76BD6F3A1B25F34200398086 /* SellingEnsureViewController.h */,
-				76BD6F3B1B25F34200398086 /* SellingEnsureViewController.m */,
+				7606DCBD1B8F996A00F489BA /* SellingPage */,
 				7603A8271AFC58F6007E4B78 /* OrderViewController.h */,
 				7603A8281AFC58F6007E4B78 /* OrderViewController.m */,
 				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
@@ -365,16 +372,7 @@
 				769F994F1B0C2A0200161818 /* ChangeNickNameViewController.h */,
 				769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */,
 				7606DCBC1B8EA55200F489BA /* Verification */,
-				76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */,
-				76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */,
-				764826DC1B195106008D1D7D /* MyPickerView.h */,
-				764826DD1B195106008D1D7D /* MyPickerView.m */,
-				76B6ACFC1AFA49AC00A987C2 /* MyNavigationController.h */,
-				76B6ACFD1AFA49AC00A987C2 /* MyNavigationController.m */,
-				76C522F71AF0622E00476769 /* MyTabBarController.h */,
-				76C522F81AF0622E00476769 /* MyTabBarController.m */,
-				7606DCB61B8CB5A100F489BA /* MyButton.h */,
-				7606DCB71B8CB5A100F489BA /* MyButton.m */,
+				7606DCBE1B8F9AD600F489BA /* MyCustomize */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
 				769F994C1B0B782300161818 /* Analyze */,
 				76A2515A1AFB7CF80017F285 /* WebViewJavascriptBridge */,
@@ -555,11 +553,9 @@
 			files = (
 				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */,
 				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
-				76BD6F3C1B25F34200398086 /* SellingEnsureViewController.m in Sources */,
 				475691C91B8304FC00D7F78E /* LoginInfo.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* RegisterViewController.m in Sources */,
 				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
-				764826DE1B195106008D1D7D /* MyPickerView.m in Sources */,
 				7603A8291AFC58F6007E4B78 /* OrderViewController.m in Sources */,
 				76B6AD051AFA78C500A987C2 /* SearchResultViewController.m in Sources */,
 				478574511B7F55F900D99685 /* ChooseSchoolTableViewCell.m in Sources */,
@@ -588,7 +584,6 @@
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
 				47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */,
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
-				76C522F91AF0622E00476769 /* MyTabBarController.m in Sources */,
 				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

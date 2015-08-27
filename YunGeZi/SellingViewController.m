@@ -7,12 +7,11 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "MyTabBarController.h"
 #import "SellingViewController.h"
-#import "SellingEnsureViewController.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetCustomPicker.h"
 #import "ActionSheetPickerCustomPickerDelegate.h"
+#import "LoginInfo.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "MobClick.h"
 
@@ -24,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *priceButton;
 @property (weak, nonatomic) IBOutlet UIButton *numberButton;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
+@property (weak, nonatomic) IBOutlet UITextField *oldPriceTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSString *imageEncodedData_0;
 @property (strong, nonatomic) NSString *imageEncodedData_1;
@@ -49,6 +49,7 @@
 @property (nonatomic) NSUInteger photoWhichShouldDelete;
 @property (strong, nonatomic) NSMutableDictionary *dict;
 @property (weak, nonatomic) NSString *letters;
+@property (strong, nonatomic) UIView *loadingMask;
 
 - (NSString *)randomStringWithLength:(int)len;
 
@@ -57,12 +58,99 @@
 
 @implementation SellingViewController
 
+#pragma mark - Life Cycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"我要卖"];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initDict];
+    [self initObjectAttribute];
+    [self prepareLoadingMask];
+    [self prepareMyTxetView];
+    [self prepareMyTextField];
+    [self prepareMyIndicator];
+    [self prepareMyNotification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"我要卖"];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Inner Helper
+
 - (NSString *)randomStringWithLength:(int)len {
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     for (int i=0; i<len; i++) {
         [randomString appendFormat: @"%c", [self.letters characterAtIndex: arc4random_uniform((unsigned int)[self.letters length])]];
     }
     return randomString;
+}
+
+- (NSMutableURLRequest *)createURLRequestWithURL:(NSString *)URL andPostData:(NSMutableDictionary *)postDictionary {
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
+    NSMutableData *postData = [NSMutableData data];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSMutableString * postStr = [[NSMutableString alloc] init];
+    //convert post distionary into a string
+    if (postDictionary) {
+        for (NSString *key in postDictionary) {
+            [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [postStr appendFormat:@"\r\n--%@\r\n", boundary];
+            id postValue = [postDictionary valueForKey:key];
+            if ([postValue isKindOfClass:[NSString class]]) {
+                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
+                [postStr appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
+                [postStr appendFormat:@"%@", postValue];
+                //NSLog(@"!!!%@ %@", key, postValue);
+            } else if ([postValue isKindOfClass:[UIImage class]]) {
+                NSString *tmpStr = [self randomStringWithLength:18];
+                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr]  dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
+
+                [postStr appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
+                [postStr appendFormat:@"Content-Type: image/jpeg\r\n"];
+                [postStr appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
+                [postStr appendString:@"!!!Image Data Here!!!"];
+                //NSLog(@">.<%@ %@", key, postValue);
+            } else {
+                [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
+            }
+        }
+        [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [postStr appendFormat:@"\r\n--%@--\r\n", boundary];
+    }
+
+    //setup the request
+    [urlRequest setURL:[NSURL URLWithString:URL]];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary] forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setHTTPBody:postData];
+
+    NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
+    NSLog(@"%@", postStr);
+
+    return urlRequest;
+}
+
+#pragma mark - Take Photo
+
+- (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
+    if (self.photoNumber == 5) {
+        [self popAlert:@"图片数量超限" withMessage:@"哇您好像已经为您的宝贝照了很多照片啦~"];
+    } else
+        [self takePhoto];
 }
 
 - (void)takePhoto {
@@ -129,60 +217,12 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (NSMutableURLRequest *)createURLRequestWithURL:(NSString *)URL andPostData:(NSMutableDictionary *)postDictionary {
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
-    NSMutableData *postData = [NSMutableData data];
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSMutableString * postStr = [[NSMutableString alloc] init];
-    //convert post distionary into a string
-    if (postDictionary) {
-        for (NSString *key in postDictionary) {
-            [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [postStr appendFormat:@"\r\n--%@\r\n", boundary];
-            id postValue = [postDictionary valueForKey:key];
-            if ([postValue isKindOfClass:[NSString class]]) {
-                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-                [postData appendData:[postValue dataUsingEncoding:NSUTF8StringEncoding]];
-                [postStr appendFormat:@"Content-Disposition: form-data; name= \"%@\"\r\n\r\n", key];
-                [postStr appendFormat:@"%@", postValue];
-                //NSLog(@"!!!%@ %@", key, postValue);
-            } else if ([postValue isKindOfClass:[UIImage class]]) {
-                NSString *tmpStr = [self randomStringWithLength:18];
-                [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr]  dataUsingEncoding:NSUTF8StringEncoding]];
-                [postData appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-                [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-                [postData appendData:UIImageJPEGRepresentation(postValue, 0.0)];
-
-                [postStr appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpeg\"\r\n", key, tmpStr];
-                [postStr appendFormat:@"Content-Type: image/jpeg\r\n"];
-                [postStr appendFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"];
-                [postStr appendString:@"!!!Image Data Here!!!"];
-                //NSLog(@">.<%@ %@", key, postValue);
-            } else {
-                [NSException raise:@"Invalid Post Value" format:@"Received invalid post value while trying to create URL Request. Post values are required to be strings. The value for the following key was not a string: %@.", key];
-            }
-        }
-        [postData appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [postStr appendFormat:@"\r\n--%@--\r\n", boundary];
-    }
-
-    //setup the request
-    [urlRequest setURL:[NSURL URLWithString:URL]];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary] forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setHTTPBody:postData];
-
-    NSLog(@"Content-Type: multipart/form-data; boundary=%@",boundary);
-    NSLog(@"%@", postStr);
-
-    return urlRequest;
-}
+#pragma mark - Upload Photo
 
 - (NSString *)getImageID:(NSString *)encodedData {
-    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
     NSMutableDictionary *imageDict = [[NSMutableDictionary alloc] init];
     NSString *tmpRandom = [self randomStringWithLength:18];
-    [imageDict setObject:tab.access_token forKey:@"access_token"];
+    [imageDict setObject:[LoginInfo sharedInfo].accessToken forKey:@"access_token"];
     [imageDict setObject:tmpRandom forKey:@"fileElementName"];
     [imageDict setObject:encodedData forKey:tmpRandom];
     NSMutableURLRequest *request = [self createURLRequestWithURL:@"http://img.boxbuy.cc/images/add" andPostData:imageDict];
@@ -215,6 +255,8 @@
         self.photoUpLoadID_4 = [self getImageID:self.imageEncodedData_4];
 }
 
+#pragma mark - Upload Item
+
 - (NSString *)imageJsonArray {
     NSMutableString *tmp = [[NSMutableString alloc] initWithString:@"["];
     if (self.photoNumber >= 1 && ![self.photoUpLoadID_0  isEqual: @""])
@@ -228,28 +270,46 @@
     if (self.photoNumber >= 5 && ![self.photoUpLoadID_4  isEqual: @""])
         [tmp appendString:[[NSString alloc] initWithFormat:@",%@", self.photoUpLoadID_4]];
     [tmp appendString:@"]"];
-    NSLog(@"%@", tmp);
     return tmp;
 }
 
-- (NSString *)handlePrice:(NSString *)originalPrice {
-    float tmp = [originalPrice floatValue];
+- (NSString *)handlePrice:(NSString *)inputedPrice {
+    float tmp = [inputedPrice floatValue];
     tmp *= 100;
     return [[NSString alloc] initWithFormat:@"%f", tmp];
 }
 
+- (BOOL)checkPrice:(NSString *)price {
+    NSArray *digit = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"."];
+    int dot = 0;
+    BOOL flag = true;
+    for (int i = 0; i < price.length; i++) {
+        NSString *ch = [price substringWithRange:NSMakeRange(i, 1)];
+        if (![digit containsObject:ch]) {
+            flag = false;
+        } else if ([ch isEqual:@"."]) {
+            if (++dot > 1)
+                flag = false;
+            if (i == 0 || i != price.length - 2)
+                flag = false;
+        }
+    }
+    return flag;
+}
+
 - (void)uploadItem {
-    [self.activityIndicator setHidden:NO];
+    [self addLoadingMask];
+    [self.view bringSubviewToFront:self.activityIndicator];
     [self.activityIndicator startAnimating];
     dispatch_queue_t requestQueue = dispatch_queue_create("webRequestInUploadItem", NULL);
     dispatch_async(requestQueue, ^{
         @try {
             [self uploadPhoto];
-            MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
             NSMutableDictionary *itemDict = [[NSMutableDictionary alloc] init];
-            [itemDict setObject:tab.access_token forKey:@"access_token"];
+            [itemDict setObject:[LoginInfo sharedInfo].accessToken forKey:@"access_token"];
             [itemDict setObject:self.objectName forKey:@"title"];
             [itemDict setObject:[self handlePrice: self.objectPrice] forKey:@"price"];
+            [itemDict setObject:[self handlePrice: self.objectOldPrice] forKey:@"oldprice"];
             [itemDict setObject:self.objectNumber forKey:@"amount"];
             [itemDict setObject:self.dict[self.objectQuality] forKey:@"degree"];
             [itemDict setObject:self.objectContent forKey:@"content"];
@@ -273,35 +333,57 @@
             //}
         }
         @catch (NSException *exception) {
+            [self removeLoadingMask];
             [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:TRUE];
             [self popAlert:@"上传失败" withMessage:@"您好像网络不太好哦╮(╯_╰)╭"];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self removeLoadingMask];
             [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:TRUE];
             [self initObjectAttribute];
             [self popAlert:@"上传成功" withMessage:@"快去看看您的商品吧!（记得下拉刷新哦~）"];
         });
     });
 }
 
-- (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
+- (IBAction)publishButtonTouchUpInside:(UIBarButtonItem *)sender {
     [self.view endEditing:YES];
+    if (![self checkPrice:self.priceTextField.text] || ![self checkPrice:self.oldPriceTextField.text]) {
+        [self popAlert:@"信息不完整" withMessage:@"哇您的价格好像填错啦。。\n (最多精确到小数点后一位哦)"];
+        return;
+    }
+
+    self.objectPrice = self.priceTextField.text;
+    self.objectOldPrice = self.oldPriceTextField.text;
+    self.objectName = self.objectNameTextView.text;
+    self.objectContent = self.objectContentTextView.text;
+
+    if ([self.objectOldPrice isEqualToString:@""]) {
+        self.objectOldPrice = self.objectPrice;
+    }
+
+    if ([self.objectName isEqual:@""] || [self.objectName isEqual:@"给宝贝起个名字吧~"]) {
+        [self popAlert:@"信息不完整" withMessage:@"给您的宝贝取个名字吧~"];
+    } else if ([self.objectContent isEqual:@""] || [self.objectContent isEqual:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
+        [self popAlert:@"信息不完整" withMessage:@"跟大家讲讲您的宝贝的故事吧~"];
+    } else if ([self.objectCategory isEqual: @"请选择"] || [self.dict valueForKey:self.objectCategory]== nil) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选分类 >_<"];
+    } else if ([self.objectLocation isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选校区 >_<"];
+    }  else if ([self.objectQuality isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选成色 >_<"];
+    }else if ([self.objectPrice isEqual: @""]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没填价格 >_<"];
+    } else if ([self.objectNumber isEqual: @"请选择"]) {
+        [self popAlert:@"信息不完整" withMessage:@"您好像没选数量 >_<"];
+    } else if (self.photoNumber == 0) {
+        [self popAlert:@"未上传图片" withMessage:@"为您的宝贝拍几张照片吧~"];
+    } else {
+        [self uploadItem];
+    }
 }
 
-- (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
-    if (self.photoNumber == 5) {
-        [self popAlert:@"图片数量超限" withMessage:@"哇您好像已经为您的宝贝照了很多照片啦~"];
-    } else
-        [self takePhoto];
-}
-
-- (void)setSchoolID {
-    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    [tab getSchool];
-    self.school = tab.school_id;
-}
+#pragma mark - Init
 
 - (void)initDict {
     self.dict = [[NSMutableDictionary alloc] init];
@@ -479,6 +561,7 @@
     self.objectLocation = @"请选择";
     self.objectNumber = @"请选择";
     self.objectPrice = @"";
+    self.objectOldPrice = @"";
     self.objectQuality = @"请选择";
     self.objectNameTextView.text = @"给宝贝起个名字吧~";
     self.objectNameTextView.textColor = [UIColor lightGrayColor];
@@ -494,10 +577,17 @@
     [self.qualityButton setTitle:@"    成色：请选择" forState:UIControlStateNormal];
     [self.numberButton setTitle:@"    数量：请选择" forState:UIControlStateNormal];
     [self.priceTextField setText:@""];
+    [self.oldPriceTextField setText:@""];
     [self setSchoolID];
     [self refreshPhotoIcon];
     [self refreshDeleteIcon];
 }
+
+- (void)setSchoolID {
+    self.school = [LoginInfo sharedInfo].schoolId;
+}
+
+#pragma mark - Prepare My Item
 
 - (void)prepareMyTxetView {
     self.objectNameTextView.delegate = self;
@@ -511,10 +601,11 @@
 
 - (void)prepareMyTextField {
     self.priceTextField.delegate = self;
+    self.oldPriceTextField.delegate = self;
 }
 
 - (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
@@ -526,94 +617,87 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCategorySelection:) name:@"CategorySelectFinished" object:nil];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self initDict];
-    [self initObjectAttribute];
-    [self prepareMyTxetView];
-    [self prepareMyTextField];
-    [self prepareMyIndicator];
-    [self prepareMyNotification];
+#pragma mark - Mask When Loading
+
+- (void)prepareLoadingMask {
+    self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.loadingMask setBackgroundColor:[UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:0.40]];
 }
 
+- (void)addLoadingMask {
+    [self.view addSubview:self.loadingMask];
+}
+
+- (void)removeLoadingMask {
+    [self.loadingMask removeFromSuperview];
+}
+
+#pragma mark - TextField Delegate
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    //设置动画的名字
     [UIView beginAnimations:@"TextFieldKeyboardAppear" context:nil];
-    //设置动画的间隔时间
     [UIView setAnimationDuration:0.3];
-    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textField.tag == 7) {
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 200, self.view.frame.size.width, self.view.frame.size.height);
+    } else if (textField.tag == 8) {
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 230, self.view.frame.size.width, self.view.frame.size.height);
     }
-    //设置动画结束
     [UIView commitAnimations];
     [textField becomeFirstResponder];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    //设置动画的名字
     [UIView beginAnimations:@"TextFieldKeyboardDisappear" context:nil];
-    //设置动画的间隔时间
     [UIView setAnimationDuration:0.15];
-    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textField.tag == 7) {
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 200, self.view.frame.size.width, self.view.frame.size.height);
+    } else if (textField.tag == 8) {
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 230, self.view.frame.size.width, self.view.frame.size.height);
     }
-    //设置动画结束
     [textField resignFirstResponder];
     [UIView commitAnimations];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField.tag == 7)
+    if (textField.tag == 7 || textField.tag == 8)
         [textField resignFirstResponder];
     return YES;
 }
 
+#pragma mark - TextView Delegate
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    //设置动画的名字
     [UIView beginAnimations:@"TextViewKeyboardAppear" context:nil];
-    //设置动画的间隔时间
     [UIView setAnimationDuration:0.3];
-    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
         if ([textView.text isEqualToString:@"给宝贝起个名字吧~"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
     } else if (textView.tag == 6) {
         if ([textView.text isEqualToString:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 100, self.view.frame.size.width, self.view.frame.size.height);
     }
-    //设置动画结束
     [UIView commitAnimations];
     [textView becomeFirstResponder];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    //设置动画的名字
     [UIView beginAnimations:@"TextViewKeyboardDisappear" context:nil];
-    //设置动画的间隔时间
     [UIView setAnimationDuration:0.15];
-    //使用当前正在运行的状态开始下一段动画
     [UIView setAnimationBeginsFromCurrentState: YES];
     if (textView.tag == 5) {
         if ([textView.text isEqualToString:@""]) {
             textView.text = @"给宝贝起个名字吧~";
             textView.textColor = [UIColor lightGrayColor];
         }
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         self.objectName = textView.text;
     } else if (textView.tag == 6) {
@@ -621,12 +705,10 @@
             textView.text = @"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！";
             textView.textColor = [UIColor lightGrayColor];
         }
-        //设置视图移动的位移
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 100, self.view.frame.size.width, self.view.frame.size.height);
         self.objectContent = textView.text;
     }
     [textView resignFirstResponder];
-    //设置动画结束
     [UIView commitAnimations];
 }
 
@@ -638,6 +720,14 @@
         }
     return YES;
 }
+
+#pragma mark - Touch Event
+
+- (IBAction)backGroundTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Selection
 
 - (void)handleCategorySelection:(NSNotification*) noti {
     NSDictionary *dict = [noti userInfo];
@@ -660,8 +750,8 @@
 }
 
 - (IBAction)chooseLocationButtonTouchUpInside:(UIButton *)sender {
-    MyTabBarController * tab = (MyTabBarController *)self.tabBarController;
-    self.school = tab.school_id;
+    [self.view endEditing:YES];
+    self.school = [LoginInfo sharedInfo].schoolId;
     NSArray *option;
     // default  0
     if ([self.school isEqual: @"0"])
@@ -723,6 +813,7 @@
 }
 
 - (IBAction)chooseQualityButtonTouchUpInside:(UIButton *)sender {
+    [self.view endEditing:YES];
     NSArray *option = [NSArray arrayWithObjects:@"请选择", @"全新", @"九五新", @"九成新", @"八五新", @"八成新", @"七五新", @"七成新", @"六五新", @"六成新", @"五五新", @"五成新", nil];
     [ActionSheetStringPicker showPickerWithTitle:@"选择成色"
                                             rows:option
@@ -741,7 +832,12 @@
     [self.priceTextField becomeFirstResponder];
 }
 
+- (IBAction)chooseOldPriceButtonTouchUpInside:(UIButton *)sender {
+    [self.oldPriceTextField becomeFirstResponder];
+}
+
 - (IBAction)chooseNumberButtonTouchUpInside:(UIButton *)sender {
+    [self.view endEditing:YES];
     NSArray *option = [NSArray arrayWithObjects:@"请选择", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                                                 @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20",
                                                 @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29", @"30",
@@ -765,56 +861,7 @@
                                           origin:sender];
 }
 
-- (BOOL)checkPrice {
-    NSArray *digit = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"."];
-    NSString *price = self.priceTextField.text;
-    int dot = 0;
-    BOOL flag = true;
-    for (int i = 0; i < price.length; i++) {
-        NSString *ch = [price substringWithRange:NSMakeRange(i, 1)];
-        if (![digit containsObject:ch]) {
-            flag = false;
-        } else if ([ch isEqual:@"."]) {
-            if (++dot > 1)
-                flag = false;
-            if (i == 0 || i != price.length - 2)
-                flag = false;
-        }
-    }
-    if (!flag)
-        [self popAlert:@"信息不完整" withMessage:@"哇您的价格好像填错啦。。\n (最多精确到小数点后一位哦)"];
-    return flag;
-}
-
-- (IBAction)publishButtonTouchUpInside:(UIBarButtonItem *)sender {
-    [self.view endEditing:YES];
-    if (![self checkPrice])
-        return;
-
-    self.objectPrice = self.priceTextField.text;
-    self.objectName = self.objectNameTextView.text;
-    self.objectContent = self.objectContentTextView.text;
-
-    if ([self.objectName isEqual:@""] || [self.objectName isEqual:@"给宝贝起个名字吧~"]) {
-        [self popAlert:@"信息不完整" withMessage:@"给您的宝贝取个名字吧~"];
-    } else if ([self.objectContent isEqual:@""] || [self.objectContent isEqual:@"聊聊她的故事吧，附上你的手机号，会让交易更加快速哦！"]) {
-        [self popAlert:@"信息不完整" withMessage:@"跟大家讲讲您的宝贝的故事吧~"];
-    } else if ([self.objectCategory isEqual: @"请选择"] || [self.dict valueForKey:self.objectCategory]== nil) {
-        [self popAlert:@"信息不完整" withMessage:@"您好像没选分类 >_<"];
-    } else if ([self.objectLocation isEqual: @"请选择"]) {
-        [self popAlert:@"信息不完整" withMessage:@"您好像没选校区 >_<"];
-    }  else if ([self.objectQuality isEqual: @"请选择"]) {
-        [self popAlert:@"信息不完整" withMessage:@"您好像没选成色 >_<"];
-    }else if ([self.objectPrice isEqual: @""]) {
-        [self popAlert:@"信息不完整" withMessage:@"您好像没填价格 >_<"];
-    } else if ([self.objectNumber isEqual: @"请选择"]) {
-        [self popAlert:@"信息不完整" withMessage:@"您好像没选数量 >_<"];
-    } else if (self.photoNumber == 0) {
-        [self popAlert:@"未上传图片" withMessage:@"为您的宝贝拍几张照片吧~"];
-    } else {
-        [self uploadItem];
-    }
-}
+#pragma mark - Refresh Function
 
 - (void)refreshDeleteIcon {
     self.photoDeleteButton_0.hidden = true;
@@ -871,6 +918,8 @@
     }
 }
 
+#pragma mark - Photo Deletion
+
 - (IBAction)photoDeleteButtonOneTouchUpInside:(UIButton *)sender {
     if (self.photoNumber >= 1) {
         self.photoWhichShouldDelete = 1;
@@ -911,19 +960,7 @@
         return;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"我要卖"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"我要卖"];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+#pragma mark - Alert
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
