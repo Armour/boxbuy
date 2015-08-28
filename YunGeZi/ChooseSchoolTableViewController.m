@@ -98,7 +98,7 @@
                                      [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                                  });
                              }];
-    if (self.choosedIndexPath == indexPath)
+    if ([self.choosedIndexPath isEqual:indexPath])
         cell.choosenMarkImage.image = [UIImage imageNamed:@"checkmark"];
     else
         cell.choosenMarkImage.image = nil;

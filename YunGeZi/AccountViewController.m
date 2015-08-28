@@ -7,7 +7,6 @@
 //
 
 #import "AccountViewController.h"
-#import "MyTabBarController.h"
 #import "LoginInfo.h"
 #import "WebViewJavascriptBridge.h"
 #import "ShopViewController.h"

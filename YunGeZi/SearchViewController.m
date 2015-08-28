@@ -11,6 +11,7 @@
 #import "SearchResultViewController.h"
 #import "DeviceDetect.h"
 #import "MobClick.h"
+#import "DeviceDetect.h"
 #import "AFHTTPRequestOperationManager.h"
 
 #define SEARCHHISTORY_CELL @"searchHistoryCell"
@@ -23,6 +24,8 @@
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITableView *searchHistoryTableView;
 @property (weak, nonatomic) IBOutlet UIView *hotSearchsView;
+@property (nonatomic) NSUInteger preferredFontSize;
+@property (nonatomic) NSUInteger preferredHotSearchCount;
 
 @end
 
@@ -39,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
+    [self prepareMyFont];
     [self prepareMyIndicator];
     [self prepareMySearchBar];
     [self initHotSearchsView];
@@ -52,6 +56,21 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Prepare Font 
+
+- (void)prepareMyFont {
+    if (IS_IPHONE_6) {
+        self.preferredFontSize = 14;
+        self.preferredHotSearchCount = 5;
+    } else if (IS_IPHONE_6P) {
+        self.preferredFontSize = 15;
+        self.preferredHotSearchCount = 5;
+    } else if (IS_IPHONE_5) {
+        self.preferredFontSize = 13;
+        self.preferredHotSearchCount = 4;
+    }
 }
 
 #pragma mark - Init HotSearchsView
@@ -68,10 +87,10 @@
              CGFloat viewWidth = self.hotSearchsView.frame.size.width;
              CGFloat viewHeight = self.hotSearchsView.frame.size.height;
              CGFloat labelPadding = 4;
-             UIFont *font = [UIFont systemFontOfSize:15];
+             UIFont *font = [UIFont systemFontOfSize:self.preferredFontSize];
 
              NSInteger count = [hotSearchs count];
-             NSInteger number = count < 5 ? count : 5;   // Number of Labels will be added into view
+             NSInteger number = count < self.preferredHotSearchCount ? count : self.preferredHotSearchCount;   // Number of Labels will be added into view
              // Will be counted after
              NSMutableArray *hotSearchsTextWidth = [NSMutableArray arrayWithCapacity:number];
              CGFloat sumOfWidth = 0;

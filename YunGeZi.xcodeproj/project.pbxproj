@@ -20,6 +20,8 @@
 		7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82B1AFC682A007E4B78 /* ShopViewController.m */; };
 		7603A82F1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */; };
 		7606DCB81B8CB5A100F489BA /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7606DCB71B8CB5A100F489BA /* MyButton.m */; };
+		7606DCC11B8FA6A900F489BA /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7606DCC01B8FA6A900F489BA /* MainPageViewController.m */; };
+		7606DCC41B8FA6C700F489BA /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606DCC21B8FA6C700F489BA /* libMobClickLibrary.a */; };
 		7609A1091AFF58F800B134C9 /* ObjectBuyingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */; };
 		7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7609A10B1AFF681D00B134C9 /* ObjectBuyingResultViewController.m */; };
 		7613EB671B7755EC00C4FB9A /* WaterfallCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7613EB661B7755EC00C4FB9A /* WaterfallCellView.xib */; };
@@ -29,7 +31,6 @@
 		7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* SearchViewController.m */; };
 		7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* SellingViewController.m */; };
 		7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C61AF079BD003184A8 /* AccountViewController.m */; };
-		769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F99491B0B77FF00161818 /* libMobClickLibrary.a */; };
 		769F994E1B0B788D00161818 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 769F994D1B0B788D00161818 /* libz.dylib */; };
 		769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */; };
 		769F99541B0CADED00161818 /* VerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 769F99531B0CADED00161818 /* VerificationViewController.m */; };
@@ -49,7 +50,6 @@
 		76E333401AEDF8C40077BACF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E3333F1AEDF8C40077BACF /* Images.xcassets */; };
 		76E333431AEDF8C40077BACF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E333411AEDF8C40077BACF /* LaunchScreen.xib */; };
 		76E3334F1AEDF8C40077BACF /* YunGeZiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */; };
-		76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F426AA1AEF271B00A5849A /* MainPageViewController.m */; };
 		A21B52BE0A0E682927476A0F /* libPods-YunGeZi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA2DE70414C548FF7FA4241 /* libPods-YunGeZi.a */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +91,10 @@
 		7603A82E1AFD1F9F007E4B78 /* ObjectDetailInShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailInShopViewController.m; sourceTree = "<group>"; };
 		7606DCB61B8CB5A100F489BA /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
 		7606DCB71B8CB5A100F489BA /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
+		7606DCBF1B8FA6A900F489BA /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		7606DCC01B8FA6A900F489BA /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
+		7606DCC21B8FA6C700F489BA /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		7606DCC31B8FA6C700F489BA /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		7609A1071AFF58F800B134C9 /* ObjectBuyingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingViewController.h; sourceTree = "<group>"; };
 		7609A1081AFF58F800B134C9 /* ObjectBuyingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectBuyingViewController.m; sourceTree = "<group>"; };
 		7609A10A1AFF681D00B134C9 /* ObjectBuyingResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectBuyingResultViewController.h; sourceTree = "<group>"; };
@@ -107,8 +111,6 @@
 		7651D2C31AF0771B003184A8 /* SellingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellingViewController.m; sourceTree = "<group>"; };
 		7651D2C51AF079BD003184A8 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		7651D2C61AF079BD003184A8 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		769F99491B0B77FF00161818 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = ../libMobClickLibrary.a; sourceTree = "<group>"; };
-		769F994A1B0B77FF00161818 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = ../MobClick.h; sourceTree = "<group>"; };
 		769F994D1B0B788D00161818 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		769F994F1B0C2A0200161818 /* ChangeNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewController.h; sourceTree = "<group>"; };
 		769F99501B0C2A0200161818 /* ChangeNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameViewController.m; sourceTree = "<group>"; };
@@ -144,8 +146,6 @@
 		76E333481AEDF8C40077BACF /* YunGeZiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YunGeZiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E3334D1AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E3334E1AEDF8C40077BACF /* YunGeZiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YunGeZiTests.m; sourceTree = "<group>"; };
-		76F426A91AEF271B00A5849A /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPageViewController.h; path = ../MainPageViewController.h; sourceTree = "<group>"; };
-		76F426AA1AEF271B00A5849A /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPageViewController.m; path = ../MainPageViewController.m; sourceTree = "<group>"; };
 		B3BA420B256C265BECE28343 /* Pods-YunGeZi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YunGeZi.release.xcconfig"; path = "Pods/Target Support Files/Pods-YunGeZi/Pods-YunGeZi.release.xcconfig"; sourceTree = "<group>"; };
 		E1910930A10495029112E4AC /* Pods-YunGeZi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YunGeZi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YunGeZi/Pods-YunGeZi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,8 +156,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				769F994E1B0B788D00161818 /* libz.dylib in Frameworks */,
-				769F994B1B0B77FF00161818 /* libMobClickLibrary.a in Frameworks */,
 				A21B52BE0A0E682927476A0F /* libPods-YunGeZi.a in Frameworks */,
+				7606DCC41B8FA6C700F489BA /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,8 +273,8 @@
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
-				769F99491B0B77FF00161818 /* libMobClickLibrary.a */,
-				769F994A1B0B77FF00161818 /* MobClick.h */,
+				7606DCC21B8FA6C700F489BA /* libMobClickLibrary.a */,
+				7606DCC31B8FA6C700F489BA /* MobClick.h */,
 			);
 			name = Analyze;
 			sourceTree = "<group>";
@@ -307,8 +307,8 @@
 			children = (
 				47110B251B77A181001C9B5A /* RootViewController.h */,
 				47110B261B77A181001C9B5A /* RootViewController.m */,
-				76F426A91AEF271B00A5849A /* MainPageViewController.h */,
-				76F426AA1AEF271B00A5849A /* MainPageViewController.m */,
+				7606DCBF1B8FA6A900F489BA /* MainPageViewController.h */,
+				7606DCC01B8FA6A900F489BA /* MainPageViewController.m */,
 				47110B281B77A2DD001C9B5A /* LeftMenuViewController.h */,
 				47110B291B77A2DD001C9B5A /* LeftMenuViewController.m */,
 				47F4BBB61B7B17B400FA8524 /* LeftMenuTreeViewModel.h */,
@@ -552,7 +552,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */,
-				76F426AB1AEF271B00A5849A /* MainPageViewController.m in Sources */,
 				475691C91B8304FC00D7F78E /* LoginInfo.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* RegisterViewController.m in Sources */,
 				769F99511B0C2A0200161818 /* ChangeNickNameViewController.m in Sources */,
@@ -576,6 +575,7 @@
 				47110B271B77A181001C9B5A /* RootViewController.m in Sources */,
 				76B6ACF51AFA273C00A987C2 /* ChangePasswordViewController.m in Sources */,
 				76A251621AFB866A0017F285 /* CategoryDetailViewController.m in Sources */,
+				7606DCC11B8FA6A900F489BA /* MainPageViewController.m in Sources */,
 				76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */,
 				7606DCB81B8CB5A100F489BA /* MyButton.m in Sources */,
 				7603A82C1AFC682A007E4B78 /* ShopViewController.m in Sources */,
@@ -717,6 +717,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/YunGeZi",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -735,6 +736,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/YunGeZi",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

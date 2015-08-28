@@ -131,6 +131,7 @@
     [self setUserSchoolName];
     [self.userImageButton sd_setBackgroundImageWithURL:[[NSURL alloc] initWithString:[LoginInfo sharedInfo].photoUrlString]
                                               forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+    [self.view layoutIfNeeded];
     self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
     self.userImageButton.clipsToBounds = YES;
     self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
