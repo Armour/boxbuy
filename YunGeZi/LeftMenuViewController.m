@@ -47,9 +47,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor clearColor];
     [self prepareTreeView];
     [self prepareMyNotification];
+    [self initUserInfo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,12 +110,33 @@
     [self.categoryView addSubview:self.treeView];
 }
 
+#pragma mark - Init User Infor 
+
+- (void)initUserInfo {
+    self.view.backgroundColor = [UIColor clearColor];
+    self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.userImageButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.view layoutIfNeeded];
+    self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
+    self.userImageButton.clipsToBounds = YES;
+}
+
 #pragma mark - Notification
 
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo)
                                                  name:@"PostLoingTokenFromRootToLeftMenu"
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserInfo)
+                                                 name:@"CachedInfoRefreshed"
                                                object:nil];
 }
 
@@ -127,23 +148,14 @@
     [self.userFansButton setTitle:[[NSString alloc] initWithFormat:@"%ld\r\n粉丝",(long)[LoginInfo sharedInfo].numOfFan]
                          forState:UIControlStateNormal];
     [self.userNameButton setTitle:[LoginInfo sharedInfo].nickname forState:UIControlStateNormal];
-    self.schoolId = [LoginInfo sharedInfo].schoolId;
-    [self setUserSchoolName];
     [self.userImageButton sd_setBackgroundImageWithURL:[[NSURL alloc] initWithString:[LoginInfo sharedInfo].photoUrlString]
-                                              forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_headicon"]];
-    [self.view layoutIfNeeded];
-    self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
-    self.userImageButton.clipsToBounds = YES;
-    self.userProductsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.userFollowButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.userFansButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.userImageButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-    [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-    [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
-    [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+                                              forState:UIControlStateNormal
+                                      placeholderImage:[UIImage imageNamed:@"default_headicon"]];
+    [self setUserSchoolInfo];
 }
 
-- (void)setUserSchoolName {
+- (void)setUserSchoolInfo {
+    self.schoolId = [LoginInfo sharedInfo].schoolId;
     [self.schoolNameButton setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"schoolName"] forState:UIControlStateNormal];
     [self.schoolNameButton addTarget:self action:@selector(segueToChangeSchool) forControlEvents:UIControlEventTouchUpInside];
     [self.schoolConfigButton addTarget:self action:@selector(segueToChangeSchool) forControlEvents:UIControlEventTouchUpInside];

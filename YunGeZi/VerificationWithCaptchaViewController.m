@@ -6,19 +6,22 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "VerificationViewController.h"
+#import "VerificationWithCaptchaViewController.h"
 #import "MyNavigationController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "MobClick.h"
 #import "DeviceDetect.h"
 #import "LoginInfo.h"
 
-@interface VerificationViewController()
+@interface VerificationWithCaptchaViewController ()
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorCaptcha;;
 @property (strong, nonatomic) UIView *loadingMask;
 @property (weak, nonatomic) IBOutlet UITextField *uesrnameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *captchaTextField;
+@property (weak, nonatomic) IBOutlet UIButton *captchaButton;
 @property (weak, nonatomic) IBOutlet UIButton *showPasswdButton;
 @property (weak, nonatomic) IBOutlet UIButton *startVerificationButton;
 @property (weak, nonatomic) IBOutlet UILabel *alertInforLabel;
@@ -26,12 +29,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *downInfoLabel;
 @property (nonatomic) NSUInteger preferredFontSize;
 @property (nonatomic) BOOL isShowPasswd;
+@property (nonatomic) BOOL firstTimeRefreshCaptcha;
 @property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
 @property (strong, nonatomic) NSTimer *timer;
+@property (nonatomic) CGFloat activityCenterXOffSet;
+@property (nonatomic) CGFloat activityCenterYOffSet;
 
 @end
 
-@implementation VerificationViewController
+@implementation VerificationWithCaptchaViewController
 
 #pragma mark - Life Cycle
 
@@ -51,6 +57,7 @@
     [self prepareMyIndicator];
     [self prepareLoadingMask];
     [self prepareMyFont];
+    [self initAuthentication];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -70,7 +77,9 @@
 
 - (void)prepareMyButton {
     [self.startVerificationButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
+    [self.captchaButton setBackgroundColor:[UIColor colorWithRed:0.99 green:0.66 blue:0.15 alpha:1.00]];;
     self.startVerificationButton.layer.cornerRadius = 10.0f;
+    self.captchaButton.layer.cornerRadius = 3.0f;
     self.isShowPasswd = NO;
     self.alertInforLabel.layer.cornerRadius = 10.0f;;
     self.alertInforLabel.clipsToBounds = YES;
@@ -84,32 +93,57 @@
 }
 
 - (void)prepareMyIndicator {
+    [self.view layoutIfNeeded];
+
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self.activityIndicator setCenter:CGPointMake(self.alertInforLabel.center.x - 50, self.alertInforLabel.center.y)];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
     [self.view addSubview:self.activityIndicator];
     [self.view bringSubviewToFront:self.activityIndicator];
+    
+    self.firstTimeRefreshCaptcha = YES;
+    self.activityIndicatorCaptcha = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.activityIndicatorCaptcha setCenter:CGPointMake(self.captchaButton.imageView.center.x + self.activityCenterXOffSet,
+                                                         self.captchaButton.imageView.center.y + self.activityCenterYOffSet)];
+    [self.activityIndicatorCaptcha setHidesWhenStopped:TRUE];
+    [self.activityIndicatorCaptcha setHidden:YES];
+    [self.view addSubview:self.activityIndicatorCaptcha];
+    [self.view bringSubviewToFront:self.activityIndicatorCaptcha];;
 }
 
 - (void)prepareMyFont {
-    if (IS_IPHONE_4_OR_LESS)
+    if (IS_IPHONE_4_OR_LESS) {
         self.preferredFontSize = 14;
-    else if (IS_IPHONE_5)
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    } else if (IS_IPHONE_5) {
         self.preferredFontSize = 15;
-    else if (IS_IPAD)
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    } else if (IS_IPAD) {
         self.preferredFontSize = 18;
-    else
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    } else if (IS_IPHONE_6P) {
         self.preferredFontSize = 17;
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    } else {
+        self.preferredFontSize = 17;
+        self.activityCenterXOffSet = 0;
+        self.activityCenterYOffSet = 0;
+    }
     self.uesrnameTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
     self.passwordTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
+    self.captchaTextField.font = [UIFont boldSystemFontOfSize:self.preferredFontSize];
     self.upInfoLabel.font = [UIFont systemFontOfSize:self.preferredFontSize + 1];
     self.downInfoLabel.font = [UIFont systemFontOfSize:self.preferredFontSize - 3];
-    self.alertInforLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 1];
+    self.captchaButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 3];
     self.startVerificationButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize + 3];
 }
 
-#pragma mark - Prepare Loading Mask 
+#pragma mark - Prepare Loading Mask
 
 - (void)prepareLoadingMask {
     self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -131,6 +165,7 @@
     [self.timer invalidate];
     [self.alertInforLabel setHidden:YES];
     [self.alertInforLabel setAlpha:1.0];
+    self.alertInforLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 1];
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"] isEqualToString:@"0"]) {
         [self addLoadingMask];
         [self.activityIndicator startAnimating];
@@ -138,7 +173,7 @@
         [self.view bringSubviewToFront:self.activityIndicator];
         [self.alertInforLabel setText:@"加载中..."];
         [self.alertInforLabel setHidden:NO];
-        [self startAuthentication];
+        [self addAuthenticationApply];
     } else {
         [self popAlert:@"无法验证" withMessage:@"您好像没有选择学校😂"];
     }
@@ -155,18 +190,21 @@
 
 #pragma mark - School Authentication
 
-- (void)startAuthentication {
+- (void)initAuthentication {
     self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"image/png", @"image/gif", @"application/json", nil];
     [self.manager POST:@"http://v2.api.boxbuy.cc/getSchoolAuthenticationApplyAbility"
             parameters:@{@"schoolid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"]}
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [self setAccountSchool];
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [self removeLoadingMask];
-                  [self.activityIndicator stopAnimating];
-                  [self.alertInforLabel setText:@"请求验证信息失败..."];
-                  [self setAlertDisappearTimer];
-              }];
+                   [self setAccountSchool];
+               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   [self removeLoadingMask];
+                   [self.activityIndicator stopAnimating];
+                   [self.alertInforLabel setText:@"初始化验证信息失败..."];
+                   [self setAlertDisappearTimer];
+               }];
 }
 
 - (void)setAccountSchool {
@@ -174,39 +212,44 @@
             parameters:@{@"schoolid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"],
                          @"access_token" : [LoginInfo sharedInfo].accessToken }
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   [self addAuthenticationApply];
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [self removeLoadingMask];
-                  [self.activityIndicator stopAnimating];
-                  [self.alertInforLabel setText:@"请求设置学校失败..."];
-                  [self setAlertDisappearTimer];
+                   [self removeLoadingMask];
+                   [self.activityIndicator stopAnimating];
+                   [self.alertInforLabel setText:@"请求设置学校失败..."];
+                   [self setAlertDisappearTimer];
                }];
 }
 
 - (void)addAuthenticationApply {
     NSDictionary *postData = @{@"username" : self.uesrnameTextField.text,
                                @"password" : self.passwordTextField.text,
+                               @"vcode"    : self.captchaTextField.text,
                                @"authtype" : @"1",
                                @"access_token" : [LoginInfo sharedInfo].accessToken };
     [self.manager POST:@"https://secure.boxbuy.cc/addAuthenticationApply"
             parameters:postData
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   if ([[responseObject valueForKeyPath:@"uniError"] isEqual:@0]) {
+                   NSError *jsonError = [[NSError alloc] init];
+                   NSDictionary *response = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                        options:NSJSONReadingMutableContainers
+                                                                          error:&jsonError];
+                   if ([response[@"uniError"] isEqual:@0]) {
                        [[LoginInfo sharedInfo] refreshSharedInfo];
                        [self popAlert:@"验证成功！" withMessage:@"返回首页中~\r\n 您可以上传商品啦!"];
-                       [self performSegueWithIdentifier:@"verificationDone" sender:self];
+                       [self performSegueWithIdentifier:@"verificationWithCaptchaDone" sender:self];
                    } else {
                        [self removeLoadingMask];
                        [self.activityIndicator stopAnimating];
-                       if ([[responseObject valueForKeyPath:@"uniError" ]isEqual:@1004])
+                       if ([response[@"uniError"] isEqual:@1004])
                            self.alertInforLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 5];
-                       else if ([[responseObject valueForKeyPath:@"uniError" ]isEqual:@2002])
+                       else if ([response[@"uniError"] isEqual:@2002])
                            self.alertInforLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 5];
                        else
                            self.alertInforLabel.font = [UIFont boldSystemFontOfSize:self.preferredFontSize - 3];
-                       [self.alertInforLabel setText:[responseObject valueForKeyPath:@"msg"]];
+                       [self.alertInforLabel setText:response[@"msg"]];
                        [self setAlertDisappearTimer];
+                       [self refreshCaptcha];
                    }
                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    [self removeLoadingMask];
@@ -214,6 +257,30 @@
                    [self.alertInforLabel setText:@"请求验证失败..."];
                    [self setAlertDisappearTimer];
                }];
+}
+
+#pragma mark - Captcha Code 
+
+- (void)refreshCaptcha {
+    [self.activityIndicatorCaptcha startAnimating];
+    [self.manager GET:@"http://v2.api.boxbuy.cc/getAuthenticationApplyCapthcha"
+           parameters:nil
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [self.captchaButton setBackgroundImage:[UIImage imageWithData:responseObject] forState:UIControlStateNormal];
+                  if ([self firstTimeRefreshCaptcha]) {
+                      [self.captchaButton setTitle:@"" forState:UIControlStateNormal];
+                      [self setFirstTimeRefreshCaptcha:NO];
+                  }
+                  [self.activityIndicatorCaptcha stopAnimating];
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  [self.captchaButton setTitle:@"点击刷新" forState:UIControlStateNormal];
+                  [self setFirstTimeRefreshCaptcha:YES];
+                  [self.activityIndicatorCaptcha stopAnimating];
+              }];
+}
+
+- (IBAction)captchaButtonTouchUpInside:(UIButton *)sender {
+    [self refreshCaptcha];
 }
 
 #pragma mark - Alert Disapear Timer

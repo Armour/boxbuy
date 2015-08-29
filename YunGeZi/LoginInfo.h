@@ -17,6 +17,7 @@
 @property (strong, readonly, nonatomic) NSString *intro;
 @property (strong, readonly, nonatomic) NSString *photoUrlString;
 @property (strong, readonly, nonatomic) NSString *schoolId;
+@property (strong, readonly, nonatomic) NSString *authstate;
 @property (readonly, nonatomic) NSInteger numOfFollow;
 @property (readonly, nonatomic) NSInteger numOfFan;
 @property (readonly, nonatomic) NSInteger numOfItem;
@@ -30,5 +31,7 @@
 - (void)updateWithAccessToken:(NSString *)accessToken
                  refreshToken:(NSString *)refreshToken
                    expireTime:(NSString *)expireTime;
+
+- (void)refreshSharedInfo;
 
 @end

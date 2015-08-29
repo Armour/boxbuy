@@ -43,6 +43,7 @@
 		76B6AD011AFA6B4800A987C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B6ACFF1AFA6B4800A987C2 /* Main.storyboard */; };
 		76B6AD051AFA78C500A987C2 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */; };
 		76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */; };
+		76CAA2C51B90473400D3743A /* VerificationWithCaptchaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CAA2C41B90473400D3743A /* VerificationWithCaptchaViewController.m */; };
 		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
 		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
 		76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */; };
@@ -133,6 +134,8 @@
 		76B6AD041AFA78C500A987C2 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDetailViewController.h; sourceTree = "<group>"; };
 		76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectDetailViewController.m; sourceTree = "<group>"; };
+		76CAA2C31B90473400D3743A /* VerificationWithCaptchaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationWithCaptchaViewController.h; sourceTree = "<group>"; };
+		76CAA2C41B90473400D3743A /* VerificationWithCaptchaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationWithCaptchaViewController.m; sourceTree = "<group>"; };
 		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E333301AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E333311AEDF8C40077BACF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 			children = (
 				769F99521B0CADED00161818 /* VerificationViewController.h */,
 				769F99531B0CADED00161818 /* VerificationViewController.m */,
+				76CAA2C31B90473400D3743A /* VerificationWithCaptchaViewController.h */,
+				76CAA2C41B90473400D3743A /* VerificationWithCaptchaViewController.m */,
 			);
 			name = Verification;
 			sourceTree = "<group>";
@@ -582,6 +587,7 @@
 				7651D2C71AF079BD003184A8 /* AccountViewController.m in Sources */,
 				7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */,
 				76E333321AEDF8C40077BACF /* main.m in Sources */,
+				76CAA2C51B90473400D3743A /* VerificationWithCaptchaViewController.m in Sources */,
 				47F4BBBC1B7B47F300FA8524 /* SettingTableViewController.m in Sources */,
 				7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */,
 				474C5F021B73553300CDE2AF /* WaterfallCellModel.m in Sources */,

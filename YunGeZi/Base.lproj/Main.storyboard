@@ -555,16 +555,6 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请使用您的学号进行实名认证" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFU-W7-1sQ">
-                                <rect key="frame" x="16" y="104" width="224" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hFU-W7-1sQ" secondAttribute="height" multiplier="32:3" id="03m-6t-7tT"/>
-                                    <constraint firstAttribute="width" constant="224" id="pP1-S3-Kfs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.12515782828282829" green="0.12515782828282829" blue="0.12515782828282829" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实名认证后，你就可以在云格子铺上自由的销售自己的闲置物品啦~" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjD-4w-zVJ">
                                 <rect key="frame" x="16" y="272" width="343" height="45"/>
                                 <constraints>
@@ -592,10 +582,11 @@
                                     <action selector="verificationButtonTouchUpInside:" destination="UMQ-SS-uCO" eventType="touchUpInside" id="O8q-4l-Nxs"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nr-Kq-iSo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nr-Kq-iSo">
                                 <rect key="frame" x="47" y="573" width="281" height="32.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gT-Ed-aHZ">
@@ -611,6 +602,23 @@
                                     <action selector="showPasswdButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="7NE-1f-bsq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请使用您的学号进行实名认证" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFU-W7-1sQ">
+                                <rect key="frame" x="16" y="104" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hFU-W7-1sQ" secondAttribute="height" multiplier="32:3" id="03m-6t-7tT"/>
+                                    <constraint firstAttribute="height" constant="21" id="nTD-NF-h9R"/>
+                                    <constraint firstAttribute="width" constant="224" id="pP1-S3-Kfs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.12515782828282829" green="0.12515782828282829" blue="0.12515782828282829" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="03m-6t-7tT"/>
+                                        <exclude reference="pP1-S3-Kfs"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90530303030000003" green="0.90530303030000003" blue="0.90530303030000003" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -634,6 +642,7 @@
                             <constraint firstAttribute="centerX" secondItem="7nr-Kq-iSo" secondAttribute="centerX" id="Y9P-u8-5uU"/>
                             <constraint firstItem="TWN-Kk-znJ" firstAttribute="height" secondItem="bBN-H9-fos" secondAttribute="height" id="YLQ-U8-xaJ"/>
                             <constraint firstItem="4gT-Ed-aHZ" firstAttribute="trailing" secondItem="TWN-Kk-znJ" secondAttribute="trailing" id="aHd-5m-pXN"/>
+                            <constraint firstItem="hFU-W7-1sQ" firstAttribute="trailing" secondItem="juJ-FM-21b" secondAttribute="trailingMargin" id="fDs-2k-Zlt"/>
                             <constraint firstItem="GO2-um-Lmu" firstAttribute="width" secondItem="LyJ-1H-qwG" secondAttribute="width" multiplier="0.82" id="fqp-fE-2kz"/>
                             <constraint firstItem="GO2-um-Lmu" firstAttribute="trailing" secondItem="TWN-Kk-znJ" secondAttribute="trailing" id="gSm-rY-1Eq"/>
                             <constraint firstItem="LyJ-1H-qwG" firstAttribute="leading" secondItem="hFU-W7-1sQ" secondAttribute="leading" id="gmd-7q-O3I"/>
@@ -673,6 +682,9 @@
                         <outlet property="startVerificationButton" destination="GO2-um-Lmu" id="f0v-16-QbO"/>
                         <outlet property="uesrnameTextField" destination="TWN-Kk-znJ" id="3jS-yL-gom"/>
                         <outlet property="upInfoLabel" destination="hFU-W7-1sQ" id="LqS-Oh-1Vt"/>
+                        <segue destination="g99-Ha-WnK" kind="popoverPresentation" identifier="verificationDone" popoverAnchorView="GO2-um-Lmu" id="BA8-0R-UkZ">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ruq-FO-JfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -766,6 +778,7 @@
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                         <segue destination="UMQ-SS-uCO" kind="show" identifier="goToUserVerify" id="oyF-Ip-PpY"/>
+                        <segue destination="9dj-DS-KVa" kind="show" identifier="goToUserVerifyWithCapthcha" id="hmN-sp-2aK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feg-y5-ZlM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3296,6 +3309,272 @@
             </objects>
             <point key="canvasLocation" x="-2289.5" y="1909.5"/>
         </scene>
+        <!--实名验证-->
+        <scene sceneID="WFK-Nl-enf">
+            <objects>
+                <viewController id="9dj-DS-KVa" customClass="VerificationWithCaptchaViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="20C-Qt-Wg3"/>
+                        <viewControllerLayoutGuide type="bottom" id="wua-Jf-gSW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="53a-wq-DVP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register1" translatesAutoresizingMaskIntoConstraints="NO" id="xcO-OS-2Jh">
+                                <rect key="frame" x="16" y="133" width="343" height="131"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xcO-OS-2Jh" secondAttribute="height" multiplier="343:131" id="jWm-7V-IBJ"/>
+                                    <constraint firstAttribute="width" secondItem="xcO-OS-2Jh" secondAttribute="height" multiplier="343:131" id="pYm-ve-F7g"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="jWm-7V-IBJ"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的学号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MIU-Qt-j9a">
+                                <rect key="frame" x="80" y="151" width="248" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KVl-aT-Cuu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="KVl-aT-Cuu"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jFW-8h-KXW">
+                                <rect key="frame" x="80" y="214" width="214" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="n5w-5b-kIe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="n5w-5b-kIe"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请使用您的学号进行实名认证" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gq-Tv-OsQ">
+                                <rect key="frame" x="16" y="104" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Mld-ht-lQn"/>
+                                    <constraint firstAttribute="width" constant="224" id="iva-6D-Wuq"/>
+                                    <constraint firstAttribute="width" secondItem="4Gq-Tv-OsQ" secondAttribute="height" multiplier="32:3" id="mpo-1d-NjP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.1251578283" green="0.1251578283" blue="0.1251578283" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="iva-6D-Wuq"/>
+                                        <exclude reference="mpo-1d-NjP"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实名认证后，你就可以在云格子铺上自由的销售自己的闲置物品啦~" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Os-ho-B6B">
+                                <rect key="frame" x="16" y="340" width="343" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8Os-ho-B6B" secondAttribute="height" multiplier="343:50" constant="34.300000000000011" id="pIS-ix-tIS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.065991950760000001" green="0.065991950760000001" blue="0.065991950760000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yg-6Z-95p">
+                                <rect key="frame" x="47" y="574" width="281" height="33"/>
+                                <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQJ-gt-mLP">
+                                <rect key="frame" x="299" y="214" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZQJ-gt-mLP" secondAttribute="height" multiplier="1:1" id="y1O-M8-2BM"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="eye_close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPasswdButtonTouchUpInside:" destination="9dj-DS-KVa" eventType="touchUpInside" id="sQu-rY-ip5"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verification_up" translatesAutoresizingMaskIntoConstraints="NO" id="Dhc-rc-h8a">
+                                <rect key="frame" x="16" y="272" width="343" height="52.5"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入图片验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kpM-RN-ND2">
+                                <rect key="frame" x="80" y="290" width="155" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5k5-uz-Yxp"/>
+                                    <constraint firstAttribute="width" constant="155" id="NP2-wR-obc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5k5-uz-Yxp"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verification_down" translatesAutoresizingMaskIntoConstraints="NO" id="cGj-gK-fFh">
+                                <rect key="frame" x="15" y="311" width="344" height="21"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLp-J1-OQr">
+                                <rect key="frame" x="47" y="393" width="281" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xv2-8K-b1g"/>
+                                </constraints>
+                                <state key="normal" title="确定">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="xv2-8K-b1g"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="verificationButtonTouchUpInside:" destination="9dj-DS-KVa" eventType="touchUpInside" id="lol-da-d7c"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmJ-4h-Rdi">
+                                <rect key="frame" x="252" y="283" width="74" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="kmJ-4h-Rdi" secondAttribute="height" multiplier="85:40" id="0dN-kq-mrB"/>
+                                    <constraint firstAttribute="height" constant="41" id="9Fn-vJ-PTM"/>
+                                    <constraint firstAttribute="width" constant="85" id="O0a-51-47B"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="点击刷新">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9Fn-vJ-PTM"/>
+                                        <exclude reference="O0a-51-47B"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="captchaButtonTouchUpInside:" destination="QMi-wm-GZU" eventType="touchUpInside" id="he0-Zg-Tm6"/>
+                                    <action selector="captchaButtonTouchUpInside:" destination="9dj-DS-KVa" eventType="touchUpInside" id="xqK-y3-0OX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90530303030000003" green="0.90530303030000003" blue="0.90530303030000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="height" secondItem="xcO-OS-2Jh" secondAttribute="height" multiplier="0.4" id="02A-os-wTp"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="leading" secondItem="8Os-ho-B6B" secondAttribute="leading" id="0i4-Ow-nLQ"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="trailing" secondItem="8Os-ho-B6B" secondAttribute="trailing" id="1ie-UC-If4"/>
+                            <constraint firstItem="ZQJ-gt-mLP" firstAttribute="trailing" secondItem="TLp-J1-OQr" secondAttribute="trailing" id="3If-lO-E1G"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="width" secondItem="xcO-OS-2Jh" secondAttribute="width" multiplier="0.82" id="3In-zH-Cwj"/>
+                            <constraint firstItem="4Gq-Tv-OsQ" firstAttribute="leading" secondItem="53a-wq-DVP" secondAttribute="leadingMargin" id="5hC-Ra-fXA"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="height" secondItem="cGj-gK-fFh" secondAttribute="height" multiplier="2.5" id="5wM-hv-km5"/>
+                            <constraint firstItem="4Gq-Tv-OsQ" firstAttribute="trailing" secondItem="53a-wq-DVP" secondAttribute="trailingMargin" id="6Y5-Zb-7hV"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="height" secondItem="3yg-6Z-95p" secondAttribute="height" multiplier="1.3" id="8ap-UT-u65"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="bottom" secondItem="cGj-gK-fFh" secondAttribute="bottom" multiplier="0.98" id="9c0-fp-ttu"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="leading" secondItem="4Gq-Tv-OsQ" secondAttribute="leading" id="Fqz-g5-2cS"/>
+                            <constraint firstItem="kpM-RN-ND2" firstAttribute="centerY" secondItem="kmJ-4h-Rdi" secondAttribute="centerY" id="Fxm-x4-Dsw"/>
+                            <constraint firstItem="cGj-gK-fFh" firstAttribute="centerX" secondItem="Dhc-rc-h8a" secondAttribute="centerX" id="HI5-UI-zOt"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="width" secondItem="3yg-6Z-95p" secondAttribute="width" id="HVA-11-Daw"/>
+                            <constraint firstItem="kpM-RN-ND2" firstAttribute="leading" secondItem="jFW-8h-KXW" secondAttribute="leading" id="Hka-Tk-huK"/>
+                            <constraint firstItem="MIU-Qt-j9a" firstAttribute="height" secondItem="jFW-8h-KXW" secondAttribute="height" id="ITh-pG-0Hy"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="top" secondItem="8Os-ho-B6B" secondAttribute="bottom" constant="8" symbolic="YES" id="JxH-Ak-cjZ"/>
+                            <constraint firstItem="cGj-gK-fFh" firstAttribute="top" secondItem="kpM-RN-ND2" secondAttribute="bottom" constant="6" id="Mzp-mi-ggQ"/>
+                            <constraint firstItem="8Os-ho-B6B" firstAttribute="top" secondItem="cGj-gK-fFh" secondAttribute="bottom" constant="19" id="Nu0-8G-fMI"/>
+                            <constraint firstItem="ZQJ-gt-mLP" firstAttribute="leading" secondItem="jFW-8h-KXW" secondAttribute="trailing" multiplier="1.02" id="O7B-Bm-8yz"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="trailing" secondItem="53a-wq-DVP" secondAttribute="trailingMargin" id="Oeh-yn-ZOH"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="bottom" secondItem="jFW-8h-KXW" secondAttribute="bottom" multiplier="1.09" id="PT8-Lu-9gb"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="height" secondItem="xcO-OS-2Jh" secondAttribute="height" multiplier="0.32" id="Pro-b5-7FF"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="width" secondItem="MIU-Qt-j9a" secondAttribute="width" multiplier="1.6" id="Qo5-E3-KLw"/>
+                            <constraint firstAttribute="centerX" secondItem="3yg-6Z-95p" secondAttribute="centerX" id="RFh-in-GBD"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="centerY" secondItem="kpM-RN-ND2" secondAttribute="centerY" id="TR9-jY-kkv"/>
+                            <constraint firstItem="ZQJ-gt-mLP" firstAttribute="centerY" secondItem="jFW-8h-KXW" secondAttribute="centerY" id="U4e-J4-RO2"/>
+                            <constraint firstItem="kpM-RN-ND2" firstAttribute="height" secondItem="kmJ-4h-Rdi" secondAttribute="height" multiplier="0.6" id="WHu-sO-pji"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="width" secondItem="jFW-8h-KXW" secondAttribute="width" multiplier="1.6" id="X9h-nb-See"/>
+                            <constraint firstItem="ZQJ-gt-mLP" firstAttribute="height" secondItem="jFW-8h-KXW" secondAttribute="height" id="YtB-eK-4p3"/>
+                            <constraint firstItem="ZQJ-gt-mLP" firstAttribute="width" secondItem="ZQJ-gt-mLP" secondAttribute="height" multiplier="1:1" id="Zt0-q1-GfT"/>
+                            <constraint firstItem="kmJ-4h-Rdi" firstAttribute="width" secondItem="kmJ-4h-Rdi" secondAttribute="height" multiplier="85:40" id="aBc-tT-IAY"/>
+                            <constraint firstItem="4Gq-Tv-OsQ" firstAttribute="top" secondItem="20C-Qt-Wg3" secondAttribute="bottom" multiplier="1.5" constant="8" symbolic="YES" id="b8X-VU-8Rv"/>
+                            <constraint firstItem="kpM-RN-ND2" firstAttribute="centerY" secondItem="Dhc-rc-h8a" secondAttribute="centerY" multiplier="1.01" id="cSk-UR-fGd"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="trailing" secondItem="kmJ-4h-Rdi" secondAttribute="trailing" multiplier="1.1" id="cpM-wS-ziG"/>
+                            <constraint firstItem="wua-Jf-gSW" firstAttribute="top" secondItem="3yg-6Z-95p" secondAttribute="bottom" multiplier="1.1" id="d2Q-pY-MSq"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="top" secondItem="xcO-OS-2Jh" secondAttribute="bottom" constant="8" symbolic="YES" id="dCg-al-Jln"/>
+                            <constraint firstAttribute="centerX" secondItem="TLp-J1-OQr" secondAttribute="centerX" id="fW9-4n-ucU"/>
+                            <constraint firstItem="cGj-gK-fFh" firstAttribute="trailing" secondItem="8Os-ho-B6B" secondAttribute="trailing" id="fjS-QM-y4I"/>
+                            <constraint firstItem="8Os-ho-B6B" firstAttribute="top" secondItem="Dhc-rc-h8a" secondAttribute="bottom" id="htq-xh-Q1T"/>
+                            <constraint firstItem="8Os-ho-B6B" firstAttribute="top" secondItem="xcO-OS-2Jh" secondAttribute="bottom" constant="8" symbolic="YES" id="iKO-Nx-WOm"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="trailing" secondItem="cGj-gK-fFh" secondAttribute="trailing" id="j7U-pH-sRC"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="leading" secondItem="cGj-gK-fFh" secondAttribute="leading" constant="1" id="jeU-5M-LiE"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="top" secondItem="8Os-ho-B6B" secondAttribute="bottom" multiplier="1.05" constant="88" id="kYe-Em-cGM"/>
+                            <constraint firstItem="kpM-RN-ND2" firstAttribute="top" secondItem="xcO-OS-2Jh" secondAttribute="bottom" constant="22" id="kom-Nw-iGd"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="top" secondItem="4Gq-Tv-OsQ" secondAttribute="bottom" constant="8" symbolic="YES" id="mIg-bI-KRd"/>
+                            <constraint firstItem="ZQJ-gt-mLP" firstAttribute="trailing" secondItem="MIU-Qt-j9a" secondAttribute="trailing" id="mra-Km-CdH"/>
+                            <constraint firstAttribute="centerX" secondItem="MIU-Qt-j9a" secondAttribute="centerX" constant="0.5" id="oEf-E0-lRr"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="width" secondItem="xcO-OS-2Jh" secondAttribute="height" multiplier="343:131" id="pkN-2Y-Yv3"/>
+                            <constraint firstItem="MIU-Qt-j9a" firstAttribute="leading" secondItem="jFW-8h-KXW" secondAttribute="leading" id="pxd-OQ-nAa"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="leading" secondItem="MIU-Qt-j9a" secondAttribute="leading" multiplier="0.2" id="tUF-qv-Wga"/>
+                            <constraint firstItem="8Os-ho-B6B" firstAttribute="top" secondItem="cGj-gK-fFh" secondAttribute="bottom" constant="8" symbolic="YES" id="tg7-bI-rol"/>
+                            <constraint firstItem="TLp-J1-OQr" firstAttribute="trailing" secondItem="MIU-Qt-j9a" secondAttribute="trailing" id="uVA-Aj-f5O"/>
+                            <constraint firstItem="Dhc-rc-h8a" firstAttribute="leading" secondItem="8Os-ho-B6B" secondAttribute="leading" id="vFI-hh-Oqd"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="top" secondItem="MIU-Qt-j9a" secondAttribute="top" multiplier="0.88" id="vVc-bS-QUD"/>
+                            <constraint firstItem="xcO-OS-2Jh" firstAttribute="height" secondItem="MIU-Qt-j9a" secondAttribute="height" multiplier="4.5" id="yH2-Bf-bhn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Qo5-E3-KLw"/>
+                                <exclude reference="X9h-nb-See"/>
+                                <exclude reference="pkN-2Y-Yv3"/>
+                                <exclude reference="oEf-E0-lRr"/>
+                                <exclude reference="TR9-jY-kkv"/>
+                                <exclude reference="kom-Nw-iGd"/>
+                                <exclude reference="HI5-UI-zOt"/>
+                                <exclude reference="Mzp-mi-ggQ"/>
+                                <exclude reference="Nu0-8G-fMI"/>
+                                <exclude reference="htq-xh-Q1T"/>
+                                <exclude reference="iKO-Nx-WOm"/>
+                                <exclude reference="Zt0-q1-GfT"/>
+                                <exclude reference="aBc-tT-IAY"/>
+                                <exclude reference="kYe-Em-cGM"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Vc3-k5-IXY" appends="YES" id="ZN7-rI-wXH"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="实名验证" id="pHC-Cb-LGg">
+                        <barButtonItem key="backBarButtonItem" title=" " id="8v6-GV-xaf"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="alertInforLabel" destination="3yg-6Z-95p" id="gD8-2P-lIZ"/>
+                        <outlet property="captchaButton" destination="kmJ-4h-Rdi" id="9eT-DD-bm6"/>
+                        <outlet property="captchaTextField" destination="kpM-RN-ND2" id="7VE-9c-cde"/>
+                        <outlet property="downInfoLabel" destination="8Os-ho-B6B" id="C6q-aD-clH"/>
+                        <outlet property="passwordTextField" destination="jFW-8h-KXW" id="3Vk-5v-Fcp"/>
+                        <outlet property="showPasswdButton" destination="ZQJ-gt-mLP" id="VTz-qQ-eXn"/>
+                        <outlet property="startVerificationButton" destination="TLp-J1-OQr" id="4oN-v9-qsC"/>
+                        <outlet property="uesrnameTextField" destination="MIU-Qt-j9a" id="Bhs-y0-y61"/>
+                        <outlet property="upInfoLabel" destination="4Gq-Tv-OsQ" id="Wnj-AD-hqU"/>
+                        <segue destination="g99-Ha-WnK" kind="popoverPresentation" identifier="verificationWithCaptchaDone" popoverAnchorView="TLp-J1-OQr" id="BhZ-Tx-gdv">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H2s-Tu-c4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Vc3-k5-IXY">
+                    <connections>
+                        <action selector="backgroundTap:" destination="9dj-DS-KVa" id="iAu-Ll-07J"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1658.5" y="3507.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow-back" width="128" height="128"/>
@@ -3308,12 +3587,14 @@
         <image name="register2" width="2693" height="907"/>
         <image name="takePhoto" width="128" height="128"/>
         <image name="user_setting" width="36" height="36"/>
+        <image name="verification_down" width="688" height="44"/>
+        <image name="verification_up" width="686" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jh5-aa-AqP"/>
         <segue reference="GCd-gI-drE"/>
-        <segue reference="94F-h8-wDZ"/>
         <segue reference="0p7-WM-ggn"/>
+        <segue reference="94F-h8-wDZ"/>
+        <segue reference="BA8-0R-UkZ"/>
         <segue reference="hPn-SL-c0M"/>
         <segue reference="WTi-fG-if7"/>
     </inferredMetricsTieBreakers>

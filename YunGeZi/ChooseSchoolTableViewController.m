@@ -21,6 +21,8 @@
 @property (strong, nonatomic) NSArray *schoolImage;
 @property (strong, nonatomic) NSMutableSet *indexPathFetchedImageSet;
 @property (strong, nonatomic) NSIndexPath *choosedIndexPath;
+@property (strong, nonatomic) UIView *loadingMask;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -35,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSchoolArray];
+    [self prepareMyIndicator];
     /*AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
      [manager GET:@"http://v2.api.boxbuy.cc/getSchools"
      parameters:@{@"json":@1}
@@ -60,6 +63,33 @@
     schoolSectionTitles = [[schools allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     self.indexPathFetchedImageSet = [NSMutableSet set];
     self.choosedIndexPath = nil;
+}
+
+#pragma mark - Prepare Indicator
+
+- (void)prepareMyIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.activityIndicator setCenter:self.view.center];
+    [self.activityIndicator setHidesWhenStopped:TRUE];
+    [self.activityIndicator setHidden:YES];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+}
+
+#pragma mark - Prepare Loading Mask
+
+- (void)prepareLoadingMask {
+    self.loadingMask = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height * 3 )];
+    [self.loadingMask setBackgroundColor:[UIColor grayColor]];
+    self.loadingMask.alpha = 0.4;
+}
+
+- (void)addLoadingMask {
+    [self.view addSubview:self.loadingMask];
+}
+
+- (void)removeLoadingMask {
+    [self.loadingMask removeFromSuperview];
 }
 
 #pragma mark - Table view data source
@@ -130,7 +160,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:[sectionSchoolsId objectAtIndex:self.choosedIndexPath.row] forKey:@"schoolId"];
         [[NSUserDefaults standardUserDefaults] setObject:[sectionSchools objectAtIndex:self.choosedIndexPath.row] forKey:@"schoolName"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self popAlertWith2Button:@"设置成功" withMessage:@"现在就认证此学校么"];
+        if ([[LoginInfo sharedInfo].authstate isEqualToString:@"0"])
+            [self popAlertWith2Button:@"设置成功" withMessage:@"现在就认证此学校么"];
+        else
+            [self popAlert:@"设置成功" withMessage:@"您选择查看此学校的商品~"];
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"schoolId"];
         [[NSUserDefaults standardUserDefaults] setObject:@"未设置学校" forKey:@"schoolName"];
@@ -160,9 +193,32 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (self.choosedIndexPath != nil) {
+    if (self.choosedIndexPath != nil && [[LoginInfo sharedInfo].authstate isEqualToString:@"0"]) {
         if (buttonIndex == 0 ) {
-            [self performSegueWithIdentifier:@"goToUserVerify" sender:self];
+            [self prepareLoadingMask];
+            [self addLoadingMask];
+            [self.activityIndicator startAnimating];
+            [self.view bringSubviewToFront:self.activityIndicator];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager POST:@"http://v2.api.boxbuy.cc/getSchoolAuthenticationApplyAbility"
+               parameters:@{@"schoolid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"]}
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      if ([[responseObject valueForKeyPath:@"needCapthcha"] isEqual:@1])
+                          [self performSegueWithIdentifier:@"goToUserVerifyWithCapthcha" sender:self];
+                      else
+                          [self performSegueWithIdentifier:@"goToUserVerify" sender:self];
+                      [self removeLoadingMask];
+                      [self.activityIndicator stopAnimating];
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      [self removeLoadingMask];
+                      [self.activityIndicator stopAnimating];
+                      UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"网络不好"
+                                                                     message:@"请稍后重试"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"YES"
+                                                           otherButtonTitles:nil];
+                      [alert show];
+                  }];
         } else {
             [self performSegueWithIdentifier:@"chooseSchoolDone" sender:self];
         }

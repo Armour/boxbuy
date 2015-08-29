@@ -431,7 +431,6 @@
     return item;
 }
 
-
 - (void)prepareNavigationBar {
     UIButton *spaceButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [spaceButton setTitle:@"" forState:UIControlStateNormal];
@@ -498,7 +497,7 @@
     UIButton *recycleButton = [self createBubbleButtonWithImageName:@"guide_entry_recycle"
                                                                size:buttonSize
                                                              target:nil
-                                                             action:nil];
+                                                             action:@selector(performSegueToSellingPage)];
     UIButton *sellButton = [self createBubbleButtonWithImageName:@"guide_entry_upload"
                                                             size:buttonSize
                                                           target:nil

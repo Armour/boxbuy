@@ -17,6 +17,8 @@
 
 @implementation LoginInfo
 
+@synthesize cachedInfo = _cachedInfo;
+
 #pragma mark - Shared Info and Update
 
 + (LoginInfo *)sharedInfo {
@@ -35,34 +37,45 @@
     self.accessToken = accessToken;
     self.refreshToken = refreshToken;
     self.expireTime = expireTime;
-    _cachedInfo = nil;
+    [self refreshSharedInfo];
 }
 
-#pragma mark - Get Info from Cache
-
-NSDictionary *_cachedInfo;
+#pragma mark- Cached Info
 
 - (NSDictionary *)cachedInfo {
     if (!_cachedInfo) {
-        NSString *urlString = @"http://v2.api.boxbuy.cc/getUserData";
-        NSString *postData = [NSString stringWithFormat:@"access_token=%@&userid=me", self.accessToken];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-        [request setHTTPMethod:@"POST"];
-        [request setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
-        NSURLResponse *response = nil;
-        NSError *error = nil;
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        if (error) {
-            return nil;
-        }
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-        if (error) {
-            return nil;
-        }
-        _cachedInfo = dict;
+        _cachedInfo = [[NSDictionary alloc] init];
     }
     return _cachedInfo;
 }
+
+- (void)setCachedInfo:(NSDictionary *)cachedInfo {
+    _cachedInfo = cachedInfo;
+}
+
+#pragma mark- Refresh Shared Info
+
+- (void)refreshSharedInfo {
+    NSString *urlString = @"http://v2.api.boxbuy.cc/getUserData";
+    NSString *postData = [NSString stringWithFormat:@"access_token=%@&userid=me", self.accessToken];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error) {
+        return;
+    }
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+    if (error) {
+        return;
+    }
+    _cachedInfo = dict;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CachedInfoRefreshed" object:self userInfo:nil];
+}
+
+#pragma mark - Get Info from Cache
 
 - (NSString *)nickname {
     return [NSString stringWithFormat:@"%@",[[self cachedInfo] valueForKeyPath:@"Account.nickname"]];
@@ -81,6 +94,10 @@ NSDictionary *_cachedInfo;
 
 - (NSString *)schoolId {
     return [[self cachedInfo] valueForKeyPath:@"Account.schoolid"];
+}
+
+- (NSString *)authstate {
+    return [[self cachedInfo] valueForKeyPath:@"Account.authstate"];
 }
 
 - (NSInteger)numOfFollow {
