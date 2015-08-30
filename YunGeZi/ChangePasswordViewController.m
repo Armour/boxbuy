@@ -40,15 +40,6 @@
 
 #pragma mark - Life Cycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"修改密码"];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
@@ -56,6 +47,15 @@
     [self prepareMyNotification];
     [self prepareMyFont];
     [self prepareMyIndicator];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"修改密码"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

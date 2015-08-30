@@ -24,16 +24,16 @@
 
 #pragma mark - Life Circle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"搜索结果"];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyIndicator];
     [self addWebViewBridge];
     [self loadWebViewRequest];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"搜索结果"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

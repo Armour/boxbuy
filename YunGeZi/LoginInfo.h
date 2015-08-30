@@ -16,6 +16,7 @@
 @property (strong, readonly, nonatomic) NSString *nickname;
 @property (strong, readonly, nonatomic) NSString *intro;
 @property (strong, readonly, nonatomic) NSString *photoUrlString;
+@property (strong, readonly, nonatomic) NSString *photoUrlOriString;
 @property (strong, readonly, nonatomic) NSString *schoolId;
 @property (strong, readonly, nonatomic) NSString *authstate;
 @property (readonly, nonatomic) NSInteger numOfFollow;

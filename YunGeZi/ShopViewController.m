@@ -7,7 +7,6 @@
 //
 
 #import "ShopViewController.h"
-#import "ObjectDetailInShopViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
 
@@ -79,8 +78,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showDetailInShop"]) {
-        ObjectDetailInShopViewController *controller = (ObjectDetailInShopViewController *)segue.destinationViewController;
-        [controller setObjectNumber:self.objectNumber];
     }
 }
 

@@ -38,6 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"身份认证"];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -56,6 +57,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"身份认证"];
+    [self.navigationController.navigationBar setTranslucent:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

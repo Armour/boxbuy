@@ -20,6 +20,8 @@
 
 @implementation WaterfallCellView
 
+#pragma mark - Init With Frame
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -31,6 +33,8 @@
     }
     return self;
 }
+
+#pragma mark - Set Property                        
 
 - (void)setItemImageWithStringAsync:(NSString *)imageString callback:(void (^)(BOOL, CGFloat, CGFloat))callback {
     NSURL *url = [NSURL URLWithString:imageString];

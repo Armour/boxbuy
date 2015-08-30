@@ -42,15 +42,6 @@
 
 #pragma mark - Life Cycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"注册新账号"];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
@@ -58,6 +49,15 @@
     [self prepareMyNotification];
     [self prepareMyFont];
     [self prepareMyIndicator];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"注册新账号"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -291,9 +291,6 @@
 }
 
 - (IBAction)registerButtonTouchUpInside:(UIButton *)sender {
-    [self updateSharedToken];
-    [self performSegueWithIdentifier:@"chooseSchool" sender:self];
-    /*
     if (![self checkPhoneNumber])
         [self popAlert:@"格式错误" withMessage:@"手机号格式错误😣"];
     else if (![self checkPassword])
@@ -301,7 +298,7 @@
     else if (![self checkPCode])
         [self popAlert:@"格式错误" withMessage:@"验证码格式错误😣"];
     else
-        [self tryRegister];*/
+        [self tryRegister];
 }
 
 - (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
@@ -316,8 +313,8 @@
 #pragma mark - Update Login Shared Token
 
 - (void)updateSharedToken {
-    NSDictionary *postData = @{@"username" : @"18868101893",//self.phoneTextField.text,
-                               @"password" : @"222222",//self.passwordTextField.text,
+    NSDictionary *postData = @{@"username" : self.phoneTextField.text,
+                               @"password" : self.passwordTextField.text,
                                @"app_key"  : @"X6K1Hfzr12EERq3ea0SZJC0XAWk4ojOy",
                                @"mobile"   : @"1",
                                @"return_url" : @"null"};

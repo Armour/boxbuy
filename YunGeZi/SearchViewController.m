@@ -34,11 +34,6 @@
 
 #pragma mark - Life Circle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"搜索界面"];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
@@ -47,6 +42,15 @@
     [self prepareMySearchBar];
     [self initHotSearchsView];
     [self refreshSearchHistory];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"搜索界面"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

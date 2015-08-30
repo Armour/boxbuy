@@ -60,11 +60,6 @@
 
 #pragma mark - Life Cycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"我要卖"];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initDict];
@@ -74,6 +69,15 @@
     [self prepareMyTextField];
     [self prepareMyIndicator];
     [self prepareMyNotification];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"我要卖"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -17,13 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationBar.translucent = YES;
-    //self.navigationBar.alpha = 1.0;
-    self.navigationBar.barTintColor = [UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.0];
-    self.navigationBar.tintColor = [UIColor whiteColor];
     UIColor * color = [UIColor whiteColor];
     NSDictionary * dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     self.navigationBar.titleTextAttributes = dict;
+    self.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationBar.barTintColor = [UIColor whiteColor];
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navibg"]
+                             forBarMetrics:UIBarMetricsDefault];
+    self.navigationBar.shadowImage = [UIImage new];
+    self.navigationBar.translucent = YES;
 }
 
 - (void)didReceiveMemoryWarning {

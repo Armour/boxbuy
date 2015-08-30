@@ -36,15 +36,6 @@ enum {
 
 #pragma mark - Life Cycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"登录界面"];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyButton];
@@ -53,6 +44,15 @@ enum {
     [self prepareMyNotification];
     [self prepareLoadingMask];
     [self prepareUserDefault];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"登录界面"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

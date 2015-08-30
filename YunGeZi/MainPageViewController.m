@@ -68,15 +68,6 @@
 
 #pragma mark - Life Circle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"首页"];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyIndicator];
@@ -88,6 +79,15 @@
     [self initWaterfallView];
     [self prepareBubbleMenu];
     [self prepareMyNotification];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"首页"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -123,7 +123,6 @@
     layout.minimumInteritemSpacing = ROW_PADDING;
     layout.sectionInset = UIEdgeInsetsMake(ROW_PADDING, ROW_PADDING, ROW_PADDING, ROW_PADDING);
     self.waterfallView.collectionViewLayout = layout;
-
     self.isFetching = NO;
 
     [self addLoadingMask];

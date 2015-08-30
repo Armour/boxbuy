@@ -88,6 +88,13 @@
 - (NSString *)photoUrlString {
     NSString *photoId = [[self cachedInfo] valueForKeyPath:@"Account.headiconid"];
     NSString *photoHash = [[self cachedInfo] valueForKeyPath:@"HeadIcon.hash"];
+    NSString *urlString = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-mid.jpg", photoId, photoHash];
+    return urlString;
+}
+
+- (NSString *)photoUrlOriString {
+    NSString *photoId = [[self cachedInfo] valueForKeyPath:@"Account.headiconid"];
+    NSString *photoHash = [[self cachedInfo] valueForKeyPath:@"HeadIcon.hash"];
     NSString *urlString = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-ori.jpg", photoId, photoHash];
     return urlString;
 }

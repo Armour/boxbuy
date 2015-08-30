@@ -131,7 +131,7 @@
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo)
-                                                 name:@"PostLoingTokenFromRootToLeftMenu"
+                                                 name:@"RootViewLoaded"
                                                object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self

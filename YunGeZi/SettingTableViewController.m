@@ -8,6 +8,7 @@
 
 #import "SettingTableViewController.h"
 #import "UserSettings.h"
+#import "MobClick.h"
 
 @interface SettingTableViewController ()
 
@@ -30,9 +31,22 @@
     self.userSettings = [[UserSettings alloc] init];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"配置页面"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"配置页面"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Preparation

@@ -7,10 +7,11 @@
 //
 
 #import "ChooseSchoolTableViewController.h"
+#import "ChooseSchoolTableViewCell.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
-#import "ChooseSchoolTableViewCell.h"
 #import "LoginInfo.h"
+#import "MobClick.h"
 
 @interface ChooseSchoolTableViewController ()
 
@@ -34,18 +35,28 @@
 @synthesize schoolSectionTitles;
 @synthesize schoolIndexTitles;
 
+#pragma mark - LifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSchoolArray];
     [self prepareMyIndicator];
-    /*AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-     [manager GET:@"http://v2.api.boxbuy.cc/getSchools"
-     parameters:@{@"json":@1}
-     success:^(AFHTTPRequestOperation *operation, id response) {
-     NSLog(@"Get School Success!!");
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-     NSLog(@"Get School Fail!!");
-     }];*/
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"修改学校"];
+    [self.navigationController.navigationBar setTranslucent:NO];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"修改学校"];
+    [self.navigationController.navigationBar setTranslucent:YES];
 }
 
 - (void)didReceiveMemoryWarning {

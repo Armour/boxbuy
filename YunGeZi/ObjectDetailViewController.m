@@ -32,6 +32,37 @@
 
 @implementation ObjectDetailViewController
 
+#pragma mark - Life Cycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"商品详情"];
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self resizeViewInPriceAndTitleView];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self prepareImageScrollView];
+    [self preparePriceAndTitleView];
+    [self prepareItemStroyView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"商品详情"];
+    self.navigationController.navigationBar.translucent = YES;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 #pragma mark - Preparation
 
 - (void)prepareImageScrollView {
@@ -98,36 +129,6 @@
     } else {
         
     }
-}
-
-#pragma mark - Life Cycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self prepareImageScrollView];
-    [self preparePriceAndTitleView];
-    [self prepareItemStroyView];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"商品详情"];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self resizeViewInPriceAndTitleView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"商品详情"];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Seque Detail

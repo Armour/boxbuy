@@ -34,12 +34,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyNotification];
-    [self PostLoginTokenToLeftMenu];
 }
 
-- (void)PostLoginTokenToLeftMenu {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostLoingTokenFromRootToLeftMenu" object:self userInfo:nil];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
+
+#pragma mark - Prepare Notification
 
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -50,14 +51,13 @@
                                              selector:@selector(hideLeftMenuView)
                                                  name:@"SideMenuToChangeSchool"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RootViewLoaded"
+                                                        object:self
+                                                      userInfo:nil];
 }
 
 - (void)hideLeftMenuView {
     [self hideMenuViewController];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 @end

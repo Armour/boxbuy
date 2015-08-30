@@ -1,14 +1,14 @@
 //
-//  ChooseSchoolTableViewCell.m
+//  AccountTableViewCell.m
 //  YunGeZi
 //
-//  Created by Chujie Zeng on 8/14/15.
+//  Created by Armour on 8/29/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "ChooseSchoolTableViewCell.h"
+#import "AccountTableViewCell.h"
 
-@implementation ChooseSchoolTableViewCell
+@implementation AccountTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
