@@ -21,6 +21,7 @@
 @interface LeftMenuViewController ()
 
 @property (strong, nonatomic) NSArray *models;
+@property (strong, nonatomic) NSArray *selectedArray;
 @property (strong, nonatomic) NSString *selectedItem;
 @property (strong, nonatomic) NSString *schoolId;
 @property (strong, nonatomic) RATreeView *treeView;
@@ -232,13 +233,16 @@
         if ([self.selectedItem isEqualToString:@""]) {
             [cell.accessoryView.layer addAnimation:[self arrowRotationAnimationWithFromValue:0.f toValue:90.f duration:0.3f] forKey:ARROW_ROTATION_ANIMATION];
             self.selectedItem = [item mainClass];
+            self.selectedArray = [item subClasses];
         } else if ([self.selectedItem isEqualToString:[item mainClass]]) {
             [cell.accessoryView.layer addAnimation:[self arrowRotationAnimationWithFromValue:90.f toValue:0.f duration:0.3f] forKey:ARROW_ROTATION_ANIMATION];
             self.selectedItem = @"";
+            self.selectedArray = nil;
         } else {
             [cell.accessoryView.layer addAnimation:[self arrowRotationAnimationWithFromValue:0.f toValue:90.f duration:0.3f] forKey:ARROW_ROTATION_ANIMATION];
             NSString *tmp = self.selectedItem;
             self.selectedItem = [item mainClass];
+            self.selectedArray = [item subClasses];
             for (int i = 0; i < [self.models count]; i++) {
                 if ([tmp isEqualToString:[[self.models objectAtIndex:i] mainClass]]) {
                     id item2 = [self treeView:self.treeView child:i ofItem:nil];
@@ -249,7 +253,13 @@
             }
         }
     } else if ([item isKindOfClass:[NSString class]]) {
-        // TODO ...
+        for (int i = 0; i < [self.models count]; i++)
+            if ([[[self.models objectAtIndex:i] mainClass] isEqualToString:self.selectedItem])
+                for (int j = 0; j < [self.selectedArray count]; j++)
+                    if ([[self.selectedArray objectAtIndex:j] isEqualToString:item]) {
+                        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:[[NSString alloc] initWithFormat:@"%d", i], @"mainCategory", [[NSString alloc] initWithFormat:@"%d", j], @"subCategory", item, @"categoryName", nil];
+                        [self segueToCategory:dict];
+                    }
     }
 }
 
@@ -292,6 +302,10 @@
 
 - (void)segueToChangeSchool {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToChangeSchool" object:self userInfo:nil];
+}
+
+- (void)segueToCategory:(NSDictionary *)dict {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToCategory" object:self userInfo:dict];
 }
 
 #pragma mark - Alert

@@ -26,6 +26,7 @@
 @synthesize sellerName;
 @synthesize sellerPhotoId;
 @synthesize sellerPhotoHash;
+@synthesize sellerIntro;
 
 - (NSString *)sizeStringFromSize:(IMAGE_SIZE)size {
     NSString *str = nil;

@@ -487,13 +487,43 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "YunGeZi/SearchResultViewController.m"
-            timestampString = "461044907.319419"
+            filePath = "YunGeZi/SellingViewController.m"
+            timestampString = "462606841.649343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-webView:didFailLoadWithError:"
+            startingLineNumber = "646"
+            endingLineNumber = "646"
+            landmarkName = "@implementation SellingViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YunGeZi/main.m"
+            timestampString = "462645964.072422"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3"
+            endingLineNumber = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YunGeZi/SearchResultViewController.m"
+            timestampString = "462656763.780923"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "-fillCellModelsForPage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -503,14 +533,62 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "YunGeZi/SellingViewController.m"
-            timestampString = "462606841.649343"
+            filePath = "YunGeZi/SearchResultViewController.m"
+            timestampString = "462656763.780923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
-            landmarkName = "@implementation SellingViewController"
-            landmarkType = "3">
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-fillCellModelsForPage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YunGeZi/SearchResultViewController.m"
+            timestampString = "462656634.26237"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__68-[SearchResultViewController collectionView:cellForItemAtIndexPath:]_block_invoke"
+                  moduleName = "YunGeZi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/armour/Desktop/YunGeZi/YunGeZi/SearchResultViewController.m"
+                  timestampString = "462652231.988041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "236"
+                  endingLineNumber = "236"
+                  offsetFromSymbolStart = "340">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__68-[SearchResultViewController collectionView:cellForItemAtIndexPath:]_block_invoke_2"
+                  moduleName = "YunGeZi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/armour/Desktop/YunGeZi/YunGeZi/SearchResultViewController.m"
+                  timestampString = "462652231.988221"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "236"
+                  endingLineNumber = "236"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

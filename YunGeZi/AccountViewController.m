@@ -217,6 +217,7 @@
     } else if (indexPath.item == 4) {
         [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
     }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Segue Detail

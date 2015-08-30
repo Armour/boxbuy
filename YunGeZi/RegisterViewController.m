@@ -134,7 +134,10 @@
 }
 
 - (void)prepareMyNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPcodeButton:) name:@"CountDownTimerInRegister" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshPcodeButton:)
+                                                 name:@"CountDownTimerInRegister"
+                                               object:nil];
     manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"image/png", @"application/json", nil];

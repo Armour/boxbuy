@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBStoreHouseRefreshControl.h"
+#import "CHTCollectionViewWaterfallLayout.h"
 
-@interface CategoryDetailViewController : UIViewController <UIWebViewDelegate>
+@interface CategoryDetailViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 
-@property (strong, nonatomic) NSString* categoryNumber;
-@property (strong, nonatomic) NSString *objectNumber;
+@property (strong, nonatomic) NSString *mainCategory;
+@property (strong, nonatomic) NSString *subCategory;
+@property (strong, nonatomic) NSString *categoryName;
+@property (strong, nonatomic) CBStoreHouseRefreshControl *storeHouseRefreshControl;
 
 @end

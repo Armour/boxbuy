@@ -1,5 +1,5 @@
 //
-//  WaterfallCellView.m
+//  waterfallcellview.m
 //  YunGeZi
 //
 //  Created by Chujie Zeng on 8/6/15.
@@ -42,6 +42,7 @@
                                               forState:UIControlStateNormal
                                       placeholderImage:[UIImage imageNamed:@"default_cover"]
                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+    NSLog(@"itemPhoto 11111111111");
                                                  if (error) {
                                                      callback(NO, 0, 0);
                                                  } else {
@@ -64,7 +65,7 @@
     [oldPriceStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, oldPriceStr.length)];
     [oldPriceStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, oldPriceStr.length)];
     NSMutableAttributedString *newPriceStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@元", newPrice]];
-    [newPriceStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, oldPriceStr.length)];
+    [newPriceStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, newPriceStr.length)];
     [newPriceStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1.00 green:0.66 blue:0.16 alpha:1.00] range:NSMakeRange(0, newPriceStr.length)];
     if ([oldPrice isEqualToString:newPrice]) {
         NSMutableAttributedString *str = newPriceStr;

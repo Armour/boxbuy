@@ -297,6 +297,15 @@
 			name = MyCustomize;
 			sourceTree = "<group>";
 		};
+		768903F91B93984E00322727 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				76A251601AFB866A0017F285 /* CategoryDetailViewController.h */,
+				76A251611AFB866A0017F285 /* CategoryDetailViewController.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +398,7 @@
 				47F4BBB91B7B47CB00FA8524 /* Setting */,
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
 				76AD1BCF1B7B30E000BA8512 /* MainPage */,
+				768903F91B93984E00322727 /* Category */,
 				475691C11B8205CD00D7F78E /* Search */,
 				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
 				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */,
@@ -402,8 +412,6 @@
 				76DB96501B92DE6B004FEDFD /* RecycleViewController.m */,
 				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
 				7603A82B1AFC682A007E4B78 /* ShopViewController.m */,
-				76A251601AFB866A0017F285 /* CategoryDetailViewController.h */,
-				76A251611AFB866A0017F285 /* CategoryDetailViewController.m */,
 				7606DCBC1B8EA55200F489BA /* Verification */,
 				7606DCBE1B8F9AD600F489BA /* MyCustomize */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,

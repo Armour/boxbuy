@@ -56,6 +56,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"搜索界面"];
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

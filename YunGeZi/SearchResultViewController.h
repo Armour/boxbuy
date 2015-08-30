@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBStoreHouseRefreshControl.h"
+#import "CHTCollectionViewWaterfallLayout.h"
 
-@interface SearchResultViewController : UIViewController <UIWebViewDelegate>
+@interface SearchResultViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 
 @property (strong, nonatomic) NSString *searchQuery;
-@property (strong, nonatomic) NSString *objectNumber;
+@property (strong, nonatomic) CBStoreHouseRefreshControl *storeHouseRefreshControl;
                    
 @end

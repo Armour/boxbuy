@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "MyNavigationController.h"
 #import "MainPageViewController.h"
 #import "ObjectDetailViewController.h"
 #import "ChooseSchoolTableViewController.h"
+#import "CategoryDetailViewController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
-#import "AFNetworking.h"
+#import "AFHTTPRequestOperationManager.h"
 #import "DWBubbleMenuButton.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/UIButton+WebCache.h"
@@ -47,10 +47,12 @@
 @property (strong, nonatomic) NSMutableArray *hotItemUrl;
 @property (strong, nonatomic) NSMutableArray *itemId;
 @property (strong, nonatomic) NSMutableArray *sellerId;
-@property (strong, nonatomic) NSMutableArray *sellerIntro;
 @property (strong, nonatomic) NSString *choosedItemId;
 @property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) NSString *choosedHotItemUrl;
+@property (strong, nonatomic) NSString *mainCategory;
+@property (strong, nonatomic) NSString *subCategory;
+@property (strong, nonatomic) NSString *categoryName;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
 @property (strong, nonatomic) UIView *hottestUserView;
@@ -149,10 +151,7 @@
                   self.cellModels = [[NSMutableArray alloc] init];
                   self.itemId = [[NSMutableArray alloc] init];
                   self.sellerId = [[NSMutableArray alloc] init];
-                  self.sellerIntro = [[NSMutableArray alloc] init];
               }
-              for (int i = 0; i < [[response valueForKeyPath:@"result"] count]; i++)
-                  [self.sellerIntro addObject:SELLER_INTRO_DEFAULT];
               int indexPath = 0;
               for (id obj in [response valueForKeyPath:@"result"]) {
                   WaterfallCellModel *model = [[WaterfallCellModel alloc] init];
@@ -166,20 +165,7 @@
                   [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
-
-                  [manager POST:@"http://v2.api.boxbuy.cc/getUserData"
-                     parameters:@{@"access_token" : [LoginInfo sharedInfo].accessToken,
-                                  @"userid" : [obj valueForKeyPath:@"Seller.userid"]}
-                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            [self.sellerIntro setObject:[responseObject valueForKeyPath:@"Account.intro"] atIndexedSubscript:(page - 1) * ITEMS_PER_PAGE + indexPath];
-                            NSIndexPath *indexPaths = [NSIndexPath indexPathForItem:(page - 1) * ITEMS_PER_PAGE + indexPath inSection:0];
-                            [self.waterfallView reloadItemsAtIndexPaths:@[indexPaths]];
-                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            [self.sellerIntro setObject:SELLER_INTRO_FAIL atIndexedSubscript:(page - 1) * ITEMS_PER_PAGE + indexPath];
-                            NSIndexPath *indexPaths = [NSIndexPath indexPathForItem:(page - 1) * ITEMS_PER_PAGE + indexPath inSection:0];
-                            [self.waterfallView reloadItemsAtIndexPaths:@[indexPaths]];
-                        }];
-
+                  [model setSellerIntro: [obj valueForKeyPath:@"Seller.intro"]];
                   [self.cellModels addObject:model];
                   [self.itemId addObject:[obj valueForKeyPath:@"Item.itemid"]];
                   [self.sellerId addObject:[obj valueForKeyPath:@"Seller.userid"]];
@@ -194,6 +180,8 @@
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Fetch failed...");
               self.isFetching = NO;
+              [self.activityIndicator stopAnimating];
+              [self removeLoadingMask];
               [self popAlert:@"加载失败" withMessage:@"貌似网络不太好哦"];
           }];
 }
@@ -238,6 +226,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(performSegueToChangeSchool)
                                                  name:@"SideMenuToChangeSchool"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(performSegueToCategory:)
+                                                 name:@"SideMenuToCategory"
                                                object:nil];
 }
 
@@ -534,7 +526,7 @@
     [cell setItemOldPrice:model.itemOldPrice NewPrice:model.itemNewPrice];
     [cell setItemTitle:model.itemTitle];
     [cell setSellerName:model.sellerName];
-    [cell setSellerIntro:[self.sellerIntro objectAtIndex:indexPath.item]];
+    [cell setSellerIntro:model.sellerIntro];
     [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_MEDIUM]];
     [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
         if (succeeded) {
@@ -609,10 +601,6 @@
     }
 }
 
-- (void)configButtonTouchUpInside:(UIBarButtonItem *)sender {
-    [self performSegueToUserSettingsPage];
-}
-
 #pragma mark - DWBubbleMenuView
 
 - (void)bubbleMenuButtonWillExpand:(DWBubbleMenuButton *)expandableView {
@@ -668,7 +656,7 @@
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - Segue Detail
@@ -684,6 +672,11 @@
     } else if ([segue.identifier isEqualToString:@"changeSchool"]) {
         ChooseSchoolTableViewController *controller = (ChooseSchoolTableViewController *)segue.destinationViewController;
         [controller setTitle:@"修改查看学校"];
+    } else if ([segue.identifier isEqualToString:@"showCategoryPage"]) {
+        CategoryDetailViewController *controller = (CategoryDetailViewController *)segue.destinationViewController;
+        [controller setMainCategory:self.mainCategory];
+        [controller setSubCategory:self.subCategory];
+        [controller setCategoryName:self.categoryName];
     }
 }
 
@@ -711,6 +704,14 @@
     [self performSegueWithIdentifier:@"showAddRecyclePage" sender:self];
 }
 
+- (void)performSegueToCategory:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    self.mainCategory = [dict objectForKey:@"mainCategory"];
+    self.subCategory = [dict objectForKey:@"subCategory"];
+    self.categoryName = [dict objectForKey:@"categoryName"];
+    [self performSegueWithIdentifier:@"showCategoryPage" sender:self];
+}
+
 #pragma mark - Alert
 
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
@@ -718,7 +719,7 @@
                                                     message:message
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
-                                          otherButtonTitles: nil];
+                                          otherButtonTitles:nil];
     [alert show];
 }
 

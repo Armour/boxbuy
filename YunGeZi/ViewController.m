@@ -46,6 +46,8 @@ enum {
     [self prepareMyNotification];
     [self prepareLoadingMask];
     [self prepareUserDefault];
+    self.textUsername.text = @"18868101893";
+    self.textPassword.text = @"222222";
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -51,6 +51,10 @@
                                              selector:@selector(hideLeftMenuView)
                                                  name:@"SideMenuToChangeSchool"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLeftMenuView)
+                                                 name:@"SideMenuToCategory"
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RootViewLoaded"
                                                         object:self
                                                       userInfo:nil];

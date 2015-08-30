@@ -25,6 +25,8 @@
 @property (readonly, nonatomic) NSInteger numOfNewMsg;
 @property (readonly, nonatomic) NSInteger numOfMsgSend;
 @property (readonly, nonatomic) NSInteger numOfMsgRecv;
+@property (nonatomic) BOOL searchViewIsDisappeared;
+@property (nonatomic) BOOL categoryViewIsDisappeared;
 
 
 + (LoginInfo *)sharedInfo;
