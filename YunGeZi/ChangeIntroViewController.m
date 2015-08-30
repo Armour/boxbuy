@@ -1,42 +1,42 @@
 //
-//  ChangeNickNameViewController.m
+//  ChangeIntroViewController.m
 //  YunGeZi
 //
-//  Created by Armour on 5/20/15.
+//  Created by Armour on 8/29/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "ChangeNickNameViewController.h"
+#import "ChangeIntroViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "MobClick.h"
 #import "LoginInfo.h"
 
-@interface ChangeNickNameViewController ()
+@interface ChangeIntroViewController ()
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIView *loadingMask;
-@property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
+@property (weak, nonatomic) IBOutlet UITextView *introTextView;
 
 @end
 
-
-@implementation ChangeNickNameViewController
+@implementation ChangeIntroViewController
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyIndicator];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"修改昵称"];
+    [MobClick beginLogPageView:@"修改简介"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"修改昵称"];
+    [MobClick endLogPageView:@"修改简介"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,13 +77,13 @@
     [self.activityIndicator startAnimating];
     [self.view bringSubviewToFront:self.activityIndicator];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://v2.api.boxbuy.cc/setAccountNickname"
-       parameters:@{@"nickname" : self.nicknameTextField.text,
+    [manager POST:@"http://v2.api.uboxs.com/setAccountIntro"
+       parameters:@{@"intro" : self.introTextView.text,
                     @"access_token" : [LoginInfo sharedInfo].accessToken}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               if ([[responseObject valueForKeyPath:@"uniError"] isEqual:@0]) {
                   [[LoginInfo sharedInfo] refreshSharedInfo];
-                  [self popAlert:@"修改成功~" withMessage:@"耶！改名成功啦~😝"];
+                  [self popAlert:@"修改成功~" withMessage:@"耶！个人简介修改成功~😝"];
                   [self.navigationController popViewControllerAnimated:YES];
               } else {
                   [self popAlert:@"修改失败" withMessage:[responseObject valueForKeyPath:@"msg"]];

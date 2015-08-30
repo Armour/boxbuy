@@ -38,6 +38,8 @@
     [self initUserInfo];
     [self prepareButton];
     [self prepareTableView];
+    [self prepareMyNotification];
+    [self prepareBlurEffect];
     [self refreshUserInfo];
 }
 
@@ -92,26 +94,46 @@
 #pragma mark - Init User Info
 
 - (void)initUserInfo {
+    self.userImage.layer.cornerRadius = self.userImage.bounds.size.height / 2;
+    self.userImage.clipsToBounds = YES;
+    self.userImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userImageTouchUpInside)];
+    [self.userImage addGestureRecognizer:tapGesture];
+}
+
+#pragma mark - Refresh User Info
+
+- (void)refreshUserInfo {
     void (^_setImage)(UIImageView *) = ^(UIImageView *imageView) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:[LoginInfo sharedInfo].photoUrlString]
                      placeholderImage:[UIImage imageNamed:@"default_headicon"]];
     };
     _setImage(self.headerBackgroundImage);
     _setImage(self.userImage);
+    [self setProductsCount:[LoginInfo sharedInfo].numOfItem];
+    [self setFollowCount:[LoginInfo sharedInfo].numOfFollow];
+    [self setFansCount:[LoginInfo sharedInfo].numOfFan];
+    [self setCommentsCount:0];
+    [self setUserResume:[LoginInfo sharedInfo].intro];
+    [self.userNameLabel setText:[LoginInfo sharedInfo].nickname];
+}
 
-    self.userImage.layer.cornerRadius = self.userImage.bounds.size.height / 2;
-    self.userImage.clipsToBounds = YES;
-    self.userImage.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userImageTouchUpInside)];
-    [self.userImage addGestureRecognizer:tapGesture];
+#pragma mark - Notification
 
-    self.userNameLabel.text = [LoginInfo sharedInfo].nickname;
+- (void)prepareMyNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshUserInfo)
+                                                 name:@"CachedInfoRefreshed"
+                                               object:nil];
+}
 
+#pragma mark - Prepare Blur Effect
+
+- (void)prepareBlurEffect {
     UIVisualEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     effectView.frame = self.headerBackgroundImage.bounds;
     [self.headerBackgroundImage addSubview:effectView];
-    [self setUserResume:[LoginInfo sharedInfo].intro];
 }
 
 #pragma mark - Prepare Function
@@ -152,15 +174,6 @@
     self.tableView.sectionHeaderHeight = 10;
     self.tableView.sectionFooterHeight = 10;
     self.automaticallyAdjustsScrollViewInsets = NO;
-}
-
-#pragma mark - Refresh User Info
-
-- (void)refreshUserInfo {
-    [self setProductsCount:[LoginInfo sharedInfo].numOfItem];
-    [self setFollowCount:[LoginInfo sharedInfo].numOfFollow];
-    [self setFansCount:[LoginInfo sharedInfo].numOfFan];
-    [self setCommentsCount:0];
 }
 
 #pragma mark - Gesture Event

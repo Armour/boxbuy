@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "SellingViewController.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetCustomPicker.h"
@@ -50,8 +51,7 @@
 @property (strong, nonatomic) NSMutableDictionary *dict;
 @property (weak, nonatomic) NSString *letters;
 @property (strong, nonatomic) UIView *loadingMask;
-
-- (NSString *)randomStringWithLength:(int)len;
+@property (strong, nonatomic) UIAlertController *actionSheet;
 
 @end
 
@@ -65,6 +65,7 @@
     [self initDict];
     [self initObjectAttribute];
     [self prepareLoadingMask];
+    [self prepareActionSheet];
     [self prepareMyTxetView];
     [self prepareMyTextField];
     [self prepareMyIndicator];
@@ -148,26 +149,48 @@
     return urlRequest;
 }
 
+#pragma mark - Prepare Action Sheet
+
+- (void)prepareActionSheet {
+    self.actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                           message:nil
+                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                         }];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"使用相机"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             [self takePhoto:1];
+                                                         }];
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"相册获取"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            [self takePhoto:2];
+                                                        }];
+    [self.actionSheet addAction:cameraAction];
+    [self.actionSheet addAction:albumAction];
+    [self.actionSheet addAction:cancelAction];
+}
+
 #pragma mark - Take Photo
 
 - (IBAction)takePhotoButtonTouchUpInside:(UIButton *)sender {
     if (self.photoNumber == 5) {
         [self popAlert:@"图片数量超限" withMessage:@"哇您好像已经为您的宝贝照了很多照片啦~"];
-    } else
-        [self takePhoto];
+    } else {
+        [self presentViewController:self.actionSheet animated:YES completion:nil];
+    }
 }
 
-- (void)takePhoto {
+- (void)takePhoto:(NSUInteger)mark {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] &&
-        [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
-        NSLog(@"!!!!both");
-    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if (mark == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    } else if (mark == 2 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"照片获取失败" message:@"没有可用的照片来源" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -233,7 +256,6 @@
     NSError *requestError = [[NSError alloc] init];
     NSHTTPURLResponse *requestResponse;
     NSData *requestHandler = [NSURLConnection sendSynchronousRequest:request returningResponse:&requestResponse error:&requestError];
-    //NSLog(@"Response code: %ld", (long)[requestResponse statusCode]);
     NSError *jsonError = nil;
     if (requestHandler != nil) {
         NSDictionary *jsonData = [NSJSONSerialization

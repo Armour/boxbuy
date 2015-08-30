@@ -9,8 +9,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RegisterViewController.h"
 #import "ChooseSchoolTableViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 #import "MobClick.h"
-#import "AFNetworking.h"
 #import "DeviceDetect.h"
 #import "LoginInfo.h"
 

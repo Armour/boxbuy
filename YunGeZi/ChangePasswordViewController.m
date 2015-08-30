@@ -8,8 +8,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ChangePasswordViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 #import "MobClick.h"
-#import "AFNetworking.h"
 #import "DeviceDetect.h"
 
 @interface ChangePasswordViewController ()

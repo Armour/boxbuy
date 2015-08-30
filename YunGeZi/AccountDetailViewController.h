@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AccountDetailTableViewController : UITableViewController
+@interface AccountDetailTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

@@ -923,7 +923,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7iS-xA-Osf">
                                 <rect key="frame" x="0.0" y="89" width="375" height="55"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入6~20位昵称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MX7-8a-m86">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入6~16位昵称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MX7-8a-m86">
                                         <rect key="frame" x="8" y="13" width="359" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -972,8 +972,14 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="0xc-mM-HRT"/>
                         <barButtonItem key="rightBarButtonItem" title="确认" id="tpr-li-auH">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="changeNicknameButtonTouchUpInside:" destination="xWx-yG-ynS" id="IkT-ae-g8y"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nicknameTextField" destination="MX7-8a-m86" id="fhM-F7-nbX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0QK-ld-WTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -982,7 +988,7 @@
         <!--个性签名-->
         <scene sceneID="Kje-5V-zdU">
             <objects>
-                <viewController id="PUk-em-TCo" sceneMemberID="viewController">
+                <viewController id="PUk-em-TCo" customClass="ChangeIntroViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Saj-Ej-ByH"/>
                         <viewControllerLayoutGuide type="bottom" id="Mwq-aa-J7g"/>
@@ -994,10 +1000,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIp-Qn-5oM">
                                 <rect key="frame" x="0.0" y="89" width="375" height="155"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请输入最多不超过30字的个性签名~" translatesAutoresizingMaskIntoConstraints="NO" id="unq-2q-MOH">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="unq-2q-MOH">
                                         <rect key="frame" x="8" y="8" width="359" height="127"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" red="0.65528330180000005" green="0.65528330180000005" blue="0.65528330180000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -1011,7 +1017,7 @@
                                     <constraint firstItem="unq-2q-MOH" firstAttribute="leading" secondItem="CIp-Qn-5oM" secondAttribute="leadingMargin" id="TKz-uo-EEI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  个性签名可以随时修改~" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GW-PQ-qVM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  请输入最多不超过30字的个性签名~" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GW-PQ-qVM">
                                 <rect key="frame" x="0.0" y="252" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nUH-5q-jn1"/>
@@ -1041,8 +1047,14 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="ivk-4O-Atp"/>
                         <barButtonItem key="rightBarButtonItem" title="确认" id="SDY-UD-qK2">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="changeNicknameButtonTouchUpInside:" destination="PUk-em-TCo" id="zxA-tf-I5c"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="introTextView" destination="unq-2q-MOH" id="wSF-JU-Ay3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftI-26-iRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1220,7 +1232,8 @@
                         <outlet property="introLabel" destination="Kkt-1k-GpV" id="dgk-J5-qrO"/>
                         <outlet property="nickenameLabel" destination="Prh-io-bWP" id="cot-Zl-ntG"/>
                         <segue destination="xWx-yG-ynS" kind="show" identifier="showChangeNickname" id="6GM-n5-1fd"/>
-                        <segue destination="PUk-em-TCo" kind="show" id="rvV-gc-iKg"/>
+                        <segue destination="PUk-em-TCo" kind="show" identifier="showChangeUserIntro" id="rvV-gc-iKg"/>
+                        <segue destination="wlc-Ki-NRX" kind="show" identifier="showUserAvatar2" id="DYM-ZL-Lnn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vf9-7N-Cqc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3674,9 +3687,10 @@
         <image name="verification" width="684" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GCd-gI-drE"/>
         <segue reference="0p7-WM-ggn"/>
+        <segue reference="GCd-gI-drE"/>
         <segue reference="BA8-0R-UkZ"/>
+        <segue reference="DYM-ZL-Lnn"/>
         <segue reference="IRI-1L-pUC"/>
     </inferredMetricsTieBreakers>
 </document>

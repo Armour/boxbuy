@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangeNickNameViewController : UIViewController <UIWebViewDelegate>
+@interface ChangeNickNameViewController : UIViewController 
 
 @end
