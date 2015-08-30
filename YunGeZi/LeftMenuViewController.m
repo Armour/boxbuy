@@ -189,7 +189,7 @@
 
 - (CGFloat)treeView:(RATreeView *)treeView heightForRowForItem:(id)item {
     if ([item isKindOfClass:[NSString class]])
-        return 25;
+        return 32;
     return 40;
 }
 
