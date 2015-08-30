@@ -23,6 +23,8 @@
 @property (strong, nonatomic) UIView *loadingMask;
 @property (nonatomic) NSInteger timerCountInRegister;
 @property (nonatomic) NSInteger timerCountInChangePassword;
+@property (nonatomic) BOOL isShowPasswd;
+@property (weak, nonatomic) IBOutlet UIButton *showPasswdButton;
 
 @end
 
@@ -73,6 +75,10 @@ enum {
 - (void)prepareMyButton {
     [self.loginButton setBackgroundColor:[UIColor colorWithRed:0.13 green:0.73 blue:0.56 alpha:1.00]];
     self.loginButton.layer.cornerRadius = 10.0f;
+    [self.registerButton setBackgroundColor:[UIColor whiteColor]];
+    self.registerButton.layer.cornerRadius = 10.0f;
+    self.registerButton.layer.borderWidth = 1.0f;
+    self.registerButton.layer.borderColor = [UIColor grayColor].CGColor;
 }
 
 - (void)prepareMyTextField {
@@ -80,14 +86,9 @@ enum {
     self.textPassword.delegate = self;
     self.textUsername.tag = textUsernameTag;
     self.textPassword.tag = textPasswordTag;
-    self.textUsername.layer.cornerRadius = 10.0f;
-    self.textPassword.layer.cornerRadius = 10.0f;
-    self.textUsername.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.textPassword.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.textUsername.layer.borderWidth = 1.0f;
-    self.textPassword.layer.borderWidth = 1.0f;
     self.textUsername.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.textPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.isShowPasswd = NO;
 }
 
 - (void)prepareMyIndicator {
@@ -253,6 +254,17 @@ enum {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolName"];
 }
 
+#pragma mark - Show Password Button
+
+- (IBAction)showPasswdButtonTouchUpInside:(UIButton *)sender {
+    self.isShowPasswd ^= 1;
+    self.textPassword.secureTextEntry = !self.isShowPasswd;
+    NSString* imageName = self.isShowPasswd ? @"eye_open" : @"eye_close";
+    [self.showPasswdButton setImage:[UIImage imageNamed:imageName]
+                           forState:UIControlStateNormal];
+    [self.textPassword becomeFirstResponder];
+}
+
 #pragma mark - TextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -275,10 +287,10 @@ enum {
     [UIView setAnimationBeginsFromCurrentState: YES];
     switch (textField.tag) {
         case textUsernameTag:
-            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 100, self.view.frame.size.width, self.view.frame.size.height);
+            //self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 100, self.view.frame.size.width, self.view.frame.size.height);
             break;
         case textPasswordTag:
-            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
+            //self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
             break;
         default:
             break;
@@ -307,10 +319,10 @@ enum {
     [UIView setAnimationBeginsFromCurrentState: YES];
     switch (textField.tag) {
         case textUsernameTag:
-            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 100, self.view.frame.size.width, self.view.frame.size.height);
+            //self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 100, self.view.frame.size.width, self.view.frame.size.height);
             break;
         case textPasswordTag:
-            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 150, self.view.frame.size.width, self.view.frame.size.height);
+            //self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 150, self.view.frame.size.width, self.view.frame.size.height);
             break;
         default:
             break;
@@ -328,6 +340,10 @@ enum {
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
+}
+
+- (IBAction)forgetPasswordIconTouchUpInside:(UITapGestureRecognizer *)sender {
+    [self performSegueWithIdentifier:@"forgetPassword" sender:self];
 }
 
 #pragma mark - Alert

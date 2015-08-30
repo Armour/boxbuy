@@ -496,7 +496,7 @@
     UIButton *recycleButton = [self createBubbleButtonWithImageName:@"guide_entry_recycle"
                                                                size:buttonSize
                                                              target:nil
-                                                             action:@selector(performSegueToSellingPage)];
+                                                             action:@selector(performSegueToAddRecycle)];
     UIButton *sellButton = [self createBubbleButtonWithImageName:@"guide_entry_upload"
                                                             size:buttonSize
                                                           target:nil
@@ -688,28 +688,27 @@
 }
 
 - (void)performSegueToSearchPage {
-    NSLog(@"SEGUE TO SEARCHPAGE");
     [self performSegueWithIdentifier:@"showSearchPage" sender:self];
 }
 
 - (void)performSegueToSellingPage {
-    NSLog(@"SEGUE TO SELLINGPAGE");
     [self performSegueWithIdentifier:@"showSellingPage" sender:self];
 }
 
 - (void)performSegueToUserSettingsPage {
-    NSLog(@"SEGUE TO SETTINGSPAGE");
     [self performSegueWithIdentifier:@"showUserSettings" sender:self];
 }
 
 - (void)performSegueToAccountPage {
-    NSLog(@"SEGUE TO ACCOUNTPAGE");
     [self performSegueWithIdentifier:@"showAccount" sender:self];
 }
 
 - (void)performSegueToChangeSchool {
-    NSLog(@"SEGUE TO CHANGESCHOOL");
     [self performSegueWithIdentifier:@"changeSchool" sender:self];
+}
+
+- (void)performSegueToAddRecycle {
+    [self performSegueWithIdentifier:@"showAddRecyclePage" sender:self];
 }
 
 #pragma mark - Alert

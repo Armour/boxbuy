@@ -47,6 +47,7 @@
 		76DB96471B9232F6004FEDFD /* AccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DB96461B9232F6004FEDFD /* AccountTableViewCell.m */; };
 		76DB964B1B924617004FEDFD /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DB964A1B924617004FEDFD /* AccountDetailViewController.m */; };
 		76DB964E1B92B64D004FEDFD /* ChangeIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DB964D1B92B64D004FEDFD /* ChangeIntroViewController.m */; };
+		76DB96511B92DE6B004FEDFD /* RecycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DB96501B92DE6B004FEDFD /* RecycleViewController.m */; };
 		76E333321AEDF8C40077BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333311AEDF8C40077BACF /* main.m */; };
 		76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E333341AEDF8C40077BACF /* AppDelegate.m */; };
 		76E333381AEDF8C40077BACF /* YunGeZi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */; };
@@ -145,6 +146,8 @@
 		76DB964A1B924617004FEDFD /* AccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailViewController.m; sourceTree = "<group>"; };
 		76DB964C1B92B64D004FEDFD /* ChangeIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeIntroViewController.h; sourceTree = "<group>"; };
 		76DB964D1B92B64D004FEDFD /* ChangeIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeIntroViewController.m; sourceTree = "<group>"; };
+		76DB964F1B92DE6B004FEDFD /* RecycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecycleViewController.h; sourceTree = "<group>"; };
+		76DB96501B92DE6B004FEDFD /* RecycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecycleViewController.m; sourceTree = "<group>"; };
 		76E3332C1AEDF8C40077BACF /* YunGeZi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunGeZi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E333301AEDF8C40077BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E333311AEDF8C40077BACF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 				7606DCBD1B8F996A00F489BA /* SellingPage */,
 				7603A8271AFC58F6007E4B78 /* OrderViewController.h */,
 				7603A8281AFC58F6007E4B78 /* OrderViewController.m */,
+				76DB964F1B92DE6B004FEDFD /* RecycleViewController.h */,
+				76DB96501B92DE6B004FEDFD /* RecycleViewController.m */,
 				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
 				7603A82B1AFC682A007E4B78 /* ShopViewController.m */,
 				76A251601AFB866A0017F285 /* CategoryDetailViewController.h */,
@@ -592,6 +597,7 @@
 				47F4BBB81B7B17B400FA8524 /* LeftMenuTreeViewModel.m in Sources */,
 				474C5EFE1B732E7F00CDE2AF /* WaterfallCellView.m in Sources */,
 				76E333351AEDF8C40077BACF /* AppDelegate.m in Sources */,
+				76DB96511B92DE6B004FEDFD /* RecycleViewController.m in Sources */,
 				76DB964B1B924617004FEDFD /* AccountDetailViewController.m in Sources */,
 				7609A10C1AFF681D00B134C9 /* ObjectBuyingResultViewController.m in Sources */,
 				47110B2A1B77A2DD001C9B5A /* LeftMenuViewController.m in Sources */,

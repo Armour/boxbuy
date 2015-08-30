@@ -1,23 +1,22 @@
 //
-//  OrderViewController.m
+//  RecycleViewController.m
 //  YunGeZi
 //
-//  Created by Armour on 5/8/15.
+//  Created by Armour on 8/29/15.
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#import "OrderViewController.h"
+#import "RecycleViewController.h"
 #import "MobClick.h"
 
-@interface OrderViewController ()
+@interface RecycleViewController ()
 
 @property (strong, nonatomic) IBOutlet UIWebView *orderWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
 
-
-@implementation OrderViewController
+@implementation RecycleViewController
 
 - (void)prepareMyIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -30,7 +29,7 @@
 
 - (void)loadWebViewRequest {
     self.orderWebView.delegate = self;
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/account/order.html"];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/huisou.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_orderWebView loadRequest:request];
 }
@@ -63,12 +62,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"我的订单"];
+    [MobClick beginLogPageView:@"添加回收"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"我的订单"];
+    [MobClick endLogPageView:@"添加回收"];
 }
 
 @end
