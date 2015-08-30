@@ -12,8 +12,7 @@
 
 @interface CategoryDetailViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 
-@property (strong, nonatomic) NSString *mainCategory;
-@property (strong, nonatomic) NSString *subCategory;
+@property (strong, nonatomic) NSString *categoryNum;
 @property (strong, nonatomic) NSString *categoryName;
 @property (strong, nonatomic) CBStoreHouseRefreshControl *storeHouseRefreshControl;
 

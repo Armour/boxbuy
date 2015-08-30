@@ -60,7 +60,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"分类结果"];
-    self.waterfallView.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -70,15 +69,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"分类结果"];
-    [LoginInfo sharedInfo].categoryViewIsDisappeared = YES;
-    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.waterfallView.delegate = nil;
+    [LoginInfo sharedInfo].categoryViewIsDisappeared = YES;
+}
+
+- (void)dealloc {
+    [self.waterfallView setDelegate:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,7 +108,7 @@
     self.isFetching = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://v2.api.boxbuy.cc/searchItems"
-       parameters:@{@"c" : self.mainCategory,
+       parameters:@{@"c" : self.categoryNum,
                     @"schoolid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"schoolId"],
                     @"p" : @(page),
                     @"pp" : @ITEMS_PER_PAGE}
@@ -167,7 +166,7 @@
     self.navigationItem.title = [[NSString alloc] initWithFormat:@"分类：%@", self.categoryName];
 }
 
-#pragma mark - Prepare Notification
+#pragma mark - Prepare View Status
 
 - (void)prepareViewStatus {
     [LoginInfo sharedInfo].categoryViewIsDisappeared = NO;
@@ -235,20 +234,26 @@
     [cell setSellerName:model.sellerName];
     [cell setSellerIntro:model.sellerIntro];
     [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_MEDIUM]];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
-        if (succeeded) {
-            [UIView setAnimationsEnabled:NO];
-            if ([LoginInfo sharedInfo].categoryViewIsDisappeared) return;
-            [collectionView performBatchUpdates:^{
-                [model setImageWidth:width];
-                [model setImageHeight:height];
-                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-            } completion:^(BOOL finished) {
-                [UIView setAnimationsEnabled:YES];
-            }];
-        }
-    }];
-
+    __weak CategoryDetailViewController *weakSelf = self;
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM]
+                                                  withWeakSelf:weakSelf
+                                                 withIndexPath:indexPath
+                             callback:^(BOOL succeeded, CGFloat width, CGFloat height, NSIndexPath *indexPath, id weakSelf) {
+                                 if (succeeded) {
+                                     if (![LoginInfo sharedInfo].categoryViewIsDisappeared) {
+                                         [UIView setAnimationsEnabled:NO];
+                                         CategoryDetailViewController *tmpSelf = weakSelf;
+                                         [tmpSelf.waterfallView performBatchUpdates:^{
+                                             WaterfallCellModel *weakModel = [tmpSelf.cellModels objectAtIndex:indexPath.item];
+                                             [weakModel setImageWidth:width];
+                                             [weakModel setImageHeight:height];
+                                             [tmpSelf.waterfallView reloadItemsAtIndexPaths:@[indexPath]];
+                                         } completion:^(BOOL finished) {
+                                             [UIView setAnimationsEnabled:YES];
+                                         }];
+                                     };
+                                 }
+                             }];
     [cell.itemImageButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -271,7 +276,7 @@
     if (imageHight < itemWidth * 0.8)
         imageHight = itemWidth * 0.8;
     CGFloat itemHeight = imageHight + model.titleHeight + 88;
-    CGSize  itemsize = CGSizeMake(itemWidth, itemHeight);
+    CGSize itemsize = CGSizeMake(itemWidth, itemHeight);
     return itemsize;
 }
 
@@ -328,12 +333,6 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
-}
-
-#pragma mark - Back Button Event
-
-- (IBAction)backButtonTouchUpInside:(UIBarButtonItem *)sender {
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark - Segue Detail

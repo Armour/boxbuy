@@ -36,17 +36,19 @@
 
 #pragma mark - Set Property                        
 
-- (void)setItemImageWithStringAsync:(NSString *)imageString callback:(void (^)(BOOL, CGFloat, CGFloat))callback {
+- (void)setItemImageWithStringAsync:(NSString *)imageString
+                       withWeakSelf:(id)weakSelf
+                      withIndexPath:(NSIndexPath *)indexPath
+                           callback:(void (^)(BOOL, CGFloat, CGFloat, NSIndexPath *, id))callback {
     NSURL *url = [NSURL URLWithString:imageString];
     [self.itemImageButton sd_setBackgroundImageWithURL:url
                                               forState:UIControlStateNormal
                                       placeholderImage:[UIImage imageNamed:@"default_cover"]
                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-    NSLog(@"itemPhoto 11111111111");
                                                  if (error) {
-                                                     callback(NO, 0, 0);
+                                                     callback(NO, 0, 0, indexPath, weakSelf);
                                                  } else {
-                                                     callback(YES, image.size.width, image.size.height);
+                                                     callback(YES, image.size.width, image.size.height, indexPath, weakSelf);
                                                  }
                                              }];
 }

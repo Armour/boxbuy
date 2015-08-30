@@ -50,8 +50,7 @@
 @property (strong, nonatomic) NSString *choosedItemId;
 @property (strong, nonatomic) NSString *choosedSellerId;
 @property (strong, nonatomic) NSString *choosedHotItemUrl;
-@property (strong, nonatomic) NSString *mainCategory;
-@property (strong, nonatomic) NSString *subCategory;
+@property (strong, nonatomic) NSString *categoryNum;
 @property (strong, nonatomic) NSString *categoryName;
 @property (strong, nonatomic) UIView *bubbleMask;
 @property (strong, nonatomic) UIView *loadingMask;
@@ -81,6 +80,7 @@
     [self initWaterfallView];
     [self prepareBubbleMenu];
     [self prepareMyNotification];
+    //[self prepareMYPopover];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -407,6 +407,10 @@
     [self.loadingMask removeFromSuperview];
 }
 
+#pragma mark - Prepare Popover
+
+
+
 #pragma mark - Init Navigation Bar
 
 - (UIBarButtonItem *)createUIBarButtonItemWithImageName:(NSString *)imageName
@@ -528,19 +532,24 @@
     [cell setSellerName:model.sellerName];
     [cell setSellerIntro:model.sellerIntro];
     [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_MEDIUM]];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
-        if (succeeded) {
-            [UIView setAnimationsEnabled:NO];
-            [collectionView performBatchUpdates:^{
-                NSLog(@"RELOAD!!!!!!!!!!%@", indexPath);
-                [model setImageWidth:width];
-                [model setImageHeight:height];
-                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-            } completion:^(BOOL finished) {
-                [UIView setAnimationsEnabled:YES];
-            }];
-        }
-    }];
+    __weak MainPageViewController *weakSelf = self;
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM]
+                         withWeakSelf:weakSelf
+                        withIndexPath:indexPath
+                             callback:^(BOOL succeeded, CGFloat width, CGFloat height, NSIndexPath *indexPath, id weakSelf) {
+                                 if (succeeded) {
+                                     [UIView setAnimationsEnabled:NO];
+                                     MainPageViewController *tmpSelf = weakSelf;
+                                     [tmpSelf.waterfallView performBatchUpdates:^{
+                                         WaterfallCellModel *weakModel = [tmpSelf.cellModels objectAtIndex:indexPath.item];
+                                         [weakModel setImageWidth:width];
+                                         [weakModel setImageHeight:height];
+                                         [tmpSelf.waterfallView reloadItemsAtIndexPaths:@[indexPath]];
+                                     } completion:^(BOOL finished) {
+                                         [UIView setAnimationsEnabled:YES];
+                                     }];
+                                 }
+                             }];
     [cell.itemImageButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -674,8 +683,7 @@
         [controller setTitle:@"修改查看学校"];
     } else if ([segue.identifier isEqualToString:@"showCategoryPage"]) {
         CategoryDetailViewController *controller = (CategoryDetailViewController *)segue.destinationViewController;
-        [controller setMainCategory:self.mainCategory];
-        [controller setSubCategory:self.subCategory];
+        [controller setCategoryNum:self.categoryNum];
         [controller setCategoryName:self.categoryName];
     }
 }
@@ -706,8 +714,7 @@
 
 - (void)performSegueToCategory:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
-    self.mainCategory = [dict objectForKey:@"mainCategory"];
-    self.subCategory = [dict objectForKey:@"subCategory"];
+    self.categoryNum = [dict objectForKey:@"categoryNum"];
     self.categoryName = [dict objectForKey:@"categoryName"];
     [self performSegueWithIdentifier:@"showCategoryPage" sender:self];
 }

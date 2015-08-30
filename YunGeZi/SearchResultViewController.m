@@ -59,7 +59,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"搜索结果"];
-    self.waterfallView.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -69,12 +68,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"搜索结果"];
-    [LoginInfo sharedInfo].searchViewIsDisappeared = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.waterfallView.delegate = nil;
+    [LoginInfo sharedInfo].searchViewIsDisappeared = YES;
+}
+
+- (void)dealloc {
+    [self.waterfallView setDelegate:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -225,20 +227,26 @@
     [cell setSellerName:model.sellerName];
     [cell setSellerIntro:model.sellerIntro];
     [cell setSellerPhotoWithStringAsync:[model photoPathWithSize:IMAGE_SIZE_MEDIUM]];
-    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM] callback:^(BOOL succeeded, CGFloat width, CGFloat height) {
-        if (succeeded) {
-            [UIView setAnimationsEnabled:NO];
-                if ([LoginInfo sharedInfo].searchViewIsDisappeared) return;
-                [collectionView performBatchUpdates:^{
-                    [model setImageWidth:width];
-                    [model setImageHeight:height];
-                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                } completion:^(BOOL finished) {
-                    [UIView setAnimationsEnabled:YES];
-                }];
-        }
-    }];
-
+    __weak SearchResultViewController *weakSelf = self;
+    [cell setItemImageWithStringAsync:[model imagePathWithSize:IMAGE_SIZE_MEDIUM]
+                         withWeakSelf:weakSelf
+                        withIndexPath:indexPath
+                             callback:^(BOOL succeeded, CGFloat width, CGFloat height, NSIndexPath *indexPath, id weakSelf) {
+                                 if (succeeded) {
+                                     if (![LoginInfo sharedInfo].searchViewIsDisappeared) {
+                                         [UIView setAnimationsEnabled:NO];
+                                         SearchResultViewController *tmpSelf = weakSelf;
+                                         [tmpSelf.waterfallView performBatchUpdates:^{
+                                             WaterfallCellModel *weakModel = [tmpSelf.cellModels objectAtIndex:indexPath.item];
+                                             [weakModel setImageWidth:width];
+                                             [weakModel setImageHeight:height];
+                                             [tmpSelf.waterfallView reloadItemsAtIndexPaths:@[indexPath]];
+                                         } completion:^(BOOL finished) {
+                                             [UIView setAnimationsEnabled:YES];
+                                         }];
+                                     }
+                                 }
+                             }];
     [cell.itemImageButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -318,12 +326,6 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
-}
-
-#pragma mark - Back Button Event
-
-- (IBAction)backButtonTouchUpInside:(UIBarButtonItem *)sender {
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark - Segue Detail

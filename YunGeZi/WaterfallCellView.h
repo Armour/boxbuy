@@ -20,7 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *sellerPhotoImageButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleButtonHeightConstraint;
 
-- (void)setItemImageWithStringAsync:(NSString *)imageString callback:(void (^)(BOOL succeeded, CGFloat width, CGFloat height))callback;
+- (void)setItemImageWithStringAsync:(NSString *)imageString
+                       withWeakSelf:(id)weakSelf
+                      withIndexPath:(NSIndexPath *)indexPath
+                           callback:(void (^)(BOOL succeeded, CGFloat width, CGFloat height, NSIndexPath *indexPath, id weakSelf))callback;
 - (void)setItemTitle:(NSString *)title;
 - (void)setItemOldPrice:(NSString *)oldPrice NewPrice:(NSString *)newPrice;
 - (void)setSellerName:(NSString *)name;

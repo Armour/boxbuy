@@ -1960,12 +1960,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="搜索结果" id="dkb-N0-4sf">
                         <barButtonItem key="backBarButtonItem" title=" " id="bAe-rb-MYE"/>
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="pf0-8B-BnB">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="backButtonTouchUpInside:" destination="K87-1c-mC9" id="VqB-kV-ch7"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="waterfallView" destination="UAB-EU-Ruz" id="AVJ-YZ-RI3"/>
@@ -3835,12 +3829,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="分类:" id="neG-BG-mQZ">
                         <barButtonItem key="backBarButtonItem" title="  " id="Ypn-jW-ZJb"/>
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="g6z-gS-dtC">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="backButtonTouchUpInside:" destination="q1U-s5-nb6" id="iBB-2W-hWr"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="waterfallView" destination="AGG-hj-hDP" id="6ul-cg-NzA"/>
