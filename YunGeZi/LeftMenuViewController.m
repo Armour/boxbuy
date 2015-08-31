@@ -435,7 +435,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToCategory" object:self userInfo:dict];
 }
 
-- (void)logoutFromMainPage {
+- (void)performLogout {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LogoutFromMainPage" object:self userInfo:nil];
 }
 
@@ -491,7 +491,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        [self logoutFromMainPage];
+        [self performLogout];
     }
 }
 

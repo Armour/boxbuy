@@ -7,7 +7,6 @@
 //
 
 #import "UserSettings.h"
-#import <CoreData/CoreData.h>
 
 #define NOTIFICATION_KEY            @"NotificationEnablded"
 #define SOUND_NOTIFICATION_KEY      @"SoundNotificationEnabled"
