@@ -12,7 +12,7 @@
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DWBubbleMenuButton.h"
 
-@interface MainPageViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, DWBubbleMenuViewDelegate>
+@interface MainPageViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, DWBubbleMenuViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) CBStoreHouseRefreshControl *storeHouseRefreshControl;
 

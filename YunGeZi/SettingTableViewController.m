@@ -132,16 +132,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         NSLog(@"Segue to Security");
-        [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     } else if (indexPath.section == 1 && indexPath.item == 3) {
         NSLog(@"Clear Image Cache");
         [self popAlertWithDelegate:@"清除缓存" withMessage:@"确定要清除么~ \r\n (已载入的图片重新载入，会烧流量哦)"];
     } else if (indexPath.section == 2) {
         NSLog(@"Segue to Help&Feed");
-        [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     } else if (indexPath.section == 3) {
         NSLog(@"Segue to AboutUs");
-        [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     }
 }
 

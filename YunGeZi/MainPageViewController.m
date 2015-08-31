@@ -437,7 +437,7 @@
                                                                       action:@selector(performSegueToSearchPage)];
     UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:self
-                                                                            action:@selector(performSegueToAccountPage)]; // JUST FOR TEST
+                                                                            action:@selector(alertForUser)];
     UIBarButtonItem *configButton = [self createUIBarButtonItemWithImageName:@"config"
                                                                       target:self
                                                                       action:@selector(performSegueToUserSettingsPage)];
@@ -692,7 +692,10 @@
 }
 
 - (void)performSegueToSellingPage {
-    [self performSegueWithIdentifier:@"showSellingPage" sender:self];
+    if ([[LoginInfo sharedInfo].authstate isEqualToString:@"0"])
+        [self popAlertWithDelegate:@"未认证用户" withMessage:@"您需要先认证学校才能上传商品"];
+    else
+        [self performSegueWithIdentifier:@"showSellingPage" sender:self];
 }
 
 - (void)performSegueToUserSettingsPage {
@@ -727,10 +730,29 @@
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)popAlertWithDelegate:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+- (void)alertForUser {
+    [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self performSegueToChangeSchool];
+    }
 }
 
 @end

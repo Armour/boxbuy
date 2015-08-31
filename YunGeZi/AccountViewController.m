@@ -207,15 +207,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
-        [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     } else if (indexPath.item == 1) {
         [self performSegueWithIdentifier:@"showMyOrder" sender:self];
     } else if (indexPath.item == 2) {
         [self performSegueWithIdentifier:@"showMyShop" sender:self];
     } else if (indexPath.item == 3) {
-        [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     } else if (indexPath.item == 4) {
-        [self popAlert:@"此功能下版本开放" withMessage:@"敬请期待~"];
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

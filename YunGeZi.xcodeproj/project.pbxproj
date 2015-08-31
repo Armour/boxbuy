@@ -306,6 +306,33 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		768903FA1B93E4BE00322727 /* OrderPage */ = {
+			isa = PBXGroup;
+			children = (
+				7603A8271AFC58F6007E4B78 /* OrderViewController.h */,
+				7603A8281AFC58F6007E4B78 /* OrderViewController.m */,
+			);
+			name = OrderPage;
+			sourceTree = "<group>";
+		};
+		768903FB1B93E4CE00322727 /* RecyclePage */ = {
+			isa = PBXGroup;
+			children = (
+				76DB964F1B92DE6B004FEDFD /* RecycleViewController.h */,
+				76DB96501B92DE6B004FEDFD /* RecycleViewController.m */,
+			);
+			name = RecyclePage;
+			sourceTree = "<group>";
+		};
+		768903FC1B93E4DD00322727 /* ShopPage */ = {
+			isa = PBXGroup;
+			children = (
+				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
+				7603A82B1AFC682A007E4B78 /* ShopViewController.m */,
+			);
+			name = ShopPage;
+			sourceTree = "<group>";
+		};
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,12 +433,9 @@
 				4785744B1B7DE02200D99685 /* ChooseSchoolPage */,
 				478574471B7DDF5600D99685 /* AccountPage */,
 				7606DCBD1B8F996A00F489BA /* SellingPage */,
-				7603A8271AFC58F6007E4B78 /* OrderViewController.h */,
-				7603A8281AFC58F6007E4B78 /* OrderViewController.m */,
-				76DB964F1B92DE6B004FEDFD /* RecycleViewController.h */,
-				76DB96501B92DE6B004FEDFD /* RecycleViewController.m */,
-				7603A82A1AFC682A007E4B78 /* ShopViewController.h */,
-				7603A82B1AFC682A007E4B78 /* ShopViewController.m */,
+				768903FA1B93E4BE00322727 /* OrderPage */,
+				768903FB1B93E4CE00322727 /* RecyclePage */,
+				768903FC1B93E4DD00322727 /* ShopPage */,
 				7606DCBC1B8EA55200F489BA /* Verification */,
 				7606DCBE1B8F9AD600F489BA /* MyCustomize */,
 				76E3333F1AEDF8C40077BACF /* Images.xcassets */,
