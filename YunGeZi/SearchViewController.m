@@ -74,6 +74,9 @@
     } else if (IS_IPHONE_5) {
         self.preferredFontSize = 13;
         self.preferredHotSearchCount = 4;
+    } else {
+        self.preferredFontSize = 12;
+        self.preferredHotSearchCount = 4;
     }
 }
 

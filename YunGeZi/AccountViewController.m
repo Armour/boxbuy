@@ -11,6 +11,7 @@
 #import "LoginInfo.h"
 #import "ShopViewController.h"
 #import "UIImageView+WebCache.h"
+#import "DeviceDetect.h"
 #import "MobClick.h"
 
 @interface AccountViewController ()
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *category;
+@property (nonatomic) NSInteger preferredTableViewCellHeight;
 
 @end
 
@@ -94,11 +96,15 @@
 #pragma mark - Init User Info
 
 - (void)initUserInfo {
+    [self.view layoutIfNeeded];
     self.userImage.layer.cornerRadius = self.userImage.bounds.size.height / 2;
     self.userImage.clipsToBounds = YES;
     self.userImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userImageTouchUpInside)];
     [self.userImage addGestureRecognizer:tapGesture];
+    if (IS_IPHONE_4_OR_LESS) {
+        [self.userResumeLabel setHidden:YES];
+    }
 }
 
 #pragma mark - Refresh User Info
@@ -132,6 +138,7 @@
 - (void)prepareBlurEffect {
     UIVisualEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    [self.view layoutIfNeeded];
     effectView.frame = self.headerBackgroundImage.bounds;
     [self.headerBackgroundImage addSubview:effectView];
 }
@@ -174,6 +181,17 @@
     self.tableView.sectionHeaderHeight = 10;
     self.tableView.sectionFooterHeight = 10;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    if (IS_IPHONE_4_OR_LESS) {
+        self.preferredTableViewCellHeight = 35;
+    } else if (IS_IPHONE_5) {
+        self.preferredTableViewCellHeight = 45;
+    } else if (IS_IPAD) {
+        self.preferredTableViewCellHeight = 60;
+    } else if (IS_IPHONE_6P) {
+        self.preferredTableViewCellHeight = 60;
+    } else {
+        self.preferredTableViewCellHeight = 55;
+    }
 }
 
 #pragma mark - Gesture Event
@@ -193,7 +211,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 55;
+   return self.preferredTableViewCellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

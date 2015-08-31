@@ -333,6 +333,15 @@
 			name = ShopPage;
 			sourceTree = "<group>";
 		};
+		768903FD1B93E9E600322727 /* ObjectDetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
+				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */,
+			);
+			name = ObjectDetailPage;
+			sourceTree = "<group>";
+		};
 		769F994C1B0B782300161818 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,8 +436,7 @@
 				76AD1BCF1B7B30E000BA8512 /* MainPage */,
 				768903F91B93984E00322727 /* Category */,
 				475691C11B8205CD00D7F78E /* Search */,
-				76C3F9B21AFBB0B400821B9B /* ObjectDetailViewController.h */,
-				76C3F9B31AFBB0B400821B9B /* ObjectDetailViewController.m */,
+				768903FD1B93E9E600322727 /* ObjectDetailPage */,
 				76DB96481B924557004FEDFD /* BuyingPage */,
 				4785744B1B7DE02200D99685 /* ChooseSchoolPage */,
 				478574471B7DDF5600D99685 /* AccountPage */,
