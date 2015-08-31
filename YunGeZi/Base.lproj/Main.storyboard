@@ -325,6 +325,9 @@
                                                 <state key="normal" backgroundImage="drawer_option_open_icon">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="popoverStart:" destination="HoH-mJ-wbW" eventType="touchUpInside" id="y2L-mU-Fuh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2385,6 +2388,9 @@
                         <segue destination="9o0-US-vJF" kind="show" identifier="showAccount" id="nG2-nw-Xr8"/>
                         <segue destination="V2u-Fk-874" kind="show" identifier="showAddRecyclePage" id="uDZ-ay-TU6"/>
                         <segue destination="q1U-s5-nb6" kind="show" identifier="showCategoryPage" id="vNv-tS-igJ"/>
+                        <segue destination="vXZ-lx-hvc" kind="popoverPresentation" identifier="logoutFromMainPage" popoverAnchorView="0x0-Cx-x4O" id="byz-Vz-Hnu">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMf-hl-PaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3201,6 +3207,9 @@
                         <outlet property="soundNotificationEnabledSwitch" destination="tGc-sk-e6l" id="aLU-L7-7hX"/>
                         <outlet property="tableView" destination="pOx-FV-Omc" id="xVR-BF-BiL"/>
                         <outlet property="vibrationNotificationEnabledSwitch" destination="GgO-58-mX4" id="BdD-ur-zOX"/>
+                        <segue destination="vXZ-lx-hvc" kind="popoverPresentation" identifier="logoutFromConfigPage" popoverAnchorView="32M-wP-5Jl" id="ymZ-7S-N1U">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZb-zp-RZc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3854,9 +3863,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GCd-gI-drE"/>
-        <segue reference="JHU-KT-8bK"/>
-        <segue reference="Anz-jd-hYN"/>
+        <segue reference="0p7-WM-ggn"/>
+        <segue reference="ymZ-7S-N1U"/>
         <segue reference="4ZE-kV-fhQ"/>
-        <segue reference="IRI-1L-pUC"/>
+        <segue reference="Anz-jd-hYN"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -80,7 +80,6 @@
     [self initWaterfallView];
     [self prepareBubbleMenu];
     [self prepareMyNotification];
-    //[self prepareMYPopover];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -230,6 +229,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(performSegueToCategory:)
                                                  name:@"SideMenuToCategory"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(performSegueToLogout)
+                                                 name:@"LogoutFromMainPage"
                                                object:nil];
 }
 
@@ -406,10 +409,6 @@
 - (void)removeLoadingMask {
     [self.loadingMask removeFromSuperview];
 }
-
-#pragma mark - Prepare Popover
-
-
 
 #pragma mark - Init Navigation Bar
 
@@ -710,6 +709,10 @@
 
 - (void)performSegueToAddRecycle {
     [self performSegueWithIdentifier:@"showAddRecyclePage" sender:self];
+}
+
+- (void)performSegueToLogout {
+    [self performSegueWithIdentifier:@"logoutFromMainPage" sender:self];
 }
 
 - (void)performSegueToCategory:(NSNotification *)notification {

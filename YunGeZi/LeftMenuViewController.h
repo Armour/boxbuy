@@ -10,7 +10,7 @@
 #import "RESideMenu.h"
 #import "RATreeView.h"
 
-@interface LeftMenuViewController : UIViewController <RESideMenuDelegate, RATreeViewDataSource, RATreeViewDelegate>
+@interface LeftMenuViewController : UIViewController <RESideMenuDelegate, RATreeViewDataSource, RATreeViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSString *schoolName;
 

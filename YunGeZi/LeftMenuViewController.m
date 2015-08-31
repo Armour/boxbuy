@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topPaddingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomPaddingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftPaddingConstraint;
+@property (strong, nonatomic) UIPopoverPresentationController *popover;
+@property (strong, nonatomic) UIAlertController *actionSheet;
 @property (strong, nonatomic) NSMutableDictionary *dict;
 
 @end
@@ -52,6 +54,7 @@
     [self initDict];
     [self prepareTreeView];
     [self prepareMyNotification];
+    [self prepareMyPopover];
     [self initUserInfo];
 }
 
@@ -124,6 +127,7 @@
     [self.userProductsButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.userFollowButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.userFansButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.userNameButton addTarget:self action:@selector(segueToUserInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.view layoutIfNeeded];
     self.userImageButton.layer.cornerRadius = self.userImageButton.bounds.size.height / 2.f;
     self.userImageButton.clipsToBounds = YES;
@@ -393,6 +397,12 @@
     }
 }
 
+#pragma mark - Popover Actionsheet
+
+- (IBAction)popoverStart:(UIButton *)sender {
+    [self presentViewController:self.actionSheet animated:YES completion:nil];
+}
+
 #pragma mark - Arrow Animation
 
 - (CABasicAnimation *)arrowRotationAnimationWithFromValue:(CGFloat)fromAngle
@@ -425,15 +435,64 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SideMenuToCategory" object:self userInfo:dict];
 }
 
+- (void)logoutFromMainPage {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LogoutFromMainPage" object:self userInfo:nil];
+}
+
+#pragma mark - Prepare Popover
+
+- (void)prepareMyPopover {
+    UIAlertAction *destroyAction;
+    UIAlertAction *otherAction;
+
+    self.actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                           message:nil
+                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+    destroyAction = [UIAlertAction actionWithTitle:@"退出登录"
+                                             style:UIAlertActionStyleDestructive
+                                           handler:^(UIAlertAction *action) {
+                                               [self popAlertWithDelegate:@"登出" withMessage:@"确定退出此用户么QUQ"];
+                                           }];
+    otherAction = [UIAlertAction actionWithTitle:@"取消"
+                                           style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction *action) {
+                                             // do something here
+                                         }];
+    [self.actionSheet addAction:destroyAction];
+    [self.actionSheet addAction:otherAction];
+    [self.actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+
+    [self.view layoutIfNeeded];
+    self.popover = [self.actionSheet popoverPresentationController];
+    self.popover.sourceView = self.userActionButton;
+    self.popover.sourceRect = self.userActionButton.bounds;
+    self.popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+}
+
 #pragma mark - Alert
 
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
-                                                   delegate:self
+                                                   delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
+}
+
+- (void)popAlertWithDelegate:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:@"取消", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self logoutFromMainPage];
+    }
 }
 
 @end
