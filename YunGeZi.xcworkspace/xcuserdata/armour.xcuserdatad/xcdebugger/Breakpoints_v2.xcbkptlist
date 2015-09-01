@@ -566,11 +566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YunGeZi/ObjectDetailViewController.m"
-            timestampString = "462756463.692664"
+            timestampString = "462764303.919282"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "-getItemDetail"
             landmarkType = "5">
          </BreakpointContent>

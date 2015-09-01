@@ -142,7 +142,7 @@
 #pragma mark - Get Info from Cache
 
 - (NSString *)userid {
-    return [NSString stringWithFormat:@"%@",[[self cachedUserInfo] valueForKeyPath:@"Accout.userid"]];
+    return [NSString stringWithFormat:@"%@",[[self cachedUserInfo] valueForKeyPath:@"Account.userid"]];
 }
 
 - (NSString *)nickname {

@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *itemStoryView;
 @property (weak, nonatomic) IBOutlet UILabel *itemStoryLabel;
 @property (weak, nonatomic) IBOutlet UIButton *showAllStoryButton;
+@property (weak, nonatomic) IBOutlet UILabel *showAllStoryLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemStoryViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *addCommetButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
@@ -180,6 +181,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pageScrollView.contentSize = CGSizeMake(self.pageScrollView.frame.size.width, self.pageScrollView.frame.size.height);
     self.showAllStoryButton.hidden = YES;
+    self.showAllStoryLabel.hidden = YES;
 }
 
 - (void)prepareShowAllStoryButton{
@@ -190,6 +192,7 @@
                                           withLineBreakMode:self.itemStoryLabel.lineBreakMode];
     if (expectedLabelSize.height > self.itemStoryLabel.bounds.size.height + 10) {
         [self.showAllStoryButton setHidden:NO];
+        [self.showAllStoryLabel setHidden:NO];
     }
 }
 
@@ -240,7 +243,7 @@
 
 - (void)prepareLoadingMask {
     self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    [self.loadingMask setBackgroundColor:[UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:0.4]];
+    [self.loadingMask setBackgroundColor:[UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:0.6]];
 }
 
 - (void)addLoadingMask {
@@ -279,6 +282,7 @@
                                                      self.pageScrollView.contentSize.height + offset);
         self.itemStoryViewHeightConstraint.constant = expectedLabelSize.height + 6;
         [self.showAllStoryButton setHidden:YES];
+        [self.showAllStoryLabel setHidden:YES];
         [self.view layoutIfNeeded];
     }
 }
@@ -313,6 +317,7 @@
               [self.schoolNameLabel setText:[self getSchoolNameWithId:[responseObject valueForKeyPath:@"Item.schoolid"]
                                                          withLocation:[responseObject valueForKeyPath:@"Item.location"]]];
               //BarButton
+              NSLog(@"%@ %@", [responseObject valueForKeyPath:@"Seller.userid"], [LoginInfo sharedInfo].userid);
               if ([[NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:@"Seller.userid"]] isEqualToString:[LoginInfo sharedInfo].userid]) {
                   [self updateBuyingBarButton];
               }
@@ -340,9 +345,9 @@
 #pragma mark - Update Buyinh Bar Button
 
 - (void)updateBuyingBarButton {
-    [self.buyBarButton setBackgroundColor:[UIColor redColor]];
-    [self.buyBarButton setTitle:@"删 除" forState:UIControlStateNormal];
-    [self.buyBarButtonImageView setImage:[UIImage imageNamed:@"close"]];
+    [self.buyBarButton setBackgroundImage:[UIImage imageNamed:@"alertbg"] forState:UIControlStateNormal];
+    [self.buyBarButton setTitle:@"下架商品" forState:UIControlStateNormal];
+    [self.buyBarButtonImageView setImage:[UIImage imageNamed:@"alertimage"]];
     self.isSeller = YES;
 }
 
@@ -407,7 +412,7 @@
 - (void)popAlertWithDelegate:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
-                                                   delegate:nil
+                                                   delegate:self
                                           cancelButtonTitle:@"确定"
                                           otherButtonTitles:@"取消", nil];
     [alert show];
@@ -423,10 +428,10 @@
           parameters:@{@"itemid" : self.objectNumber,
                        @"access_token" : [LoginInfo sharedInfo].accessToken}
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 [self popAlert:@"删除成功" withMessage:@"此物品已经成功下架啦~\r\n记得下拉刷新哦w"];
+                 [self popAlert:@"删除成功" withMessage:@"此物品已经成功下架啦~w"];
+                 [self performSegueWithIdentifier:@"deleteItemBackToMainPage" sender:self];
                  [self removeLoadingMask];
                  [self.activityIndicator stopAnimating];
-                 [self.navigationController popViewControllerAnimated:YES];
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  [self popAlert:@"删除失败" withMessage:@"网络不太好，请重试"];
                  [self removeLoadingMask];

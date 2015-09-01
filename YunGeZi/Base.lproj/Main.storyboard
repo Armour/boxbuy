@@ -2221,7 +2221,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HD-b0-hjc" userLabel="Price And Title View">
-                                        <rect key="frame" x="0.0" y="187.5" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="187" width="375" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nrl-zC-Edn">
                                                 <rect key="frame" x="15" y="19" width="12" height="21"/>
@@ -2310,7 +2310,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iK3-rN-53o" userLabel="Stats View">
-                                        <rect key="frame" x="0.0" y="249.5" width="375" height="36"/>
+                                        <rect key="frame" x="0.0" y="249" width="375" height="36"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details_location" translatesAutoresizingMaskIntoConstraints="NO" id="Ex8-Tg-3rf">
                                                 <rect key="frame" x="15" y="9" width="14" height="18"/>
@@ -2367,7 +2367,7 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝故事" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scf-hh-laa">
-                                        <rect key="frame" x="8" y="293.5" width="60" height="21"/>
+                                        <rect key="frame" x="8" y="293" width="60" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="idg-VX-QPY"/>
                                         </constraints>
@@ -2376,7 +2376,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPS-xZ-8LV" userLabel="Item Story View">
-                                        <rect key="frame" x="8" y="322.5" width="359" height="70"/>
+                                        <rect key="frame" x="8" y="322" width="359" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbv-fK-55r">
                                                 <rect key="frame" x="3" y="3" width="353" height="64"/>
@@ -2390,7 +2390,7 @@
                                                     <constraint firstAttribute="height" constant="25" id="nsU-bs-kgA"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="13"/>
-                                                <state key="normal" title="查看全部介绍" backgroundImage="showAllMask">
+                                                <state key="normal" backgroundImage="showAllMask">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -2398,14 +2398,27 @@
                                                     <action selector="resuzeItemStoryView:" destination="mum-fe-LV2" eventType="touchUpInside" id="kpe-tD-iXA"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看全部介绍" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNV-l9-era">
+                                                <rect key="frame" x="126" y="47" width="106" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="vCF-zf-inV"/>
+                                                    <constraint firstAttribute="width" constant="106" id="z3B-hh-hzh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="13"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="cNV-l9-era" firstAttribute="centerX" secondItem="mtm-SX-Msd" secondAttribute="centerX" id="7F8-Kn-6yM"/>
+                                            <constraint firstItem="cNV-l9-era" firstAttribute="top" secondItem="FPS-xZ-8LV" secondAttribute="top" constant="47" id="EEi-7J-xmg"/>
                                             <constraint firstAttribute="height" constant="70" id="EGF-sD-hDm"/>
                                             <constraint firstAttribute="trailing" secondItem="mtm-SX-Msd" secondAttribute="trailing" id="G5r-rl-4W0"/>
                                             <constraint firstItem="Rbv-fK-55r" firstAttribute="top" secondItem="FPS-xZ-8LV" secondAttribute="top" constant="3" id="GSo-BI-QB9"/>
                                             <constraint firstAttribute="bottom" secondItem="Rbv-fK-55r" secondAttribute="bottom" constant="3" id="Gzq-fd-E8S"/>
                                             <constraint firstItem="Rbv-fK-55r" firstAttribute="leading" secondItem="mtm-SX-Msd" secondAttribute="leading" constant="3" id="Ijw-0v-JCQ"/>
+                                            <constraint firstItem="cNV-l9-era" firstAttribute="centerY" secondItem="mtm-SX-Msd" secondAttribute="centerY" id="Mhr-1G-Apg"/>
                                             <constraint firstAttribute="bottom" secondItem="mtm-SX-Msd" secondAttribute="bottom" id="QzG-ea-sO7"/>
                                             <constraint firstItem="Rbv-fK-55r" firstAttribute="leading" secondItem="FPS-xZ-8LV" secondAttribute="leading" constant="3" id="TuW-1b-MCR"/>
                                             <constraint firstAttribute="bottom" secondItem="mtm-SX-Msd" secondAttribute="bottom" id="VEW-vT-lUq"/>
@@ -2422,14 +2435,15 @@
                                                 <exclude reference="ZlY-gZ-lsR"/>
                                                 <exclude reference="dlu-Wh-02B"/>
                                                 <exclude reference="VEW-vT-lUq"/>
+                                                <exclude reference="EEi-7J-xmg"/>
                                             </mask>
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6x-ED-CPL">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="187.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onH-fl-L3V" userLabel="Image Scroll View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="187.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
                                                 <color key="backgroundColor" red="0.2370383523" green="0.2370383523" blue="0.2370383523" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="0.061906572549999997" green="0.60451632219999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -2462,7 +2476,7 @@
                                         </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRD-3t-A92">
-                                        <rect key="frame" x="327" y="400.5" width="40" height="21"/>
+                                        <rect key="frame" x="327" y="400" width="40" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="8cp-cA-BL2"/>
                                         </constraints>
@@ -2475,7 +2489,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝讨论" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoq-8a-use">
-                                        <rect key="frame" x="8" y="400.5" width="60" height="21"/>
+                                        <rect key="frame" x="8" y="400" width="60" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="R23-Ed-Dyf"/>
                                         </constraints>
@@ -2484,7 +2498,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHB-Vl-eCS">
-                                        <rect key="frame" x="8" y="429.5" width="359" height="100"/>
+                                        <rect key="frame" x="8" y="429" width="359" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无讨论" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv5-h5-P09">
                                                 <rect key="frame" x="28" y="20" width="302" height="21"/>
@@ -2673,11 +2687,15 @@
                         <outlet property="pageScrollView" destination="QFG-in-xcb" id="mVQ-tB-e3g"/>
                         <outlet property="schoolNameLabel" destination="gfN-WQ-ymR" id="4FL-90-BIB"/>
                         <outlet property="showAllStoryButton" destination="mtm-SX-Msd" id="rl4-d7-FZ8"/>
+                        <outlet property="showAllStoryLabel" destination="cNV-l9-era" id="vzp-es-uXK"/>
                         <outlet property="starBarButton" destination="jil-H7-UJk" id="vNZ-Fy-VcJ"/>
                         <outlet property="userBarButton" destination="lY2-sg-0jd" id="Ldx-Qp-NFX"/>
                         <outlet property="userImageView" destination="sMN-WL-4dK" id="R9q-Ri-4wc"/>
                         <outlet property="userNameLabel" destination="2zA-PU-Lkw" id="uyB-xl-Mu7"/>
                         <segue destination="Del-wP-S8A" kind="show" identifier="showBuyingPage" id="Y3E-mh-XML"/>
+                        <segue destination="g99-Ha-WnK" kind="popoverPresentation" identifier="deleteItemBackToMainPage" popoverAnchorView="UAB-Bq-v4S" id="qgK-Jb-iAG">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhs-xQ-qdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4320,9 +4338,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GCd-gI-drE"/>
-        <segue reference="JHU-KT-8bK"/>
         <segue reference="ymZ-7S-N1U"/>
-        <segue reference="4ZE-kV-fhQ"/>
         <segue reference="Anz-jd-hYN"/>
+        <segue reference="JHU-KT-8bK"/>
+        <segue reference="qgK-Jb-iAG"/>
     </inferredMetricsTieBreakers>
 </document>
