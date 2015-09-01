@@ -82,7 +82,7 @@
                     @"access_token" : [LoginInfo sharedInfo].accessToken}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               if ([[responseObject valueForKeyPath:@"uniError"] isEqual:@0]) {
-                  [[LoginInfo sharedInfo] refreshSharedInfo];
+                  [[LoginInfo sharedInfo] refreshSharedUserInfo];
                   [self popAlert:@"修改成功~" withMessage:@"耶！个人简介修改成功~😝"];
                   [self.navigationController popViewControllerAnimated:YES];
               } else {

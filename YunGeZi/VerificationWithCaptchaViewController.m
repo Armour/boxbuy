@@ -194,7 +194,6 @@
 
 - (void)initAuthentication {
     self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"image/png", @"image/gif", @"application/json", nil];
     [self.manager POST:@"http://v2.api.boxbuy.cc/getSchoolAuthenticationApplyAbility"
@@ -237,7 +236,7 @@
                                                                         options:NSJSONReadingMutableContainers
                                                                           error:&jsonError];
                    if ([response[@"uniError"] isEqual:@0]) {
-                       [[LoginInfo sharedInfo] refreshSharedInfo];
+                       [[LoginInfo sharedInfo] refreshSharedUserInfo];
                        [self popAlert:@"验证成功！" withMessage:@"返回首页中~\r\n 您可以上传商品啦!"];
                        [self performSegueWithIdentifier:@"verificationWithCaptchaDone" sender:self];
                    } else {

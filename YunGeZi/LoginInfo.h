@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperationManager.h"
 
 @interface LoginInfo : NSObject
 
@@ -35,6 +36,10 @@
                  refreshToken:(NSString *)refreshToken
                    expireTime:(NSString *)expireTime;
 
-- (void)refreshSharedInfo;
+- (NSString *)schoolNameWithSchoolId:(NSString *)schoolid;
+- (NSString *)locationNameWithSchoolId:(NSString *)schoolid withLocationId:(NSString *)locationid;
+- (void)refreshSharedUserInfo;
+- (void)refreshSharedSchoolInfo;
+- (void)refreshSharedCategoryInfo;
 
 @end

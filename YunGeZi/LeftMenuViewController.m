@@ -143,7 +143,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo)
-                                                 name:@"CachedInfoRefreshed"
+                                                 name:@"CachedUserInfoRefreshed"
                                                object:nil];
 }
 

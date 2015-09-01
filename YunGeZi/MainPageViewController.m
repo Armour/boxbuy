@@ -159,8 +159,8 @@
                   [model setImageHash:[obj valueForKeyPath:@"Cover.hash"]];
                   [model setImageId:[obj valueForKeyPath:@"Item.cover"]];
                   [model setItemTitle:[obj valueForKeyPath:@"Item.title"]];
-                  [model setItemOldPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.oldprice"] floatValue] / 100]];
-                  [model setItemNewPrice:[NSString stringWithFormat:@"%.2f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
+                  [model setItemOldPrice:[NSString stringWithFormat:@"%.1f", [[obj valueForKeyPath:@"Item.oldprice"] floatValue] / 100]];
+                  [model setItemNewPrice:[NSString stringWithFormat:@"%.1f", [[obj valueForKeyPath:@"Item.price"] floatValue] / 100]];
                   [model setSellerName:[obj valueForKeyPath:@"Seller.nickname"]];
                   [model setSellerPhotoHash:[obj valueForKeyPath:@"SellerHeadIcon.hash"]];
                   [model setSellerPhotoId:[obj valueForKeyPath:@"Seller.headiconid"]];
@@ -255,6 +255,7 @@
     CGRect imageFrame = CGRectMake(0, 0, imageWidth, GALLERY_HEIGHT);
     self.imageScrollView = [[UIScrollView alloc] initWithFrame:imageFrame];
     self.imageScrollViewPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(imageWidth/2 - PAGE_CONTROL_WIDTH/2, GALLERY_HEIGHT * 0.9 - ROW_PADDING, PAGE_CONTROL_WIDTH, ROW_PADDING)];
+    self.imageScrollViewPageControl.hidesForSinglePage = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHotItemTap)];
     [self.imageScrollView addGestureRecognizer:tapGesture];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -519,7 +520,6 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"LOAD!!!!!!!!!!%@", indexPath);
     if (self.cellModels.count - indexPath.item < 5 && self.cellModels.count % ITEMS_PER_PAGE == 0)
         [self fillCellModelsForPage:(self.cellModels.count / ITEMS_PER_PAGE) + 1];
     WaterfallCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:WATERFALL_CELL forIndexPath:indexPath];
@@ -551,6 +551,9 @@
                              }];
     [cell.itemImageButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemButtonTouchUpInsideWithGesture:)];
+    [cell.itemPriceLabel addGestureRecognizer:gesture];
+    [cell.itemPriceLabel setUserInteractionEnabled:YES];
     [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.sellerPhotoImageButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [model setTitleHeight:cell.titleButtonHeightConstraint.constant];
@@ -599,13 +602,23 @@
     }
 }
 
+- (void)itemButtonTouchUpInsideWithGesture:(UITapGestureRecognizer *)sender {
+    WaterfallCellView *cell = (WaterfallCellView *)[[sender.view superview] superview];
+    NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
+    if (indexPath != nil) {
+        self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
+        self.choosedSellerId = @"";
+        [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
+    }
+}
+
 - (void)sellerButtonTouchUpInside:(UIButton *)sender {
     WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
-        self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.row];
+        self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.item];
         self.choosedItemId = @"";
-        [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
+        //[self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
 }
 

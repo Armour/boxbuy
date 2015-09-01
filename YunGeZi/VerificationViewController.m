@@ -195,7 +195,7 @@
             parameters:postData
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    if ([[responseObject valueForKeyPath:@"uniError"] isEqual:@0]) {
-                       [[LoginInfo sharedInfo] refreshSharedInfo];
+                       [[LoginInfo sharedInfo] refreshSharedUserInfo];
                        [self popAlert:@"验证成功！" withMessage:@"返回首页中~\r\n 您可以上传商品啦!"];
                        [self performSegueWithIdentifier:@"verificationDone" sender:self];
                    } else {

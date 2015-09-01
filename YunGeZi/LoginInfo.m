@@ -10,14 +10,20 @@
 
 @interface LoginInfo ()
 
-@property (strong, readonly, nonatomic) NSDictionary *cachedInfo;
+@property (strong, readonly, nonatomic) NSDictionary *cachedUserInfo;
+@property (strong, readonly, nonatomic) NSDictionary *cachedSchoolInfo;
+@property (strong, readonly, nonatomic) NSDictionary *cachedCategoryInfo;
+@property (strong, nonatomic) AFHTTPRequestOperationManager *sharedManager;
 
 @end
 
 
 @implementation LoginInfo
 
-@synthesize cachedInfo = _cachedInfo;
+@synthesize cachedUserInfo = _cachedUserInfo;
+@synthesize cachedSchoolInfo = _cachedSchoolInfo;
+@synthesize cachedCategoryInfo = _cachedCategoryInfo;
+@synthesize sharedManager = _sharedManager;
 
 #pragma mark - Shared Info and Update
 
@@ -37,98 +43,201 @@
     self.accessToken = accessToken;
     self.refreshToken = refreshToken;
     self.expireTime = expireTime;
-    [self refreshSharedInfo];
+    _sharedManager = [AFHTTPRequestOperationManager manager];
+    _sharedManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    _sharedManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
+    [self refreshSharedUserInfo];
+    [self refreshSharedSchoolInfo];
+    [self refreshSharedCategoryInfo];
 }
 
 #pragma mark- Cached Info
 
-- (NSDictionary *)cachedInfo {
-    if (!_cachedInfo) {
-        _cachedInfo = [[NSDictionary alloc] init];
+- (NSDictionary *)cachedUserInfo {
+    if (!_cachedUserInfo) {
+        _cachedUserInfo = [[NSDictionary alloc] init];
     }
-    return _cachedInfo;
+    return _cachedUserInfo;
 }
 
-- (void)setCachedInfo:(NSDictionary *)cachedInfo {
-    _cachedInfo = cachedInfo;
+- (void)setCachedUserInfo:(NSDictionary *)cachedUserInfo {
+    _cachedUserInfo = cachedUserInfo;
+}
+
+- (NSDictionary *)cachedSchoolInfo {
+    if (!_cachedSchoolInfo) {
+        _cachedSchoolInfo = [[NSDictionary alloc] init];
+    }
+    return _cachedSchoolInfo;
+}
+
+- (void)setCachedSchoolInfo:(NSDictionary *)cachedSchoolInfo {
+    _cachedSchoolInfo = cachedSchoolInfo;
+}
+
+- (NSDictionary *)cachedCategoryInfo {
+    if (!_cachedCategoryInfo) {
+        _cachedCategoryInfo = [[NSDictionary alloc] init];
+    }
+    return _cachedCategoryInfo;
+}
+
+- (void)setCachedCategoryInfo:(NSDictionary *)cachedCategoryInfo {
+    _cachedCategoryInfo = cachedCategoryInfo;
 }
 
 #pragma mark- Refresh Shared Info
 
-- (void)refreshSharedInfo {
-    NSString *urlString = @"http://v2.api.boxbuy.cc/getUserData";
-    NSString *postData = [NSString stringWithFormat:@"access_token=%@&userid=me", self.accessToken];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if (error) {
-        return;
-    }
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-    if (error) {
-        return;
-    }
-    _cachedInfo = dict;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CachedInfoRefreshed" object:self userInfo:nil];
+- (void)refreshSharedUserInfo {
+    [_sharedManager POST:@"http://v2.api.boxbuy.cc/getUserData"
+       parameters:@{@"access_token" : self.accessToken, @"userid" : @"me"}
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSError *jsonError = [[NSError alloc] init];
+              NSDictionary *response = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                       options:NSJSONReadingMutableContainers
+                                                                         error:&jsonError];
+              _cachedUserInfo = response;
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"CachedUserInfoRefreshed"
+                                                                  object:self
+                                                                userInfo:nil];
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [self refreshSharedUserInfo];
+          }];
+}
+
+- (void)refreshSharedSchoolInfo {
+    [_sharedManager GET:@"http://v2.api.boxbuy.cc/getSchools"
+             parameters:@{@"json" : @"1"}
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSError *jsonError = [[NSError alloc] init];
+                    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                              options:NSJSONReadingMutableContainers
+                                                                                error:&jsonError];
+                    _cachedSchoolInfo = response;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CachedSchoolInfoRefreshed"
+                                                                         object:self
+                                                                       userInfo:nil];
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    [self refreshSharedSchoolInfo];
+                }];
+}
+
+- (void)refreshSharedCategoryInfo {
+    [_sharedManager GET:@"http://v2.api.boxbuy.cc/getItemClasses"
+             parameters:@{@"json" : @"1"}
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSError *jsonError = [[NSError alloc] init];
+                    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                             options:NSJSONReadingMutableContainers
+                                                                               error:&jsonError];
+                    _cachedCategoryInfo = response;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CachedCategoryInfoRefreshed"
+                                                                        object:self
+                                                                      userInfo:nil];
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    [self refreshSharedCategoryInfo];
+                }];
 }
 
 #pragma mark - Get Info from Cache
 
 - (NSString *)nickname {
-    return [NSString stringWithFormat:@"%@",[[self cachedInfo] valueForKeyPath:@"Account.nickname"]];
+    return [NSString stringWithFormat:@"%@",[[self cachedUserInfo] valueForKeyPath:@"Account.nickname"]];
 }
 
 - (NSString *)intro {
-    return [[self cachedInfo] valueForKeyPath:@"Account.intro"];
+    return [[self cachedUserInfo] valueForKeyPath:@"Account.intro"];
 }
 
 - (NSString *)photoUrlString {
-    NSString *photoId = [[self cachedInfo] valueForKeyPath:@"Account.headiconid"];
-    NSString *photoHash = [[self cachedInfo] valueForKeyPath:@"HeadIcon.hash"];
+    NSString *photoId = [[self cachedUserInfo] valueForKeyPath:@"Account.headiconid"];
+    NSString *photoHash = [[self cachedUserInfo] valueForKeyPath:@"HeadIcon.hash"];
     NSString *urlString = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-md.jpg", photoId, photoHash];
     return urlString;
 }
 
 - (NSString *)photoUrlOriString {
-    NSString *photoId = [[self cachedInfo] valueForKeyPath:@"Account.headiconid"];
-    NSString *photoHash = [[self cachedInfo] valueForKeyPath:@"HeadIcon.hash"];
+    NSString *photoId = [[self cachedUserInfo] valueForKeyPath:@"Account.headiconid"];
+    NSString *photoHash = [[self cachedUserInfo] valueForKeyPath:@"HeadIcon.hash"];
     NSString *urlString = [NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-ori.jpg", photoId, photoHash];
     return urlString;
 }
 
 - (NSString *)schoolId {
-    return [[self cachedInfo] valueForKeyPath:@"Account.schoolid"];
+    return [[self cachedUserInfo] valueForKeyPath:@"Account.schoolid"];
 }
 
 - (NSString *)authstate {
-    return [[self cachedInfo] valueForKeyPath:@"Account.authstate"];
+    return [[self cachedUserInfo] valueForKeyPath:@"Account.authstate"];
 }
 
 - (NSInteger)numOfFollow {
-    return [[[self cachedInfo] valueForKeyPath:@"Account.value_follow"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_follow"] integerValue];
 }
 
 - (NSInteger)numOfFan {
-    return [[[self cachedInfo] valueForKeyPath:@"Account.value_fan"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_fan"] integerValue];
 }
 
 - (NSInteger)numOfItem {
-    return [[[self cachedInfo] valueForKeyPath:@"Account.value_item"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_item"] integerValue];
 }
 
 - (NSInteger)numOfNewMsg {
-    return [[[self cachedInfo] valueForKeyPath:@"Account.value_newmsg"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_newmsg"] integerValue];
 }
 
 - (NSInteger)numOfMsgSend {
-    return [[[self cachedInfo] valueForKeyPath:@"Account.value_msg_send"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_msg_send"] integerValue];
 }
 
 - (NSInteger)numOfMsgRecv {
-    return [[[self cachedInfo] valueForKeyPath:@"Account.value_msg_recv"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_msg_recv"] integerValue];
+}
+
+- (NSString *)schoolNameWithSchoolId:(NSString *)schoolid {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *sid = [formatter numberFromString:schoolid];
+    if (sid == nil) {
+        return @"";
+    }
+    for (int i = 0; i < 100; i++) {
+        NSString *tmpStr = [[NSString alloc] initWithFormat:@"%d", i];
+        if ([_cachedSchoolInfo objectForKey:tmpStr]) {
+            NSDictionary *tmpDict = [_cachedSchoolInfo objectForKey:tmpStr];
+            if ([tmpDict[@"id"] isEqualToNumber:sid]) {
+                return tmpDict[@"nameCh"];
+            }
+        }
+    }
+    return @"";
+}
+
+- (NSString *)locationNameWithSchoolId:(NSString *)schoolid withLocationId:(NSString *)locationid {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *sid = [formatter numberFromString:schoolid];
+    NSNumber *lid = [formatter numberFromString:locationid];
+    if (sid == nil || lid == nil) {
+        return @"";
+    }
+    for (int i = 0; i < 100; i++) {
+        NSString *tmpStr = [[NSString alloc] initWithFormat:@"%d", i];
+        if ([_cachedSchoolInfo objectForKey:tmpStr]) {
+            NSDictionary *tmpDict = [_cachedSchoolInfo objectForKey:tmpStr];
+            if ([tmpDict[@"id"] isEqualToNumber:sid]) {
+                NSArray *tmpArr = tmpDict[@"campus"];
+                for (int j = 0; j < [tmpArr count]; j++) {
+                    NSDictionary *tmpDict2 = [tmpArr objectAtIndex:j];
+                    if ([tmpDict2[@"id"] isEqualToNumber:lid]) {
+                        return tmpDict2[@"name"];
+                    }
+                }
+            }
+        }
+    }
+    return @"";
 }
 
 @end

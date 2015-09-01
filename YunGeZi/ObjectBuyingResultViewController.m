@@ -74,12 +74,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"商品详情"];
+    [MobClick beginLogPageView:@"购买结果"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"商品详情"];
+    [MobClick endLogPageView:@"购买结果"];
 }
 
 @end

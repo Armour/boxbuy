@@ -88,7 +88,7 @@
 - (void)prepareMyNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshUserInfo)
-                                                 name:@"CachedInfoRefreshed"
+                                                 name:@"CachedUserInfoRefreshed"
                                                object:nil];
 }
 
@@ -230,7 +230,7 @@
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"%@", responseObject);
                         if ([[responseObject valueForKeyPath:@"uniError"] isEqual:@0]) {
-                            [[LoginInfo sharedInfo] refreshSharedInfo];
+                            [[LoginInfo sharedInfo] refreshSharedUserInfo];
                             [self popAlert:@"修改成功~" withMessage:@"耶！头像修改成功~😝"];
                             [self.navigationController popViewControllerAnimated:YES];
                         } else {
