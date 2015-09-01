@@ -24,7 +24,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"查看我的头像"];
+    [MobClick beginLogPageView:@"我的头像"];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
 }
@@ -37,7 +37,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"查看我的头像"];
+    [MobClick endLogPageView:@"我的头像"];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navibg"]
                                                   forBarMetrics:UIBarMetricsDefault];
 }

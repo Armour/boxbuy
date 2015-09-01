@@ -32,7 +32,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"个人信息"];
+    [MobClick beginLogPageView:@"我的"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,7 +54,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"个人信息"];
+    [MobClick endLogPageView:@"我的"];
 }
 
 #pragma mark - Inner Helper

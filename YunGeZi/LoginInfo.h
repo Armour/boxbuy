@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString *accessToken;
 @property (strong, nonatomic) NSString *refreshToken;
 @property (strong, nonatomic) NSString *expireTime;
+@property (strong, readonly, nonatomic) NSString *userid;
 @property (strong, readonly, nonatomic) NSString *nickname;
 @property (strong, readonly, nonatomic) NSString *intro;
 @property (strong, readonly, nonatomic) NSString *photoUrlString;

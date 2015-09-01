@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *objectBuyWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIView *loadingMask;
 @property WebViewJavascriptBridge* bridge;
 
 @end
@@ -23,7 +24,7 @@
 @implementation ObjectBuyingViewController
 
 - (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];

@@ -568,7 +568,7 @@
     [self.dict setValue:@"3003" forKey:@"非实物(账号)"];
     [self.dict setValue:@"3004" forKey:@"非实物(其他)"];
     // 分类：交通工具
-    [self.dict setValue:@"3101" forKey:@"交通工具(滑板轮滑)"];
+    [self.dict setValue:@"3101" forKey:@"交通工具(滑板/轮滑)"];
     [self.dict setValue:@"3102" forKey:@"交通工具(自行车)"];
     [self.dict setValue:@"3103" forKey:@"交通工具(电动车)"];
     [self.dict setValue:@"3104" forKey:@"交通工具(汽车)"];

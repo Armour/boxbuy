@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet UIWebView *orderWebView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIView *loadingMask;
 
 @end
 
@@ -20,7 +21,7 @@
 @implementation OrderViewController
 
 - (void)prepareMyIndicator {
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.activityIndicator setCenter:self.view.center];
     [self.activityIndicator setHidesWhenStopped:TRUE];
     [self.activityIndicator setHidden:YES];
@@ -37,24 +38,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareLoadingMask];
     [self prepareMyIndicator];
     [self loadWebViewRequest];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
+    [self addLoadingMask];
     [self.activityIndicator startAnimating];
+    [self.view bringSubviewToFront:self.activityIndicator];
     return YES;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+    [self removeLoadingMask];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+    [self removeLoadingMask];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +72,22 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我的订单"];
+}
+
+#pragma mark - Mask When Loading
+
+- (void)prepareLoadingMask {
+    self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.loadingMask setBackgroundColor:[UIColor grayColor]];
+    self.loadingMask.alpha = 0.5;
+}
+
+- (void)addLoadingMask {
+    [self.view addSubview:self.loadingMask];
+}
+
+- (void)removeLoadingMask {
+    [self.loadingMask removeFromSuperview];
 }
 
 @end
