@@ -2659,6 +2659,7 @@
                     <connections>
                         <outlet property="addCommetButton" destination="CRD-3t-A92" id="Rjb-EE-NU3"/>
                         <outlet property="buyBarButton" destination="UAB-Bq-v4S" id="Wsd-mz-ZJB"/>
+                        <outlet property="buyBarButtonImageView" destination="sd8-Fg-rKk" id="cd8-co-3vB"/>
                         <outlet property="imageScrollView" destination="onH-fl-L3V" id="5VX-xE-pdg"/>
                         <outlet property="imageScrollViewContainer" destination="u6x-ED-CPL" id="Fqd-eD-Z9I"/>
                         <outlet property="itemNewPriceLabel" destination="Uoh-5k-77t" id="eih-Yx-1es"/>

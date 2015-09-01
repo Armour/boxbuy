@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ObjectDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface ObjectDetailViewController : UIViewController <UIScrollViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSString *objectNumber;
 
