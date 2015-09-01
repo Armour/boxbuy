@@ -9,6 +9,7 @@
 #import "RecycleViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
+#import "LoginInfo.h"
 
 @interface RecycleViewController ()
 
@@ -46,7 +47,7 @@
 
 - (void)loadWebViewRequest {
     self.orderWebView.delegate = self;
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/huisou.html"];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/huisou.html?access_token=%@", [LoginInfo sharedInfo].accessToken];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_orderWebView loadRequest:request];
 }

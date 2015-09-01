@@ -242,7 +242,6 @@
               [self refreshCaptcha];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"ERROR: %@", error);
               [self popAlert:@"错误" withMessage:@"短息发送失败，请稍候重试"];
               [self.activityIndicator stopAnimating];
               [self refreshCaptcha];

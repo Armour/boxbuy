@@ -28,6 +28,7 @@
 		761F4E971B763795009E527A /* boxbuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761F4E961B763795009E527A /* boxbuy.plist */; };
 		7627AEEF1B9552550073825F /* OtherUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7627AEEE1B9552550073825F /* OtherUserViewController.m */; };
 		7627AEF21B956BE50073825F /* OtherAvatarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7627AEF11B956BE50073825F /* OtherAvatarViewController.m */; };
+		7627AEF51B959C170073825F /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7627AEF41B959C170073825F /* AboutUsViewController.m */; };
 		76418B741B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */; };
 		7651D2C11AF07434003184A8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C01AF07434003184A8 /* SearchViewController.m */; };
 		7651D2C41AF0771B003184A8 /* SellingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651D2C31AF0771B003184A8 /* SellingViewController.m */; };
@@ -112,6 +113,8 @@
 		7627AEEE1B9552550073825F /* OtherUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserViewController.m; sourceTree = "<group>"; };
 		7627AEF01B956BE50073825F /* OtherAvatarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherAvatarViewController.h; sourceTree = "<group>"; };
 		7627AEF11B956BE50073825F /* OtherAvatarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAvatarViewController.m; sourceTree = "<group>"; };
+		7627AEF31B959C170073825F /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		7627AEF41B959C170073825F /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPickerCustomPickerDelegate.h; sourceTree = "<group>"; };
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -266,6 +269,8 @@
 				47F4BBBB1B7B47F300FA8524 /* SettingTableViewController.m */,
 				47F4BBBD1B7B485200FA8524 /* UserSettings.h */,
 				47F4BBBE1B7B485200FA8524 /* UserSettings.m */,
+				7627AEF31B959C170073825F /* AboutUsViewController.h */,
+				7627AEF41B959C170073825F /* AboutUsViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -644,6 +649,7 @@
 			files = (
 				76C3F9B41AFBB0B400821B9B /* ObjectDetailViewController.m in Sources */,
 				475691C91B8304FC00D7F78E /* LoginInfo.m in Sources */,
+				7627AEF51B959C170073825F /* AboutUsViewController.m in Sources */,
 				76DB96471B9232F6004FEDFD /* AccountTableViewCell.m in Sources */,
 				76B6ACF81AFA27D200A987C2 /* RegisterViewController.m in Sources */,
 				7627AEF21B956BE50073825F /* OtherAvatarViewController.m in Sources */,

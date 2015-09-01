@@ -10,6 +10,7 @@
 #import "ObjectBuyingResultViewController.h"
 #import "WebViewJavascriptBridge.h"
 #import "MobClick.h"
+#import "LoginInfo.h"
 
 @interface ObjectBuyingViewController ()
 
@@ -42,7 +43,7 @@
 }
 
 - (void)loadWebViewRequest {
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.boxbuy.cc/trades/confirm.html?item_id=%@", self.objectNumber];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/trades/confirm.html?item_id=%@&access_token=%@&school_id=%@", self.objectNumber, [LoginInfo sharedInfo].accessToken, [LoginInfo sharedInfo].schoolId];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_objectBuyWebView loadRequest:request];
 }

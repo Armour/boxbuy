@@ -66,6 +66,7 @@
     [self prepareMyIndicator];
     [self prepareLoadingMask];
     [self getItemDetail];
+    [self.addCommetButton setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -228,7 +229,7 @@
 }
 
 - (IBAction)starBarButtonTouchUpInside:(UIButton *)sender {
-    [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
+    //[self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
 }
 
 #pragma mark - Prepare Indicator
@@ -379,7 +380,10 @@
 
 - (IBAction)buyingButtonTouchUpInside:(UIButton *)sender {
     if (!self.isSeller) {
-        [self performSegueWithIdentifier:@"showBuyingPage" sender:self];
+        if ([[LoginInfo sharedInfo].authstate isEqualToString:@"0"])
+            [self popAlertWithDelegate:@"未认证用户" withMessage:@"您需要先认证学校才能上传商品"];
+        else
+            [self performSegueWithIdentifier:@"showBuyingPage" sender:self];
     } else {
         [self popAlertWithDelegate:@"删除商品" withMessage:@"您确定要下架此商品么？"];
     }

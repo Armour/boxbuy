@@ -269,7 +269,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", indexPath);
+    //NSLog(@"%@", indexPath);
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout

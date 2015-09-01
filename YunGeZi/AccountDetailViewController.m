@@ -223,12 +223,12 @@
     [manager POST:@"http://img.boxbuy.cc/images/add"
        parameters:imageDict
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"%@", responseObject);
+              //NSLog(@"%@", responseObject);
               [manager POST:@"http://v2.api.uboxs.com/setAccountHeadicon"
                  parameters:@{@"access_token" : [LoginInfo sharedInfo].accessToken,
                               @"headiconid" : [responseObject valueForKeyPath:@"imageid"]}
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"%@", responseObject);
+                        //NSLog(@"%@", responseObject);
                         if ([[responseObject valueForKeyPath:@"uniError"] isEqual:@0]) {
                             [[LoginInfo sharedInfo] refreshSharedUserInfo];
                             [self popAlert:@"修改成功~" withMessage:@"耶！头像修改成功~😝"];

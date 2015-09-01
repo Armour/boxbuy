@@ -171,11 +171,11 @@
 
 - (void)prepareTableView {
     self.category = [[NSMutableArray alloc] init];
-    [self.category addObject:@"我的收藏"];
+    //[self.category addObject:@"我的收藏"];
     [self.category addObject:@"全部订单"];
-    [self.category addObject:@"我的店铺"];
-    [self.category addObject:@"我的回收"];
-    [self.category addObject:@"我的钱包"];
+    //[self.category addObject:@"我的店铺"];
+    //[self.category addObject:@"我的回收"];
+    //[self.category addObject:@"我的钱包"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.sectionHeaderHeight = 10;
@@ -225,11 +225,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
-        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
-    } else if (indexPath.item == 1) {
         [self performSegueWithIdentifier:@"showMyOrder" sender:self];
+    } else if (indexPath.item == 1) {
+        [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     } else if (indexPath.item == 2) {
-        [self performSegueWithIdentifier:@"showMyShop" sender:self];
+        //[self performSegueWithIdentifier:@"showMyShop" sender:self];
     } else if (indexPath.item == 3) {
         [self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
     } else if (indexPath.item == 4) {

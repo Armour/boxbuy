@@ -89,7 +89,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSLog(@"Row %li selected in component %li", (long)row, (long)component);
+    //NSLog(@"Row %li selected in component %li", (long)row, (long)component);
     switch (component) {
         case 0:
             self.selectedKey = level_1[(NSUInteger) row];

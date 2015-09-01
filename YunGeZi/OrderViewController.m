@@ -8,6 +8,7 @@
 
 #import "OrderViewController.h"
 #import "MobClick.h"
+#import "LoginInfo.h"
 
 @interface OrderViewController ()
 
@@ -31,7 +32,7 @@
 
 - (void)loadWebViewRequest {
     self.orderWebView.delegate = self;
-    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/account/order.html"];
+    NSString *requestUrl = [[NSString alloc] initWithFormat:@"http://webapp-ios.uboxs.com/account/order.html?access_token=%@", [LoginInfo sharedInfo].accessToken];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [_orderWebView loadRequest:request];
 }

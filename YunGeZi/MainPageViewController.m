@@ -309,7 +309,7 @@
 }
 
 - (void)handleHotItemTap {
-    NSLog(@"%@", [self.hotItemUrl objectAtIndex:self.imageScrollViewPageControl.currentPage]);
+    //NSLog(@"%@", [self.hotItemUrl objectAtIndex:self.imageScrollViewPageControl.currentPage]);
 }
 
 #pragma mark - Prepare HottestUserView
@@ -367,7 +367,8 @@
 
 - (void)handleHotUserTap:(UITapGestureRecognizer *)sender {
     MyButton *hotUserBtn = (MyButton *)sender.view;
-    NSLog(@"%@", hotUserBtn.userData);
+    self.choosedSellerId = hotUserBtn.userData;
+    [self performSegueWithIdentifier:@"showUserDetailFromMain" sender:self];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -437,14 +438,15 @@
     UIBarButtonItem *searchButton = [self createUIBarButtonItemWithImageName:@"search"
                                                                       target:self
                                                                       action:@selector(performSegueToSearchPage)];
-    UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
+    /*UIBarButtonItem *notificationButton = [self createUIBarButtonItemWithImageName:@"message"
                                                                             target:self
                                                                             action:@selector(alertForUser)];
+    */
     UIBarButtonItem *configButton = [self createUIBarButtonItemWithImageName:@"config"
                                                                       target:self
                                                                       action:@selector(performSegueToUserSettingsPage)];
     NSArray *leftButtons = [NSArray arrayWithObjects:leftNavButton, leftSpaceButton, nil];
-    NSArray *rightButtons = [NSArray arrayWithObjects:configButton, notificationButton, searchButton, nil];
+    NSArray *rightButtons = [NSArray arrayWithObjects:configButton, /*notificationButton,*/ searchButton, nil];
     self.navigationItem.leftBarButtonItems = leftButtons;
     self.navigationItem.rightBarButtonItems = rightButtons;
 
@@ -477,7 +479,7 @@
     UIImageView *bubbleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f,
                                                                              buttonSize.width,
                                                                              buttonSize.height)];
-    [bubbleImage setImage:[UIImage imageNamed:@"guide_entry"]];
+    [bubbleImage setImage:[UIImage imageNamed:@"guide_2"]];
     bubbleImage.layer.cornerRadius = buttonSize.height / 2.f;
     bubbleImage.clipsToBounds = YES;
     
@@ -490,15 +492,16 @@
     bubbleMenu.homeButtonView = bubbleImage;
     bubbleMenu.animationDuration = BUBBLE_ANIMATION_DURATION;
     
-    UIButton *recycleButton = [self createBubbleButtonWithImageName:@"guide_entry_recycle"
+    /*UIButton *recycleButton = [self createBubbleButtonWithImageName:@"guide_entry_recycle"
                                                                size:buttonSize
                                                              target:nil
                                                              action:@selector(performSegueToAddRecycle)];
-    UIButton *sellButton = [self createBubbleButtonWithImageName:@"guide_entry_upload"
+    */
+    UIButton *sellButton = [self createBubbleButtonWithImageName:@"guide_1"
                                                             size:buttonSize
                                                           target:nil
                                                           action:@selector(performSegueToSellingPage)];
-    NSArray *buttons = [NSArray arrayWithObjects:recycleButton, sellButton, nil];
+    NSArray *buttons = [NSArray arrayWithObjects:/*recycleButton,*/ sellButton, nil];
     [bubbleMenu addButtons:buttons];
     
     bubbleMenu.delegate = self;

@@ -184,7 +184,7 @@
 }
 
 - (NSInteger)numOfItem {
-    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_item"] integerValue];
+    return [[[self cachedUserInfo] valueForKeyPath:@"Account.value_item"] integerValue] > 0? [[[self cachedUserInfo] valueForKeyPath:@"Account.value_item"] integerValue]: 0;
 }
 
 - (NSInteger)numOfNewMsg {

@@ -105,6 +105,8 @@
         [self.userResumeLabel setHidden:YES];
     }
     [self setFollowButtonRadius];
+    [self.headerBackgroundImage setImage:[UIImage imageNamed:@"default_headicon"]];
+    [self.userImage setImage:[UIImage imageNamed:@"default_headicon"]];
     [self.view layoutIfNeeded];
 }
 
@@ -122,6 +124,12 @@
     [self setUserResume:[response valueForKeyPath:@"Account.intro"]];
     [self setCommentsCount:[[response valueForKeyPath:@"Account.value_msg_recv"] integerValue]];
     [self.userNameLabel setText:[response valueForKeyPath:@"Account.nickname"]];
+    if ([[response valueForKeyPath:@"Account.authstate"] integerValue] != 0) {
+        [self.followButton setTitle:@"已认证" forState:UIControlStateNormal];
+    } else {
+        [self.followButton setTitle:@"未认证" forState:UIControlStateNormal];
+        [self.followButton setBackgroundImage:[UIImage imageNamed:@"alertbg"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Prepare Indicator
@@ -199,6 +207,10 @@
 
 - (void)userImageTouchUpInside {
     [self performSegueWithIdentifier:@"showOtherUserAvatar" sender:self];
+}
+
+- (IBAction)followButtonTouchUpInside:(UIButton *)sender {
+    //[self popAlert:@"此功能后续版本开放" withMessage:@"敬请期待~"];
 }
 
 #pragma mark - Segue Detail
