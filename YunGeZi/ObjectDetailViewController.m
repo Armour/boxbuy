@@ -66,7 +66,6 @@
     [self prepareMyIndicator];
     [self prepareLoadingMask];
     [self getItemDetail];
-    [self.addCommetButton setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,7 +123,7 @@
     for (NSInteger idx = 0; idx < self.imageCount; idx++) {
         imageFrame.origin.x = idx * imageWidth;
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-md.jpg", [imageArray objectAtIndex:idx][@"imageid"], [imageArray objectAtIndex:idx][@"hash"]]]
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-ori.jpg", [imageArray objectAtIndex:idx][@"imageid"], [imageArray objectAtIndex:idx][@"hash"]]]
                      placeholderImage:[UIImage imageNamed:@"default_cover"]];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.imageScrollView addSubview:imageView];
@@ -181,6 +180,8 @@
 
 - (void)prepareItemStroyView {
     self.itemStoryLabel.text = @"";
+    self.itemStoryView.clipsToBounds = YES;
+    self.itemStoryView.layer.cornerRadius = 6.0f;
     self.itemStoryView.layer.borderWidth = 1;
     self.itemStoryView.layer.borderColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0].CGColor;
     self.pageScrollView.contentSize = CGSizeMake(self.pageScrollView.frame.size.width, self.pageScrollView.frame.size.height);
