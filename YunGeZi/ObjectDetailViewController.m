@@ -194,7 +194,7 @@
     if (IS_IPHONE_4_OR_LESS) {
         self.preferredFontSize = 13;
     } else if (IS_IPHONE_5) {
-        self.preferredFontSize = 14;
+        self.preferredFontSize = 15;
     } else if (IS_IPAD) {
         self.preferredFontSize = 18;
     } else if (IS_IPHONE_6P) {
@@ -257,7 +257,7 @@
     NSAttributedString *oldPriceStr = [[NSAttributedString alloc] initWithString:oldPrice
                                                                       attributes:@{
                                     NSStrikethroughStyleAttributeName : @(NSUnderlinePatternSolid | NSUnderlineStyleSingle),
-                                    NSFontAttributeName : [UIFont systemFontOfSize:self.preferredFontSize - 3],
+                                    NSFontAttributeName : [UIFont systemFontOfSize:self.preferredFontSize - 4],
                                     NSForegroundColorAttributeName : [UIColor blackColor]
                                 }];
     self.itemOldPriceLabel.attributedText = oldPriceStr;
