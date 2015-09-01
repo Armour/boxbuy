@@ -41,9 +41,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *userBarButton;
 @property (weak, nonatomic) IBOutlet UIButton *starBarButton;
 @property (weak, nonatomic) IBOutlet UIButton *buyBarButton;
+@property (weak, nonatomic) IBOutlet UIImageView *buyBarButtonImageView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIView *loadingMask;
 @property (nonatomic) NSUInteger preferredFontSize;
+@property (nonatomic) BOOL isSeller;
 
 @end
 
@@ -168,6 +170,7 @@
 - (void)prepareSchoolAndNumber {
     self.itemNumberLabel.text = @"";
     self.schoolNameLabel.text = @"";
+    self.isSeller = NO;
 }
 
 - (void)prepareItemStroyView {
@@ -309,6 +312,10 @@
               //School and Location
               [self.schoolNameLabel setText:[self getSchoolNameWithId:[responseObject valueForKeyPath:@"Item.schoolid"]
                                                          withLocation:[responseObject valueForKeyPath:@"Item.location"]]];
+              //BarButton
+              if ([[NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:@"Seller.userid"]] isEqualToString:[LoginInfo sharedInfo].userid]) {
+                  [self updateBuyingBarButton];
+              }
               //Avatar
               [self.userImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://img.boxbuy.cc/%@/%@-md.jpg", [responseObject valueForKeyPath:@"Seller.headiconid"], [responseObject valueForKeyPath:@"SellerHeadIcon.hash"]]]
                                                          placeholderImage:[UIImage imageNamed:@"default_headicon"]];
@@ -328,6 +335,15 @@
     NSString *tmpStr = [[NSString  alloc] initWithFormat:@"%@%@", [[LoginInfo sharedInfo] schoolNameWithSchoolId:schoolid]
                                        ,[[LoginInfo sharedInfo] locationNameWithSchoolId:schoolid withLocationId:location]];
     return tmpStr;
+}
+
+#pragma mark - Update Buyinh Bar Button
+
+- (void)updateBuyingBarButton {
+    [self.buyBarButton setBackgroundColor:[UIColor redColor]];
+    [self.buyBarButton setTitle:@"删 除" forState:UIControlStateNormal];
+    [self.buyBarButtonImageView setImage:[UIImage imageNamed:@"close"]];
+    self.isSeller = YES;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -355,7 +371,11 @@
 #pragma mark - Go To Buying Page
 
 - (IBAction)buyingButtonTouchUpInside:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"showBuyingPage" sender:self];
+    if (!self.isSeller) {
+        [self performSegueWithIdentifier:@"showBuyingPage" sender:self];
+    } else {
+        [self popAlertWithDelegate:@"删除商品" withMessage:@"您确定要下架此商品么？"];
+    }
 }
 
 #pragma mark - Add Comment
@@ -378,10 +398,41 @@
 - (void)popAlert:(NSString *)title withMessage:(NSString *)message {
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                     message:message
-                                                   delegate:self
+                                                   delegate:nil
                                           cancelButtonTitle:@"OK"
-                                          otherButtonTitles: nil];
+                                          otherButtonTitles:nil];
     [alert show];
+}
+
+- (void)popAlertWithDelegate:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:@"取消", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self addLoadingMask];
+        [self.activityIndicator startAnimating];
+        [self.view bringSubviewToFront:self.activityIndicator];
+        AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
+        [manage POST:@"http://v2.api.boxbuy.cc/removeItem"
+          parameters:@{@"itemid" : self.objectNumber,
+                       @"access_token" : [LoginInfo sharedInfo].accessToken}
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [self popAlert:@"删除成功" withMessage:@"此物品已经成功下架啦~\r\n记得下拉刷新哦w"];
+                 [self removeLoadingMask];
+                 [self.activityIndicator stopAnimating];
+                 [self.navigationController popViewControllerAnimated:YES];
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 [self popAlert:@"删除失败" withMessage:@"网络不太好，请重试"];
+                 [self removeLoadingMask];
+                 [self.activityIndicator stopAnimating];
+             }];
+    }
 }
 
 @end
