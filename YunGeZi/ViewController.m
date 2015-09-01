@@ -211,6 +211,8 @@ enum {
             self.refreshToken = [[NSString alloc] initWithFormat:@"%@", jsonData[@"refresh_token"]];
             self.expireTime = [[NSString alloc] initWithFormat:@"%@", jsonData[@"expire_time"]];
 
+            [[NSUserDefaults standardUserDefaults] setObject:self.textUsername.text forKey:@"loginName"];
+            
             [[LoginInfo sharedInfo] updateWithAccessToken:self.accessToken
                                              refreshToken:self.refreshToken
                                                expireTime:self.expireTime];
@@ -239,8 +241,11 @@ enum {
 #pragma mark - User Defaults
 
 - (void)prepareUserDefault {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"loginName"] != nil) {
+        self.textUsername.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginName"];
+    }
     if ([self getLocalSchoolId] == nil) {
-        NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"schoolId", @"未设置学校", @"schoolName", nil];
+        NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"schoolId", @"未设置学校", @"schoolName", @"", @"loginName", nil];
         [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

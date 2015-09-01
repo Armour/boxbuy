@@ -59,8 +59,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [LoginInfo sharedInfo].searchViewIsDisappeared = NO;
     [MobClick beginLogPageView:@"搜索结果"];
+    [LoginInfo sharedInfo].searchViewIsDisappeared = NO;
+    [[LoginInfo sharedInfo] updateToken];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

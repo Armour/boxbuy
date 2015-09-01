@@ -8,6 +8,8 @@
 
 #import "LoginInfo.h"
 
+#define TimeStamp [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]]
+
 @interface LoginInfo ()
 
 @property (strong, readonly, nonatomic) NSDictionary *cachedUserInfo;
@@ -49,6 +51,41 @@
     [self refreshSharedUserInfo];
     [self refreshSharedSchoolInfo];
     [self refreshSharedCategoryInfo];
+}
+
+- (void)updateToken {
+    if ([self string:TimeStamp isGreaterThanString:self.expireTime]) {
+        [_sharedManager POST:@"https://secure.boxbuy.cc/oauth/refresh"
+                  parameters:@{@"refresh_token" : self.refreshToken}
+                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         NSError *jsonError = [[NSError alloc] init];
+                         NSDictionary *response = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                                  options:NSJSONReadingMutableContainers
+                                                                                    error:&jsonError];
+                         [self updateWithAccessToken:response[@"access_token"]
+                                        refreshToken:response[@"refresh_token"]
+                                          expireTime:response[@"expire_time"]];
+                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                         [self updateToken];
+                     }];
+    }
+}
+
+- (BOOL)string:(NSString*)str1 isGreaterThanString:(NSString*)str2 {
+    NSArray *a1 = [str1 componentsSeparatedByString:@"."];
+    NSArray *a2 = [str2 componentsSeparatedByString:@"."];
+    NSInteger totalCount = ([a1 count] < [a2 count]) ? [a1 count] : [a2 count];
+    NSInteger checkCount = 0;
+
+    while (checkCount < totalCount) {
+        if([a1[checkCount] integerValue] < [a2[checkCount] integerValue])
+            return NO;
+        else if([a1[checkCount] integerValue] > [a2[checkCount] integerValue])
+            return YES;
+        else
+            checkCount++;
+    }
+    return NO;
 }
 
 #pragma mark- Cached Info
@@ -242,6 +279,17 @@
         }
     }
     return @"";
+}
+
+#pragma mark - Alert
+
+- (void)popAlert:(NSString *)title withMessage:(NSString *)message {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

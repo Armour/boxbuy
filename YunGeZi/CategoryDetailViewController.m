@@ -62,6 +62,7 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"分类结果"];
     [LoginInfo sharedInfo].categoryViewIsDisappeared = NO;
+    [[LoginInfo sharedInfo] updateToken];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -7,11 +7,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "drawer_option_open_icon-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "drawer_option_open_icon-2.png"
     }
   ],
   "info" : {

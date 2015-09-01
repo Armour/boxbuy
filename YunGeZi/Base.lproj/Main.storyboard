@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -999,7 +1000,6 @@
                             <outletCollection property="gestureRecognizers" destination="yHt-Pz-aWF" appends="YES" id="fkM-Nm-ugH"/>
                         </connections>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="loginButton" destination="iMe-zj-9RM" id="wib-9u-GRH"/>
                         <outlet property="registerButton" destination="YAU-et-EkE" id="Ahh-dD-1Td"/>
@@ -3055,7 +3055,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="选填项" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1yt-8K-shK">
-                                <rect key="frame" x="82" y="625" width="84" height="20"/>
+                                <rect key="frame" x="82" y="626" width="84" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                             </textField>
@@ -3255,7 +3255,7 @@
                             <constraint firstItem="cDP-Ll-k72" firstAttribute="top" secondItem="LNa-yc-lCi" secondAttribute="top" id="6dN-mz-CZf"/>
                             <constraint firstItem="LaD-zi-GLv" firstAttribute="bottom" secondItem="z2L-lS-bZ2" secondAttribute="bottom" id="6ux-sU-Eao"/>
                             <constraint firstItem="DKN-5A-Kbf" firstAttribute="trailing" secondItem="1g7-Yb-ZGb" secondAttribute="trailing" id="8Sx-BC-I1k"/>
-                            <constraint firstItem="brz-TS-kwL" firstAttribute="firstBaseline" secondItem="wmB-BT-aqo" secondAttribute="baseline" id="8bJ-cV-Xp5"/>
+                            <constraint firstItem="brz-TS-kwL" firstAttribute="centerY" secondItem="wmB-BT-aqo" secondAttribute="centerY" id="8bJ-cV-Xp5"/>
                             <constraint firstItem="LaD-zi-GLv" firstAttribute="height" secondItem="z2L-lS-bZ2" secondAttribute="height" id="9H5-vc-fZK"/>
                             <constraint firstItem="DWr-DH-kf2" firstAttribute="top" secondItem="DKN-5A-Kbf" secondAttribute="bottom" constant="8" symbolic="YES" id="9hN-jQ-QAn"/>
                             <constraint firstItem="LaD-zi-GLv" firstAttribute="leading" secondItem="z2L-lS-bZ2" secondAttribute="trailing" multiplier="1.05" id="BMH-cL-LpA"/>
@@ -3488,7 +3488,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugb-Go-gSw">
                                         <rect key="frame" x="5" y="0.0" width="333" height="418"/>
-                                        <mutableString key="text">       造风电子商务有限公司创立于2014年。这一年，来自浙大和中国美院的30余名有志青年，在杭州这一块土地上播下了梦想的种子。公司目前主营项目——“云格子铺（www.boxbuy.cc）”致力于打造中国第一校园二手交易平台。平台的价值在于帮助大家以更低廉的价格购置更为实惠的二手产品，同时帮助大家更好的处理自己的闲置商品。由于买卖双方的身份都为学生，因此相对于其他交易平台，本平台更为方便、安全。平台所涉及的产品包括数码电子，书本，代步交通等日常学习生活所需的所有商品。在过去的半年时间里，公司已在浙江大学五大校区完成内测，在获得同学广泛好评和一致支持的同时我们也获得5000用户的用户量，500笔订单和5W的交易额。日前，公司已拿到百万级天使轮投资，boxbuy网页端2.0以及移动端也将在寒假结束后正式上线，造风电子商务正在走向一个更好的时代。</mutableString>
+                                        <string key="text">       造风电子商务有限公司创立于2014年。这一年，来自浙大和中国美院的30余名有志青年，在杭州这一块土地上播下了梦想的种子。公司目前主营项目——“云格子铺（www.boxbuy.cc）”致力于打造中国第一校园二手交易平台。平台的价值在于帮助大家以更低廉的价格购置更为实惠的二手产品，同时帮助大家更好的处理自己的闲置商品。由于买卖双方的身份都为学生，因此相对于其他交易平台，本平台更为方便、安全。平台所涉及的产品包括数码电子，书本，代步交通等日常学习生活所需的所有商品。在过去的半年时间里，公司已在浙江大学五大校区完成内测，在获得同学广泛好评和一致支持的同时我们也获得5000用户的用户量，500笔订单和5W的交易额。日前，公司已拿到百万级天使轮投资，boxbuy网页端2.0以及移动端也将在寒假结束后正式上线，造风电子商务正在走向一个更好的时代。</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -4670,10 +4670,10 @@
         <image name="verification" width="684" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0p7-WM-ggn"/>
+        <segue reference="byz-Vz-Hnu"/>
+        <segue reference="Q7b-34-e16"/>
         <segue reference="GCd-gI-drE"/>
-        <segue reference="JHU-KT-8bK"/>
-        <segue reference="hjE-Ia-T5Q"/>
-        <segue reference="ymZ-7S-N1U"/>
         <segue reference="4ZE-kV-fhQ"/>
         <segue reference="Anz-jd-hYN"/>
     </inferredMetricsTieBreakers>

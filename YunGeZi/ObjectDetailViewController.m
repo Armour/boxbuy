@@ -73,6 +73,7 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"商品详情"];
     [self.navigationController.navigationBar setTranslucent:YES];
+    [[LoginInfo sharedInfo] updateToken];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

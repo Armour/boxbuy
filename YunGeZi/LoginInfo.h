@@ -37,6 +37,7 @@
                  refreshToken:(NSString *)refreshToken
                    expireTime:(NSString *)expireTime;
 
+- (void)updateToken;
 - (NSString *)schoolNameWithSchoolId:(NSString *)schoolid;
 - (NSString *)locationNameWithSchoolId:(NSString *)schoolid withLocationId:(NSString *)locationid;
 - (void)refreshSharedUserInfo;

@@ -45,6 +45,7 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"身份认证"];
     [self.navigationController.navigationBar setTranslucent:NO];
+    [[LoginInfo sharedInfo] updateToken];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

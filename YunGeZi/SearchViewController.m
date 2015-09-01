@@ -12,6 +12,7 @@
 #import "DeviceDetect.h"
 #import "MobClick.h"
 #import "DeviceDetect.h"
+#import "LoginInfo.h"
 #import "AFHTTPRequestOperationManager.h"
 
 #define SEARCHHISTORY_CELL @"searchHistoryCell"
@@ -47,6 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"搜索界面"];
+    [[LoginInfo sharedInfo] updateToken];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -321,10 +323,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showSearchResult"]){
         SearchResultViewController *controller = (SearchResultViewController *)segue.destinationViewController;
-        NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        //NSString *urlencodedQuery = [self.searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         // Holy shit! Why there need to be encode twice? = = I think the code in website need to be rewrite...
-        urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        [controller setSearchQuery:urlencodedQuery];
+        //urlencodedQuery = [urlencodedQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        //[controller setSearchQuery:urlencodedQuery];
+        [controller setSearchQuery:self.searchQuery];
     }
 }
 

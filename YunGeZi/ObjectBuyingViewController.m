@@ -80,6 +80,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"购买页面"];
+    [[LoginInfo sharedInfo] updateToken];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
