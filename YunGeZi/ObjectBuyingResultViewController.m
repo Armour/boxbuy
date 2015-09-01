@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *objectBuyResultWebview;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIView *loadingMask;
 @property WebViewJavascriptBridge* bridge;
 
 @end
@@ -48,24 +49,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareMyIndicator];
+    [self prepareLoadingMask];
     [self addWebViewBridge];
     [self loadWebViewRequest];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [self.activityIndicator setHidden:NO];
+    [self addLoadingMask];
     [self.activityIndicator startAnimating];
+    [self.view bringSubviewToFront:self.activityIndicator];
     return YES;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+    [self removeLoadingMask];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.activityIndicator stopAnimating];
-    [self.activityIndicator setHidden:YES];
+    [self removeLoadingMask];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +83,22 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"购买结果"];
+}
+
+#pragma mark - Mask When Loading
+
+- (void)prepareLoadingMask {
+    self.loadingMask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.loadingMask setBackgroundColor:[UIColor grayColor]];
+    self.loadingMask.alpha = 0.5;
+}
+
+- (void)addLoadingMask {
+    [self.view addSubview:self.loadingMask];
+}
+
+- (void)removeLoadingMask {
+    [self.loadingMask removeFromSuperview];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MainPageViewController.h"
 #import "ObjectDetailViewController.h"
+#import "OtherUserViewController.h"
 #import "ChooseSchoolTableViewController.h"
 #import "CategoryDetailViewController.h"
 #import "WaterfallCellView.h"
@@ -551,11 +552,11 @@
                              }];
     [cell.itemImageButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.sellerPhotoImageButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemButtonTouchUpInsideWithGesture:)];
     [cell.itemPriceLabel addGestureRecognizer:gesture];
     [cell.itemPriceLabel setUserInteractionEnabled:YES];
-    [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.sellerPhotoImageButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [model setTitleHeight:cell.titleButtonHeightConstraint.constant];
     return cell;
 }
@@ -597,7 +598,6 @@
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
         self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
-        self.choosedSellerId = @"";
         [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
 }
@@ -607,7 +607,6 @@
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
         self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
-        self.choosedSellerId = @"";
         [self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
     }
 }
@@ -617,8 +616,7 @@
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
         self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.item];
-        self.choosedItemId = @"";
-        //[self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
+        [self performSegueWithIdentifier:@"showUserDetailFromMain" sender:self];
     }
 }
 
@@ -684,12 +682,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showObjectDetailFromMain"]) {
-        if ([self.choosedItemId isEqualToString:@""]) {
-            NSLog(@"%@!!!", self.choosedSellerId);
-        } else if ([self.choosedSellerId isEqualToString:@""]) {
-            ObjectDetailViewController *destViewController = segue.destinationViewController;
-            destViewController.objectNumber = self.choosedItemId;
-        }
+        ObjectDetailViewController *destViewController = segue.destinationViewController;
+        destViewController.objectNumber = self.choosedItemId;
+    } else if ([segue.identifier isEqualToString:@"showUserDetailFromMain"]) {
+        OtherUserViewController *destViewController = segue.destinationViewController;
+        destViewController.userid = self.choosedSellerId;
     } else if ([segue.identifier isEqualToString:@"changeSchool"]) {
         ChooseSchoolTableViewController *controller = (ChooseSchoolTableViewController *)segue.destinationViewController;
         [controller setTitle:@"修改查看学校"];

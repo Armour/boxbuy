@@ -8,6 +8,7 @@
 
 #import "ObjectDetailViewController.h"
 #import "ObjectBuyingViewController.h"
+#import "OtherUserViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "UIImageView+WebCache.h"
 #import "LoginInfo.h"
@@ -45,6 +46,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *buyBarButtonImageView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIView *loadingMask;
+@property (strong, nonatomic) NSString *userid;
 @property (nonatomic) NSUInteger preferredFontSize;
 @property (nonatomic) BOOL isSeller;
 
@@ -69,6 +71,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"商品详情"];
+    [self.navigationController.navigationBar setTranslucent:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -178,7 +181,6 @@
     self.itemStoryLabel.text = @"";
     self.itemStoryView.layer.borderWidth = 1;
     self.itemStoryView.layer.borderColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0].CGColor;
-    self.automaticallyAdjustsScrollViewInsets = NO;
     self.pageScrollView.contentSize = CGSizeMake(self.pageScrollView.frame.size.width, self.pageScrollView.frame.size.height);
     self.showAllStoryButton.hidden = YES;
     self.showAllStoryLabel.hidden = YES;
@@ -298,6 +300,7 @@
        parameters:@{@"itemid" : self.objectNumber,
                     @"schoolid" : [LoginInfo sharedInfo].schoolId}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              self.userid = [responseObject valueForKeyPath:@"Seller.userid"];
               //Label
               [self.itemTitleLabel setText:[responseObject valueForKeyPath:@"Item.title"]];
               [self.itemStoryLabel setText:[responseObject valueForKeyPath:@"Item.content"]];
@@ -317,8 +320,7 @@
               [self.schoolNameLabel setText:[self getSchoolNameWithId:[responseObject valueForKeyPath:@"Item.schoolid"]
                                                          withLocation:[responseObject valueForKeyPath:@"Item.location"]]];
               //BarButton
-              NSLog(@"%@ %@", [responseObject valueForKeyPath:@"Seller.userid"], [LoginInfo sharedInfo].userid);
-              if ([[NSString stringWithFormat:@"%@", [responseObject valueForKeyPath:@"Seller.userid"]] isEqualToString:[LoginInfo sharedInfo].userid]) {
+              if ([[NSString stringWithFormat:@"%@", self.userid] isEqualToString:[LoginInfo sharedInfo].userid]) {
                   [self updateBuyingBarButton];
               }
               //Avatar
@@ -383,6 +385,12 @@
     }
 }
 
+#pragma mark - Show Seller Info
+
+- (IBAction)showSellerInfo:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"showUserDetailFromObjectDetail" sender:self];
+}
+
 #pragma mark - Add Comment
 
 - (IBAction)commetButtonTouchUpInside:(UIButton *)sender {
@@ -392,9 +400,12 @@
 #pragma mark - Seque Detail
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"showBuyingPage"]) {
+    if ([segue.identifier isEqualToString:@"showBuyingPage"]) {
         ObjectBuyingViewController *controller = (ObjectBuyingViewController *)segue.destinationViewController;
         [controller setObjectNumber:self.objectNumber];
+    } else if ([segue.identifier isEqualToString:@"showUserDetailFromObjectDetail"]) {
+        OtherUserViewController *controller = (OtherUserViewController *)segue.destinationViewController;
+        [controller setUserid:self.userid];
     }
 }
 

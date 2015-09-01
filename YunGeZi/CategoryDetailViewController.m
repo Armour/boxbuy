@@ -7,6 +7,7 @@
 //
 
 #import "CategoryDetailViewController.h"
+#import "OtherUserViewController.h"
 #import "ObjectDetailViewController.h"
 #import "WaterfallCellView.h"
 #import "WaterfallCellModel.h"
@@ -60,6 +61,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"分类结果"];
+    [LoginInfo sharedInfo].categoryViewIsDisappeared = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -76,12 +78,12 @@
     [LoginInfo sharedInfo].categoryViewIsDisappeared = YES;
 }
 
-- (void)dealloc {
-    [self.waterfallView setDelegate:nil];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    [self.waterfallView setDelegate:nil];
 }
 
 #pragma mark - Inner Helper
@@ -258,6 +260,9 @@
     [cell.itemTitleButton addTarget:self action:@selector(itemButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.sellerNameButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [cell.sellerPhotoImageButton addTarget:self action:@selector(sellerButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemButtonTouchUpInsideWithGesture:)];
+    [cell.itemPriceLabel addGestureRecognizer:gesture];
+    [cell.itemPriceLabel setUserInteractionEnabled:YES];
     [model setTitleHeight:cell.titleButtonHeightConstraint.constant];
 
     return cell;
@@ -287,8 +292,16 @@
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
         self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
-        self.choosedSellerId = @"";
-        //[self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
+        [self performSegueWithIdentifier:@"showObjectDetailFromCategory" sender:self];
+    }
+}
+
+- (void)itemButtonTouchUpInsideWithGesture:(UITapGestureRecognizer *)sender {
+    WaterfallCellView *cell = (WaterfallCellView *)[[sender.view superview] superview];
+    NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
+    if (indexPath != nil) {
+        self.choosedItemId = [self.itemId objectAtIndex:indexPath.item];
+        [self performSegueWithIdentifier:@"showObjectDetailFromCategory" sender:self];
     }
 }
 
@@ -296,9 +309,8 @@
     WaterfallCellView *cell = (WaterfallCellView *)[[sender superview] superview];
     NSIndexPath *indexPath = [self.waterfallView indexPathForCell:cell];
     if (indexPath != nil) {
-        self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.row];
-        self.choosedItemId = @"";
-        //[self performSegueWithIdentifier:@"showObjectDetailFromMain" sender:self];
+        self.choosedSellerId = [self.sellerId objectAtIndex:indexPath.item];
+        [self performSegueWithIdentifier:@"showUserDetailFromCategory" sender:self];
     }
 }
 
@@ -338,10 +350,13 @@
 #pragma mark - Segue Detail
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //if([segue.identifier isEqualToString:@"showObjectDetailFromSearch"]) {
-    //ObjectDetailViewController *controller = (ObjectDetailViewController *)segue.destinationViewController;
-    //[controller setObjectNumber:self.objectNumber];
-    //}
+    if ([segue.identifier isEqualToString:@"showObjectDetailFromCategory"]) {
+        ObjectDetailViewController *destViewController = segue.destinationViewController;
+        destViewController.objectNumber = self.choosedItemId;
+    } else if ([segue.identifier isEqualToString:@"showUserDetailFromCategory"]) {
+        OtherUserViewController *destViewController = segue.destinationViewController;
+        destViewController.userid = self.choosedSellerId;
+    }
 }
 
 #pragma mark - Alert
