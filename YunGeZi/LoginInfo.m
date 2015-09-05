@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "LoginInfo.h"
 
 #define TimeStamp [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]]
