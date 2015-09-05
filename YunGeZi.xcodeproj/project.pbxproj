@@ -115,6 +115,8 @@
 		7627AEF11B956BE50073825F /* OtherAvatarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAvatarViewController.m; sourceTree = "<group>"; };
 		7627AEF31B959C170073825F /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		7627AEF41B959C170073825F /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		763AD9401B9662DA008E05DF /* YunGeZi 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YunGeZi 2.xcdatamodel"; sourceTree = "<group>"; };
+		763AD9411B9663A1008E05DF /* YunGeZi 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YunGeZi 3.xcdatamodel"; sourceTree = "<group>"; };
 		76418B721B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPickerCustomPickerDelegate.h; sourceTree = "<group>"; };
 		76418B731B1CC803007CE044 /* ActionSheetPickerCustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetPickerCustomPickerDelegate.m; sourceTree = "<group>"; };
 		7651D2BF1AF07434003184A8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -396,7 +398,7 @@
 			name = "Login and Register";
 			sourceTree = "<group>";
 		};
-		76AD1BCF1B7B30E000BA8512 /* MainPage */ = {
+		76AD1BCF1B7B30E000BA8512 /* MainPage and Menu */ = {
 			isa = PBXGroup;
 			children = (
 				47110B251B77A181001C9B5A /* RootViewController.h */,
@@ -413,7 +415,7 @@
 				474C5F001B73553300CDE2AF /* WaterfallCellModel.h */,
 				474C5F011B73553300CDE2AF /* WaterfallCellModel.m */,
 			);
-			name = MainPage;
+			name = "MainPage and Menu";
 			sourceTree = "<group>";
 		};
 		76DB96481B924557004FEDFD /* BuyingPage */ = {
@@ -455,7 +457,7 @@
 				475691C61B8304E500D7F78E /* Shared Login Info */,
 				47F4BBB91B7B47CB00FA8524 /* Setting */,
 				76AD1BCA1B7AFFA300BA8512 /* Login and Register */,
-				76AD1BCF1B7B30E000BA8512 /* MainPage */,
+				76AD1BCF1B7B30E000BA8512 /* MainPage and Menu */,
 				768903F91B93984E00322727 /* Category */,
 				475691C11B8205CD00D7F78E /* Search */,
 				768903FD1B93E9E600322727 /* ObjectDetailPage */,
@@ -919,9 +921,11 @@
 		76E333361AEDF8C40077BACF /* YunGeZi.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				763AD9411B9663A1008E05DF /* YunGeZi 3.xcdatamodel */,
+				763AD9401B9662DA008E05DF /* YunGeZi 2.xcdatamodel */,
 				76E333371AEDF8C40077BACF /* YunGeZi.xcdatamodel */,
 			);
-			currentVersion = 76E333371AEDF8C40077BACF /* YunGeZi.xcdatamodel */;
+			currentVersion = 763AD9401B9662DA008E05DF /* YunGeZi 2.xcdatamodel */;
 			path = YunGeZi.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
